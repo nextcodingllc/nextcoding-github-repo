@@ -3,987 +3,608 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nextcoding - Digital Transformation & IT Solutions</title>
-    <meta name="description" content="Nextcoding provides cutting-edge IT services including custom software development, cloud solutions, cybersecurity, and digital transformation consulting.">
+    <title data-lang-key="pageTitle">Nextcoding | Coming Soon</title>
+    <meta name="description" data-lang-key="metaDescription" content="Nextcoding LLC is preparing to launch its new website. Stay tuned for cutting-edge IT services.">
     <link rel="icon" href="favicon.ico" type="image/x-icon">
-    
-    <!-- Preload critical resources -->
-    <link rel="preload" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" as="style">
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" as="style">
-    
-    <!-- CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-    
+
+    <!-- Google Fonts: Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <!-- Font Awesome for professional icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <!-- AOS (Animate On Scroll) library -->
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    
+
     <style>
+        /* Custom CSS for Nextcoding Coming Soon Page */
         :root {
-            --primary: #1976D2;
-            --primary-light: #2196F3;
-            --secondary: #FF6D00;
-            --dark: #1E293B;
-            --light: #F8FAFC;
+            --blue-light: #2196F3;
+            --blue-dark: #1976D2;
+            --text-color: white;
+            --card-bg: rgba(255,255,255,0.15);
+            --shadow-color: rgba(0,0,0,0.1);
+            --button-bg-light: white;
+            --button-text-dark: var(--blue-dark);
         }
-        
+
         body {
             font-family: 'Inter', sans-serif;
-            color: var(--dark);
-            background-color: var(--light);
-            overflow-x: hidden;
-            scroll-behavior: smooth;
+            background: linear-gradient(135deg, var(--blue-dark), var(--blue-light));
+            color: var(--text-color);
+            height: 100vh;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            overflow: hidden; /* Prevent scrollbars from background circles */
+            position: relative; /* For z-index context */
         }
-        
-        .header-bg {
-            background: linear-gradient(135deg, var(--primary), var(--primary-light));
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+        .container {
+            max-width: 800px;
+            padding: 0 20px;
+            z-index: 2; /* Ensure content is above circles */
+            position: relative; /* For language selector positioning */
         }
-        
-        .btn-primary {
-            background-color: var(--primary);
-            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-        }
-        
-        .btn-primary:hover {
-            background-color: var(--primary-light);
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(25, 118, 210, 0.2);
-        }
-        
-        .btn-secondary {
-            background-color: var(--secondary);
-            transition: all 0.3s ease;
-        }
-        
-        .btn-secondary:hover {
-            background-color: #FF8500;
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(255, 109, 0, 0.2);
-        }
-        
-        .card {
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-            overflow: hidden;
-        }
-        
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
-        }
-        
-        .service-icon {
-            font-size: 2.5rem;
-            color: var(--primary);
+
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
             margin-bottom: 1rem;
-            transition: all 0.3s ease;
+            text-shadow: 0 2px 10px var(--shadow-color);
         }
-        
-        .nav-link {
-            position: relative;
-            padding-bottom: 5px;
+
+        p {
+            font-size: 1.25rem;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+            opacity: 0.9;
         }
-        
-        .nav-link:after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: 0;
-            left: 0;
-            background-color: white;
-            transition: width 0.3s ease;
+
+        .logo {
+            width: 150px; /* Increased size for prominence */
+            height: auto;
+            margin-bottom: 2rem;
+            filter: drop-shadow(0 2px 5px var(--shadow-color));
         }
-        
-        .nav-link:hover:after {
-            width: 100%;
+
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin: 3rem 0;
         }
-        
-        .testimonial-card {
-            background: white;
+
+        .countdown-item {
+            background: var(--card-bg);
+            backdrop-filter: blur(5px);
             border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            padding: 1.5rem;
+            min-width: 90px;
+            box-shadow: 0 4px 20px var(--shadow-color);
         }
-        
-        .client-logo {
-            filter: grayscale(100%);
-            opacity: 0.6;
+
+        .countdown-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .countdown-label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .notify-form {
+            display: flex;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .notify-input {
+            flex: 1;
+            padding: 15px 20px;
+            border: none;
+            border-radius: 50px 0 0 50px;
+            font-size: 1rem;
+            outline: none;
+            color: var(--blue-dark); /* Text color for input */
+        }
+        .notify-input::placeholder {
+            color: rgba(25, 118, 210, 0.6); /* Placeholder color */
+        }
+
+        .notify-button {
+            background: var(--button-bg-light);
+            color: var(--button-text-dark);
+            border: none;
+            padding: 0 30px;
+            border-radius: 0 50px 50px 0;
+            font-weight: 600;
+            cursor: pointer;
             transition: all 0.3s ease;
         }
-        
-        .client-logo:hover {
-            filter: grayscale(0%);
+
+        .notify-button:hover {
+            background: #f5f5f5;
+            transform: translateY(-2px); /* Slight lift on hover */
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+        .notify-button:active {
+            transform: translateY(0);
+        }
+
+        .social-links {
+            margin-top: 3rem;
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .social-link {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: var(--card-bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            color: var(--text-color); /* Ensure icons are white */
+        }
+
+        .social-link:hover {
+            background: rgba(255,255,255,0.25);
+            transform: translateY(-3px);
+        }
+
+        /* Animated background circles */
+        .circles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .circles li {
+            position: absolute;
+            display: block;
+            list-style: none;
+            width: 20px;
+            height: 20px;
+            background: rgba(255,255,255,0.2);
+            animation: animate 25s linear infinite;
+            bottom: -150px;
+            border-radius: 50%;
+        }
+
+        @keyframes animate {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-1000px) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
+        /* Language Selector Styles */
+        .language-selector {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            z-index: 10; /* Above other content */
+        }
+        .language-selector button {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: 1px solid rgba(255,255,255,0.3);
+            border-radius: 8px;
+            padding: 8px 15px;
+            cursor: pointer;
+            transition: background 0.3s ease, border-color 0.3s ease;
+            display: flex;
+            align-items: center;
+        }
+        .language-selector button:hover {
+            background: rgba(255,255,255,0.3);
+        }
+        .language-selector .dropdown-menu {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            position: absolute;
+            top: 100%;
+            right: 0;
+            margin-top: 8px;
+            min-width: 100px;
+            overflow: hidden;
+            z-index: 11;
+        }
+        .language-selector .dropdown-menu a {
+            display: block;
+            padding: 10px 15px;
+            color: var(--blue-dark);
+            text-decoration: none;
+            transition: background 0.2s ease;
+        }
+        .language-selector .dropdown-menu a:hover {
+            background: #f0f0f0;
+        }
+
+        /* Floating Language Hint Button */
+        .lang-hint-button {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: rgba(255,255,255,0.2); /* Semi-transparent white */
+            color: white;
+            padding: 10px 20px;
+            border-radius: 50px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            z-index: 1000;
+            cursor: pointer;
+            border: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            opacity: 0; /* Hidden by default */
+            visibility: hidden; /* Hidden by default */
+            white-space: nowrap; /* Prevent text wrapping */
+        }
+        .lang-hint-button.show {
             opacity: 1;
+            visibility: visible;
         }
-        
-        .input-field {
-            transition: all 0.3s ease;
-            border: 1px solid #E2E8F0;
+        .lang-hint-button:hover {
+            background-color: rgba(255,255,255,0.3);
+            transform: translateX(-50%) translateY(-3px);
         }
-        
-        .input-field:focus {
-            border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(25, 118, 210, 0.2);
-        }
-        
-        /* Loading animation for better perceived performance */
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        
-        .animate-fade-in {
-            animation: fadeIn 0.5s ease-out forwards;
-        }
-        
-        /* Mobile menu animation */
-        .mobile-menu {
-            transform: translateX(100%);
-            transition: transform 0.3s ease-out;
-        }
-        
-        .mobile-menu.open {
-            transform: translateX(0);
+
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            p {
+                font-size: 1.1rem;
+            }
+
+            .countdown {
+                gap: 1rem;
+            }
+
+            .countdown-item {
+                min-width: 70px;
+                padding: 1rem;
+            }
+
+            .countdown-number {
+                font-size: 2rem;
+            }
+
+            .notify-form {
+                flex-direction: column;
+            }
+
+            .notify-input,
+            .notify-button {
+                border-radius: 50px;
+                width: 100%;
+            }
+
+            .notify-button {
+                margin-top: 1rem;
+                padding: 15px;
+            }
+
+            .language-selector {
+                top: 10px;
+                right: 10px;
+            }
+            .lang-hint-button {
+                bottom: 10px; /* Adjusted for mobile */
+                padding: 8px 15px;
+                font-size: 0.8rem;
+            }
         }
     </style>
 </head>
-<body class="antialiased">
+<body>
+    <!-- Animated background circles -->
+    <div class="circles">
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </div>
 
-    <!-- Preloader -->
-    <div id="preloader" class="fixed inset-0 bg-white z-50 flex items-center justify-center">
-        <div class="animate-pulse flex flex-col items-center">
-            <div class="w-16 h-16 bg-blue-500 rounded-full mb-4"></div>
-            <div class="text-blue-500 font-semibold">Loading...</div>
+    <!-- Language Selector -->
+    <div class="language-selector">
+        <button id="language-menu-button">
+            <span id="current-lang-display">EN</span>
+            <svg class="ml-2 h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+            </svg>
+        </button>
+        <div class="dropdown-menu hidden" id="language-menu">
+            <a href="#" id="lang-en" data-lang="en">English</a>
+            <a href="#" id="lang-es" data-lang="es">Español</a>
         </div>
     </div>
 
-    <!-- Header with improved navigation -->
-    <header class="header-bg text-white sticky top-0 z-40">
-        <div class="container mx-auto px-4 py-4">
-            <div class="flex justify-between items-center">
-                <!-- Logo with Lazy Loading -->
-                <a href="#" class="flex items-center">
-                    <img src="images/logo.png" alt="Nextcoding Logo" class="h-10 w-auto" loading="lazy">
-                    <span class="ml-3 text-xl font-bold hidden md:block">Nextcoding</span>
-                </a>
-                
-                <!-- Desktop Navigation -->
-                <nav class="hidden md:flex items-center space-x-8">
-                    <a href="#" class="nav-link font-medium">Home</a>
-                    <a href="#services" class="nav-link font-medium">Services</a>
-                    <a href="#about" class="nav-link font-medium">About</a>
-                    <a href="#case-studies" class="nav-link font-medium">Case Studies</a>
-                    <a href="#contact" class="nav-link font-medium">Contact</a>
-                    <a href="#contact" class="btn-primary px-6 py-2 rounded-full font-semibold">Get Started</a>
-                </nav>
-                
-                <!-- Mobile Menu Button -->
-                <button id="mobile-menu-button" class="md:hidden focus:outline-none">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-                    </svg>
-                </button>
-            </div>
-        </div>
-        
-        <!-- Mobile Menu -->
-        <div id="mobile-menu" class="mobile-menu fixed inset-y-0 right-0 w-64 bg-white text-gray-800 shadow-lg z-50 p-6">
-            <div class="flex justify-end mb-8">
-                <button id="close-menu" class="text-gray-500 focus:outline-none">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-                    </svg>
-                </button>
-            </div>
-            <nav class="flex flex-col space-y-6">
-                <a href="#" class="text-lg font-medium hover:text-blue-500">Home</a>
-                <a href="#services" class="text-lg font-medium hover:text-blue-500">Services</a>
-                <a href="#about" class="text-lg font-medium hover:text-blue-500">About</a>
-                <a href="#case-studies" class="text-lg font-medium hover:text-blue-500">Case Studies</a>
-                <a href="#contact" class="text-lg font-medium hover:text-blue-500">Contact</a>
-                <a href="#contact" class="btn-primary px-6 py-3 rounded-full font-semibold text-center mt-4">Get Started</a>
-            </nav>
-        </div>
-    </header>
+    <div class="container">
+        <!-- Nextcoding Logo -->
+        <img src="images/logo.png" alt="Nextcoding Logo" class="logo">
 
-    <!-- Hero Section with Video Background Option -->
-    <section class="relative overflow-hidden">
-        <!-- Video background placeholder (replace with actual video) -->
-        <div class="absolute inset-0 bg-gradient-to-r from-blue-800 to-blue-600 opacity-90"></div>
-        
-        <div class="container mx-auto px-4 py-32 relative z-10">
-            <div class="max-w-3xl mx-auto text-center">
-                <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6" data-aos="fade-up">
-                    Transform Your Business with <span class="text-orange-300">Digital Innovation</span>
-                </h1>
-                <p class="text-xl text-blue-100 mb-8 leading-relaxed" data-aos="fade-up" data-aos-delay="100">
-                    Nextcoding delivers cutting-edge IT solutions that drive growth, efficiency, and competitive advantage for businesses of all sizes.
-                </p>
-                <div class="flex flex-col sm:flex-row justify-center gap-4" data-aos="fade-up" data-aos-delay="200">
-                    <a href="#contact" class="btn-primary px-8 py-4 rounded-full font-semibold text-lg hover:shadow-xl">
-                        Get Free Consultation <i class="fas fa-arrow-right ml-2"></i>
-                    </a>
-                    <a href="#services" class="bg-white text-blue-600 px-8 py-4 rounded-full font-semibold text-lg hover:bg-gray-100 hover:shadow-lg transition-all">
-                        Explore Services
-                    </a>
-                </div>
+        <h1 data-lang-key="mainHeading">Estamos construyendo algo increíble</h1>
+
+        <p data-lang-key="subHeading">Nuestro nuevo sitio web está en desarrollo. Estamos trabajando duro para ofrecerte la mejor experiencia. Suscríbete para recibir actualizaciones.</p>
+
+        <div class="countdown">
+            <div class="countdown-item">
+                <div class="countdown-number" id="days">00</div>
+                <div class="countdown-label" data-lang-key="daysLabel">Días</div>
+            </div>
+            <div class="countdown-item">
+                <div class="countdown-number" id="hours">00</div>
+                <div class="countdown-label" data-lang-key="hoursLabel">Horas</div>
+            </div>
+            <div class="countdown-item">
+                <div class="countdown-number" id="minutes">00</div>
+                <div class="countdown-label" data-lang-key="minutesLabel">Minutos</div>
+            </div>
+            <div class="countdown-item">
+                <div class="countdown-number" id="seconds">00</div>
+                <div class="countdown-label" data-lang-key="secondsLabel">Segundos</div>
             </div>
         </div>
-        
-        <!-- Animated background elements -->
-        <div class="absolute bottom-0 left-0 right-0 h-16 bg-white transform skew-y-3 origin-bottom-left z-0"></div>
-    </section>
 
-    <!-- Trusted By Section -->
-    <section class="py-12 bg-gray-50">
-        <div class="container mx-auto px-4">
-            <p class="text-center text-gray-500 mb-8">TRUSTED BY INNOVATIVE COMPANIES WORLDWIDE</p>
-            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8 items-center">
-                <img src="images/client-1.svg" alt="Client Logo" class="client-logo h-12 mx-auto" loading="lazy">
-                <img src="images/client-2.svg" alt="Client Logo" class="client-logo h-10 mx-auto" loading="lazy">
-                <img src="images/client-3.svg" alt="Client Logo" class="client-logo h-14 mx-auto" loading="lazy">
-                <img src="images/client-4.svg" alt="Client Logo" class="client-logo h-12 mx-auto" loading="lazy">
-                <img src="images/client-5.svg" alt="Client Logo" class="client-logo h-10 mx-auto" loading="lazy">
-                <img src="images/client-6.svg" alt="Client Logo" class="client-logo h-12 mx-auto" loading="lazy">
-            </div>
+        <form class="notify-form" id="notify-form">
+            <input type="email" class="notify-input" data-lang-key="emailPlaceholder" placeholder="Tu correo electrónico" required>
+            <button type="submit" class="notify-button" data-lang-key="notifyButton">Notificarme <i class="fas fa-paper-plane"></i></button>
+        </form>
+        <div id="form-message" class="mt-4 text-sm font-semibold"></div>
+
+        <div class="social-links">
+            <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
         </div>
-    </section>
+    </div>
 
-    <!-- Services Section with Tabs -->
-    <section id="services" class="py-20 bg-white">
-        <div class="container mx-auto px-4">
-            <div class="text-center mb-16" data-aos="fade-up">
-                <span class="text-blue-500 font-semibold">OUR SERVICES</span>
-                <h2 class="text-4xl font-bold mt-2 mb-4">Comprehensive IT Solutions</h2>
-                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
-                    We offer end-to-end technology services tailored to your business needs.
-                </p>
-            </div>
-            
-            <!-- Services Tabs -->
-            <div class="max-w-5xl mx-auto">
-                <div class="flex flex-wrap justify-center mb-8" data-aos="fade-up">
-                    <button class="service-tab active px-6 py-3 font-medium text-blue-500 border-b-2 border-blue-500" data-tab="development">
-                        <i class="fas fa-code mr-2"></i> Development
-                    </button>
-                    <button class="service-tab px-6 py-3 font-medium text-gray-500 hover:text-blue-500" data-tab="cloud">
-                        <i class="fas fa-cloud mr-2"></i> Cloud
-                    </button>
-                    <button class="service-tab px-6 py-3 font-medium text-gray-500 hover:text-blue-500" data-tab="security">
-                        <i class="fas fa-shield-alt mr-2"></i> Security
-                    </button>
-                    <button class="service-tab px-6 py-3 font-medium text-gray-500 hover:text-blue-500" data-tab="consulting">
-                        <i class="fas fa-chart-line mr-2"></i> Consulting
-                    </button>
-                </div>
-                
-                <!-- Tab Content -->
-                <div class="service-content active" data-tab-content="development" data-aos="fade-up">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                        <div class="card p-8">
-                            <div class="service-icon">
-                                <i class="fas fa-laptop-code"></i>
-                            </div>
-                            <h3 class="text-2xl font-bold mb-4">Custom Software Development</h3>
-                            <p class="text-gray-600 mb-4">
-                                Bespoke software solutions designed to address your unique business challenges and streamline operations.
-                            </p>
-                            <ul class="space-y-2 text-gray-600">
-                                <li class="flex items-start">
-                                    <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
-                                    <span>Web & Mobile Applications</span>
-                                </li>
-                                <li class="flex items-start">
-                                    <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
-                                    <span>Enterprise Systems</span>
-                                </li>
-                                <li class="flex items-start">
-                                    <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
-                                    <span>API Development & Integration</span>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="card p-8">
-                            <div class="service-icon">
-                                <i class="fas fa-mobile-alt"></i>
-                            </div>
-                            <h3 class="text-2xl font-bold mb-4">Mobile App Development</h3>
-                            <p class="text-gray-600 mb-4">
-                                High-performance mobile applications for iOS and Android that engage users and drive business growth.
-                            </p>
-                            <ul class="space-y-2 text-gray-600">
-                                <li class="flex items-start">
-                                    <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
-                                    <span>Native & Cross-Platform Apps</span>
-                                </li>
-                                <li class="flex items-start">
-                                    <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
-                                    <span>UI/UX Focused Design</span>
-                                </li>
-                                <li class="flex items-start">
-                                    <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
-                                    <span>App Store Optimization</span>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Other tabs content would go here (hidden by default) -->
-                <div class="service-content hidden" data-tab-content="cloud">
-                    <!-- Cloud services content -->
-                </div>
-                
-                <div class="text-center mt-10" data-aos="fade-up">
-                    <a href="#contact" class="inline-flex items-center px-8 py-3 bg-gradient-to-r from-blue-500 to-blue-600 text-white font-semibold rounded-full hover:shadow-lg transition-all">
-                        Need a different solution? Let's talk
-                        <i class="fas fa-arrow-right ml-2"></i>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Stats Section -->
-    <section class="py-20 bg-gradient-to-r from-blue-600 to-blue-800 text-white">
-        <div class="container mx-auto px-4">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 text-center">
-                <div class="p-6" data-aos="fade-up">
-                    <div class="text-5xl font-bold mb-2">150+</div>
-                    <div class="text-xl">Projects Completed</div>
-                </div>
-                <div class="p-6" data-aos="fade-up" data-aos-delay="100">
-                    <div class="text-5xl font-bold mb-2">95%</div>
-                    <div class="text-xl">Client Retention</div>
-                </div>
-                <div class="p-6" data-aos="fade-up" data-aos-delay="200">
-                    <div class="text-5xl font-bold mb-2">40+</div>
-                    <div class="text-xl">Expert Team</div>
-                </div>
-                <div class="p-6" data-aos="fade-up" data-aos-delay="300">
-                    <div class="text-5xl font-bold mb-2">24/7</div>
-                    <div class="text-xl">Support Available</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- About Section with Team -->
-    <section id="about" class="py-20 bg-gray-50">
-        <div class="container mx-auto px-4">
-            <div class="flex flex-col lg:flex-row items-center gap-12">
-                <div class="lg:w-1/2" data-aos="fade-right">
-                    <img src="images/team-meeting.jpg" alt="Nextcoding Team" class="rounded-xl shadow-xl w-full" loading="lazy">
-                </div>
-                <div class="lg:w-1/2" data-aos="fade-left">
-                    <span class="text-blue-500 font-semibold">ABOUT US</span>
-                    <h2 class="text-4xl font-bold mt-2 mb-6">Technology Partners for the Digital Age</h2>
-                    <p class="text-gray-600 mb-6 leading-relaxed">
-                        Founded in 2015, Nextcoding has grown from a small startup to a leading provider of digital transformation services. Our team of certified experts brings together decades of experience across industries to deliver innovative solutions that drive real business results.
-                    </p>
-                    <div class="space-y-4">
-                        <div class="flex items-start">
-                            <div class="bg-blue-100 p-3 rounded-full mr-4">
-                                <i class="fas fa-bullseye text-blue-500"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-bold mb-1">Our Mission</h4>
-                                <p class="text-gray-600">To empower businesses through innovative technology solutions that create sustainable competitive advantages.</p>
-                            </div>
-                        </div>
-                        <div class="flex items-start">
-                            <div class="bg-blue-100 p-3 rounded-full mr-4">
-                                <i class="fas fa-eye text-blue-500"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-bold mb-1">Our Vision</h4>
-                                <p class="text-gray-600">To be the most trusted technology partner for businesses navigating digital transformation.</p>
-                            </div>
-                        </div>
-                        <div class="flex items-start">
-                            <div class="bg-blue-100 p-3 rounded-full mr-4">
-                                <i class="fas fa-heart text-blue-500"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-bold mb-1">Our Values</h4>
-                                <p class="text-gray-600">Innovation, Integrity, Excellence, and Partnership guide everything we do.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Team Section -->
-            <div class="mt-20" data-aos="fade-up">
-                <div class="text-center mb-12">
-                    <span class="text-blue-500 font-semibold">MEET THE TEAM</span>
-                    <h2 class="text-4xl font-bold mt-2 mb-4">Our Leadership</h2>
-                    <p class="text-xl text-gray-600 max-w-3xl mx-auto">
-                        The talented professionals driving our success and yours.
-                    </p>
-                </div>
-                
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    <!-- Team Member 1 -->
-                    <div class="card overflow-hidden group">
-                        <div class="relative overflow-hidden">
-                            <img src="images/team-1.jpg" alt="CEO" class="w-full h-80 object-cover transition duration-500 group-hover:scale-105" loading="lazy">
-                            <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
-                            <div class="absolute bottom-0 left-0 p-6">
-                                <h3 class="text-white text-2xl font-bold">Sarah Johnson</h3>
-                                <p class="text-blue-200">CEO & Founder</p>
-                            </div>
-                        </div>
-                        <div class="p-6">
-                            <p class="text-gray-600 mb-4">Technology visionary with 15+ years in software development and digital transformation.</p>
-                            <div class="flex space-x-4">
-                                <a href="#" class="text-blue-500 hover:text-blue-700">
-                                    <i class="fab fa-linkedin"></i>
-                                </a>
-                                <a href="#" class="text-blue-500 hover:text-blue-700">
-                                    <i class="fab fa-twitter"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Team Member 2 -->
-                    <div class="card overflow-hidden group">
-                        <div class="relative overflow-hidden">
-                            <img src="images/team-2.jpg" alt="CTO" class="w-full h-80 object-cover transition duration-500 group-hover:scale-105" loading="lazy">
-                            <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
-                            <div class="absolute bottom-0 left-0 p-6">
-                                <h3 class="text-white text-2xl font-bold">Michael Chen</h3>
-                                <p class="text-blue-200">Chief Technology Officer</p>
-                            </div>
-                        </div>
-                        <div class="p-6">
-                            <p class="text-gray-600 mb-4">Cloud architecture expert specializing in scalable, secure enterprise solutions.</p>
-                            <div class="flex space-x-4">
-                                <a href="#" class="text-blue-500 hover:text-blue-700">
-                                    <i class="fab fa-linkedin"></i>
-                                </a>
-                                <a href="#" class="text-blue-500 hover:text-blue-700">
-                                    <i class="fab fa-github"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Team Member 3 -->
-                    <div class="card overflow-hidden group">
-                        <div class="relative overflow-hidden">
-                            <img src="images/team-3.jpg" alt="CDO" class="w-full h-80 object-cover transition duration-500 group-hover:scale-105" loading="lazy">
-                            <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
-                            <div class="absolute bottom-0 left-0 p-6">
-                                <h3 class="text-white text-2xl font-bold">David Rodriguez</h3>
-                                <p class="text-blue-200">Chief Digital Officer</p>
-                            </div>
-                        </div>
-                        <div class="p-6">
-                            <p class="text-gray-600 mb-4">Digital strategy leader focused on customer experience and business growth.</p>
-                            <div class="flex space-x-4">
-                                <a href="#" class="text-blue-500 hover:text-blue-700">
-                                    <i class="fab fa-linkedin"></i>
-                                </a>
-                                <a href="#" class="text-blue-500 hover:text-blue-700">
-                                    <i class="fab fa-medium"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Case Studies Section -->
-    <section id="case-studies" class="py-20 bg-white">
-        <div class="container mx-auto px-4">
-            <div class="text-center mb-16" data-aos="fade-up">
-                <span class="text-blue-500 font-semibold">CASE STUDIES</span>
-                <h2 class="text-4xl font-bold mt-2 mb-4">Success Stories</h2>
-                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
-                    Discover how we've helped businesses transform through technology.
-                </p>
-            </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <!-- Case Study 1 -->
-                <div class="card overflow-hidden group" data-aos="fade-up">
-                    <div class="relative overflow-hidden h-64">
-                        <img src="images/case-study-1.jpg" alt="Case Study" class="w-full h-full object-cover transition duration-500 group-hover:scale-110" loading="lazy">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
-                        <div class="absolute top-4 right-4">
-                            <span class="bg-blue-500 text-white px-3 py-1 rounded-full text-sm font-semibold">Retail</span>
-                        </div>
-                    </div>
-                    <div class="p-8">
-                        <h3 class="text-2xl font-bold mb-3">Omnichannel Platform for Global Retailer</h3>
-                        <p class="text-gray-600 mb-4">Developed a unified commerce platform integrating 300+ stores with e-commerce and mobile apps, resulting in 35% revenue growth.</p>
-                        <div class="flex justify-between items-center">
-                            <a href="#" class="text-blue-500 font-semibold hover:text-blue-700 flex items-center">
-                                Read Case Study <i class="fas fa-arrow-right ml-2"></i>
-                            </a>
-                            <span class="text-gray-500 text-sm">6 months project</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Case Study 2 -->
-                <div class="card overflow-hidden group" data-aos="fade-up" data-aos-delay="100">
-                    <div class="relative overflow-hidden h-64">
-                        <img src="images/case-study-2.jpg" alt="Case Study" class="w-full h-full object-cover transition duration-500 group-hover:scale-110" loading="lazy">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
-                        <div class="absolute top-4 right-4">
-                            <span class="bg-green-500 text-white px-3 py-1 rounded-full text-sm font-semibold">Healthcare</span>
-                        </div>
-                    </div>
-                    <div class="p-8">
-                        <h3 class="text-2xl font-bold mb-3">AI-Powered Diagnostics System</h3>
-                        <p class="text-gray-600 mb-4">Implemented machine learning algorithms that reduced diagnostic time by 60% while improving accuracy for a leading hospital network.</p>
-                        <div class="flex justify-between items-center">
-                            <a href="#" class="text-blue-500 font-semibold hover:text-blue-700 flex items-center">
-                                Read Case Study <i class="fas fa-arrow-right ml-2"></i>
-                            </a>
-                            <span class="text-gray-500 text-sm">9 months project</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="text-center mt-12" data-aos="fade-up">
-                <a href="#" class="inline-flex items-center px-6 py-3 border border-blue-500 text-blue-500 font-semibold rounded-full hover:bg-blue-50 transition-all">
-                    View All Case Studies
-                    <i class="fas fa-arrow-right ml-2"></i>
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Testimonials Section -->
-    <section class="py-20 bg-gray-50">
-        <div class="container mx-auto px-4">
-            <div class="text-center mb-16" data-aos="fade-up">
-                <span class="text-blue-500 font-semibold">TESTIMONIALS</span>
-                <h2 class="text-4xl font-bold mt-2 mb-4">What Our Clients Say</h2>
-                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
-                    Don't just take our word for it - hear from our satisfied clients.
-                </p>
-            </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- Testimonial 1 -->
-                <div class="testimonial-card p-8" data-aos="fade-up">
-                    <div class="flex items-center mb-6">
-                        <div class="w-12 h-12 rounded-full overflow-hidden mr-4">
-                            <img src="images/client-1.jpg" alt="Client" class="w-full h-full object-cover" loading="lazy">
-                        </div>
-                        <div>
-                            <h4 class="font-bold">Jennifer Martinez</h4>
-                            <p class="text-gray-500 text-sm">CTO, TechForward Inc.</p>
-                        </div>
-                    </div>
-                    <p class="text-gray-600 italic mb-6">
-                        "Nextcoding transformed our legacy systems into a modern microservices architecture, reducing our operational costs by 40% while improving system reliability."
-                    </p>
-                    <div class="flex text-yellow-400">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                </div>
-                
-                <!-- Testimonial 2 -->
-                <div class="testimonial-card p-8" data-aos="fade-up" data-aos-delay="100">
-                    <div class="flex items-center mb-6">
-                        <div class="w-12 h-12 rounded-full overflow-hidden mr-4">
-                            <img src="images/client-2.jpg" alt="Client" class="w-full h-full object-cover" loading="lazy">
-                        </div>
-                        <div>
-                            <h4 class="font-bold">Robert Williams</h4>
-                            <p class="text-gray-500 text-sm">CEO, Global Retail Group</p>
-                        </div>
-                    </div>
-                    <p class="text-gray-600 italic mb-6">
-                        "Their team delivered our e-commerce platform ahead of schedule and under budget. The system handles 10,000+ concurrent users with zero downtime during peak seasons."
-                    </p>
-                    <div class="flex text-yellow-400">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                </div>
-                
-                <!-- Testimonial 3 -->
-                <div class="testimonial-card p-8" data-aos="fade-up" data-aos-delay="200">
-                    <div class="flex items-center mb-6">
-                        <div class="w-12 h-12 rounded-full overflow-hidden mr-4">
-                            <img src="images/client-3.jpg" alt="Client" class="w-full h-full object-cover" loading="lazy">
-                        </div>
-                        <div>
-                            <h4 class="font-bold">Amanda Chen</h4>
-                            <p class="text-gray-500 text-sm">Director of IT, HealthPlus</p>
-                        </div>
-                    </div>
-                    <p class="text-gray-600 italic mb-6">
-                        "The cybersecurity framework Nextcoding implemented for us identified and mitigated vulnerabilities we didn't even know existed. Their expertise is unparalleled."
-                    </p>
-                    <div class="flex text-yellow-400">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star-half-alt"></i>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- CTA Section -->
-    <section class="py-20 bg-gradient-to-r from-blue-600 to-blue-800 text-white">
-        <div class="container mx-auto px-4 text-center">
-            <h2 class="text-4xl font-bold mb-6" data-aos="fade-up">Ready to Transform Your Business?</h2>
-            <p class="text-xl mb-8 max-w-3xl mx-auto" data-aos="fade-up" data-aos-delay="100">
-                Let's discuss how Nextcoding can help you achieve your digital transformation goals.
-            </p>
-            <div class="flex flex-col sm:flex-row justify-center gap-4" data-aos="fade-up" data-aos-delay="200">
-                <a href="#contact" class="btn-primary px-8 py-4 rounded-full font-semibold text-lg hover:shadow-xl">
-                    Get Started Now
-                </a>
-                <a href="tel:+18005551234" class="bg-white text-blue-600 px-8 py-4 rounded-full font-semibold text-lg hover:bg-gray-100 hover:shadow-lg transition-all">
-                    <i class="fas fa-phone-alt mr-2"></i> Call Us
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="py-20 bg-white">
-        <div class="container mx-auto px-4">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
-                <div data-aos="fade-right">
-                    <span class="text-blue-500 font-semibold">CONTACT US</span>
-                    <h2 class="text-4xl font-bold mt-2 mb-6">Let's Build Something Great</h2>
-                    <p class="text-gray-600 mb-8 leading-relaxed">
-                        Whether you have a project in mind or just want to explore possibilities, our team is ready to help. Fill out the form or contact us directly.
-                    </p>
-                    
-                    <div class="space-y-6">
-                        <div class="flex items-start">
-                            <div class="bg-blue-100 p-3 rounded-full mr-4">
-                                <i class="fas fa-map-marker-alt text-blue-500"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-bold mb-1">Our Office</h4>
-                                <p class="text-gray-600">123 Tech Park Drive, Suite 500<br>San Francisco, CA 94107</p>
-                            </div>
-                        </div>
-                        
-                        <div class="flex items-start">
-                            <div class="bg-blue-100 p-3 rounded-full mr-4">
-                                <i class="fas fa-envelope text-blue-500"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-bold mb-1">Email Us</h4>
-                                <p class="text-gray-600">
-                                    <a href="mailto:info@nextcoding.com" class="hover:text-blue-500">info@nextcoding.com</a><br>
-                                    <a href="mailto:support@nextcoding.com" class="hover:text-blue-500">support@nextcoding.com</a>
-                                </p>
-                            </div>
-                        </div>
-                        
-                        <div class="flex items-start">
-                            <div class="bg-blue-100 p-3 rounded-full mr-4">
-                                <i class="fas fa-phone-alt text-blue-500"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-bold mb-1">Call Us</h4>
-                                <p class="text-gray-600">
-                                    <a href="tel:+18005551234" class="hover:text-blue-500">+1 (800) 555-1234</a><br>
-                                    <a href="tel:+18005554321" class="hover:text-blue-500">+1 (800) 555-4321</a>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="mt-10">
-                        <h4 class="font-bold mb-4">Follow Us</h4>
-                        <div class="flex space-x-4">
-                            <a href="#" class="w-10 h-10 rounded-full bg-blue-100 text-blue-500 flex items-center justify-center hover:bg-blue-500 hover:text-white transition-all">
-                                <i class="fab fa-linkedin-in"></i>
-                            </a>
-                            <a href="#" class="w-10 h-10 rounded-full bg-blue-100 text-blue-500 flex items-center justify-center hover:bg-blue-500 hover:text-white transition-all">
-                                <i class="fab fa-twitter"></i>
-                            </a>
-                            <a href="#" class="w-10 h-10 rounded-full bg-blue-100 text-blue-500 flex items-center justify-center hover:bg-blue-500 hover:text-white transition-all">
-                                <i class="fab fa-facebook-f"></i>
-                            </a>
-                            <a href="#" class="w-10 h-10 rounded-full bg-blue-100 text-blue-500 flex items-center justify-center hover:bg-blue-500 hover:text-white transition-all">
-                                <i class="fab fa-instagram"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                
-                <div data-aos="fade-left">
-                    <div class="card p-8">
-                        <form id="contact-form" class="space-y-6">
-                            <div>
-                                <label for="name" class="block font-medium mb-2">Your Name *</label>
-                                <input type="text" id="name" name="name" class="input-field w-full px-4 py-3 rounded-lg focus:outline-none" required>
-                            </div>
-                            
-                            <div>
-                                <label for="email" class="block font-medium mb-2">Email Address *</label>
-                                <input type="email" id="email" name="email" class="input-field w-full px-4 py-3 rounded-lg focus:outline-none" required>
-                            </div>
-                            
-                            <div>
-                                <label for="company" class="block font-medium mb-2">Company</label>
-                                <input type="text" id="company" name="company" class="input-field w-full px-4 py-3 rounded-lg focus:outline-none">
-                            </div>
-                            
-                            <div>
-                                <label for="service" class="block font-medium mb-2">Service Interest</label>
-                                <select id="service" name="service" class="input-field w-full px-4 py-3 rounded-lg focus:outline-none">
-                                    <option value="">Select a service</option>
-                                    <option value="development">Custom Software Development</option>
-                                    <option value="cloud">Cloud Solutions</option>
-                                    <option value="security">Cybersecurity</option>
-                                    <option value="consulting">IT Consulting</option>
-                                    <option value="other">Other</option>
-                                </select>
-                            </div>
-                            
-                            <div>
-                                <label for="message" class="block font-medium mb-2">Your Message *</label>
-                                <textarea id="message" name="message" rows="5" class="input-field w-full px-4 py-3 rounded-lg focus:outline-none" required></textarea>
-                            </div>
-                            
-                            <div class="flex items-center">
-                                <input type="checkbox" id="consent" name="consent" class="mr-2" required>
-                                <label for="consent" class="text-sm text-gray-600">I agree to the <a href="#" class="text-blue-500 hover:underline">privacy policy</a> and terms of service.</label>
-                            </div>
-                            
-                            <button type="submit" class="w-full btn-primary text-white font-semibold py-4 px-6 rounded-lg hover:shadow-xl transition-all">
-                                Send Message <i class="fas fa-paper-plane ml-2"></i>
-                            </button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="bg-gray-900 text-white pt-16 pb-8">
-        <div class="container mx-auto px-4">
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
-                <div>
-                    <a href="#" class="flex items-center mb-6">
-                        <img src="images/logo-white.png" alt="Nextcoding Logo" class="h-8" loading="lazy">
-                    </a>
-                    <p class="text-gray-400 mb-6">
-                        Nextcoding is a leading provider of digital transformation services, helping businesses leverage technology for growth and innovation.
-                    </p>
-                    <div class="flex space-x-4">
-                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
-                            <i class="fab fa-linkedin-in"></i>
-                        </a>
-                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
-                            <i class="fab fa-twitter"></i>
-                        </a>
-                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
-                            <i class="fab fa-facebook-f"></i>
-                        </a>
-                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
-                            <i class="fab fa-instagram"></i>
-                        </a>
-                    </div>
-                </div>
-                
-                <div>
-                    <h3 class="text-lg font-semibold mb-6">Services</h3>
-                    <ul class="space-y-3">
-                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Custom Software Development</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Cloud Solutions & Migration</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Cybersecurity Services</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Data Analytics & AI</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Web & Mobile Development</a></li>
-                    </ul>
-                </div>
-                
-                <div>
-                    <h3 class="text-lg font-semibold mb-6">Company</h3>
-                    <ul class="space-y-3">
-                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">About Us</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Our Team</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Case Studies</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Careers</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Blog</a></li>
-                    </ul>
-                </div>
-                
-                <div>
-                    <h3 class="text-lg font-semibold mb-6">Contact</h3>
-                    <address class="not-italic text-gray-400 space-y-3">
-                        <p>123 Tech Park Drive<br>Suite 500<br>San Francisco, CA 94107</p>
-                        <p><a href="mailto:info@nextcoding.com" class="hover:text-white transition-colors">info@nextcoding.com</a></p>
-                        <p><a href="tel:+18005551234" class="hover:text-white transition-colors">+1 (800) 555-1234</a></p>
-                    </address>
-                </div>
-            </div>
-            
-            <div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center">
-                <p class="text-gray-400 text-sm mb-4 md:mb-0">
-                    &copy; 2025 Nextcoding. All rights reserved.
-                </p>
-                <div class="flex space-x-6">
-                    <a href="#" class="text-gray-400 hover:text-white text-sm transition-colors">Privacy Policy</a>
-                    <a href="#" class="text-gray-400 hover:text-white text-sm transition-colors">Terms of Service</a>
-                    <a href="#" class="text-gray-400 hover:text-white text-sm transition-colors">Cookie Policy</a>
-                </div>
-            </div>
-        </div>
-    </footer>
-
-    <!-- Back to Top Button -->
-    <button id="back-to-top" class="fixed bottom-8 right-8 bg-blue-500 text-white w-12 h-12 rounded-full shadow-lg flex items-center justify-center opacity-0 invisible transition-all duration-300 hover:bg-blue-600">
-        <i class="fas fa-arrow-up"></i>
+    <!-- Floating Language Hint Button -->
+    <button id="lang-hint-button" class="lang-hint-button">
+        <span data-lang-key="langHintText">Change to Spanish?</span>
     </button>
 
-    <!-- JavaScript Libraries -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    
-    <!-- Main JavaScript -->
     <script>
-        // Initialize AOS (Animate On Scroll)
-        document.addEventListener('DOMContentLoaded', function() {
-            AOS.init({
-                duration: 800,
-                easing: 'ease-in-out',
-                once: true,
-                offset: 100
-            });
-            
-            // Hide preloader when page is loaded
-            setTimeout(function() {
-                document.getElementById('preloader').style.opacity = '0';
-                document.getElementById('preloader').style.visibility = 'hidden';
-                document.body.style.overflow = 'auto';
-            }, 500);
-            
-            // Mobile menu toggle
-            const mobileMenuButton = document.getElementById('mobile-menu-button');
-            const mobileMenu = document.getElementById('mobile-menu');
-            const closeMenuButton = document.getElementById('close-menu');
-            
-            mobileMenuButton.addEventListener('click', function() {
-                mobileMenu.classList.add('open');
-                document.body.style.overflow = 'hidden';
-            });
-            
-            closeMenuButton.addEventListener('click', function() {
-                mobileMenu.classList.remove('open');
-                document.body.style.overflow = 'auto';
-            });
-            
-            // Close mobile menu when clicking on a link
-            const mobileMenuLinks = mobileMenu.querySelectorAll('a');
-            mobileMenuLinks.forEach(link => {
-                link.addEventListener('click', function() {
-                    mobileMenu.classList.remove('open');
-                    document.body.style.overflow = 'auto';
-                });
-            });
-            
-            // Back to top button
-            const backToTopButton = document.getElementById('back-to-top');
-            
-            window.addEventListener('scroll', function() {
-                if (window.pageYOffset > 300) {
-                    backToTopButton.style.opacity = '1';
-                    backToTopButton.style.visibility = 'visible';
+        // --- Translations Data (Inline) ---
+        const translations = {
+            en: {
+                pageTitle: "Nextcoding | Coming Soon",
+                metaDescription: "Nextcoding LLC is preparing to launch its new website. Stay tuned for cutting-edge IT services.",
+                mainHeading: "We are building something amazing",
+                subHeading: "Our new website is under development. We are working hard to bring you the best experience. Subscribe for updates.",
+                daysLabel: "Days",
+                hoursLabel: "Hours",
+                minutesLabel: "Minutes",
+                secondsLabel: "Seconds",
+                emailPlaceholder: "Your email address",
+                notifyButton: "Notify Me",
+                formSuccess: "Thank you for subscribing! We will notify you when we are ready.",
+                formError: "There was an error subscribing. Please try again.",
+                langHintText: "Change to Spanish?"
+            },
+            es: {
+                pageTitle: "Nextcoding | Sitio en Construcción",
+                metaDescription: "Nextcoding LLC está preparando el lanzamiento de su nuevo sitio web. Mantente atento a los servicios de TI de vanguardia.",
+                mainHeading: "Estamos construyendo algo increíble",
+                subHeading: "Nuestro nuevo sitio web está en desarrollo. Estamos trabajando duro para ofrecerte la mejor experiencia. Suscríbete para recibir actualizaciones.",
+                daysLabel: "Días",
+                hoursLabel: "Horas",
+                minutesLabel: "Minutos",
+                secondsLabel: "Segundos",
+                emailPlaceholder: "Tu correo electrónico",
+                notifyButton: "Notificarme",
+                formSuccess: "¡Gracias por suscribirte! Te notificaremos cuando estemos listos.",
+                formError: "Hubo un error al suscribirte. Por favor, inténtalo de nuevo.",
+                langHintText: "¿Cambiar a Inglés?"
+            }
+        };
+
+        // --- Countdown Timer ---
+        // Set your launch date here (YYYY, MM-1, DD)
+        const launchDate = new Date(2025, 7, 28, 17, 0, 0).getTime(); // Example: August 28, 2025, 5:00 PM EDT
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const distance = launchDate - now;
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById('days').textContent = days.toString().padStart(2, '0');
+            document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+            document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+            document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+
+            if (distance < 0) {
+                clearInterval(countdownTimer);
+                document.getElementById('days').textContent = '00';
+                document.getElementById('hours').textContent = '00';
+                document.getElementById('minutes').textContent = '00';
+                document.getElementById('seconds').textContent = '00';
+                // Optionally, display a "We are LIVE!" message or redirect
+            }
+        }
+
+        // Update countdown every second
+        updateCountdown();
+        const countdownTimer = setInterval(updateCountdown, 1000);
+
+        // --- Form Submission ---
+        const notifyForm = document.getElementById('notify-form');
+        const formMessage = document.getElementById('form-message');
+
+        notifyForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const emailInput = this.querySelector('input[type="email"]');
+            const email = emailInput.value;
+
+            // In a real scenario, you would send this email to a backend service
+            // (e.g., Formspree, Mailchimp, custom API)
+            // For this single-file example, we'll simulate a success/error message.
+
+            formMessage.textContent = ''; // Clear previous messages
+            formMessage.style.color = ''; // Reset color
+
+            try {
+                // Simulate API call delay
+                // await new Promise(resolve => setTimeout(resolve, 1000));
+
+                // Simulate success or failure
+                const success = Math.random() > 0.2; // 80% chance of success
+
+                if (success) {
+                    formMessage.textContent = translations[localStorage.getItem('selectedLanguage') || 'en'].formSuccess;
+                    formMessage.style.color = '#D1FAE5'; /* Tailwind green-100 equivalent for text */
+                    emailInput.value = ''; // Clear input on success
                 } else {
-                    backToTopButton.style.opacity = '0';
-                    backToTopButton.style.visibility = 'hidden';
+                    formMessage.textContent = translations[localStorage.getItem('selectedLanguage') || 'en'].formError;
+                    formMessage.style.color = '#FECACA'; /* Tailwind red-200 equivalent for text */
+                }
+            } catch (error) {
+                console.error("Subscription error:", error);
+                formMessage.textContent = translations[localStorage.getItem('selectedLanguage') || 'en'].formError;
+                formMessage.style.color = '#FECACA';
+            }
+        });
+
+        // --- Background animation ---
+        const circles = document.querySelectorAll('.circles li');
+        circles.forEach((circle, index) => {
+            circle.style.left = `${Math.random() * 100}%`;
+            circle.style.width = `${10 + Math.random() * 30}px`;
+            circle.style.height = circle.style.width;
+            circle.style.animationDelay = `${Math.random() * 5}s`;
+            circle.style.animationDuration = `${10 + Math.random() * 20}s`;
+        });
+
+        // --- Language Switching Logic ---
+        const languageMenuButton = document.getElementById('language-menu-button');
+        const languageMenu = document.getElementById('language-menu');
+        const currentLangDisplay = document.getElementById('current-lang-display');
+        const langHintButton = document.getElementById('lang-hint-button');
+
+        // Function to set the language
+        window.setLanguage = (lang) => {
+            document.documentElement.lang = lang; // Update HTML lang attribute
+
+            // Update all elements with data-lang-key
+            document.querySelectorAll('[data-lang-key]').forEach(element => {
+                const key = element.getAttribute('data-lang-key');
+                if (translations[lang] && translations[lang][key]) {
+                    if (element.tagName === 'INPUT' && element.hasAttribute('placeholder')) {
+                        element.setAttribute('placeholder', translations[lang][key]);
+                    } else if (element.tagName === 'META' && element.getAttribute('name') === 'description') {
+                        element.setAttribute('content', translations[lang][key]);
+                    } else {
+                        element.textContent = translations[lang][key];
+                    }
                 }
             });
-            
-            backToTopButton.addEventListener('click', function() {
-                window.scrollTo({
-                    top: 0,
-                    behavior: 'smooth'
-                });
-            });
-            
-            // Service tabs functionality
-            const serviceTabs = document.querySelectorAll('.service-tab');
-            const serviceContents = document.querySelectorAll('[data-tab-content]');
-            
-            serviceTabs.forEach(tab => {
-                tab.addEventListener('click', function() {
-                    const targetTab = this.getAttribute('data-tab');
-                    
-                    // Update active tab
-                    serviceTabs.forEach(t => t.classList.remove('active', 'text-blue-500', 'border-blue-500'));
-                    serviceTabs.forEach(t => t.classList.add('text-gray-500', 'hover:text-blue-500'));
-                    this.classList.add('active', 'text-blue-500', 'border-blue-500');
-                    this.classList.remove('text-gray-500', 'hover:text-blue-500');
-                    
-                    // Update active content
-                    serviceContents.forEach(content => {
-                        content.classList.add('hidden');
-                        if (content.getAttribute('data-tab-content') === targetTab) {
-                            content.classList.remove('hidden');
-                        }
-                    });
-                });
-            });
-            
-            // Form submission
-            const contactForm = document.getElementById('contact-form');
-            
-            contactForm.addEventListener('submit', function(e) {
-                e.preventDefault();
-                
-                // Here you would typically send the form data to your server
-                // For demo purposes, we'll just show a success message
-                alert('Thank you for your message! We will get back to you soon.');
-                this.reset();
-            });
-            
-            // Smooth scrolling for anchor links
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    
-                    const targetId = this.getAttribute('href');
-                    if (targetId === '#') return;
-                    
-                    const targetElement = document.querySelector(targetId);
-                    if (targetElement) {
-                        window.scrollTo({
-                            top: targetElement.offsetTop - 80,
-                            behavior: 'smooth'
-                        });
-                    }
-                });
-            });
+
+            currentLangDisplay.textContent = lang.toUpperCase(); // Update current language display
+            localStorage.setItem('selectedLanguage', lang); // Store selected language
+
+            // Update language hint button text and visibility
+            if (lang === 'en') {
+                langHintButton.querySelector('[data-lang-key="langHintText"]').textContent = translations.es.langHintText;
+                langHintButton.onclick = () => setLanguage('es');
+            } else { // lang === 'es'
+                langHintButton.querySelector('[data-lang-key="langHintText"]').textContent = translations.en.langHintText;
+                langHintButton.onclick = () => setLanguage('en');
+            }
+            langHintButton.classList.remove('show'); // Hide hint after explicit selection
+        };
+
+        // Toggle language dropdown menu
+        languageMenuButton.addEventListener('click', (event) => {
+            event.stopPropagation();
+            languageMenu.classList.toggle('hidden');
         });
+
+        // Close language dropdown when clicking outside
+        document.addEventListener('click', (event) => {
+            if (!languageMenuButton.contains(event.target) && !languageMenu.contains(event.target)) {
+                languageMenu.classList.add('hidden');
+            }
+        });
+
+        // Language selection event listeners
+        document.getElementById('lang-en').addEventListener('click', (e) => {
+            e.preventDefault();
+            setLanguage('en');
+            languageMenu.classList.add('hidden');
+        });
+
+        document.getElementById('lang-es').addEventListener('click', (e) => {
+            e.preventDefault();
+            setLanguage('es');
+            languageMenu.classList.add('hidden');
+        });
+
+        // Initial language load from localStorage or default to English
+        const savedLanguage = localStorage.getItem('selectedLanguage') || 'en';
+        setLanguage(savedLanguage);
+
+        // --- Floating Language Hint Button Logic ---
+        let scrollTimeout;
+        const scrollThreshold = 100; // Pixels to scroll before hint appears
+
+        const checkScrollForHint = () => {
+            if (langHintButton) {
+                const currentLang = localStorage.getItem('selectedLanguage') || 'en';
+                // Show hint if scrolled down AND current language is English
+                if (window.scrollY > scrollThreshold && currentLang === 'en' && !langHintButton.classList.contains('show')) {
+                    langHintButton.classList.add('show');
+                }
+                // Show hint if scrolled down AND current language is Spanish
+                else if (window.scrollY > scrollThreshold && currentLang === 'es' && !langHintButton.classList.contains('show')) {
+                    langHintButton.classList.add('show');
+                }
+                // Hide if scrolled back up or if language was changed
+                else if (window.scrollY <= scrollThreshold || (langHintButton.classList.contains('show') && (currentLang === 'en' && langHintButton.querySelector('[data-lang-key="langHintText"]').textContent === translations.en.langHintText) || (currentLang === 'es' && langHintButton.querySelector('[data-lang-key="langHintText"]').textContent === translations.es.langHintText))) {
+                    langHintButton.classList.remove('show');
+                }
+            }
+        };
+
+        window.addEventListener('scroll', () => {
+            clearTimeout(scrollTimeout);
+            scrollTimeout = setTimeout(checkScrollForHint, 100); // Debounce scroll event
+        });
+
+        // Initial check for hint visibility on page load
+        checkScrollForHint();
     </script>
 </body>
 </html>
