@@ -28,69 +28,77 @@
             font-family: 'Inter', sans-serif;
             background: linear-gradient(135deg, var(--blue-dark), var(--blue-light));
             color: var(--text-color);
-            height: 100vh;
+            min-height: 100vh;
             margin: 0;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             text-align: center;
-            overflow: hidden; /* Prevent scrollbars from background circles */
-            position: relative; /* For z-index context */
+            overflow-x: hidden;
+            position: relative;
+            padding: 20px;
+            box-sizing: border-box;
         }
 
         .container {
             max-width: 800px;
+            width: 100%;
             padding: 0 20px;
-            z-index: 2; /* Ensure content is above circles */
-            position: relative; /* For language selector positioning */
+            z-index: 2;
+            position: relative;
         }
 
         h1 {
-            font-size: 3.5rem;
+            font-size: clamp(2rem, 5vw, 3.5rem);
             font-weight: 700;
             margin-bottom: 1rem;
             text-shadow: 0 2px 10px var(--shadow-color);
+            line-height: 1.2;
         }
 
         p {
-            font-size: 1.25rem;
+            font-size: clamp(1rem, 2vw, 1.25rem);
             line-height: 1.6;
             margin-bottom: 2rem;
             opacity: 0.9;
         }
 
         .logo {
-            width: 150px; /* Increased size for prominence */
+            width: min(150px, 40vw);
             height: auto;
             margin-bottom: 2rem;
             filter: drop-shadow(0 2px 5px var(--shadow-color));
+            max-width: 100%;
         }
 
         .countdown {
             display: flex;
             justify-content: center;
-            gap: 1.5rem;
-            margin: 3rem 0;
+            gap: 1rem;
+            margin: 2rem 0;
+            flex-wrap: wrap;
         }
 
         .countdown-item {
             background: var(--card-bg);
             backdrop-filter: blur(5px);
             border-radius: 12px;
-            padding: 1.5rem;
-            min-width: 90px;
+            padding: 1rem;
+            min-width: 70px;
             box-shadow: 0 4px 20px var(--shadow-color);
+            flex: 1;
+            max-width: 90px;
         }
 
         .countdown-number {
-            font-size: 2.5rem;
+            font-size: clamp(1.8rem, 5vw, 2.5rem);
             font-weight: 700;
             margin-bottom: 0.5rem;
         }
 
         .countdown-label {
-            font-size: 0.9rem;
+            font-size: clamp(0.7rem, 2vw, 0.9rem);
             opacity: 0.8;
             text-transform: uppercase;
             letter-spacing: 1px;
@@ -100,46 +108,52 @@
             display: flex;
             max-width: 500px;
             margin: 0 auto;
+            width: 100%;
+            flex-direction: column;
         }
 
         .notify-input {
             flex: 1;
             padding: 15px 20px;
             border: none;
-            border-radius: 50px 0 0 50px;
+            border-radius: 50px;
             font-size: 1rem;
             outline: none;
-            color: var(--blue-dark); /* Text color for input */
+            color: var(--blue-dark);
+            margin-bottom: 10px;
+            width: 100%;
+            box-sizing: border-box;
         }
+
         .notify-input::placeholder {
-            color: rgba(25, 118, 210, 0.6); /* Placeholder color */
+            color: rgba(25, 118, 210, 0.6);
         }
 
         .notify-button {
             background: var(--button-bg-light);
             color: var(--button-text-dark);
             border: none;
-            padding: 0 30px;
-            border-radius: 0 50px 50px 0;
+            padding: 15px;
+            border-radius: 50px;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
+            width: 100%;
+            box-sizing: border-box;
         }
 
         .notify-button:hover {
             background: #f5f5f5;
-            transform: translateY(-2px); /* Slight lift on hover */
+            transform: translateY(-2px);
             box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-        }
-        .notify-button:active {
-            transform: translateY(0);
         }
 
         .social-links {
-            margin-top: 3rem;
+            margin-top: 2rem;
             display: flex;
             gap: 1rem;
             justify-content: center;
+            flex-wrap: wrap;
         }
 
         .social-link {
@@ -151,12 +165,7 @@
             align-items: center;
             justify-content: center;
             transition: all 0.3s ease;
-            color: var(--text-color); /* Ensure icons are white */
-        }
-
-        .social-link:hover {
-            background: rgba(255,255,255,0.25);
-            transform: translateY(-3px);
+            color: var(--text-color);
         }
 
         /* Animated background circles */
@@ -195,11 +204,12 @@
 
         /* Language Selector Styles */
         .language-selector {
-            position: absolute;
+            position: fixed;
             top: 20px;
             right: 20px;
-            z-index: 10; /* Above other content */
+            z-index: 10;
         }
+
         .language-selector button {
             background: rgba(255,255,255,0.2);
             color: white;
@@ -207,14 +217,18 @@
             border-radius: 8px;
             padding: 8px 15px;
             cursor: pointer;
-            transition: background 0.3s ease, border-color 0.3s ease;
+            transition: all 0.3s ease;
             display: flex;
             align-items: center;
+            font-size: 0.9rem;
         }
+
         .language-selector button:hover {
             background: rgba(255,255,255,0.3);
         }
+
         .language-selector .dropdown-menu {
+            display: none;
             background: white;
             border-radius: 8px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.2);
@@ -222,98 +236,75 @@
             top: 100%;
             right: 0;
             margin-top: 8px;
-            min-width: 100px;
+            min-width: 120px;
             overflow: hidden;
             z-index: 11;
         }
+
+        .language-selector .dropdown-menu.show {
+            display: block;
+        }
+
         .language-selector .dropdown-menu a {
             display: block;
             padding: 10px 15px;
             color: var(--blue-dark);
             text-decoration: none;
             transition: background 0.2s ease;
+            font-size: 0.9rem;
         }
+
         .language-selector .dropdown-menu a:hover {
             background: #f0f0f0;
         }
 
-        /* Floating Language Hint Button */
-        .lang-hint-button {
-            position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            background-color: rgba(255,255,255,0.2); /* Semi-transparent white */
-            color: white;
-            padding: 10px 20px;
-            border-radius: 50px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            transition: opacity 0.3s ease, transform 0.3s ease;
-            z-index: 1000;
-            cursor: pointer;
-            border: none;
+        /* Form message */
+        #form-message {
+            margin-top: 1rem;
             font-size: 0.9rem;
-            font-weight: 500;
-            opacity: 0; /* Hidden by default */
-            visibility: hidden; /* Hidden by default */
-            white-space: nowrap; /* Prevent text wrapping */
-        }
-        .lang-hint-button.show {
-            opacity: 1;
-            visibility: visible;
-        }
-        .lang-hint-button:hover {
-            background-color: rgba(255,255,255,0.3);
-            transform: translateX(-50%) translateY(-3px);
+            min-height: 20px;
         }
 
-
-        /* Responsive adjustments */
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 2.5rem;
-            }
-
-            p {
-                font-size: 1.1rem;
-            }
-
-            .countdown {
-                gap: 1rem;
-            }
-
-            .countdown-item {
-                min-width: 70px;
-                padding: 1rem;
-            }
-
-            .countdown-number {
-                font-size: 2rem;
-            }
-
-            .notify-form {
-                flex-direction: column;
-            }
-
-            .notify-input,
-            .notify-button {
-                border-radius: 50px;
-                width: 100%;
-            }
-
-            .notify-button {
-                margin-top: 1rem;
-                padding: 15px;
-            }
-
+        /* Media queries for mobile */
+        @media (max-width: 480px) {
             .language-selector {
-                top: 10px;
-                right: 10px;
+                top: 15px;
+                right: 15px;
             }
-            .lang-hint-button {
-                bottom: 10px; /* Adjusted for mobile */
-                padding: 8px 15px;
-                font-size: 0.8rem;
+            
+            .countdown-item {
+                min-width: 60px;
+                padding: 0.8rem;
+            }
+            
+            .countdown-number {
+                font-size: 1.5rem;
+            }
+            
+            .countdown-label {
+                font-size: 0.6rem;
+            }
+            
+            .social-link {
+                width: 40px;
+                height: 40px;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .notify-form {
+                flex-direction: row;
+            }
+            
+            .notify-input {
+                border-radius: 50px 0 0 50px;
+                margin-bottom: 0;
+            }
+            
+            .notify-button {
+                border-radius: 0 50px 50px 0;
+                padding: 0 30px;
+                width: auto;
             }
         }
     </style>
@@ -333,15 +324,13 @@
         <li></li>
     </div>
 
-    <!-- Language Selector -->
+    <!-- Language Selector - Fixed position -->
     <div class="language-selector">
         <button id="language-menu-button">
             <span id="current-lang-display">EN</span>
-            <svg class="ml-2 h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-            </svg>
+            <i class="fas fa-chevron-down ml-2" style="font-size: 0.8rem;"></i>
         </button>
-        <div class="dropdown-menu hidden" id="language-menu">
+        <div class="dropdown-menu" id="language-menu">
             <a href="#" id="lang-en" data-lang="en">English</a>
             <a href="#" id="lang-es" data-lang="es">Español</a>
         </div>
@@ -351,32 +340,32 @@
         <!-- Nextcoding Logo -->
         <img src="images/logo.png" alt="Nextcoding Logo" class="logo">
 
-        <h1 data-lang-key="mainHeading">Estamos construyendo algo increíble</h1>
+        <h1 data-lang-key="mainHeading">We are building something amazing</h1>
 
-        <p data-lang-key="subHeading">Nuestro nuevo sitio web está en desarrollo. Estamos trabajando duro para ofrecerte la mejor experiencia. Suscríbete para recibir actualizaciones.</p>
+        <p data-lang-key="subHeading">Our new website is under development. We are working hard to bring you the best experience. Subscribe for updates.</p>
 
         <div class="countdown">
             <div class="countdown-item">
                 <div class="countdown-number" id="days">00</div>
-                <div class="countdown-label" data-lang-key="daysLabel">Días</div>
+                <div class="countdown-label" data-lang-key="daysLabel">Days</div>
             </div>
             <div class="countdown-item">
                 <div class="countdown-number" id="hours">00</div>
-                <div class="countdown-label" data-lang-key="hoursLabel">Horas</div>
+                <div class="countdown-label" data-lang-key="hoursLabel">Hours</div>
             </div>
             <div class="countdown-item">
                 <div class="countdown-number" id="minutes">00</div>
-                <div class="countdown-label" data-lang-key="minutesLabel">Minutos</div>
+                <div class="countdown-label" data-lang-key="minutesLabel">Minutes</div>
             </div>
             <div class="countdown-item">
                 <div class="countdown-number" id="seconds">00</div>
-                <div class="countdown-label" data-lang-key="secondsLabel">Segundos</div>
+                <div class="countdown-label" data-lang-key="secondsLabel">Seconds</div>
             </div>
         </div>
 
         <form class="notify-form" id="notify-form">
-            <input type="email" class="notify-input" data-lang-key="emailPlaceholder" placeholder="Tu correo electrónico" required>
-            <button type="submit" class="notify-button" data-lang-key="notifyButton">Notificarme <i class="fas fa-paper-plane"></i></button>
+            <input type="email" class="notify-input" data-lang-key="emailPlaceholder" placeholder="Your email address" required>
+            <button type="submit" class="notify-button" data-lang-key="notifyButton">Notify Me <i class="fas fa-paper-plane"></i></button>
         </form>
         <div id="form-message" class="mt-4 text-sm font-semibold"></div>
 
@@ -388,13 +377,8 @@
         </div>
     </div>
 
-    <!-- Floating Language Hint Button -->
-    <button id="lang-hint-button" class="lang-hint-button">
-        <span data-lang-key="langHintText">Change to Spanish?</span>
-    </button>
-
     <script>
-        // --- Translations Data (Inline) ---
+        // --- Translations Data ---
         const translations = {
             en: {
                 pageTitle: "Nextcoding | Coming Soon",
@@ -408,8 +392,7 @@
                 emailPlaceholder: "Your email address",
                 notifyButton: "Notify Me",
                 formSuccess: "Thank you for subscribing! We will notify you when we are ready.",
-                formError: "There was an error subscribing. Please try again.",
-                langHintText: "Change to Spanish?"
+                formError: "There was an error subscribing. Please try again."
             },
             es: {
                 pageTitle: "Nextcoding | Sitio en Construcción",
@@ -423,14 +406,12 @@
                 emailPlaceholder: "Tu correo electrónico",
                 notifyButton: "Notificarme",
                 formSuccess: "¡Gracias por suscribirte! Te notificaremos cuando estemos listos.",
-                formError: "Hubo un error al suscribirte. Por favor, inténtalo de nuevo.",
-                langHintText: "¿Cambiar a Inglés?"
+                formError: "Hubo un error al suscribirte. Por favor, inténtalo de nuevo."
             }
         };
 
         // --- Countdown Timer ---
-        // Set your launch date here (YYYY, MM-1, DD)
-        const launchDate = new Date(2025, 7, 28, 17, 0, 0).getTime(); // Example: August 28, 2025, 5:00 PM EDT
+        const launchDate = new Date(2025, 7, 28, 17, 0, 0).getTime();
 
         function updateCountdown() {
             const now = new Date().getTime();
@@ -452,11 +433,9 @@
                 document.getElementById('hours').textContent = '00';
                 document.getElementById('minutes').textContent = '00';
                 document.getElementById('seconds').textContent = '00';
-                // Optionally, display a "We are LIVE!" message or redirect
             }
         }
 
-        // Update countdown every second
         updateCountdown();
         const countdownTimer = setInterval(updateCountdown, 1000);
 
@@ -464,38 +443,27 @@
         const notifyForm = document.getElementById('notify-form');
         const formMessage = document.getElementById('form-message');
 
-        notifyForm.addEventListener('submit', async function(e) {
+        notifyForm.addEventListener('submit', function(e) {
             e.preventDefault();
             const emailInput = this.querySelector('input[type="email"]');
             const email = emailInput.value;
+            const currentLang = localStorage.getItem('selectedLanguage') || 'en';
 
-            // In a real scenario, you would send this email to a backend service
-            // (e.g., Formspree, Mailchimp, custom API)
-            // For this single-file example, we'll simulate a success/error message.
+            formMessage.textContent = '';
+            formMessage.style.color = '';
 
-            formMessage.textContent = ''; // Clear previous messages
-            formMessage.style.color = ''; // Reset color
-
-            try {
-                // Simulate API call delay
-                // await new Promise(resolve => setTimeout(resolve, 1000));
-
-                // Simulate success or failure
-                const success = Math.random() > 0.2; // 80% chance of success
-
+            // Simulate form submission
+            setTimeout(() => {
+                const success = Math.random() > 0.2; // 80% success rate for demo
                 if (success) {
-                    formMessage.textContent = translations[localStorage.getItem('selectedLanguage') || 'en'].formSuccess;
-                    formMessage.style.color = '#D1FAE5'; /* Tailwind green-100 equivalent for text */
-                    emailInput.value = ''; // Clear input on success
+                    formMessage.textContent = translations[currentLang].formSuccess;
+                    formMessage.style.color = '#D1FAE5';
+                    emailInput.value = '';
                 } else {
-                    formMessage.textContent = translations[localStorage.getItem('selectedLanguage') || 'en'].formError;
-                    formMessage.style.color = '#FECACA'; /* Tailwind red-200 equivalent for text */
+                    formMessage.textContent = translations[currentLang].formError;
+                    formMessage.style.color = '#FECACA';
                 }
-            } catch (error) {
-                console.error("Subscription error:", error);
-                formMessage.textContent = translations[localStorage.getItem('selectedLanguage') || 'en'].formError;
-                formMessage.style.color = '#FECACA';
-            }
+            }, 800);
         });
 
         // --- Background animation ---
@@ -512,16 +480,18 @@
         const languageMenuButton = document.getElementById('language-menu-button');
         const languageMenu = document.getElementById('language-menu');
         const currentLangDisplay = document.getElementById('current-lang-display');
-        const langHintButton = document.getElementById('lang-hint-button');
+
+        // Initialize language menu as hidden
+        languageMenu.classList.remove('show');
 
         // Function to set the language
-        window.setLanguage = (lang) => {
-            document.documentElement.lang = lang; // Update HTML lang attribute
-
-            // Update all elements with data-lang-key
+        function setLanguage(lang) {
+            document.documentElement.lang = lang;
+            
+            // Update all translatable elements
             document.querySelectorAll('[data-lang-key]').forEach(element => {
                 const key = element.getAttribute('data-lang-key');
-                if (translations[lang] && translations[lang][key]) {
+                if (translations[lang][key]) {
                     if (element.tagName === 'INPUT' && element.hasAttribute('placeholder')) {
                         element.setAttribute('placeholder', translations[lang][key]);
                     } else if (element.tagName === 'META' && element.getAttribute('name') === 'description') {
@@ -532,79 +502,38 @@
                 }
             });
 
-            currentLangDisplay.textContent = lang.toUpperCase(); // Update current language display
-            localStorage.setItem('selectedLanguage', lang); // Store selected language
-
-            // Update language hint button text and visibility
-            if (lang === 'en') {
-                langHintButton.querySelector('[data-lang-key="langHintText"]').textContent = translations.es.langHintText;
-                langHintButton.onclick = () => setLanguage('es');
-            } else { // lang === 'es'
-                langHintButton.querySelector('[data-lang-key="langHintText"]').textContent = translations.en.langHintText;
-                langHintButton.onclick = () => setLanguage('en');
-            }
-            langHintButton.classList.remove('show'); // Hide hint after explicit selection
-        };
+            currentLangDisplay.textContent = lang.toUpperCase();
+            localStorage.setItem('selectedLanguage', lang);
+        }
 
         // Toggle language dropdown menu
-        languageMenuButton.addEventListener('click', (event) => {
-            event.stopPropagation();
-            languageMenu.classList.toggle('hidden');
+        languageMenuButton.addEventListener('click', (e) => {
+            e.stopPropagation();
+            languageMenu.classList.toggle('show');
         });
 
-        // Close language dropdown when clicking outside
-        document.addEventListener('click', (event) => {
-            if (!languageMenuButton.contains(event.target) && !languageMenu.contains(event.target)) {
-                languageMenu.classList.add('hidden');
-            }
+        // Close dropdown when clicking outside
+        document.addEventListener('click', () => {
+            languageMenu.classList.remove('show');
         });
 
-        // Language selection event listeners
+        // Language selection
         document.getElementById('lang-en').addEventListener('click', (e) => {
             e.preventDefault();
             setLanguage('en');
-            languageMenu.classList.add('hidden');
+            languageMenu.classList.remove('show');
         });
 
         document.getElementById('lang-es').addEventListener('click', (e) => {
             e.preventDefault();
             setLanguage('es');
-            languageMenu.classList.add('hidden');
+            languageMenu.classList.remove('show');
         });
 
-        // Initial language load from localStorage or default to English
+        // Initialize with saved language or default to English
         const savedLanguage = localStorage.getItem('selectedLanguage') || 'en';
         setLanguage(savedLanguage);
-
-        // --- Floating Language Hint Button Logic ---
-        let scrollTimeout;
-        const scrollThreshold = 100; // Pixels to scroll before hint appears
-
-        const checkScrollForHint = () => {
-            if (langHintButton) {
-                const currentLang = localStorage.getItem('selectedLanguage') || 'en';
-                // Show hint if scrolled down AND current language is English
-                if (window.scrollY > scrollThreshold && currentLang === 'en' && !langHintButton.classList.contains('show')) {
-                    langHintButton.classList.add('show');
-                }
-                // Show hint if scrolled down AND current language is Spanish
-                else if (window.scrollY > scrollThreshold && currentLang === 'es' && !langHintButton.classList.contains('show')) {
-                    langHintButton.classList.add('show');
-                }
-                // Hide if scrolled back up or if language was changed
-                else if (window.scrollY <= scrollThreshold || (langHintButton.classList.contains('show') && (currentLang === 'en' && langHintButton.querySelector('[data-lang-key="langHintText"]').textContent === translations.en.langHintText) || (currentLang === 'es' && langHintButton.querySelector('[data-lang-key="langHintText"]').textContent === translations.es.langHintText))) {
-                    langHintButton.classList.remove('show');
-                }
-            }
-        };
-
-        window.addEventListener('scroll', () => {
-            clearTimeout(scrollTimeout);
-            scrollTimeout = setTimeout(checkScrollForHint, 100); // Debounce scroll event
-        });
-
-        // Initial check for hint visibility on page load
-        checkScrollForHint();
+        currentLangDisplay.textContent = savedLanguage.toUpperCase();
     </script>
 </body>
 </html>
