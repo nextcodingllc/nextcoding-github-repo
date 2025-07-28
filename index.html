@@ -23,6 +23,7 @@
             justify-content: center;
             text-align: center;
             padding: 20px;
+            box-sizing: border-box;
         }
         
         .logo-container {
@@ -41,41 +42,42 @@
         }
         
         h1 {
-            font-size: 2rem;
+            font-size: clamp(1.8rem, 5vw, 2.5rem);
             margin-bottom: 1rem;
         }
         
         p {
-            font-size: 1rem;
+            font-size: clamp(1rem, 3vw, 1.1rem);
             margin-bottom: 2rem;
             max-width: 500px;
         }
         
         .countdown {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1rem;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0.8rem;
             margin: 2rem 0;
             width: 100%;
-            max-width: 400px;
+            max-width: 500px;
         }
         
         .countdown-item {
             background: rgba(255,255,255,0.15);
             backdrop-filter: blur(5px);
             border-radius: 12px;
-            padding: 1rem;
+            padding: 1rem 0.5rem;
             text-align: center;
+            min-width: 0;
         }
         
         .countdown-number {
-            font-size: 1.8rem;
+            font-size: clamp(1.5rem, 6vw, 1.8rem);
             font-weight: bold;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.3rem;
         }
         
         .countdown-label {
-            font-size: 0.8rem;
+            font-size: clamp(0.6rem, 2.5vw, 0.8rem);
             opacity: 0.9;
             text-transform: uppercase;
         }
@@ -113,22 +115,13 @@
         }
         
         @media (min-width: 768px) {
-            h1 {
-                font-size: 2.5rem;
-            }
-            
-            p {
-                font-size: 1.1rem;
-            }
-            
             .countdown {
-                display: flex;
-                justify-content: center;
                 gap: 1.5rem;
-                max-width: none;
+                max-width: 600px;
             }
             
             .countdown-item {
+                padding: 1rem;
                 min-width: 100px;
             }
             
@@ -155,20 +148,19 @@
     
     <div class="countdown">
         <div class="countdown-item">
-            <div class="countdown-number" id="days">31</div>
+            <div class="countdown-number" id="days">00</div>
             <div class="countdown-label">Days</div>
         </div>
         <div class="countdown-item">
-            <div class="countdown-number" id="hours">01</div>
+            <div class="countdown-number" id="hours">00</div>
             <div class="countdown-label">Hours</div>
         </div>
         <div class="countdown-item">
-            <div class="countdown-number" id="minutes">02</div>
+            <div class="countdown-number" id="minutes">00</div>
             <div class="countdown-label">Minutes</div>
         </div>
-        <!-- Este elemento se ocultará en móviles -->
-        <div class="countdown-item desktop-only">
-            <div class="countdown-number" id="seconds">16</div>
+        <div class="countdown-item">
+            <div class="countdown-number" id="seconds">00</div>
             <div class="countdown-label">Seconds</div>
         </div>
     </div>
@@ -179,7 +171,31 @@
     </form>
     
     <script>
-        // Countdown logic would go here
+        // Countdown Timer
+        function updateCountdown() {
+            const launchDate = new Date('2025-08-28T17:00:00').getTime();
+            const now = new Date().getTime();
+            const distance = launchDate - now;
+            
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            
+            document.getElementById('days').textContent = days.toString().padStart(2, '0');
+            document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+            document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+            document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+            
+            if (distance < 0) {
+                clearInterval(countdownTimer);
+                document.querySelector('.countdown').innerHTML = '<div class="launch-message">We\'re live!</div>';
+            }
+        }
+        
+        // Update immediately and then every second
+        updateCountdown();
+        const countdownTimer = setInterval(updateCountdown, 1000);
     </script>
 </body>
 </html>
