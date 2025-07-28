@@ -26,6 +26,7 @@
             box-sizing: border-box;
         }
         
+        /* Logo container */
         .logo-container {
             margin-bottom: 2rem;
             padding: 15px;
@@ -41,6 +42,59 @@
             filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
         }
         
+        /* Language selector */
+        .language-selector {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            z-index: 10;
+        }
+        
+        .language-btn {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: 1px solid rgba(255,255,255,0.3);
+            border-radius: 8px;
+            padding: 8px 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            font-size: 0.9rem;
+        }
+        
+        .language-btn:hover {
+            background: rgba(255,255,255,0.3);
+        }
+        
+        .language-options {
+            display: none;
+            position: absolute;
+            right: 0;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            overflow: hidden;
+            min-width: 120px;
+        }
+        
+        .language-options.show {
+            display: block;
+        }
+        
+        .language-option {
+            padding: 10px 15px;
+            color: var(--blue-dark);
+            text-decoration: none;
+            display: block;
+            transition: background 0.2s ease;
+        }
+        
+        .language-option:hover {
+            background: #f0f0f0;
+        }
+        
+        /* Content styles */
         h1 {
             font-size: clamp(1.8rem, 5vw, 2.5rem);
             margin-bottom: 1rem;
@@ -138,39 +192,131 @@
     </style>
 </head>
 <body>
+    <!-- Language Selector -->
+    <div class="language-selector">
+        <button class="language-btn" id="languageBtn">
+            <span id="currentLang">EN</span>
+            <i class="fas fa-chevron-down ml-2"></i>
+        </button>
+        <div class="language-options" id="languageOptions">
+            <a href="#" class="language-option" data-lang="en">English</a>
+            <a href="#" class="language-option" data-lang="es">Español</a>
+        </div>
+    </div>
+    
+    <!-- Main Content -->
     <div class="logo-container">
         <img src="images/logo.png" alt="Nextcoding Logo" class="logo">
     </div>
     
-    <h1>We are building something amazing</h1>
+    <h1 id="mainHeading">We are building something amazing</h1>
     
-    <p>Our new website is under development. We are working hard to bring you the best experience. Subscribe for updates.</p>
+    <p id="subHeading">Our new website is under development. We are working hard to bring you the best experience. Subscribe for updates.</p>
     
     <div class="countdown">
         <div class="countdown-item">
             <div class="countdown-number" id="days">00</div>
-            <div class="countdown-label">Days</div>
+            <div class="countdown-label" id="daysLabel">Days</div>
         </div>
         <div class="countdown-item">
             <div class="countdown-number" id="hours">00</div>
-            <div class="countdown-label">Hours</div>
+            <div class="countdown-label" id="hoursLabel">Hours</div>
         </div>
         <div class="countdown-item">
             <div class="countdown-number" id="minutes">00</div>
-            <div class="countdown-label">Minutes</div>
+            <div class="countdown-label" id="minutesLabel">Minutes</div>
         </div>
         <div class="countdown-item">
             <div class="countdown-number" id="seconds">00</div>
-            <div class="countdown-label">Seconds</div>
+            <div class="countdown-label" id="secondsLabel">Seconds</div>
         </div>
     </div>
     
-    <form class="notify-form">
-        <input type="email" class="notify-input" placeholder="Your email address" required>
-        <button type="submit" class="notify-button">Notify Me</button>
+    <form class="notify-form" id="notifyForm">
+        <input type="email" class="notify-input" id="emailInput" placeholder="Your email address" required>
+        <button type="submit" class="notify-button" id="notifyBtn">Notify Me</button>
     </form>
     
+    <!-- Font Awesome for the chevron icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <script>
+        // Translations
+        const translations = {
+            en: {
+                title: "Nextcoding | Coming Soon",
+                heading: "We are building something amazing",
+                subheading: "Our new website is under development. We are working hard to bring you the best experience. Subscribe for updates.",
+                days: "Days",
+                hours: "Hours",
+                minutes: "Minutes",
+                seconds: "Seconds",
+                emailPlaceholder: "Your email address",
+                notifyBtn: "Notify Me",
+                currentLang: "EN"
+            },
+            es: {
+                title: "Nextcoding | Próximamente",
+                heading: "Estamos construyendo algo increíble",
+                subheading: "Nuestro nuevo sitio web está en desarrollo. Estamos trabajando duro para ofrecerte la mejor experiencia. Suscríbete para recibir actualizaciones.",
+                days: "Días",
+                hours: "Horas",
+                minutes: "Minutos",
+                seconds: "Segundos",
+                emailPlaceholder: "Tu correo electrónico",
+                notifyBtn: "Notificarme",
+                currentLang: "ES"
+            }
+        };
+        
+        // Language selector functionality
+        const languageBtn = document.getElementById('languageBtn');
+        const languageOptions = document.getElementById('languageOptions');
+        const currentLang = document.getElementById('currentLang');
+        
+        // Toggle language dropdown
+        languageBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            languageOptions.classList.toggle('show');
+        });
+        
+        // Close dropdown when clicking outside
+        document.addEventListener('click', () => {
+            languageOptions.classList.remove('show');
+        });
+        
+        // Change language
+        document.querySelectorAll('.language-option').forEach(option => {
+            option.addEventListener('click', (e) => {
+                e.preventDefault();
+                const lang = option.dataset.lang;
+                setLanguage(lang);
+                languageOptions.classList.remove('show');
+            });
+        });
+        
+        // Set language function
+        function setLanguage(lang) {
+            // Update all text elements
+            document.title = translations[lang].title;
+            document.getElementById('mainHeading').textContent = translations[lang].heading;
+            document.getElementById('subHeading').textContent = translations[lang].subheading;
+            document.getElementById('daysLabel').textContent = translations[lang].days;
+            document.getElementById('hoursLabel').textContent = translations[lang].hours;
+            document.getElementById('minutesLabel').textContent = translations[lang].minutes;
+            document.getElementById('secondsLabel').textContent = translations[lang].seconds;
+            document.getElementById('emailInput').placeholder = translations[lang].emailPlaceholder;
+            document.getElementById('notifyBtn').textContent = translations[lang].notifyBtn;
+            currentLang.textContent = translations[lang].currentLang;
+            
+            // Store selected language
+            localStorage.setItem('selectedLanguage', lang);
+        }
+        
+        // Initialize with saved language or default to English
+        const savedLanguage = localStorage.getItem('selectedLanguage') || 'en';
+        setLanguage(savedLanguage);
+        
         // Countdown Timer
         function updateCountdown() {
             const launchDate = new Date('2025-08-28T17:00:00').getTime();
