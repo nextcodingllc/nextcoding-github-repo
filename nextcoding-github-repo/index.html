@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nextcoding | Coming Soon</title>
+    <style>
+        :root {
+            --blue-light: #2196F3;
+            --blue-dark: #1976D2;
+            --text-color: white;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, var(--blue-dark), var(--blue-light));
+            color: var(--text-color);
+            min-height: 100vh;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        
+        /* Logo container */
+        .logo-container {
+            margin-bottom: 2rem;
+            padding: 15px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 16px;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        
+        .logo {
+            width: auto;
+            height: 60px;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+        }
+        
+        /* Language selector */
+        .language-selector {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            z-index: 10;
+        }
+        
+        .language-btn {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: 1px solid rgba(255,255,255,0.3);
+            border-radius: 8px;
+            padding: 8px 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            font-size: 0.9rem;
+        }
+        
+        .language-btn:hover {
+            background: rgba(255,255,255,0.3);
+        }
+        
+        .language-options {
+            display: none;
+            position: absolute;
+            right: 0;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            overflow: hidden;
+            min-width: 120px;
+        }
+        
+        .language-options.show {
+            display: block;
+        }
+        
+        .language-option {
+            padding: 10px 15px;
+            color: var(--blue-dark);
+            text-decoration: none;
+            display: block;
+            transition: background 0.2s ease;
+            font-size: 0.9rem;
+        }
+        
+        .language-option:hover {
+            background: #f0f0f0;
+        }
+        
+        /* Content styles */
+        h1 {
+            font-size: clamp(1.8rem, 5vw, 2.5rem);
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+        
+        p {
+            font-size: clamp(1rem, 3vw, 1.1rem);
+            margin-bottom: 2rem;
+            max-width: 500px;
+            line-height: 1.5;
+        }
+        
+        /* Countdown - Mobile first approach */
+        .countdown {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.8rem;
+            margin: 2rem 0;
+            width: 100%;
+            max-width: 500px;
+        }
+        
+        .countdown-item {
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(5px);
+            border-radius: 12px;
+            padding: 1rem 0.5rem;
+            text-align: center;
+            min-width: 0;
+        }
+        
+        .countdown-number {
+            font-size: clamp(1.5rem, 6vw, 1.8rem);
+            font-weight: bold;
+            margin-bottom: 0.3rem;
+        }
+        
+        .countdown-label {
+            font-size: clamp(0.6rem, 2.5vw, 0.8rem);
+            opacity: 0.9;
+            text-transform: uppercase;
+        }
+        
+        /* Form styles */
+        .notify-form {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            max-width: 400px;
+            margin: 1rem 0;
+        }
+        
+        .notify-input {
+            padding: 15px;
+            border: none;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            font-size: 1rem;
+        }
+        
+        .notify-button {
+            background: white;
+            color: var(--blue-dark);
+            border: none;
+            padding: 15px;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .notify-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        
+        /* Social links */
+        .social-links {
+            margin-top: 2rem;
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .social-link {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            color: var(--text-color);
+        }
+        
+        .social-link:hover {
+            background: rgba(255,255,255,0.25);
+            transform: translateY(-3px);
+        }
+        
+        /* Media queries for larger screens */
+        @media (min-width: 480px) {
+            .countdown {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 0.8rem;
+            }
+            
+            .language-selector {
+                top: 20px;
+                right: 20px;
+            }
+        }
+        
+        @media (min-width: 768px) {
+            .countdown {
+                gap: 1.5rem;
+                max-width: 600px;
+            }
+            
+            .countdown-item {
+                padding: 1rem;
+                min-width: 100px;
+            }
+            
+            .notify-form {
+                flex-direction: row;
+            }
+            
+            .notify-input {
+                margin-bottom: 0;
+                margin-right: 1rem;
+                flex: 1;
+                border-radius: 50px 0 0 50px;
+            }
+            
+            .notify-button {
+                border-radius: 0 50px 50px 0;
+                padding: 0 30px;
+                width: auto;
+            }
+        }
+    </style>
+    <!-- Font Awesome for the chevron icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Language Selector -->
+    <div class="language-selector">
+        <button class="language-btn" id="languageBtn">
+            <span id="currentLang">EN</span>
+            <i class="fas fa-chevron-down ml-2"></i>
+        </button>
+        <div class="language-options" id="languageOptions">
+            <a href="#" class="language-option" data-lang="en">English</a>
+            <a href="#" class="language-option" data-lang="es">Español</a>
+        </div>
+    </div>
+    
+    <!-- Main Content -->
+    <div class="logo-container">
+        <img src="images/logo.png" alt="Nextcoding LLC Logo" class="logo">
+    </div>
+    
+    <h1 id="mainHeading">We are building something amazing</h1>
+    
+    <p id="subHeading">Our new website is under development. We are working hard to bring you the best experience. Subscribe for updates.</p>
+    
+    <div class="countdown">
+        <div class="countdown-item">
+            <div class="countdown-number" id="days">00</div>
+            <div class="countdown-label" id="daysLabel">Days</div>
+        </div>
+        <div class="countdown-item">
+            <div class="countdown-number" id="hours">00</div>
+            <div class="countdown-label" id="hoursLabel">Hours</div>
+        </div>
+        <div class="countdown-item">
+            <div class="countdown-number" id="minutes">00</div>
+            <div class="countdown-label" id="minutesLabel">Minutes</div>
+        </div>
+        <div class="countdown-item">
+            <div class="countdown-number" id="seconds">00</div>
+            <div class="countdown-label" id="secondsLabel">Seconds</div>
+        </div>
+    </div>
+    
+    <form class="notify-form" id="notifyForm">
+        <input type="email" class="notify-input" id="emailInput" placeholder="Your email address" required>
+        <button type="submit" class="notify-button" id="notifyBtn">Notify Me</button>
+    </form>
+    
+    <div class="social-links">
+        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+        <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+    </div>
+    
+    <script>
+        // Translations
+        const translations = {
+            en: {
+                title: "Nextcoding | Coming Soon",
+                heading: "We are building something amazing",
+                subheading: "Our new website is under development. We are working hard to bring you the best experience. Subscribe for updates.",
+                days: "Days",
+                hours: "Hours",
+                minutes: "Minutes",
+                seconds: "Seconds",
+                emailPlaceholder: "Your email address",
+                notifyBtn: "Notify Me",
+                currentLang: "EN"
+            },
+            es: {
+                title: "Nextcoding | Próximamente",
+                heading: "Estamos construyendo algo increíble",
+                subheading: "Nuestro nuevo sitio web está en desarrollo. Estamos trabajando duro para ofrecerte la mejor experiencia. Suscríbete para recibir actualizaciones.",
+                days: "Días",
+                hours: "Horas",
+                minutes: "Minutos",
+                seconds: "Segundos",
+                emailPlaceholder: "Tu correo electrónico",
+                notifyBtn: "Notificarme",
+                currentLang: "ES"
+            }
+        };
+        
+        // Language selector functionality
+        const languageBtn = document.getElementById('languageBtn');
+        const languageOptions = document.getElementById('languageOptions');
+        const currentLang = document.getElementById('currentLang');
+        
+        // Toggle language dropdown
+        languageBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            languageOptions.classList.toggle('show');
+        });
+        
+        // Close dropdown when clicking outside
+        document.addEventListener('click', () => {
+            languageOptions.classList.remove('show');
+        });
+        
+        // Change language
+        document.querySelectorAll('.language-option').forEach(option => {
+            option.addEventListener('click', (e) => {
+                e.preventDefault();
+                const lang = option.dataset.lang;
+                setLanguage(lang);
+                languageOptions.classList.remove('show');
+            });
+        });
+        
+        // Set language function
+        function setLanguage(lang) {
+            // Update all text elements
+            document.title = translations[lang].title;
+            document.getElementById('mainHeading').textContent = translations[lang].heading;
+            document.getElementById('subHeading').textContent = translations[lang].subheading;
+            document.getElementById('daysLabel').textContent = translations[lang].days;
+            document.getElementById('hoursLabel').textContent = translations[lang].hours;
+            document.getElementById('minutesLabel').textContent = translations[lang].minutes;
+            document.getElementById('secondsLabel').textContent = translations[lang].seconds;
+            document.getElementById('emailInput').placeholder = translations[lang].emailPlaceholder;
+            document.getElementById('notifyBtn').textContent = translations[lang].notifyBtn;
+            currentLang.textContent = translations[lang].currentLang;
+            
+            // Store selected language
+            localStorage.setItem('selectedLanguage', lang);
+        }
+        
+        // Initialize with saved language or default to English
+        const savedLanguage = localStorage.getItem('selectedLanguage') || 'en';
+        setLanguage(savedLanguage);
+        
+        // Countdown Timer
+        function updateCountdown() {
+            const launchDate = new Date('2025-08-28T17:00:00').getTime();
+            const now = new Date().getTime();
+            const distance = launchDate - now;
+            
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            
+            document.getElementById('days').textContent = days.toString().padStart(2, '0');
+            document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+            document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+            document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+            
+            if (distance < 0) {
+                clearInterval(countdownTimer);
+                document.querySelector('.countdown').innerHTML = '<div class="launch-message">We\'re live!</div>';
+            }
+        }
+        
+        // Update immediately and then every second
+        updateCountdown();
+        const countdownTimer = setInterval(updateCountdown, 1000);
+    </script>
+</body>
+</html>
