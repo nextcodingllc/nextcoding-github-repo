@@ -24,30 +24,17 @@
             text-align: center;
             padding: 20px;
             box-sizing: border-box;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        body::before {
-            content: "";
-            position: absolute;
-            inset: 0;
-            background: url('https://www.transparenttextures.com/patterns/cubes.png');
-            opacity: 0.08;
-            z-index: 0;
-            pointer-events: none;
         }
         
         /* Logo container */
-         .logo-container {
-             margin-bottom: 2.5rem;
-             padding: 18px 32px;
-             background: rgba(30,40,60,0.18);
-             border-radius: 18px;
-             border: 1.5px solid rgba(255,255,255,0.18);
-             box-shadow: 0 8px 32px rgba(0,0,0,0.18);
-             display: inline-block;
-}
+        .logo-container {
+            margin-bottom: 2rem;
+            padding: 15px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 16px;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
         
         .logo {
             width: auto;
@@ -109,12 +96,10 @@
         }
         
         /* Content styles */
-                h1 {
-            font-size: clamp(2.2rem, 6vw, 3.2rem);
-            margin-bottom: 1.2rem;
-            font-weight: 700;
-            letter-spacing: 0.5px;
-            text-shadow: 0 2px 12px rgba(25, 118, 210, 0.18);
+        h1 {
+            font-size: clamp(1.8rem, 5vw, 2.5rem);
+            margin-bottom: 1rem;
+            line-height: 1.2;
         }
         
         p {
@@ -122,17 +107,6 @@
             margin-bottom: 2rem;
             max-width: 500px;
             line-height: 1.5;
-        }
-        
-        #subHeading {
-            font-size: clamp(1.1rem, 2.8vw, 1.25rem);
-            color: #e3eafc;
-            background: rgba(25, 118, 210, 0.12);
-            border-radius: 10px;
-            padding: 18px 28px;
-            margin-bottom: 2.2rem;
-            display: inline-block;
-            max-width: 600px;
         }
         
         /* Countdown - Mobile first approach */
@@ -146,73 +120,57 @@
         }
         
         .countdown-item {
-            background: rgba(255,255,255,0.22);
-            border: 1.5px solid rgba(255,255,255,0.18);
-            box-shadow: 0 2px 12px rgba(25,118,210,0.10);
-            backdrop-filter: blur(8px);
-            border-radius: 16px;
-            padding: 1.2rem 0.7rem;
-            min-width: 80px;
-            transition: transform 0.2s;
-        }
-        
-        .countdown-item:hover {
-            transform: translateY(-4px) scale(1.04);
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(5px);
+            border-radius: 12px;
+            padding: 1rem 0.5rem;
+            text-align: center;
+            min-width: 0;
         }
         
         .countdown-number {
-            font-size: clamp(2rem, 7vw, 2.5rem);
-            color: #fff;
-            font-weight: 700;
-            margin-bottom: 0.2rem;
-            text-shadow: 0 2px 8px rgba(25,118,210,0.12);
+            font-size: clamp(1.5rem, 6vw, 1.8rem);
+            font-weight: bold;
+            margin-bottom: 0.3rem;
         }
         
         .countdown-label {
-            font-size: clamp(0.7rem, 2vw, 1rem);
-            color: #c5e0fc;
-            font-weight: 600;
-            letter-spacing: 1px;
+            font-size: clamp(0.6rem, 2.5vw, 0.8rem);
+            opacity: 0.9;
+            text-transform: uppercase;
         }
         
         /* Form styles */
         .notify-form {
-            background: rgba(255,255,255,0.10);
-            border-radius: 50px;
-            box-shadow: 0 2px 12px rgba(25,118,210,0.10);
-            padding: 8px;
-            margin: 1.5rem 0;
             display: flex;
-            flex-direction: row;
-            align-items: center;
-            max-width: 420px;
+            flex-direction: column;
+            width: 100%;
+            max-width: 400px;
+            margin: 1rem 0;
         }
         
         .notify-input {
-            border-radius: 50px 0 0 50px;
+            padding: 15px;
             border: none;
-            padding: 16px 20px;
-            font-size: 1.1rem;
-            flex: 1;
-            background: rgba(255,255,255,0.18);
-            color: #222;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            font-size: 1rem;
         }
         
         .notify-button {
-            border-radius: 0 50px 50px 0;
-            background: linear-gradient(90deg, #1976D2 60%, #2196F3 100%);
-            color: #fff;
-            font-weight: 700;
-            padding: 16px 32px;
+            background: white;
+            color: var(--blue-dark);
             border: none;
-            font-size: 1.1rem;
+            padding: 15px;
+            border-radius: 8px;
+            font-weight: bold;
             cursor: pointer;
-            transition: background 0.2s, transform 0.2s;
+            transition: all 0.3s ease;
         }
         
         .notify-button:hover {
-            background: #1565c0;
-            transform: translateY(-2px) scale(1.04);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
         
         /* Social links */
@@ -225,20 +183,20 @@
         }
         
         .social-link {
-            width: 50px;
-            height: 50px;
-            font-size: 1.5rem;
-            background: rgba(255,255,255,0.18);
-            border: 1.5px solid rgba(255,255,255,0.18);
-            box-shadow: 0 2px 8px rgba(25,118,210,0.10);
-            color: #fff;
-            transition: background 0.2s, transform 0.2s;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            color: var(--text-color);
         }
         
         .social-link:hover {
-            background: #1976D2;
-            color: #fff;
-            transform: translateY(-4px) scale(1.08);
+            background: rgba(255,255,255,0.25);
+            transform: translateY(-3px);
         }
         
         /* Media queries for larger screens */
