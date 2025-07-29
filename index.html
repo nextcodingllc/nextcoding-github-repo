@@ -24,6 +24,48 @@
             text-align: center;
             padding: 20px;
             box-sizing: border-box;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* Particles/Bits background */
+        .bits-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .bit {
+            position: absolute;
+            display: block;
+            width: 10px;
+            height: 10px;
+            background: rgba(255,255,255,0.3);
+            animation: float-up 15s linear infinite;
+            bottom: -100px;
+            border-radius: 50%;
+            opacity: 0.7;
+        }
+        
+        @keyframes float-up {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.7;
+            }
+            90% {
+                opacity: 0.7;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(360deg);
+                opacity: 0;
+            }
         }
         
         /* Logo container */
@@ -34,6 +76,8 @@
             border-radius: 16px;
             backdrop-filter: blur(5px);
             box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            position: relative;
+            z-index: 2;
         }
         
         .logo {
@@ -61,6 +105,8 @@
             display: flex;
             align-items: center;
             font-size: 0.9rem;
+            position: relative;
+            z-index: 10;
         }
         
         .language-btn:hover {
@@ -76,6 +122,7 @@
             box-shadow: 0 4px 12px rgba(0,0,0,0.2);
             overflow: hidden;
             min-width: 120px;
+            z-index: 11;
         }
         
         .language-options.show {
@@ -96,10 +143,16 @@
         }
         
         /* Content styles */
+        .content {
+            position: relative;
+            z-index: 2;
+        }
+        
         h1 {
             font-size: clamp(1.8rem, 5vw, 2.5rem);
             margin-bottom: 1rem;
             line-height: 1.2;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
         }
         
         p {
@@ -107,6 +160,7 @@
             margin-bottom: 2rem;
             max-width: 500px;
             line-height: 1.5;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.1);
         }
         
         /* Countdown - Mobile first approach */
@@ -117,6 +171,8 @@
             margin: 2rem 0;
             width: 100%;
             max-width: 500px;
+            position: relative;
+            z-index: 2;
         }
         
         .countdown-item {
@@ -126,6 +182,7 @@
             padding: 1rem 0.5rem;
             text-align: center;
             min-width: 0;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
         
         .countdown-number {
@@ -147,6 +204,8 @@
             width: 100%;
             max-width: 400px;
             margin: 1rem 0;
+            position: relative;
+            z-index: 2;
         }
         
         .notify-input {
@@ -155,6 +214,8 @@
             border-radius: 8px;
             margin-bottom: 1rem;
             font-size: 1rem;
+            background: white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
         
         .notify-button {
@@ -166,11 +227,12 @@
             font-weight: bold;
             cursor: pointer;
             transition: all 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
         
         .notify-button:hover {
             transform: translateY(-2px);
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
         }
         
         /* Social links */
@@ -180,6 +242,8 @@
             gap: 1rem;
             justify-content: center;
             flex-wrap: wrap;
+            position: relative;
+            z-index: 2;
         }
         
         .social-link {
@@ -192,6 +256,8 @@
             justify-content: center;
             transition: all 0.3s ease;
             color: var(--text-color);
+            backdrop-filter: blur(5px);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
         
         .social-link:hover {
@@ -247,6 +313,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
+    <!-- Floating bits/particles background -->
+    <div class="bits-container" id="bitsContainer"></div>
+    
     <!-- Language Selector -->
     <div class="language-selector">
         <button class="language-btn" id="languageBtn">
@@ -260,46 +329,87 @@
     </div>
     
     <!-- Main Content -->
-    <div class="logo-container">
-        <img src="images/logo.png" alt="Nextcoding LLC Logo" class="logo">
-    </div>
-    
-    <h1 id="mainHeading">We are building something amazing</h1>
-    
-    <p id="subHeading">Our new website is under development. We are working hard to bring you the best experience. Please subscribe for updates.</p>
-    
-    <div class="countdown">
-        <div class="countdown-item">
-            <div class="countdown-number" id="days">00</div>
-            <div class="countdown-label" id="daysLabel">Days</div>
+    <div class="content">
+        <div class="logo-container">
+            <img src="images/logo.png" alt="Nextcoding Logo" class="logo">
         </div>
-        <div class="countdown-item">
-            <div class="countdown-number" id="hours">00</div>
-            <div class="countdown-label" id="hoursLabel">Hours</div>
+        
+        <h1 id="mainHeading">We are building something amazing</h1>
+        
+        <p id="subHeading">Our new website is under development. We are working hard to bring you the best experience. Subscribe for updates.</p>
+        
+        <div class="countdown">
+            <div class="countdown-item">
+                <div class="countdown-number" id="days">00</div>
+                <div class="countdown-label" id="daysLabel">Days</div>
+            </div>
+            <div class="countdown-item">
+                <div class="countdown-number" id="hours">00</div>
+                <div class="countdown-label" id="hoursLabel">Hours</div>
+            </div>
+            <div class="countdown-item">
+                <div class="countdown-number" id="minutes">00</div>
+                <div class="countdown-label" id="minutesLabel">Minutes</div>
+            </div>
+            <div class="countdown-item">
+                <div class="countdown-number" id="seconds">00</div>
+                <div class="countdown-label" id="secondsLabel">Seconds</div>
+            </div>
         </div>
-        <div class="countdown-item">
-            <div class="countdown-number" id="minutes">00</div>
-            <div class="countdown-label" id="minutesLabel">Minutes</div>
+        
+        <form class="notify-form" id="notifyForm">
+            <input type="email" class="notify-input" id="emailInput" placeholder="Your email address" required>
+            <button type="submit" class="notify-button" id="notifyBtn">Notify Me</button>
+        </form>
+        
+        <div class="social-links">
+            <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
         </div>
-        <div class="countdown-item">
-            <div class="countdown-number" id="seconds">00</div>
-            <div class="countdown-label" id="secondsLabel">Seconds</div>
-        </div>
-    </div>
-    
-    <form class="notify-form" id="notifyForm">
-        <input type="email" class="notify-input" id="emailInput" placeholder="Your email address" required>
-        <button type="submit" class="notify-button" id="notifyBtn">Notify Me</button>
-    </form>
-    
-    <div class="social-links">
-        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
-        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
-        <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
-        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
     </div>
     
     <script>
+        // Create floating bits/particles
+        function createBits() {
+            const container = document.getElementById('bitsContainer');
+            const bitCount = Math.floor(window.innerWidth / 10); // Adjust density based on screen size
+            
+            for (let i = 0; i < bitCount; i++) {
+                const bit = document.createElement('div');
+                bit.classList.add('bit');
+                
+                // Random position
+                bit.style.left = `${Math.random() * 100}%`;
+                
+                // Random size
+                const size = 4 + Math.random() * 8;
+                bit.style.width = `${size}px`;
+                bit.style.height = `${size}px`;
+                
+                // Random animation duration and delay
+                const duration = 10 + Math.random() * 20;
+                const delay = Math.random() * 15;
+                bit.style.animation = `float-up ${duration}s linear ${delay}s infinite`;
+                
+                // Random opacity
+                bit.style.opacity = 0.3 + Math.random() * 0.5;
+                
+                container.appendChild(bit);
+            }
+        }
+        
+        // Initialize bits on load
+        window.addEventListener('load', createBits);
+        
+        // Recreate bits on resize
+        window.addEventListener('resize', () => {
+            const container = document.getElementById('bitsContainer');
+            container.innerHTML = '';
+            createBits();
+        });
+        
         // Translations
         const translations = {
             en: {
