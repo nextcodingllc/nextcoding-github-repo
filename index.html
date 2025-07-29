@@ -303,28 +303,30 @@
         // Translations
         const translations = {
             en: {
-                title: "Nextcoding | Coming Soon",
-                heading: "We are building something amazing",
-                subheading: "Our new website is under development. We are working hard to bring you the best experience. Subscribe for updates.",
+                title: "Nextcoding | IT Solutions Under Construction",
+                heading: "Enterprise IT Solutions Coming Soon",
+                subheading: "Nextcoding is a technology company specializing in innovative software and IT services. Our new digital platform is under construction. Stay tuned for secure, scalable, and cutting-edge solutions for your business.",
                 days: "Days",
                 hours: "Hours",
                 minutes: "Minutes",
                 seconds: "Seconds",
-                emailPlaceholder: "Your email address",
+                emailPlaceholder: "Your business email",
                 notifyBtn: "Notify Me",
-                currentLang: "EN"
+                currentLang: "EN",
+                launchMessage: "Our IT platform is now live! Welcome to Nextcoding."
             },
             es: {
-                title: "Nextcoding | Próximamente",
-                heading: "Estamos construyendo algo increíble",
-                subheading: "Nuestro nuevo sitio web está en desarrollo. Estamos trabajando duro para ofrecerte la mejor experiencia. Suscríbete para recibir actualizaciones.",
+                title: "Nextcoding | Soluciones IT en Construcción",
+                heading: "Soluciones Empresariales de IT Próximamente",
+                subheading: "Nextcoding es una empresa tecnológica especializada en software innovador y servicios IT. Nuestra nueva plataforma digital está en construcción. Pronto ofreceremos soluciones seguras, escalables y de vanguardia para tu empresa.",
                 days: "Días",
                 hours: "Horas",
                 minutes: "Minutos",
                 seconds: "Segundos",
-                emailPlaceholder: "Tu correo electrónico",
+                emailPlaceholder: "Tu correo empresarial",
                 notifyBtn: "Notificarme",
-                currentLang: "ES"
+                currentLang: "ES",
+                launchMessage: "¡Nuestra plataforma IT ya está online! Bienvenido a Nextcoding."
             }
         };
         
@@ -367,37 +369,41 @@
             document.getElementById('emailInput').placeholder = translations[lang].emailPlaceholder;
             document.getElementById('notifyBtn').textContent = translations[lang].notifyBtn;
             currentLang.textContent = translations[lang].currentLang;
-            
+
             // Store selected language
             localStorage.setItem('selectedLanguage', lang);
+
+            // Store current language for launch message
+            window.currentLanguage = lang;
         }
-        
+
         // Initialize with saved language or default to English
         const savedLanguage = localStorage.getItem('selectedLanguage') || 'en';
         setLanguage(savedLanguage);
-        
+
         // Countdown Timer
         function updateCountdown() {
             const launchDate = new Date('2025-08-28T17:00:00').getTime();
             const now = new Date().getTime();
             const distance = launchDate - now;
-            
+
             const days = Math.floor(distance / (1000 * 60 * 60 * 24));
             const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
             const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
             const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-            
+
             document.getElementById('days').textContent = days.toString().padStart(2, '0');
             document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
             document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
             document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
-            
+
             if (distance < 0) {
                 clearInterval(countdownTimer);
-                document.querySelector('.countdown').innerHTML = '<div class="launch-message">We\'re live!</div>';
+                const lang = window.currentLanguage || savedLanguage || 'en';
+                document.querySelector('.countdown').innerHTML = `<div class="launch-message">${translations[lang].launchMessage}</div>`;
             }
         }
-        
+
         // Update immediately and then every second
         updateCountdown();
         const countdownTimer = setInterval(updateCountdown, 1000);
