@@ -1,990 +1,692 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>
-      Nextcoding | IT Solutions, Automation & Staffing Technology
-    </title>
-    <meta name="description" content="Nextcoding empowers businesses with cutting-edge IT services, custom web development, HR automation, digital onboarding, and staffing technology solutions tailored for fast-growing companies.">
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
-    
-    <!-- Preload critical resources -->
-    <link rel="preload" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" as="style">
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" as="style">
-    
-    <!-- CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-    
-    <!-- Font Awesome for professional icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <!-- AOS (Animate On Scroll) library -->
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    
+    <title>Nextcoding - IT Solutions & Software Development</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --primary: #1976D2;
-            --primary-light: #2196F3;
-            --secondary: #FF6D00;
-            --dark: #1E293B;
-            --light: #F8FAFC;
+        body { 
+            font-family: 'Inter', sans-serif; 
+            overflow-x: hidden; 
+            background-color: #f8fafc;
         }
         
-        body {
-            font-family: 'Inter', sans-serif;
-            color: var(--dark);
-            background-color: var(--light);
-            overflow-x: hidden;
-            scroll-behavior: smooth;
+        .header-scrolled { 
+            background-color: rgba(255, 255, 255, 0.95); 
+            backdrop-filter: blur(10px); 
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
         }
         
-        .header-bg {
-            background: linear-gradient(135deg, var(--primary), var(--primary-light));
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        .hero-section { 
+            background: linear-gradient(to bottom, #f0f9ff, #e0f2fe);
+            position: relative; 
+            overflow: hidden; 
         }
         
-        .btn-primary {
-            background-color: var(--primary);
-            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        .lang-switcher { 
+            border: 1px solid #cbd5e1; 
+            padding: 4px; 
+            border-radius: 9999px; 
+            display: flex; 
+            font-size: 0.8rem; 
+            font-weight: 500; 
         }
         
-        .btn-primary:hover {
-            background-color: var(--primary-light);
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(25, 118, 210, 0.2);
+        .lang-switcher .active { 
+            background-color: #0284c7; 
+            color: white; 
         }
         
-        .btn-secondary {
-            background-color: var(--secondary);
-            transition: all 0.3s ease;
+        .lang-switcher button { 
+            padding: 4px 10px; 
+            border-radius: 9999px; 
+            transition: all 0.2s ease-in-out; 
         }
         
-        .btn-secondary:hover {
-            background-color: #FF8500;
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(255, 109, 0, 0.2);
+        .gradient-text { 
+            background: linear-gradient(to right, #38bdf8, #a78bfa); 
+            -webkit-background-clip: text; 
+            -webkit-text-fill-color: transparent; 
         }
         
-        .card {
+        .ai-section-bg { 
+            background-color: #f0f9ff; 
+            background-image: 
+                linear-gradient(to right, rgba(2, 132, 199, 0.05) 1px, transparent 1px), 
+                linear-gradient(to bottom, rgba(2, 132, 199, 0.05) 1px, transparent 1px); 
+            background-size: 30px 30px; 
+        }
+
+        /* Cloud animation styles - optimized version */
+        .cloud {
+            position: absolute;
             background: white;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-            overflow: hidden;
+            border-radius: 50%;
+            opacity: 0.9;
+            filter: blur(4px);
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
+            z-index: 1;
         }
         
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
-        }
-        
-        .service-icon {
-            font-size: 2.5rem;
-            color: var(--primary);
-            margin-bottom: 1rem;
-            transition: all 0.3s ease;
-        }
-        
-        .nav-link {
-            position: relative;
-            padding-bottom: 5px;
-        }
-        
-        .nav-link:after {
+        .cloud:before, .cloud:after {
             content: '';
             position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: 0;
-            left: 0;
-            background-color: white;
-            transition: width 0.3s ease;
-        }
-        
-        .nav-link:hover:after {
-            width: 100%;
-        }
-        
-        .testimonial-card {
             background: white;
-            border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            border-radius: 50%;
         }
         
-        .client-logo {
-            filter: grayscale(100%);
-            opacity: 0.6;
+        .cloud1 {
+            width: 180px;
+            height: 55px;
+            top: 15%;
+            animation: moveClouds 40s linear infinite;
+        }
+        
+        .cloud1:before {
+            width: 90px;
+            height: 90px;
+            top: -45px;
+            left: 15px;
+        }
+        
+        .cloud1:after {
+            width: 120px;
+            height: 110px;
+            top: -55px;
+            right: 10px;
+        }
+        
+        .cloud2 {
+            width: 250px;
+            height: 75px;
+            top: 30%;
+            animation: moveClouds 50s linear infinite;
+            animation-delay: -10s;
+        }
+        
+        .cloud2:before {
+            width: 130px;
+            height: 130px;
+            top: -65px;
+            left: 25px;
+        }
+        
+        .cloud2:after {
+            width: 170px;
+            height: 150px;
+            top: -75px;
+            right: 15px;
+        }
+        
+        .cloud3 {
+            width: 200px;
+            height: 60px;
+            top: 65%;
+            animation: moveClouds 45s linear infinite;
+            animation-delay: -20s;
+        }
+        
+        .cloud3:before {
+            width: 100px;
+            height: 100px;
+            top: -50px;
+            left: 20px;
+        }
+        
+        .cloud3:after {
+            width: 80px;
+            height: 75px;
+            top: -40px;
+            right: 8px;
+        }
+        
+        @keyframes moveClouds {
+            0% { transform: translateX(-150%); }
+            100% { transform: translateX(150vw); }
+        }
+
+        /* Service icons */
+        .service-icon {
             transition: all 0.3s ease;
         }
         
-        .client-logo:hover {
-            filter: grayscale(0%);
+        .service-card:hover .service-icon {
+            transform: translateY(-5px) scale(1.05);
+        }
+
+        /* Portfolio grid */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            justify-items: center;
+        }
+        
+        .portfolio-item {
+            position: relative;
+            border-radius: 0.5rem;
+            overflow: hidden;
+            height: 250px;
+            width: 100%;
+            max-width: 350px;
+            transition: transform 0.3s ease;
+        }
+        
+        .portfolio-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .portfolio-item:hover img {
+            transform: scale(1.05);
+        }
+        
+        .portfolio-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(2, 132, 199, 0.85);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            padding: 1rem;
+            text-align: center;
+        }
+        
+        .portfolio-item:hover .portfolio-overlay {
             opacity: 1;
         }
-        
-        .input-field {
-            transition: all 0.3s ease;
-            border: 1px solid #E2E8F0;
+
+        /* Testimonial Slider */
+        .testimonial-slider { 
+            display: flex; 
+            transition: transform 0.5s ease-in-out; 
         }
         
-        .input-field:focus {
-            border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(25, 118, 210, 0.2);
+        .testimonial-item { 
+            min-width: 100%; 
         }
         
-        /* Loading animation for better perceived performance */
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+        /* Animation for elements on scroll */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
         }
         
-        .animate-fade-in {
-            animation: fadeIn 0.5s ease-out forwards;
-        }
-        
-        /* Mobile menu animation */
-        .mobile-menu {
-            transform: translateX(100%);
-            transition: transform 0.3s ease-out;
-        }
-        
-        .mobile-menu.open {
-            transform: translateX(0);
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
     </style>
 </head>
-<body class="antialiased">
+<body class="bg-slate-50 text-slate-800">
 
-    <!-- Preloader -->
-    <div id="preloader" class="fixed inset-0 bg-white z-50 flex items-center justify-center">
-        <div class="animate-pulse flex flex-col items-center">
-            <div class="w-16 h-16 bg-blue-500 rounded-full mb-4"></div>
-            <div class="text-blue-500 font-semibold">Loading...</div>
-        </div>
-    </div>
-
-    <!-- Header with improved navigation -->
-    <header class="header-bg text-white sticky top-0 z-40">
-        <div class="container mx-auto px-4 py-4">
-            <div class="flex justify-between items-center">
-                <!-- Logo with Lazy Loading -->
-                <a href="#" class="flex items-center">
-                    <img src="images/logo.png" alt="Nextcoding Logo" class="h-10 w-auto" loading="lazy">
-                    <span class="ml-3 text-xl font-bold hidden md:block">Nextcoding</span>
-                </a>
-                
-                <!-- Desktop Navigation -->
-                <nav class="hidden md:flex items-center space-x-8">
-                    <a href="#" class="nav-link font-medium">Home</a>
-                    <a href="#services" class="nav-link font-medium">Services</a>
-                    <a href="#about" class="nav-link font-medium">About</a>
-                    <a href="#case-studies" class="nav-link font-medium">Case Studies</a>
-                    <a href="#contact" class="nav-link font-medium">Contact</a>
-                    <a href="#contact" class="btn-primary px-6 py-2 rounded-full font-semibold">Get Started</a>
-                </nav>
-                
-                <!-- Mobile Menu Button -->
-                <button id="mobile-menu-button" class="md:hidden focus:outline-none">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-                    </svg>
-                </button>
-            </div>
-        </div>
-        
-        <!-- Mobile Menu -->
-        <div id="mobile-menu" class="mobile-menu fixed inset-y-0 right-0 w-64 bg-white text-gray-800 shadow-lg z-50 p-6">
-            <div class="flex justify-end mb-8">
-                <button id="close-menu" class="text-gray-500 focus:outline-none">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-                    </svg>
-                </button>
-            </div>
-            <nav class="flex flex-col space-y-6">
-                <a href="#" class="text-lg font-medium hover:text-blue-500">Home</a>
-                <a href="#services" class="text-lg font-medium hover:text-blue-500">Services</a>
-                <a href="#about" class="text-lg font-medium hover:text-blue-500">About</a>
-                <a href="#case-studies" class="text-lg font-medium hover:text-blue-500">Case Studies</a>
-                <a href="#contact" class="text-lg font-medium hover:text-blue-500">Contact</a>
-                <a href="#contact" class="btn-primary px-6 py-3 rounded-full font-semibold text-center mt-4">Get Started</a>
+    <!-- Header -->
+    <header id="header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="index.html" class="text-2xl font-bold text-blue-800">Next<span class="text-sky-500">coding</span></a>
+            <nav class="hidden md:flex items-center space-x-8">
+                <a href="servicios.html" class="text-slate-600 hover:text-sky-500 transition-colors" data-lang-en="Services" data-lang-es="Servicios">Services</a>
+                <a href="nosotros.html" class="text-slate-600 hover:text-sky-500 transition-colors" data-lang-en="About Us" data-lang-es="Nosotros">About Us</a>
+                <a href="portafolio.html" class="text-slate-600 hover:text-sky-500 transition-colors" data-lang-en="Portfolio" data-lang-es="Portafolio">Portfolio</a>
+                <a href="contacto.html" class="text-slate-600 hover:text-sky-500 transition-colors" data-lang-en="Contact" data-lang-es="Contacto">Contact</a>
+                <div class="lang-switcher">
+                    <button id="lang-en" data-lang="en">EN</button>
+                    <button id="lang-es" data-lang="es">ES</button>
+                </div>
             </nav>
+            <a href="contacto.html" class="hidden md:block bg-blue-700 text-white font-medium py-2 px-4 rounded-lg hover:bg-blue-800 transition-transform hover:scale-105" data-lang-en="Request a Consultation" data-lang-es="Solicitar Consultoría">Request a Consultation</a>
+            <button id="mobile-menu-button" class="md:hidden text-blue-800"><svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" /></svg></button>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden bg-white">
+            <a href="servicios.html" class="block py-2 px-6 text-slate-600 hover:bg-sky-50" data-lang-en="Services" data-lang-es="Servicios">Services</a>
+            <a href="nosotros.html" class="block py-2 px-6 text-slate-600 hover:bg-sky-50" data-lang-en="About Us" data-lang-es="Nosotros">About Us</a>
+            <a href="portafolio.html" class="block py-2 px-6 text-slate-600 hover:bg-sky-50" data-lang-en="Portfolio" data-lang-es="Portafolio">Portfolio</a>
+            <a href="contacto.html" class="block py-2 px-6 text-slate-600 hover:bg-sky-50" data-lang-en="Contact" data-lang-es="Contacto">Contact</a>
+            <div class="flex justify-between items-center py-2 px-6">
+                <div class="lang-switcher">
+                    <button id="lang-en-mobile" data-lang="en">EN</button>
+                    <button id="lang-es-mobile" data-lang="es">ES</button>
+                </div>
+            </div>
         </div>
     </header>
 
-    <!-- Hero Section with Video Background Option -->
-    <section class="relative overflow-hidden">
-        <!-- Video background placeholder (replace with actual video) -->
-        <div class="absolute inset-0 bg-gradient-to-r from-blue-800 to-blue-600 opacity-90"></div>
+    <main>
+        <!-- Hero Section -->
+        <section class="hero-section pt-40 pb-24">
+            <div class="absolute top-0 left-0 w-full h-full z-0">
+                <div class="cloud cloud1"></div>
+                <div class="cloud cloud2"></div>
+                <div class="cloud cloud3"></div>
+            </div>
+            <div class="container mx-auto px-6 text-center relative z-10">
+                <h1 class="text-4xl md:text-6xl font-extrabold text-blue-900 leading-tight fade-in" data-lang-en="Building the Future of Your Business, Code by Code." data-lang-es="Construyendo el Futuro de tu Negocio, Código a Código.">Building the Future of Your Business, Code by Code.</h1>
+                <p class="mt-4 text-lg md:text-xl max-w-3xl mx-auto text-slate-700 fade-in" data-lang-en="We provide custom software, cloud infrastructure, and process automation to drive your growth." data-lang-es="Proveemos software a medida, infraestructura en la nube y automatización de procesos para impulsar tu crecimiento.">We provide custom software, cloud infrastructure, and process automation to drive your growth.</p>
+                <div class="mt-8 flex justify-center gap-4 fade-in" style="transition-delay: 0.2s">
+                    <a href="servicios.html" class="bg-sky-500 text-white font-bold py-3 px-8 rounded-full text-lg hover:bg-sky-600 transition-transform hover:scale-105" data-lang-en="Explore Services" data-lang-es="Explorar Servicios">Explore Services</a>
+                    <a href="contacto.html" class="bg-white text-sky-600 font-bold py-3 px-8 rounded-full text-lg hover:bg-slate-100 transition-transform hover:scale-105 border border-slate-200" data-lang-en="Get in Touch" data-lang-es="Contáctanos">Get in Touch</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Services -->
+        <section class="py-20 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12 fade-in">
+                     <h2 class="text-3xl md:text-4xl font-bold text-blue-900" data-lang-en="Our Core Services" data-lang-es="Nuestros Servicios Principales">Our Core Services</h2>
+                     <p class="mt-3 text-slate-600 max-w-2xl mx-auto" data-lang-en="Technology solutions designed to solve complex challenges and deliver tangible results." data-lang-es="Soluciones tecnológicas diseñadas para resolver desafíos complejos y entregar resultados tangibles.">Technology solutions designed to solve complex challenges and deliver tangible results.</p>
+                </div>
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <!-- Feature 1 -->
+                    <div class="service-card text-center p-6 bg-slate-50 rounded-lg transition-transform hover:scale-105 hover:shadow-lg fade-in">
+                        <div class="flex justify-center items-center mb-4 bg-sky-100 rounded-full w-16 h-16 mx-auto service-icon">
+                            <svg class="text-sky-600 w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m18 16 4-4-4-4m-12 8-4-4 4-4m5.5-4-5 16"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-blue-900 mb-2" data-lang-en="Software Development" data-lang-es="Desarrollo de Software">Software Development</h3>
+                        <p class="text-slate-600" data-lang-en="Custom applications tailored to your specific business needs." data-lang-es="Aplicaciones a medida adaptadas a las necesidades de tu negocio.">Custom applications tailored to your specific business needs.</p>
+                    </div>
+                    <!-- Feature 2 -->
+                    <div class="service-card text-center p-6 bg-slate-50 rounded-lg transition-transform hover:scale-105 hover:shadow-lg fade-in" style="transition-delay: 0.1s">
+                        <div class="flex justify-center items-center mb-4 bg-sky-100 rounded-full w-16 h-16 mx-auto service-icon">
+                            <svg class="text-sky-600 w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 16.5V9.5m0 11.5a9 9 0 1 0 0-18 9 9 0 0 0 0 18ZM7 11.5h2m6 0h2"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-blue-900 mb-2" data-lang-en="IT Consulting" data-lang-es="Consultoría IT">IT Consulting</h3>
+                        <p class="text-slate-600" data-lang-en="Strategic guidance to align your technology with your business goals." data-lang-es="Guía estratégica para alinear tu tecnología con tus metas de negocio.">Strategic guidance to align your technology with your business goals.</p>
+                    </div>
+                    <!-- Feature 3 -->
+                    <div class="service-card text-center p-6 bg-slate-50 rounded-lg transition-transform hover:scale-105 hover:shadow-lg fade-in" style="transition-delay: 0.2s">
+                        <div class="flex justify-center items-center mb-4 bg-sky-100 rounded-full w-16 h-16 mx-auto service-icon">
+                            <svg class="text-sky-600 w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2 2h20v8H2zm0 12h20v8H2zm4-8h.01M6 18h.01"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-blue-900 mb-2" data-lang-en="Server Management" data-lang-es="Gestión de Servidores">Server Management</h3>
+                        <p class="text-slate-600" data-lang-en="Reliable management of your physical and cloud infrastructure." data-lang-es="Administración fiable de tu infraestructura física y en la nube.">Reliable management of your physical and cloud infrastructure.</p>
+                    </div>
+                    <!-- Feature 4 -->
+                    <div class="service-card text-center p-6 bg-slate-50 rounded-lg transition-transform hover:scale-105 hover:shadow-lg fade-in" style="transition-delay: 0.3s">
+                        <div class="flex justify-center items-center mb-4 bg-sky-100 rounded-full w-16 h-16 mx-auto service-icon">
+                            <svg class="text-sky-600 w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 20a8 8 0 1 0 0-16 8 8 0 0 0 0 16Zm0-6a2 2 0 1 0 0-4 2 2 0 0 0 0 4ZM12 2v2m0 16v2m-7.07-2.93 1.41 1.41M17.66 6.34l1.41 1.41M2 12h2m16 0h2m-2.93-7.07-1.41 1.41M6.34 17.66l-1.41 1.41"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-blue-900 mb-2" data-lang-en="Process Automation" data-lang-es="Automatización">Process Automation</h3>
+                        <p class="text-slate-600" data-lang-en="We streamline your workflows to increase efficiency and reduce costs." data-lang-es="Optimizamos tus flujos de trabajo para aumentar la eficiencia.">We streamline your workflows to increase efficiency and reduce costs.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
         
-        <div class="container mx-auto px-4 py-32 relative z-10">
-            <div class="max-w-3xl mx-auto text-center">
-                <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6" data-aos="fade-up">
-                    Transform Your Business with <span class="text-orange-300">Digital Innovation</span>
-                </h1>
-                <p class="text-xl text-blue-100 mb-8 leading-relaxed" data-aos="fade-up" data-aos-delay="100">
-                    Nextcoding delivers cutting-edge IT solutions that drive growth, efficiency, and competitive advantage for businesses of all sizes.
-                </p>
-                <div class="flex flex-col sm:flex-row justify-center gap-4" data-aos="fade-up" data-aos-delay="200">
-                    <a href="#contact" class="btn-primary px-8 py-4 rounded-full font-semibold text-lg hover:shadow-xl">
-                        Get Free Consultation <i class="fas fa-arrow-right ml-2"></i>
-                    </a>
-                    <a href="#services" class="bg-white text-blue-600 px-8 py-4 rounded-full font-semibold text-lg hover:bg-gray-100 hover:shadow-lg transition-all">
-                        Explore Services
-                    </a>
+        <!-- Portfolio Showcase -->
+        <section class="py-20 bg-slate-50">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12 fade-in">
+                    <h2 class="text-3xl md:text-4xl font-bold text-blue-900" data-lang-en="Our Work" data-lang-es="Nuestros Trabajos">Our Work</h2>
+                    <p class="mt-3 text-slate-600 max-w-2xl mx-auto" data-lang-en="Explore some of our recent projects and success stories." data-lang-es="Explora algunos de nuestros proyectos recientes y casos de éxito.">Explore some of our recent projects and success stories.</p>
+                </div>
+                
+                <div class="portfolio-grid">
+                    <!-- Portfolio Item 1 -->
+                    <div class="portfolio-item fade-in">
+                        <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="E-commerce Platform">
+                        <div class="portfolio-overlay">
+                            <h3 class="text-xl font-bold text-white" data-lang-en="E-commerce Platform" data-lang-es="Plataforma E-commerce">E-commerce Platform</h3>
+                            <p class="text-slate-100 mt-2" data-lang-en="Custom online store with advanced features" data-lang-es="Tienda online personalizada con funciones avanzadas">Custom online store with advanced features</p>
+                            <a href="#" class="mt-4 inline-block bg-white text-sky-600 font-medium py-2 px-4 rounded-lg hover:bg-slate-100 transition-colors" data-lang-en="View Project" data-lang-es="Ver Proyecto">View Project</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Portfolio Item 2 -->
+                    <div class="portfolio-item fade-in" style="transition-delay: 0.1s">
+                        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Business Dashboard">
+                        <div class="portfolio-overlay">
+                            <h3 class="text-xl font-bold text-white" data-lang-en="Business Dashboard" data-lang-es="Dashboard Empresarial">Business Dashboard</h3>
+                            <p class="text-slate-100 mt-2" data-lang-en="Real-time analytics and reporting system" data-lang-es="Sistema de análisis y reportes en tiempo real">Real-time analytics and reporting system</p>
+                            <a href="#" class="mt-4 inline-block bg-white text-sky-600 font-medium py-2 px-4 rounded-lg hover:bg-slate-100 transition-colors" data-lang-en="View Project" data-lang-es="Ver Proyecto">View Project</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Portfolio Item 3 -->
+                    <div class="portfolio-item fade-in" style="transition-delay: 0.2s">
+                        <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Mobile Application">
+                        <div class="portfolio-overlay">
+                            <h3 class="text-xl font-bold text-white" data-lang-en="Mobile Application" data-lang-es="Aplicación Móvil">Mobile Application</h3>
+                            <p class="text-slate-100 mt-2" data-lang-en="Cross-platform app for customer engagement" data-lang-es="App multiplataforma para engagement de clientes">Cross-platform app for customer engagement</p>
+                            <a href="#" class="mt-4 inline-block bg-white text-sky-600 font-medium py-2 px-4 rounded-lg hover:bg-slate-100 transition-colors" data-lang-en="View Project" data-lang-es="Ver Proyecto">View Project</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="text-center mt-12 fade-in" style="transition-delay: 0.3s">
+                    <a href="portafolio.html" class="inline-block bg-sky-500 text-white font-bold py-3 px-8 rounded-full text-lg hover:bg-sky-600 transition-transform hover:scale-105" data-lang-en="View All Projects" data-lang-es="Ver Todos los Proyectos">View All Projects</a>
                 </div>
             </div>
-        </div>
+        </section>
         
-        <!-- Animated background elements -->
-        <div class="absolute bottom-0 left-0 right-0 h-16 bg-white transform skew-y-3 origin-bottom-left z-0"></div>
-    </section>
-
-    <!-- Trusted By Section -->
-    <section class="py-12 bg-gray-50">
-        <div class="container mx-auto px-4">
-            <p class="text-center text-gray-500 mb-8">TRUSTED BY INNOVATIVE COMPANIES WORLDWIDE</p>
-            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8 items-center">
-                <img src="images/client-1.svg" alt="Client Logo" class="client-logo h-12 mx-auto" loading="lazy">
-                <img src="images/client-2.svg" alt="Client Logo" class="client-logo h-10 mx-auto" loading="lazy">
-                <img src="images/client-3.svg" alt="Client Logo" class="client-logo h-14 mx-auto" loading="lazy">
-                <img src="images/client-4.svg" alt="Client Logo" class="client-logo h-12 mx-auto" loading="lazy">
-                <img src="images/client-5.svg" alt="Client Logo" class="client-logo h-10 mx-auto" loading="lazy">
-                <img src="images/client-6.svg" alt="Client Logo" class="client-logo h-12 mx-auto" loading="lazy">
-            </div>
-        </div>
-    </section>
-
-    <!-- Services Section with Tabs -->
-    <section id="services" class="py-20 bg-white">
-        <div class="container mx-auto px-4">
-            <div class="text-center mb-16" data-aos="fade-up">
-                <span class="text-blue-500 font-semibold">OUR SERVICES</span>
-                <h2 class="text-4xl font-bold mt-2 mb-4">Tailored Technology Solutions for Staffing & Operations</h2>
-                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
-                    We offer end-to-end technology services tailored to your business needs.
-                </p>
-            </div>
-            
-            <!-- Services Tabs -->
-            <div class="max-w-5xl mx-auto">
-                <div class="flex flex-wrap justify-center mb-8" data-aos="fade-up">
-                    <button class="service-tab active px-6 py-3 font-medium text-blue-500 border-b-2 border-blue-500" data-tab="development">
-                        <i class="fas fa-code mr-2"></i> Development
-                    </button>
-                    <button class="service-tab px-6 py-3 font-medium text-gray-500 hover:text-blue-500" data-tab="cloud">
-                        <i class="fas fa-cloud mr-2"></i> Cloud
-                    </button>
-                    <button class="service-tab px-6 py-3 font-medium text-gray-500 hover:text-blue-500" data-tab="security">
-                        <i class="fas fa-shield-alt mr-2"></i> Security
-                    </button>
-                    <button class="service-tab px-6 py-3 font-medium text-gray-500 hover:text-blue-500" data-tab="consulting">
-                        <i class="fas fa-chart-line mr-2"></i> Consulting
-                    </button>
+        <!-- Redesigned Section: Our Process -->
+        <section class="py-20 bg-white">
+            <div class="container mx-auto px-6">
+                 <div class="text-center mb-16 fade-in">
+                    <h2 class="text-3xl md:text-4xl font-bold text-blue-900" data-lang-en="Our Process" data-lang-es="Nuestro Proceso">Our Process</h2>
+                    <p class="mt-3 text-slate-600 max-w-2xl mx-auto" data-lang-en="A proven path to successful project delivery, ensuring clarity and quality every step of the way." data-lang-es="Un camino probado para la entrega exitosa de proyectos, garantizando claridad y calidad en cada paso.">A proven path to successful project delivery, ensuring clarity and quality every step of the way.</p>
                 </div>
-                
-                <!-- Tab Content -->
-                <div class="service-content active" data-tab-content="development" data-aos="fade-up">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                        <div class="card p-8">
-                            <div class="service-icon">
-                                <i class="fas fa-code"></i>
-                            </div>
-                            <h3 class="text-2xl font-bold mb-4">Custom Systems for Staffing & HR</h3>
-                            <p class="text-gray-600 mb-4">
-                                Automate hiring, onboarding, and document workflows with custom-built tools tailored to your business processes.
-                            </p>
-                            <ul class="space-y-2 text-gray-600">
-                                <li class="flex items-start">
-                                    <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
-                                    <span>Gravity Forms + WordPress Automation</span>
-                                </li>
-                                <li class="flex items-start">
-                                    <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
-                                    <span>Digital W-4, I-9 & Direct Deposit Forms</span>
-                                </li>
-                                <li class="flex items-start">
-                                    <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
-                                    <span>Automated Email & WhatsApp Workflows</span>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="card p-8">
-                            <div class="service-icon">
-                                <i class="fas fa-mobile-alt"></i>
-                            </div>
-                            <h3 class="text-2xl font-bold mb-4">Web Development & Cloud Solutions</h3>
-                            <p class="text-gray-600 mb-4">
-                                High-performance web and cloud platforms to power your business and connect your teams.
-                            </p>
-                            <ul class="space-y-2 text-gray-600">
-                                <li class="flex items-start">
-                                    <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
-                                    <span>Responsive Websites & Portals</span>
-                                </li>
-                                <li class="flex items-start">
-                                    <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
-                                    <span>ERP & CRM Integrations</span>
-                                </li>
-                                <li class="flex items-start">
-                                    <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
-                                    <span>Cloud Hosting & Data Automation</span>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Other tabs content would go here (hidden by default) -->
-                <div class="service-content hidden" data-tab-content="cloud">
-                    <!-- Cloud services content -->
-                </div>
-                
-                <div class="text-center mt-10" data-aos="fade-up">
-                    <a href="#contact" class="inline-flex items-center px-8 py-3 bg-gradient-to-r from-blue-500 to-blue-600 text-white font-semibold rounded-full hover:shadow-lg transition-all">
-                        Need a different solution? Let's talk
-                        <i class="fas fa-arrow-right ml-2"></i>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Stats Section -->
-    <section class="py-20 bg-gradient-to-r from-blue-600 to-blue-800 text-white">
-        <div class="container mx-auto px-4">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 text-center">
-                <div class="p-6" data-aos="fade-up">
-                    <div class="text-5xl font-bold mb-2">150+</div>
-                    <div class="text-xl">Projects Completed</div>
-                </div>
-                <div class="p-6" data-aos="fade-up" data-aos-delay="100">
-                    <div class="text-5xl font-bold mb-2">95%</div>
-                    <div class="text-xl">Client Retention</div>
-                </div>
-                <div class="p-6" data-aos="fade-up" data-aos-delay="200">
-                    <div class="text-5xl font-bold mb-2">40+</div>
-                    <div class="text-xl">Expert Team</div>
-                </div>
-                <div class="p-6" data-aos="fade-up" data-aos-delay="300">
-                    <div class="text-5xl font-bold mb-2">24/7</div>
-                    <div class="text-xl">Support Available</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- About Section with Team -->
-    <section id="about" class="py-20 bg-gray-50">
-        <div class="container mx-auto px-4">
-            <div class="flex flex-col lg:flex-row items-center gap-12">
-                <div class="lg:w-1/2" data-aos="fade-right">
-                    <img src="images/team-meeting.jpg" alt="Nextcoding Team" class="rounded-xl shadow-xl w-full" loading="lazy">
-                </div>
-                <div class="lg:w-1/2" data-aos="fade-left">
-                    <span class="text-blue-500 font-semibold">ABOUT US</span>
-                    <h2 class="text-4xl font-bold mt-2 mb-6">Technology Partners for the Digital Age</h2>
-                    <p class="text-gray-600 mb-6 leading-relaxed">
-                        Nextcoding is an IT and automation partner focused on streamlining operations for staffing agencies and fast-growing companies. From recruitment automation to cloud integrations, we help businesses thrive through smart technology.
-                    </p>
-                    <div class="space-y-4">
-                        <div class="flex items-start">
-                            <div class="bg-blue-100 p-3 rounded-full mr-4">
-                                <i class="fas fa-bullseye text-blue-500"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-bold mb-1">Our Mission</h4>
-                                <p class="text-gray-600">To empower businesses through innovative technology solutions that create sustainable competitive advantages.</p>
-                            </div>
-                        </div>
-                        <div class="flex items-start">
-                            <div class="bg-blue-100 p-3 rounded-full mr-4">
-                                <i class="fas fa-eye text-blue-500"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-bold mb-1">Our Vision</h4>
-                                <p class="text-gray-600">To be the most trusted technology partner for businesses navigating digital transformation.</p>
-                            </div>
-                        </div>
-                        <div class="flex items-start">
-                            <div class="bg-blue-100 p-3 rounded-full mr-4">
-                                <i class="fas fa-heart text-blue-500"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-bold mb-1">Our Values</h4>
-                                <p class="text-gray-600">Innovation, Integrity, Excellence, and Partnership guide everything we do.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Team Section -->
-            <div class="mt-20" data-aos="fade-up">
-                <div class="text-center mb-12">
-                    <span class="text-blue-500 font-semibold">MEET THE TEAM</span>
-                    <h2 class="text-4xl font-bold mt-2 mb-4">Our Leadership</h2>
-                    <p class="text-xl text-gray-600 max-w-3xl mx-auto">
-                        The talented professionals driving our success and yours.
-                    </p>
-                </div>
-                
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    <!-- Team Member 1 -->
-                    <div class="card overflow-hidden group">
-                        <div class="relative overflow-hidden">
-                            <img src="images/team-1.jpg" alt="CEO" class="w-full h-80 object-cover transition duration-500 group-hover:scale-105" loading="lazy">
-                            <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
-                            <div class="absolute bottom-0 left-0 p-6">
-                                <h3 class="text-white text-2xl font-bold">Sarah Johnson</h3>
-                                <p class="text-blue-200">CEO & Founder</p>
-                            </div>
-                        </div>
-                        <div class="p-6">
-                            <p class="text-gray-600 mb-4">Technology visionary with 15+ years in software development and digital transformation.</p>
-                            <div class="flex space-x-4">
-                                <a href="#" class="text-blue-500 hover:text-blue-700">
-                                    <i class="fab fa-linkedin"></i>
-                                </a>
-                                <a href="#" class="text-blue-500 hover:text-blue-700">
-                                    <i class="fab fa-twitter"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Team Member 2 -->
-                    <div class="card overflow-hidden group">
-                        <div class="relative overflow-hidden">
-                            <img src="images/team-2.jpg" alt="CTO" class="w-full h-80 object-cover transition duration-500 group-hover:scale-105" loading="lazy">
-                            <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
-                            <div class="absolute bottom-0 left-0 p-6">
-                                <h3 class="text-white text-2xl font-bold">Michael Chen</h3>
-                                <p class="text-blue-200">Chief Technology Officer</p>
-                            </div>
-                        </div>
-                        <div class="p-6">
-                            <p class="text-gray-600 mb-4">Cloud architecture expert specializing in scalable, secure enterprise solutions.</p>
-                            <div class="flex space-x-4">
-                                <a href="#" class="text-blue-500 hover:text-blue-700">
-                                    <i class="fab fa-linkedin"></i>
-                                </a>
-                                <a href="#" class="text-blue-500 hover:text-blue-700">
-                                    <i class="fab fa-github"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Team Member 3 -->
-                    <div class="card overflow-hidden group">
-                        <div class="relative overflow-hidden">
-                            <img src="images/team-3.jpg" alt="CDO" class="w-full h-80 object-cover transition duration-500 group-hover:scale-105" loading="lazy">
-                            <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
-                            <div class="absolute bottom-0 left-0 p-6">
-                                <h3 class="text-white text-2xl font-bold">David Rodriguez</h3>
-                                <p class="text-blue-200">Chief Digital Officer</p>
-                            </div>
-                        </div>
-                        <div class="p-6">
-                            <p class="text-gray-600 mb-4">Digital strategy leader focused on customer experience and business growth.</p>
-                            <div class="flex space-x-4">
-                                <a href="#" class="text-blue-500 hover:text-blue-700">
-                                    <i class="fab fa-linkedin"></i>
-                                </a>
-                                <a href="#" class="text-blue-500 hover:text-blue-700">
-                                    <i class="fab fa-medium"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Case Studies Section -->
-    <section id="case-studies" class="py-20 bg-white">
-        <div class="container mx-auto px-4">
-            <div class="text-center mb-16" data-aos="fade-up">
-                <span class="text-blue-500 font-semibold">CASE STUDIES</span>
-                <h2 class="text-4xl font-bold mt-2 mb-4">Success Stories</h2>
-                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
-                    Discover how we've helped businesses transform through technology.
-                </p>
-            </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <!-- Case Study 1 -->
-                <div class="card overflow-hidden group" data-aos="fade-up">
-                    <div class="relative overflow-hidden h-64">
-                        <img src="images/case-study-1.jpg" alt="Case Study" class="w-full h-full object-cover transition duration-500 group-hover:scale-110" loading="lazy">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
-                        <div class="absolute top-4 right-4">
-                            <span class="bg-blue-500 text-white px-3 py-1 rounded-full text-sm font-semibold">Retail</span>
-                        </div>
-                    </div>
-                    <div class="p-8">
-                        <h3 class="text-2xl font-bold mb-3">Omnichannel Platform for Global Retailer</h3>
-                        <p class="text-gray-600 mb-4">Developed a unified commerce platform integrating 300+ stores with e-commerce and mobile apps, resulting in 35% revenue growth.</p>
-                        <div class="flex justify-between items-center">
-                            <a href="#" class="text-blue-500 font-semibold hover:text-blue-700 flex items-center">
-                                Read Case Study <i class="fas fa-arrow-right ml-2"></i>
-                            </a>
-                            <span class="text-gray-500 text-sm">6 months project</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Case Study 2 -->
-                <div class="card overflow-hidden group" data-aos="fade-up" data-aos-delay="100">
-                    <div class="relative overflow-hidden h-64">
-                        <img src="images/case-study-2.jpg" alt="Case Study" class="w-full h-full object-cover transition duration-500 group-hover:scale-110" loading="lazy">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
-                        <div class="absolute top-4 right-4">
-                            <span class="bg-green-500 text-white px-3 py-1 rounded-full text-sm font-semibold">Healthcare</span>
-                        </div>
-                    </div>
-                    <div class="p-8">
-                        <h3 class="text-2xl font-bold mb-3">AI-Powered Diagnostics System</h3>
-                        <p class="text-gray-600 mb-4">Implemented machine learning algorithms that reduced diagnostic time by 60% while improving accuracy for a leading hospital network.</p>
-                        <div class="flex justify-between items-center">
-                            <a href="#" class="text-blue-500 font-semibold hover:text-blue-700 flex items-center">
-                                Read Case Study <i class="fas fa-arrow-right ml-2"></i>
-                            </a>
-                            <span class="text-gray-500 text-sm">9 months project</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="text-center mt-12" data-aos="fade-up">
-                <a href="#" class="inline-flex items-center px-6 py-3 border border-blue-500 text-blue-500 font-semibold rounded-full hover:bg-blue-50 transition-all">
-                    View All Case Studies
-                    <i class="fas fa-arrow-right ml-2"></i>
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Testimonials Section -->
-    <section class="py-20 bg-gray-50">
-        <div class="container mx-auto px-4">
-            <div class="text-center mb-16" data-aos="fade-up">
-                <span class="text-blue-500 font-semibold">TESTIMONIALS</span>
-                <h2 class="text-4xl font-bold mt-2 mb-4">What Our Clients Say</h2>
-                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
-                    Don't just take our word for it - hear from our satisfied clients.
-                </p>
-            </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- Testimonial 1 -->
-                <div class="testimonial-card p-8" data-aos="fade-up">
-                    <div class="flex items-center mb-6">
-                        <div class="w-12 h-12 rounded-full overflow-hidden mr-4">
-                            <img src="images/client-1.jpg" alt="Client" class="w-full h-full object-cover" loading="lazy">
+                <div class="space-y-16">
+                    <!-- Step 1 -->
+                    <div class="grid md:grid-cols-2 gap-12 items-center fade-in">
+                        <div class="flex justify-center">
+                            <lottie-player 
+                                src="https://lottie.host/804c1c27-c1d0-47b6-8e54-47201b1b3696/Q2n2a03k2d.json" 
+                                background="transparent" 
+                                speed="1" 
+                                style="width: 100%; max-width: 400px; height: auto;" 
+                                loop 
+                                autoplay
+                            ></lottie-player>
                         </div>
                         <div>
-                            <h4 class="font-bold">Jennifer Martinez</h4>
-                            <p class="text-gray-500 text-sm">CTO, TechForward Inc.</p>
+                            <span class="text-sky-500 font-bold" data-lang-en="Step 1" data-lang-es="Paso 1">Step 1</span>
+                            <h3 class="text-2xl font-bold text-blue-900 my-2" data-lang-en="Discovery & Strategy" data-lang-es="Descubrimiento y Estrategia">Discovery & Strategy</h3>
+                            <p class="text-slate-600" data-lang-en="We start with a deep dive into your business. We listen to your goals, understand your challenges, and analyze your requirements to build a comprehensive project roadmap." data-lang-es="Empezamos con una inmersión profunda en tu negocio. Escuchamos tus metas, entendemos tus desafíos y analizamos tus requisitos para construir una hoja de ruta completa para el proyecto.">We start with a deep dive into your business. We listen to your goals, understand your challenges, and analyze your requirements to build a comprehensive project roadmap.</p>
                         </div>
                     </div>
-                    <p class="text-gray-600 italic mb-6">
-                        "Nextcoding transformed our legacy systems into a modern microservices architecture, reducing our operational costs by 40% while improving system reliability."
-                    </p>
-                    <div class="flex text-yellow-400">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                </div>
-                
-                <!-- Testimonial 2 -->
-                <div class="testimonial-card p-8" data-aos="fade-up" data-aos-delay="100">
-                    <div class="flex items-center mb-6">
-                        <div class="w-12 h-12 rounded-full overflow-hidden mr-4">
-                            <img src="images/client-2.jpg" alt="Client" class="w-full h-full object-cover" loading="lazy">
+                    <!-- Step 2 -->
+                    <div class="grid md:grid-cols-2 gap-12 items-center fade-in" style="transition-delay: 0.2s">
+                        <div class="md:order-last flex justify-center">
+                           <lottie-player 
+                                src="https://lottie.host/29e1f578-838d-446a-a55e-389f46401053/k2C7Rbr5Jc.json" 
+                                background="transparent" 
+                                speed="1" 
+                                style="width: 100%; max-width: 400px; height: auto;" 
+                                loop 
+                                autoplay
+                            ></lottie-player>
                         </div>
                         <div>
-                            <h4 class="font-bold">Robert Williams</h4>
-                            <p class="text-gray-500 text-sm">CEO, Global Retail Group</p>
+                            <span class="text-sky-500 font-bold" data-lang-en="Step 2" data-lang-es="Paso 2">Step 2</span>
+                            <h3 class="text-2xl font-bold text-blue-900 my-2" data-lang-en="Development & Iteration" data-lang-es="Desarrollo e Iteración">Development & Iteration</h3>
+                            <p class="text-slate-600" data-lang-en="Our expert team brings the strategy to life, building your solution with agile methodologies. We maintain transparent communication with regular updates and feedback loops." data-lang-es="Nuestro equipo de expertos da vida a la estrategia, construyendo tu solución con metodologías ágiles. Mantenemos una comunicación transparente con actualizaciones regulares y ciclos de feedback.">Our expert team brings the strategy to life, building your solution with agile methodologies. We maintain transparent communication with regular updates and feedback loops.</p>
                         </div>
                     </div>
-                    <p class="text-gray-600 italic mb-6">
-                        "Their team delivered our e-commerce platform ahead of schedule and under budget. The system handles 10,000+ concurrent users with zero downtime during peak seasons."
-                    </p>
-                    <div class="flex text-yellow-400">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                </div>
-                
-                <!-- Testimonial 3 -->
-                <div class="testimonial-card p-8" data-aos="fade-up" data-aos-delay="200">
-                    <div class="flex items-center mb-6">
-                        <div class="w-12 h-12 rounded-full overflow-hidden mr-4">
-                            <img src="images/client-3.jpg" alt="Client" class="w-full h-full object-cover" loading="lazy">
+                     <!-- Step 3 -->
+                    <div class="grid md:grid-cols-2 gap-12 items-center fade-in" style="transition-delay: 0.4s">
+                        <div class="flex justify-center">
+                           <lottie-player 
+                                src="https://lottie.host/99723a96-413e-42c2-b13c-4428c0e66d48/o5r5aL3eJm.json" 
+                                background="transparent" 
+                                speed="1" 
+                                style="width: 100%; max-width: 400px; height: auto;" 
+                                loop 
+                                autoplay
+                            ></lottie-player>
                         </div>
                         <div>
-                            <h4 class="font-bold">Amanda Chen</h4>
-                            <p class="text-gray-500 text-sm">Director of IT, HealthPlus</p>
+                            <span class="text-sky-500 font-bold" data-lang-en="Step 3" data-lang-es="Paso 3">Step 3</span>
+                            <h3 class="text-2xl font-bold text-blue-900 my-2" data-lang-en="Deployment & Launch" data-lang-es="Despliegue y Lanzamiento">Deployment & Launch</h3>
+                            <p class="text-slate-600" data-lang-en="We meticulously handle the launch process, from server configuration to final testing, ensuring a seamless and successful transition to the live environment." data-lang-es="Gestionamos meticulosamente el proceso de lanzamiento, desde la configuración del servidor hasta las pruebas finales, asegurando una transición fluida y exitosa al entorno de producción.">We meticulously handle the launch process, from server configuration to final testing, ensuring a seamless and successful transition to the live environment.</p>
                         </div>
                     </div>
-                    <p class="text-gray-600 italic mb-6">
-                        "The cybersecurity framework Nextcoding implemented for us identified and mitigated vulnerabilities we didn't even know existed. Their expertise is unparalleled."
-                    </p>
-                    <div class="flex text-yellow-400">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star-half-alt"></i>
+                     <!-- Step 4 -->
+                    <div class="grid md:grid-cols-2 gap-12 items-center fade-in" style="transition-delay: 0.6s">
+                        <div class="md:order-last flex justify-center">
+                           <lottie-player 
+                                src="https://lottie.host/a6836458-37d4-4235-9856-42775a999712/oB76uKcF6H.json" 
+                                background="transparent" 
+                                speed="1" 
+                                style="width: 100%; max-width: 400px; height: auto;" 
+                                loop 
+                                autoplay
+                            ></lottie-player>
+                        </div>
+                        <div>
+                            <span class="text-sky-500 font-bold" data-lang-en="Step 4" data-lang-es="Paso 4">Step 4</span>
+                            <h3 class="text-2xl font-bold text-blue-900 my-2" data-lang-en="Support & Growth" data-lang-es="Soporte y Crecimiento">Support & Growth</h3>
+                            <p class="text-slate-600" data-lang-en="Our partnership doesn't end at launch. We provide ongoing support, monitoring, and maintenance to ensure your solution runs smoothly and evolves with your business." data-lang-es="Nuestra alianza no termina con el lanzamiento. Ofrecemos soporte, monitorización y mantenimiento continuo para asegurar que tu solución funcione sin problemas y evolucione con tu negocio.">Our partnership doesn't end at launch. We provide ongoing support, monitoring, and maintenance to ensure your solution runs smoothly and evolves with your business.</p>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- CTA Section -->
-    <section class="py-20 bg-gradient-to-r from-blue-600 to-blue-800 text-white">
-        <div class="container mx-auto px-4 text-center">
-            <h2 class="text-4xl font-bold mb-6" data-aos="fade-up">Ready to Transform Your Business?</h2>
-            <p class="text-xl mb-8 max-w-3xl mx-auto" data-aos="fade-up" data-aos-delay="100">
-                Let's discuss how Nextcoding can help you achieve your digital transformation goals.
-            </p>
-            <div class="flex flex-col sm:flex-row justify-center gap-4" data-aos="fade-up" data-aos-delay="200">
-                <a href="#contact" class="btn-primary px-8 py-4 rounded-full font-semibold text-lg hover:shadow-xl">
-                    Get Started Now
-                </a>
-                <a href="tel:+18005551234" class="bg-white text-blue-600 px-8 py-4 rounded-full font-semibold text-lg hover:bg-gray-100 hover:shadow-lg transition-all">
-                    <i class="fas fa-phone-alt mr-2"></i> Call Us
-                </a>
+        <!-- Section: Why Choose Us -->
+        <section class="py-20 bg-slate-50">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12 fade-in">
+                    <h2 class="text-3xl md:text-4xl font-bold text-blue-900" data-lang-en="Why Partner with Nextcoding?" data-lang-es="¿Por Qué Elegir Nextcoding?">Why Partner with Nextcoding?</h2>
+                    <p class="mt-3 text-slate-600 max-w-2xl mx-auto" data-lang-en="We are more than just developers; we are architects of digital solutions that deliver real value." data-lang-es="Somos más que desarrolladores; somos arquitectos de soluciones digitales que entregan valor real.">We are more than just developers; we are architects of digital solutions that deliver real value.</p>
+                </div>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="bg-white p-8 rounded-lg shadow-sm hover:shadow-xl transition-all fade-in">
+                        <h3 class="text-xl font-bold text-blue-900 mb-3" data-lang-en="Expert Team" data-lang-es="Equipo Experto">Expert Team</h3>
+                        <p class="text-slate-600" data-lang-en="Our team consists of certified professionals with years of experience in diverse technology stacks." data-lang-es="Nuestro equipo está formado por profesionales certificados con años de experiencia en diversas tecnologías.">Our team consists of certified professionals with years of experience in diverse technology stacks.</p>
+                    </div>
+                    <div class="bg-white p-8 rounded-lg shadow-sm hover:shadow-xl transition-all fade-in" style="transition-delay: 0.2s">
+                        <h3 class="text-xl font-bold text-blue-900 mb-3" data-lang-en="Custom Solutions" data-lang-es="Soluciones a Medida">Custom Solutions</h3>
+                        <p class="text-slate-600" data-lang-en="We don't believe in one-size-fits-all. Every project is tailored to meet your unique goals." data-lang-es="No creemos en soluciones genéricas. Cada proyecto se adapta para cumplir tus objetivos únicos.">We don't believe in one-size-fits-all. Every project is tailored to meet your unique goals.</p>
+                    </div>
+                    <div class="bg-white p-8 rounded-lg shadow-sm hover:shadow-xl transition-all fade-in" style="transition-delay: 0.4s">
+                        <h3 class="text-xl font-bold text-blue-900 mb-3" data-lang-en="Client-Focused" data-lang-es="Enfoque en el Cliente">Client-Focused</h3>
+                        <p class="text-slate-600" data-lang-en="Your success is our priority. We maintain transparent communication throughout the entire process." data-lang-es="Tu éxito es nuestra prioridad. Mantenemos una comunicación transparente durante todo el proceso.">Your success is our priority. We maintain transparent communication throughout the entire process.</p>
+                    </div>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Contact Section -->
-    <section id="contact" class="py-20 bg-white">
-        <div class="container mx-auto px-4">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
-                <div data-aos="fade-right">
-                    <span class="text-blue-500 font-semibold">CONTACT US</span>
-                    <h2 class="text-4xl font-bold mt-2 mb-6">Let's Build Something Great</h2>
-                    <p class="text-gray-600 mb-8 leading-relaxed">
-                        Whether you have a project in mind or just want to explore possibilities, our team is ready to help. Fill out the form or contact us directly.
-                    </p>
-                    
-                    <div class="space-y-6">
-                        <div class="flex items-start">
-                            <div class="bg-blue-100 p-3 rounded-full mr-4">
-                                <i class="fas fa-map-marker-alt text-blue-500"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-bold mb-1">Our Office</h4>
-                                <p class="text-gray-600">Winter Garden, 34787 FL</p>
-                            </div>
-                        </div>
-                        
-                        <div class="flex items-start">
-                            <div class="bg-blue-100 p-3 rounded-full mr-4">
-                                <i class="fas fa-envelope text-blue-500"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-bold mb-1">Email Us</h4>
-                                <p class="text-gray-600">
-                                    <a href="mailto:info@nextcoding.com" class="hover:text-blue-500">info@nextcoding.com</a><br>
-                                    <a href="mailto:support@nextcoding.com" class="hover:text-blue-500">support@nextcoding.com</a>
-                                </p>
-                            </div>
-                        </div>
-                        
-                        <div class="flex items-start">
-                            <div class="bg-blue-100 p-3 rounded-full mr-4">
-                                <i class="fas fa-phone-alt text-blue-500"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-bold mb-1">Call Us</h4>
-                                <p class="text-gray-600">
-                                    <a href="tel:+18005551234" class="hover:text-blue-500">+1 (800) 555-1234</a><br>
-                                    <a href="tel:+18005554321" class="hover:text-blue-500">+1 (800) 555-4321</a>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="mt-10">
-                        <h4 class="font-bold mb-4">Follow Us</h4>
-                        <div class="flex space-x-4">
-                            <a href="#" class="w-10 h-10 rounded-full bg-blue-100 text-blue-500 flex items-center justify-center hover:bg-blue-500 hover:text-white transition-all">
-                                <i class="fab fa-linkedin-in"></i>
-                            </a>
-                            <a href="#" class="w-10 h-10 rounded-full bg-blue-100 text-blue-500 flex items-center justify-center hover:bg-blue-500 hover:text-white transition-all">
-                                <i class="fab fa-twitter"></i>
-                            </a>
-                            <a href="#" class="w-10 h-10 rounded-full bg-blue-100 text-blue-500 flex items-center justify-center hover:bg-blue-500 hover:text-white transition-all">
-                                <i class="fab fa-facebook-f"></i>
-                            </a>
-                            <a href="#" class="w-10 h-10 rounded-full bg-blue-100 text-blue-500 flex items-center justify-center hover:bg-blue-500 hover:text-white transition-all">
-                                <i class="fab fa-instagram"></i>
-                            </a>
-                        </div>
+        <!-- Gemini AI Idea Generator Section -->
+        <section id="ai-powered-strategy" class="py-20 ai-section-bg">
+            <div class="container mx-auto px-6 text-center">
+                <h2 class="text-3xl md:text-4xl font-bold text-blue-900 fade-in" data-lang-en="Discover Your Next" data-lang-es="Descubre tu Próximo">Discover Your Next <span class="gradient-text" data-lang-en="Innovative Project" data-lang-es="Proyecto Innovador">Innovative Project</span></h2>
+                <p class="mt-4 text-slate-600 max-w-3xl mx-auto fade-in" data-lang-en="Don't know where to start? Describe your business or a challenge, and our AI will give you personalized ideas, powered by Gemini." data-lang-es="¿No sabes por dónde empezar? Describe tu negocio o un desafío, y nuestra IA te dará ideas personalizadas, potenciada por Gemini.">Don't know where to start? Describe your business or a challenge, and our AI will give you personalized ideas, powered by Gemini.</p>
+                <div class="max-w-2xl mx-auto mt-8 bg-white/70 backdrop-blur-sm p-8 rounded-2xl shadow-lg border border-slate-200 fade-in" style="transition-delay: 0.2s">
+                    <div class="flex flex-col gap-4">
+                        <textarea id="business-description" rows="3" class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-500 transition" 
+                        data-lang-placeholder-en="Ex: I own a chain of coffee shops and want to increase customer loyalty."
+                        data-lang-placeholder-es="Ej: Soy dueño de una cadena de cafeterías y quiero fidelizar a mis clientes."></textarea>
+                        <button id="generate-ideas-btn" class="bg-sky-500 text-white font-bold py-3 px-8 rounded-full text-lg hover:bg-sky-600 transition-all duration-300 hover:scale-105 transform flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-sky-500/20">
+                            <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 20a8 8 0 1 0 0-16 8 8 0 0 0 0 16Zm0-6a2 2 0 1 0 0-4 2 2 0 0 0 0 4ZM12 2v2m0 16v2m-7.07-2.93 1.41 1.41M17.66 6.34l1.41 1.41M2 12h2m16 0h2m-2.93-7.07-1.41 1.41M6.34 17.66l-1.41 1.41"/></svg>
+                            <span data-lang-en="Generate Ideas with AI" data-lang-es="Generar Ideas con IA">Generate Ideas with AI</span>
+                        </button>
                     </div>
                 </div>
-                
-                <div data-aos="fade-left">
-                    <div class="card p-8">
-                        <form id="contact-form" class="space-y-6">
-                            <div>
-                                <label for="name" class="block font-medium mb-2">Your Name *</label>
-                                <input type="text" id="name" name="name" class="input-field w-full px-4 py-3 rounded-lg focus:outline-none" required>
+                <div id="idea-results" class="mt-12"></div>
+            </div>
+        </section>
+
+        <!-- Section: Testimonials -->
+        <section class="py-20 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12 fade-in">
+                    <h2 class="text-3xl md:text-4xl font-bold text-blue-900" data-lang-en="What Our Clients Say" data-lang-es="Lo que Dicen Nuestros Clientes">What Our Clients Say</h2>
+                </div>
+                <div class="max-w-3xl mx-auto relative fade-in" style="transition-delay: 0.2s">
+                    <div class="overflow-hidden">
+                        <div id="testimonial-slider" class="testimonial-slider">
+                            <!-- Testimonial 1 -->
+                            <div class="testimonial-item text-center px-8">
+                                <p class="text-xl text-slate-700 italic" data-lang-en='"Nextcoding transformed our workflow. Their automation solution saved us countless hours and significantly reduced errors."' data-lang-es='"Nextcoding transformó nuestro flujo de trabajo. Su solución de automatización nos ahorró incontables horas y redujo los errores significativamente."'>"Nextcoding transformed our workflow. Their automation solution saved us countless hours and significantly reduced errors."</p>
+                                <p class="mt-4 font-bold text-blue-800">John Doe</p>
+                                <p class="text-sm text-slate-500" data-lang-en="CEO of Innovate Corp" data-lang-es="CEO de Innovate Corp">CEO of Innovate Corp</p>
                             </div>
-                            
-                            <div>
-                                <label for="email" class="block font-medium mb-2">Email Address *</label>
-                                <input type="email" id="email" name="email" class="input-field w-full px-4 py-3 rounded-lg focus:outline-none" required>
+                            <!-- Testimonial 2 -->
+                            <div class="testimonial-item text-center px-8">
+                                <p class="text-xl text-slate-700 italic" data-lang-en='"The custom software they developed is the backbone of our operations. Incredibly reliable and perfectly tailored to our needs."' data-lang-es='"El software a medida que desarrollaron es la columna vertebral de nuestras operaciones. Increíblemente fiable y perfectamente adaptado a nuestras necesidades."'>"The custom software they developed is the backbone of our operations. Incredibly reliable and perfectly tailored to our needs."</p>
+                                <p class="mt-4 font-bold text-blue-800">Jane Smith</p>
+                                <p class="text-sm text-slate-500" data-lang-en="Operations Manager at TechSolutions" data-lang-es="Gerente de Operaciones en TechSolutions">Operations Manager at TechSolutions</p>
                             </div>
-                            
-                            <div>
-                                <label for="company" class="block font-medium mb-2">Company</label>
-                                <input type="text" id="company" name="company" class="input-field w-full px-4 py-3 rounded-lg focus:outline-none">
-                            </div>
-                            
-                            <div>
-                                <label for="service" class="block font-medium mb-2">Service Interest</label>
-                                <select id="service" name="service" class="input-field w-full px-4 py-3 rounded-lg focus:outline-none">
-                                    <option value="">Select a service</option>
-                                    <option value="development">Custom Software Development</option>
-                                    <option value="cloud">Cloud Solutions</option>
-                                    <option value="security">Cybersecurity</option>
-                                    <option value="consulting">IT Consulting</option>
-                                    <option value="other">Other</option>
-                                </select>
-                            </div>
-                            
-                            <div>
-                                <label for="message" class="block font-medium mb-2">Your Message *</label>
-                                <textarea id="message" name="message" rows="5" class="input-field w-full px-4 py-3 rounded-lg focus:outline-none" required></textarea>
-                            </div>
-                            
-                            <div class="flex items-center">
-                                <input type="checkbox" id="consent" name="consent" class="mr-2" required>
-                                <label for="consent" class="text-sm text-gray-600">I agree to the <a href="#" class="text-blue-500 hover:underline">privacy policy</a> and terms of service.</label>
-                            </div>
-                            
-                            <button type="submit" class="w-full btn-primary text-white font-semibold py-4 px-6 rounded-lg hover:shadow-xl transition-all">
-                                Send Message <i class="fas fa-paper-plane ml-2"></i>
-                            </button>
-                        </form>
+                        </div>
                     </div>
+                    <button id="prev-testimonial" class="absolute top-1/2 -translate-y-1/2 left-0 bg-white/50 hover:bg-white rounded-full p-2 shadow-md"><svg class="w-6 h-6 text-blue-800" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg></button>
+                    <button id="next-testimonial" class="absolute top-1/2 -translate-y-1/2 right-0 bg-white/50 hover:bg-white rounded-full p-2 shadow-md"><svg class="w-6 h-6 text-blue-800" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></button>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+
+        <!-- Final CTA -->
+        <section class="py-20 bg-sky-500">
+             <div class="container mx-auto px-6 text-center">
+                 <h2 class="text-3xl md:text-4xl font-bold text-white fade-in" data-lang-en="Ready to Start Your Next Project?" data-lang-es="¿Listo para Empezar tu Próximo Proyecto?">Ready to Start Your Next Project?</h2>
+                 <p class="mt-3 text-sky-100 max-w-2xl mx-auto fade-in" data-lang-en="Let's talk about how our technology solutions can help you achieve your business goals." data-lang-es="Hablemos sobre cómo nuestras soluciones tecnológicas pueden ayudarte a alcanzar tus metas de negocio.">Let's talk about how our technology solutions can help you achieve your business goals.</p>
+                 <a href="contacto.html" class="mt-8 inline-block bg-white text-sky-600 font-bold py-3 px-8 rounded-full text-lg hover:bg-slate-100 transition-transform hover:scale-105 fade-in" style="transition-delay: 0.2s" data-lang-en="Contact Us Now" data-lang-es="Contáctanos Ahora">Contact Us Now</a>
+             </div>
+        </section>
+
+    </main>
 
     <!-- Footer -->
-    <footer class="bg-gray-900 text-white pt-16 pb-8">
-        <div class="container mx-auto px-4">
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
-                <div>
-                    <a href="#" class="flex items-center mb-6">
-                        <img src="images/logo-white.png" alt="Nextcoding Logo" class="h-8" loading="lazy">
-                    </a>
-                    <p class="text-gray-400 mb-6">
-                        Nextcoding empowers staffing agencies and modern businesses with custom onboarding platforms, digital forms with e-signatures, HR automation, and cloud-based IT support systems.
-                    </p>
-                    <div class="flex space-x-4">
-                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
-                            <i class="fab fa-linkedin-in"></i>
-                        </a>
-                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
-                            <i class="fab fa-twitter"></i>
-                        </a>
-                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
-                            <i class="fab fa-facebook-f"></i>
-                        </a>
-                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
-                            <i class="fab fa-instagram"></i>
-                        </a>
-                    </div>
-                </div>
-                
-                <div>
-                    <h3 class="text-lg font-semibold mb-6">Services</h3>
-                    <ul class="space-y-3">
-                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Staffing & HR Systems</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Digital Onboarding Forms</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Twilio & WhatsApp Integration</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Gravity Forms Automation</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Employee Portals & Workflows</a></li>
-                    </ul>
-                </div>
-                
-                <div>
-                    <h3 class="text-lg font-semibold mb-6">Company</h3>
-                    <ul class="space-y-3">
-                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">About Us.</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Our Team</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Case Studies</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Careers</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Blog</a></li>
-                    </ul>
-                </div>
-                
-                <div>
-                    <h3 class="text-lg font-semibold mb-6">Contact</h3>
-                    <address class="not-italic text-gray-400 space-y-3">
-                        <p>Winter Garden, FL · Remote Nationwide</p>
-                        <p><a href="mailto:info@nextcoding.com" class="hover:text-white transition-colors">info@nextcoding.com</a></p>
-                        <p><a href="tel:+18005551234" class="hover:text-white transition-colors">+1 (800) 555-1234</a></p>
-                    </address>
-                </div>
-            </div>
-            
-            <div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center">
-                <p class="text-gray-400 text-sm mb-4 md:mb-0">
-                    &copy; 2025 Nextcoding. All rights reserved.
-                </p>
-                <div class="flex space-x-6">
-                    <a href="#" class="text-gray-400 hover:text-white text-sm transition-colors">Privacy Policy</a>
-                    <a href="#" class="text-gray-400 hover:text-white text-sm transition-colors">Terms of Service</a>
-                    <a href="#" class="text-gray-400 hover:text-white text-sm transition-colors">Cookie Policy</a>
-                </div>
-            </div>
+    <footer class="bg-blue-900 text-white py-8">
+        <div class="container mx-auto px-6 text-center">
+            <p>&copy; <span id="year"></span> Nextcoding. <span data-lang-en="All rights reserved." data-lang-es="Todos los derechos reservados.">All rights reserved.</span></p>
+            <p class="text-sm text-blue-300 mt-2" data-lang-en="Technology Solutions for the Future" data-lang-es="Soluciones Tecnológicas para el Futuro">Technology Solutions for the Future</p>
         </div>
     </footer>
 
-    <!-- Back to Top Button -->
-    <button id="back-to-top" class="fixed bottom-8 right-8 bg-blue-500 text-white w-12 h-12 rounded-full shadow-lg flex items-center justify-center opacity-0 invisible transition-all duration-300 hover:bg-blue-600">
-        <i class="fas fa-arrow-up"></i>
-    </button>
-
-    <!-- JavaScript Libraries -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    
-    <!-- Main JavaScript -->
+    <script src="lang.js"></script>
     <script>
-        // Initialize AOS (Animate On Scroll)
-        document.addEventListener('DOMContentLoaded', function() {
-            AOS.init({
-                duration: 800,
-                easing: 'ease-in-out',
-                once: true,
-                offset: 100
-            });
+        document.addEventListener('DOMContentLoaded', () => {
+            // Set current year in footer
+            document.getElementById('year').textContent = new Date().getFullYear();
             
-            // Hide preloader when page is loaded
-            setTimeout(function() {
-                document.getElementById('preloader').style.opacity = '0';
-                document.getElementById('preloader').style.visibility = 'hidden';
-                document.body.style.overflow = 'auto';
-            }, 500);
-            
-            // Mobile menu toggle
-            const mobileMenuButton = document.getElementById('mobile-menu-button');
-            const mobileMenu = document.getElementById('mobile-menu');
-            const closeMenuButton = document.getElementById('close-menu');
-            
-            mobileMenuButton.addEventListener('click', function() {
-                mobileMenu.classList.add('open');
-                document.body.style.overflow = 'hidden';
-            });
-            
-            closeMenuButton.addEventListener('click', function() {
-                mobileMenu.classList.remove('open');
-                document.body.style.overflow = 'auto';
-            });
-            
-            // Close mobile menu when clicking on a link
-            const mobileMenuLinks = mobileMenu.querySelectorAll('a');
-            mobileMenuLinks.forEach(link => {
-                link.addEventListener('click', function() {
-                    mobileMenu.classList.remove('open');
-                    document.body.style.overflow = 'auto';
-                });
-            });
-            
-            // Back to top button
-            const backToTopButton = document.getElementById('back-to-top');
-            
-            window.addEventListener('scroll', function() {
-                if (window.pageYOffset > 300) {
-                    backToTopButton.style.opacity = '1';
-                    backToTopButton.style.visibility = 'visible';
+            // Header scroll effect
+            const header = document.getElementById('header');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    header.classList.add('header-scrolled');
                 } else {
-                    backToTopButton.style.opacity = '0';
-                    backToTopButton.style.visibility = 'hidden';
+                    header.classList.remove('header-scrolled');
                 }
             });
-            
-            backToTopButton.addEventListener('click', function() {
-                window.scrollTo({
-                    top: 0,
-                    behavior: 'smooth'
-                });
+
+            // Mobile Menu
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenuButton.addEventListener('click', () => { 
+                mobileMenu.classList.toggle('hidden'); 
             });
-            
-            // Service tabs functionality
-            const serviceTabs = document.querySelectorAll('.service-tab');
-            const serviceContents = document.querySelectorAll('[data-tab-content]');
-            
-            serviceTabs.forEach(tab => {
-                tab.addEventListener('click', function() {
-                    const targetTab = this.getAttribute('data-tab');
-                    
-                    // Update active tab
-                    serviceTabs.forEach(t => t.classList.remove('active', 'text-blue-500', 'border-blue-500'));
-                    serviceTabs.forEach(t => t.classList.add('text-gray-500', 'hover:text-blue-500'));
-                    this.classList.add('active', 'text-blue-500', 'border-blue-500');
-                    this.classList.remove('text-gray-500', 'hover:text-blue-500');
-                    
-                    // Update active content
-                    serviceContents.forEach(content => {
-                        content.classList.add('hidden');
-                        if (content.getAttribute('data-tab-content') === targetTab) {
-                            content.classList.remove('hidden');
-                        }
-                    });
-                });
-            });
-            
-            // Form submission
-            const contactForm = document.getElementById('contact-form');
-            
-            contactForm.addEventListener('submit', function(e) {
-                e.preventDefault();
+
+            // Testimonial Slider Logic
+            const slider = document.getElementById('testimonial-slider');
+            if (slider) {
+                const prevBtn = document.getElementById('prev-testimonial');
+                const nextBtn = document.getElementById('next-testimonial');
+                const items = slider.querySelectorAll('.testimonial-item');
+                let currentIndex = 0;
                 
-                // Here you would typically send the form data to your server
-                // For demo purposes, we'll just show a success message
-                alert('Thank you for your message! We will get back to you soon.');
-                this.reset();
-            });
+                function updateSlider() { 
+                    slider.style.transform = `translateX(-${currentIndex * 100}%)`; 
+                }
+                
+                prevBtn.addEventListener('click', () => { 
+                    currentIndex = (currentIndex > 0) ? currentIndex - 1 : items.length - 1; 
+                    updateSlider(); 
+                });
+                
+                nextBtn.addEventListener('click', () => { 
+                    currentIndex = (currentIndex < items.length - 1) ? currentIndex + 1 : 0; 
+                    updateSlider(); 
+                });
+            }
             
-            // Smooth scrolling for anchor links
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    
-                    const targetId = this.getAttribute('href');
-                    if (targetId === '#') return;
-                    
-                    const targetElement = document.querySelector(targetId);
-                    if (targetElement) {
-                        window.scrollTo({
-                            top: targetElement.offsetTop - 80,
-                            behavior: 'smooth'
-                        });
+            // Scroll animations
+            const fadeElements = document.querySelectorAll('.fade-in');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
                     }
                 });
+            }, { threshold: 0.1 });
+            
+            fadeElements.forEach(element => {
+                observer.observe(element);
             });
+            
+            // Gemini AI logic
+            const generateIdeasBtn = document.getElementById('generate-ideas-btn');
+            const businessDescriptionInput = document.getElementById('business-description');
+            const ideaResultsContainer = document.getElementById('idea-results');
+
+            if (generateIdeasBtn) {
+                 const placeHolderEN = businessDescriptionInput.getAttribute('data-lang-placeholder-en');
+                 const placeHolderES = businessDescriptionInput.getAttribute('data-lang-placeholder-es');
+                 businessDescriptionInput.placeholder = (localStorage.getItem('lang') || 'en') === 'es' ? placeHolderES : placeHolderEN;
+
+                generateIdeasBtn.addEventListener('click', async () => {
+                    const description = businessDescriptionInput.value.trim();
+                    if (!description) {
+                        ideaResultsContainer.innerHTML = `<p class="text-red-600 font-medium">${(localStorage.getItem('lang') || 'en') === 'es' ? 'Por favor, describe tu negocio o desafío.' : 'Please, describe your business or challenge.'}</p>`;
+                        return;
+                    }
+                    ideaResultsContainer.innerHTML = `<div class="flex justify-center items-center flex-col"><svg class="animate-spin h-8 w-8 text-sky-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg><p class="mt-4 text-slate-600">${(localStorage.getItem('lang') || 'en') === 'es' ? 'Nuestra IA está analizando tu caso...' : 'Our AI is analyzing your case...'}</p></div>`;
+                    generateIdeasBtn.disabled = true;
+
+                    const apiKey = ""; // Add your Gemini API key here
+                    const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
+                    const systemPrompt = `You are an expert and creative IT consultant from the company 'Nextcoding'. Your goal is to inspire potential clients by showing them how technology can solve their problems and boost their business. Generate 3 concrete and actionable technology project ideas based on the client's description. The titles must be in English. The descriptions must also be in English.`;
+                    const userQuery = `Client's description: "${description}"`;
+
+                    const payload = {
+                        contents: [{ parts: [{ text: `${systemPrompt}\n${userQuery}` }] }],
+                        generationConfig: {
+                            responseMimeType: "application/json",
+                            responseSchema: {
+                                type: "OBJECT",
+                                properties: { "ideas": { type: "ARRAY", items: { type: "OBJECT", properties: { "title": { "type": "STRING" }, "description": { "type": "STRING" } }, required: ["title", "description"] } } }, required: ["ideas"]
+                            }
+                        }
+                    };
+
+                    try {
+                        const response = await fetch(apiUrl, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+                        if (!response.ok) throw new Error(`API error: ${response.status}`);
+                        const result = await response.json();
+                        const candidate = result.candidates?.[0];
+                        const jsonText = candidate?.content?.parts?.[0]?.text;
+                        if (!jsonText) throw new Error("No valid content received from AI.");
+                        const parsedJson = JSON.parse(jsonText);
+                        displayIdeas(parsedJson.ideas);
+                    } catch (error) {
+                        console.error("Error calling Gemini API:", error);
+                        ideaResultsContainer.innerHTML = `<p class="text-red-600 font-medium">${(localStorage.getItem('lang') || 'en') === 'es' ? 'Lo sentimos, ocurrió un error al generar las ideas. Por favor, inténtalo de nuevo más tarde.' : 'Sorry, an error occurred while generating ideas. Please try again later.'}</p>`;
+                    } finally {
+                        generateIdeasBtn.disabled = false;
+                    }
+                });
+
+                function displayIdeas(ideas) {
+                    const lang = localStorage.getItem('lang') || 'en';
+                    if (!ideas || ideas.length === 0) {
+                        ideaResultsContainer.innerHTML = `<p class="text-slate-600">${lang === 'es' ? 'No se pudieron generar ideas. Intenta ser más específico.' : 'Could not generate ideas. Try being more specific.'}</p>`;
+                        return;
+                    }
+                    const titleText = lang === 'es' ? 'Aquí tienes algunas ideas para empezar:' : 'Here are some ideas to get you started:';
+                    let html = `<h3 class="text-2xl font-bold text-blue-900 mb-8">${titleText}</h3><div class="grid md:grid-cols-3 gap-8 text-left">`;
+                    ideas.forEach(idea => {
+                        html += `<div class="bg-white p-6 rounded-lg shadow-lg border-t-4 border-sky-400 animate-fade-in"><h4 class="text-xl font-bold text-blue-900 mb-2">${idea.title}</h4><p class="text-slate-600">${idea.description}</p></div>`;
+                    });
+                    html += '</div>';
+                    ideaResultsContainer.innerHTML = html;
+                }
+                 const styleSheet = document.createElement("style");
+                 styleSheet.innerText = `@keyframes fade-in { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } } .animate-fade-in { animation: fade-in 0.5s ease-out forwards; }`;
+                 document.head.appendChild(styleSheet);
+            }
         });
     </script>
 </body>

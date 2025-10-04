@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nextcoding - Services</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        body { 
+            font-family: 'Inter', sans-serif; 
+            overflow-x: hidden; 
+            background-color: #f8fafc;
+        }
+        
+        .header-scrolled { 
+            background-color: rgba(255, 255, 255, 0.95); 
+            backdrop-filter: blur(10px); 
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+        }
+        
+        .hero-section { 
+            background: linear-gradient(to bottom, #f0f9ff, #e0f2fe);
+            position: relative; 
+            overflow: hidden; 
+        }
+        
+        .lang-switcher { 
+            border: 1px solid #cbd5e1; 
+            padding: 4px; 
+            border-radius: 9999px; 
+            display: flex; 
+            font-size: 0.8rem; 
+            font-weight: 500; 
+        }
+        
+        .lang-switcher .active { 
+            background-color: #0284c7; 
+            color: white; 
+        }
+        
+        .lang-switcher button { 
+            padding: 4px 10px; 
+            border-radius: 9999px; 
+            transition: all 0.2s ease-in-out; 
+        }
+        
+        .gradient-text { 
+            background: linear-gradient(to right, #38bdf8, #a78bfa); 
+            -webkit-background-clip: text; 
+            -webkit-text-fill-color: transparent; 
+        }
+        
+        .ai-section-bg { 
+            background-color: #f0f9ff; 
+            background-image: 
+                linear-gradient(to right, rgba(2, 132, 199, 0.05) 1px, transparent 1px), 
+                linear-gradient(to bottom, rgba(2, 132, 199, 0.05) 1px, transparent 1px); 
+            background-size: 30px 30px; 
+        }
+
+        /* Cloud animation styles */
+        .cloud {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            opacity: 0.9;
+            filter: blur(4px);
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
+            z-index: 1;
+        }
+        
+        .cloud:before, .cloud:after {
+            content: '';
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+        }
+        
+        .cloud1 {
+            width: 180px;
+            height: 55px;
+            top: 15%;
+            animation: moveClouds 40s linear infinite;
+        }
+        
+        .cloud1:before {
+            width: 90px;
+            height: 90px;
+            top: -45px;
+            left: 15px;
+        }
+        
+        .cloud1:after {
+            width: 120px;
+            height: 110px;
+            top: -55px;
+            right: 10px;
+        }
+        
+        .cloud2 {
+            width: 250px;
+            height: 75px;
+            top: 30%;
+            animation: moveClouds 50s linear infinite;
+            animation-delay: -10s;
+        }
+        
+        .cloud2:before {
+            width: 130px;
+            height: 130px;
+            top: -65px;
+            left: 25px;
+        }
+        
+        .cloud2:after {
+            width: 170px;
+            height: 150px;
+            top: -75px;
+            right: 15px;
+        }
+        
+        .cloud3 {
+            width: 200px;
+            height: 60px;
+            top: 65%;
+            animation: moveClouds 45s linear infinite;
+            animation-delay: -20s;
+        }
+        
+        .cloud3:before {
+            width: 100px;
+            height: 100px;
+            top: -50px;
+            left: 20px;
+        }
+        
+        .cloud3:after {
+            width: 80px;
+            height: 75px;
+            top: -40px;
+            right: 8px;
+        }
+        
+        @keyframes moveClouds {
+            0% { transform: translateX(-150%); }
+            100% { transform: translateX(150vw); }
+        }
+
+        /* Service icons */
+        .service-icon {
+            transition: all 0.3s ease;
+        }
+        
+        .service-card:hover .service-icon {
+            transform: translateY(-5px) scale(1.05);
+        }
+
+        /* Portfolio grid */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            justify-items: center;
+        }
+        
+        .portfolio-item {
+            position: relative;
+            border-radius: 0.5rem;
+            overflow: hidden;
+            height: 250px;
+            width: 100%;
+            max-width: 350px;
+            transition: transform 0.3s ease;
+        }
+        
+        .portfolio-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .portfolio-item:hover img {
+            transform: scale(1.05);
+        }
+        
+        .portfolio-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(2, 132, 199, 0.85);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            padding: 1rem;
+            text-align: center;
+        }
+        
+        .portfolio-item:hover .portfolio-overlay {
+            opacity: 1;
+        }
+
+        /* Animation for elements on scroll */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Service detail styles */
+        .service-detail-card {
+            transition: all 0.3s ease;
+            border-left: 4px solid #0284c7;
+        }
+        
+        .service-detail-card:hover {
+            transform: translateX(5px);
+        }
+        
+        /* Team member cards */
+        .team-card {
+            transition: all 0.3s ease;
+        }
+        
+        .team-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Contact form styles */
+        .contact-input {
+            transition: all 0.3s ease;
+            border: 1px solid #cbd5e1;
+        }
+        
+        .contact-input:focus {
+            border-color: #0284c7;
+            box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800">
+
+    <!-- Header -->
+    <header id="header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="index.html" class="text-2xl font-bold text-blue-800">Next<span class="text-sky-500">coding</span></a>
+            <nav class="hidden md:flex items-center space-x-8">
+                <a href="servicios.html" class="text-sky-500 font-medium transition-colors" data-lang-en="Services" data-lang-es="Servicios">Services</a>
+                <a href="nosotros.html" class="text-slate-600 hover:text-sky-500 transition-colors" data-lang-en="About Us" data-lang-es="Nosotros">About Us</a>
+                <a href="portafolio.html" class="text-slate-600 hover:text-sky-500 transition-colors" data-lang-en="Portfolio" data-lang-es="Portafolio">Portfolio</a>
+                <a href="contacto.html" class="text-slate-600 hover:text-sky-500 transition-colors" data-lang-en="Contact" data-lang-es="Contacto">Contact</a>
+                <div class="lang-switcher">
+                    <button id="lang-en" data-lang="en">EN</button>
+                    <button id="lang-es" data-lang="es">ES</button>
+                </div>
+            </nav>
+            <a href="contacto.html" class="hidden md:block bg-blue-700 text-white font-medium py-2 px-4 rounded-lg hover:bg-blue-800 transition-transform hover:scale-105" data-lang-en="Request a Consultation" data-lang-es="Solicitar Consultoría">Request a Consultation</a>
+            <button id="mobile-menu-button" class="md:hidden text-blue-800"><svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" /></svg></button>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden bg-white">
+            <a href="servicios.html" class="block py-2 px-6 text-sky-500 bg-sky-50 font-medium" data-lang-en="Services" data-lang-es="Servicios">Services</a>
+            <a href="nosotros.html" class="block py-2 px-6 text-slate-600 hover:bg-sky-50" data-lang-en="About Us" data-lang-es="Nosotros">About Us</a>
+            <a href="portafolio.html" class="block py-2 px-6 text-slate-600 hover:bg-sky-50" data-lang-en="Portfolio" data-lang-es="Portafolio">Portfolio</a>
+            <a href="contacto.html" class="block py-2 px-6 text-slate-600 hover:bg-sky-50" data-lang-en="Contact" data-lang-es="Contacto">Contact</a>
+            <div class="flex justify-between items-center py-2 px-6">
+                <div class="lang-switcher">
+                    <button id="lang-en-mobile" data-lang="en">EN</button>
+                    <button id="lang-es-mobile" data-lang="es">ES</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="pt-20">
+        <!-- Services Hero Section -->
+        <section class="hero-section pt-32 pb-20">
+            <div class="absolute top-0 left-0 w-full h-full z-0">
+                <div class="cloud cloud1"></div>
+                <div class="cloud cloud2"></div>
+                <div class="cloud cloud3"></div>
+            </div>
+            <div class="container mx-auto px-6 text-center relative z-10">
+                <h1 class="text-4xl md:text-5xl font-extrabold text-blue-900 leading-tight fade-in" data-lang-en="Our Services" data-lang-es="Nuestros Servicios">Our Services</h1>
+                <p class="mt-4 text-lg md:text-xl max-w-3xl mx-auto text-slate-700 fade-in" data-lang-en="Comprehensive technology solutions to drive your business forward." data-lang-es="Soluciones tecnológicas integrales para impulsar tu negocio.">Comprehensive technology solutions to drive your business forward.</p>
+            </div>
+        </section>
+
+        <!-- Services Detail Section -->
+        <section class="py-16 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="grid md:grid-cols-2 gap-12 items-center mb-16 fade-in">
+                    <div>
+                        <h2 class="text-3xl md:text-4xl font-bold text-blue-900 mb-4" data-lang-en="Custom Software Development" data-lang-es="Desarrollo de Software a Medida">Custom Software Development</h2>
+                        <p class="text-slate-600 mb-6" data-lang-en="We create tailored software solutions that address your specific business challenges and help you achieve your goals. Our development process focuses on scalability, security, and user experience." data-lang-es="Creamos soluciones de software personalizadas que abordan tus desafíos empresariales específicos y te ayudan a alcanzar tus objetivos. Nuestro proceso de desarrollo se centra en la escalabilidad, seguridad y experiencia de usuario.">We create tailored software solutions that address your specific business challenges and help you achieve your goals. Our development process focuses on scalability, security, and user experience.</p>
+                        <ul class="space-y-3">
+                            <li class="flex items-start">
+                                <svg class="h-6 w-6 text-sky-500 mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                </svg>
+                                <span data-lang-en="Web applications and platforms" data-lang-es="Aplicaciones y plataformas web">Web applications and platforms</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="h-6 w-6 text-sky-500 mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                </svg>
+                                <span data-lang-en="Mobile apps for iOS and Android" data-lang-es="Aplicaciones móviles para iOS y Android">Mobile apps for iOS and Android</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="h-6 w-6 text-sky-500 mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                </svg>
+                                <span data-lang-en="Enterprise software solutions" data-lang-es="Soluciones de software empresarial">Enterprise software solutions</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="h-6 w-6 text-sky-500 mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                </svg>
+                                <span data-lang-en="API development and integration" data-lang-es="Desarrollo e integración de API">API development and integration</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="flex justify-center">
+                        <lottie-player 
+                            src="https://lottie.host/4d4d4d4d-4d4d-4d4d-4d4d-4d4d4d4d4d4d/software-development.json" 
+                            background="transparent" 
+                            speed="1" 
+                            style="width: 100%; max-width: 400px; height: auto;" 
+                            loop 
+                            autoplay
+                        ></lottie-player>
+                    </div>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-8">
+                    <!-- IT Consulting -->
+                    <div class="service-detail-card bg-slate-50 p-8 rounded-lg fade-in">
+                        <div class="flex items-center mb-4">
+                            <div class="bg-sky-100 rounded-full w-12 h-12 flex items-center justify-center mr-4">
+                                <svg class="text-sky-600 w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 16.5V9.5m0 11.5a9 9 0 1 0 0-18 9 9 0 0 0 0 18ZM7 11.5h2m6 0h2"/>
+                                </svg>
+                            </div>
+                            <h3 class="text-xl font-bold text-blue-900" data-lang-en="IT Consulting" data-lang-es="Consultoría IT">IT Consulting</h3>
+                        </div>
+                        <p class="text-slate-600" data-lang-en="Strategic guidance to align technology with business objectives, optimize processes, and implement effective solutions." data-lang-es="Orientación estratégica para alinear la tecnología con los objetivos empresariales, optimizar procesos e implementar soluciones efectivas.">Strategic guidance to align technology with business objectives, optimize processes, and implement effective solutions.</p>
+                    </div>
+
+                    <!-- Server Management -->
+                    <div class="service-detail-card bg-slate-50 p-8 rounded-lg fade-in" style="transition-delay: 0.1s">
+                        <div class="flex items-center mb-4">
+                            <div class="bg-sky-100 rounded-full w-12 h-12 flex items-center justify-center mr-4">
+                                <svg class="text-sky-600 w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2 2h20v8H2zm0 12h20v8H2zm4-8h.01M6 18h.01"/>
+                                </svg>
+                            </div>
+                            <h3 class="text-xl font-bold text-blue-900" data-lang-en="Server Management" data-lang-es="Gestión de Servidores">Server Management</h3>
+                        </div>
+                        <p class="text-slate-600" data-lang-en="Comprehensive management of physical and cloud infrastructure to ensure reliability, security, and performance." data-lang-es="Gestión integral de infraestructura física y en la nube para garantizar confiabilidad, seguridad y rendimiento.">Comprehensive management of physical and cloud infrastructure to ensure reliability, security, and performance.</p>
+                    </div>
+
+                    <!-- Process Automation -->
+                    <div class="service-detail-card bg-slate-50 p-8 rounded-lg fade-in" style="transition-delay: 0.2s">
+                        <div class="flex items-center mb-4">
+                            <div class="bg-sky-100 rounded-full w-12 h-12 flex items-center justify-center mr-4">
+                                <svg class="text-sky-600 w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 20a8 8 0 1 0 0-16 8 8 0 0 0 0 16Zm0-6a2 2 0 1 0 0-4 2 2 0 0 0 0 4ZM12 2v2m0 16v2m-7.07-2.93 1.41 1.41M17.66 6.34l1.41 1.41M2 12h2m16 0h2m-2.93-7.07-1.41 1.41M6.34 17.66l-1.41 1.41"/>
+                                </svg>
+                            </div>
+                            <h3 class="text-xl font-bold text-blue-900" data-lang-en="Process Automation" data-lang-es="Automatización de Procesos">Process Automation</h3>
+                        </div>
+                        <p class="text-slate-600" data-lang-en="Streamline workflows, reduce manual tasks, and increase efficiency through intelligent automation solutions." data-lang-es="Optimiza flujos de trabajo, reduce tareas manuales y aumenta la eficiencia mediante soluciones de automatización inteligente.">Streamline workflows, reduce manual tasks, and increase efficiency through intelligent automation solutions.</p>
+                    </div>
+
+                    <!-- Cloud Solutions -->
+                    <div class="service-detail-card bg-slate-50 p-8 rounded-lg fade-in" style="transition-delay: 0.3s">
+                        <div class="flex items-center mb-4">
+                            <div class="bg-sky-100 rounded-full w-12 h-12 flex items-center justify-center mr-4">
+                                <svg class="text-sky-600 w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4 4 0 003 15z"/>
+                                </svg>
+                            </div>
+                            <h3 class="text-xl font-bold text-blue-900" data-lang-en="Cloud Solutions" data-lang-es="Soluciones en la Nube">Cloud Solutions</h3>
+                        </div>
+                        <p class="text-slate-600" data-lang-en="Migration, deployment, and management of cloud infrastructure for scalability and cost efficiency." data-lang-es="Migración, implementación y gestión de infraestructura en la nube para escalabilidad y eficiencia de costos.">Migration, deployment, and management of cloud infrastructure for scalability and cost efficiency.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="py-16 bg-sky-50">
+            <div class="container mx-auto px-6 text-center">
+                <h2 class="text-3xl md:text-4xl font-bold text-blue-900 mb-6 fade-in" data-lang-en="Ready to Transform Your Business?" data-lang-es="¿Listo para Transformar tu Negocio?">Ready to Transform Your Business?</h2>
+                <p class="text-slate-600 max-w-2xl mx-auto mb-8 fade-in" data-lang-en="Let's discuss how our services can help you achieve your technology goals." data-lang-es="Hablemos sobre cómo nuestros servicios pueden ayudarte a alcanzar tus objetivos tecnológicos.">Let's discuss how our services can help you achieve your technology goals.</p>
+                <a href="contacto.html" class="inline-block bg-sky-500 text-white font-bold py-3 px-8 rounded-full text-lg hover:bg-sky-600 transition-transform hover:scale-105 fade-in" data-lang-en="Get Started Today" data-lang-es="Comienza Hoy">Get Started Today</a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-blue-900 text-white py-8">
+        <div class="container mx-auto px-6 text-center">
+            <p>&copy; <span id="year"></span> Nextcoding. <span data-lang-en="All rights reserved." data-lang-es="Todos los derechos reservados.">All rights reserved.</span></p>
+            <p class="text-sm text-blue-300 mt-2" data-lang-en="Technology Solutions for the Future" data-lang-es="Soluciones Tecnológicas para el Futuro">Technology Solutions for the Future</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Set current year in footer
+            document.getElementById('year').textContent = new Date().getFullYear();
+            
+            // Header scroll effect
+            const header = document.getElementById('header');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    header.classList.add('header-scrolled');
+                } else {
+                    header.classList.remove('header-scrolled');
+                }
+            });
+
+            // Mobile Menu
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenuButton.addEventListener('click', () => { 
+                mobileMenu.classList.toggle('hidden'); 
+            });
+
+            // Scroll animations
+            const fadeElements = document.querySelectorAll('.fade-in');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            fadeElements.forEach(element => {
+                observer.observe(element);
+            });
+        });
+    </script>
+</body>
+</html>
