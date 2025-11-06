@@ -636,7 +636,7 @@
                     ideaResultsContainer.innerHTML = `<div class="flex justify-center items-center flex-col"><svg class="animate-spin h-8 w-8 text-sky-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg><p class="mt-4 text-slate-600">${(localStorage.getItem('lang') || 'en') === 'es' ? 'Nuestra IA está analizando tu caso...' : 'Our AI is analyzing your case...'}</p></div>`;
                     generateIdeasBtn.disabled = true;
 
-                    const apiKey = ""; // Add your Gemini API key here
+                    const apiKey = "AIzaSyCVmzehJnxU_Q8zSG5ipDMJD5644D8h8ww"; // Add your Gemini API key here
                     const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
                     const systemPrompt = `You are an expert and creative IT consultant from the company 'Nextcoding'. Your goal is to inspire potential clients by showing them how technology can solve their problems and boost their business. Generate 3 concrete and actionable technology project ideas based on the client's description. The titles must be in English. The descriptions must also be in English.`;
                     const userQuery = `Client's description: "${description}"`;
