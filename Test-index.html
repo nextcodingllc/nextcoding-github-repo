@@ -230,6 +230,14 @@
             opacity: 1;
             transform: translateY(0);
         }
+
+        /* Contact Section Specific Styles */
+        .contact-form-card {
+            background-color: #ffffff;
+            border-radius: 1rem;
+            box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
     </style>
 </head>
 <body class="bg-slate-50 text-slate-800">
@@ -237,25 +245,25 @@
     <!-- Header -->
     <header id="header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
         <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="index.html" class="text-2xl font-bold text-blue-800">Next<span class="text-sky-500">coding</span></a>
+            <a href="#hero-section" class="text-2xl font-bold text-blue-800">Next<span class="text-sky-500">coding</span></a>
             <nav class="hidden md:flex items-center space-x-8">
-                <a href="servicios.html" class="text-slate-600 hover:text-sky-500 transition-colors" data-lang-en="Services" data-lang-es="Servicios">Services</a>
-                <a href="nosotros.html" class="text-slate-600 hover:text-sky-500 transition-colors" data-lang-en="About Us" data-lang-es="Nosotros">About Us</a>
-                <a href="portafolio.html" class="text-slate-600 hover:text-sky-500 transition-colors" data-lang-en="Portfolio" data-lang-es="Portafolio">Portfolio</a>
-                <a href="contacto.html" class="text-slate-600 hover:text-sky-500 transition-colors" data-lang-en="Contact" data-lang-es="Contacto">Contact</a>
+                <a href="#services" class="text-slate-600 hover:text-sky-500 transition-colors" data-lang-en="Services" data-lang-es="Servicios">Services</a>
+                <a href="#process" class="text-slate-600 hover:text-sky-500 transition-colors" data-lang-en="Process" data-lang-es="Proceso">Process</a>
+                <a href="#portfolio" class="text-slate-600 hover:text-sky-500 transition-colors" data-lang-en="Portfolio" data-lang-es="Portafolio">Portfolio</a>
+                <a href="#contact" class="text-slate-600 hover:text-sky-500 transition-colors" data-lang-en="Contact" data-lang-es="Contacto">Contact</a>
                 <div class="lang-switcher">
                     <button id="lang-en" data-lang="en">EN</button>
                     <button id="lang-es" data-lang="es">ES</button>
                 </div>
             </nav>
-            <a href="contacto.html" class="hidden md:block bg-blue-700 text-white font-medium py-2 px-4 rounded-lg hover:bg-blue-800 transition-transform hover:scale-105" data-lang-en="Request a Consultation" data-lang-es="Solicitar Consultoría">Request a Consultation</a>
+            <a href="#contact" class="hidden md:block bg-blue-700 text-white font-medium py-2 px-4 rounded-lg hover:bg-blue-800 transition-transform hover:scale-105" data-lang-en="Request a Consultation" data-lang-es="Solicitar Consultoría">Request a Consultation</a>
             <button id="mobile-menu-button" class="md:hidden text-blue-800"><svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" /></svg></button>
         </div>
         <div id="mobile-menu" class="hidden md:hidden bg-white">
-            <a href="servicios.html" class="block py-2 px-6 text-slate-600 hover:bg-sky-50" data-lang-en="Services" data-lang-es="Servicios">Services</a>
-            <a href="nosotros.html" class="block py-2 px-6 text-slate-600 hover:bg-sky-50" data-lang-en="About Us" data-lang-es="Nosotros">About Us</a>
-            <a href="portafolio.html" class="block py-2 px-6 text-slate-600 hover:bg-sky-50" data-lang-en="Portfolio" data-lang-es="Portafolio">Portfolio</a>
-            <a href="contacto.html" class="block py-2 px-6 text-slate-600 hover:bg-sky-50" data-lang-en="Contact" data-lang-es="Contacto">Contact</a>
+            <a href="#services" class="block py-2 px-6 text-slate-600 hover:bg-sky-50" data-lang-en="Services" data-lang-es="Servicios">Services</a>
+            <a href="#process" class="block py-2 px-6 text-slate-600 hover:bg-sky-50" data-lang-en="Process" data-lang-es="Proceso">Process</a>
+            <a href="#portfolio" class="block py-2 px-6 text-slate-600 hover:bg-sky-50" data-lang-en="Portfolio" data-lang-es="Portafolio">Portfolio</a>
+            <a href="#contact" class="block py-2 px-6 text-slate-600 hover:bg-sky-50" data-lang-en="Contact" data-lang-es="Contacto">Contact</a>
             <div class="flex justify-between items-center py-2 px-6">
                 <div class="lang-switcher">
                     <button id="lang-en-mobile" data-lang="en">EN</button>
@@ -267,7 +275,7 @@
 
     <main>
         <!-- Hero Section -->
-        <section class="hero-section pt-40 pb-24">
+        <section id="hero-section" class="hero-section pt-40 pb-24">
             <div class="absolute top-0 left-0 w-full h-full z-0">
                 <div class="cloud cloud1"></div>
                 <div class="cloud cloud2"></div>
@@ -277,14 +285,14 @@
                 <h1 class="text-4xl md:text-6xl font-extrabold text-blue-900 leading-tight fade-in" data-lang-en="Building the Future of Your Business, Code by Code." data-lang-es="Construyendo el Futuro de tu Negocio, Código a Código.">Building the Future of Your Business, Code by Code.</h1>
                 <p class="mt-4 text-lg md:text-xl max-w-3xl mx-auto text-slate-700 fade-in" data-lang-en="We provide custom software, cloud infrastructure, and process automation to drive your growth." data-lang-es="Proveemos software a medida, infraestructura en la nube y automatización de procesos para impulsar tu crecimiento.">We provide custom software, cloud infrastructure, and process automation to drive your growth.</p>
                 <div class="mt-8 flex justify-center gap-4 fade-in" style="transition-delay: 0.2s">
-                    <a href="servicios.html" class="bg-sky-500 text-white font-bold py-3 px-8 rounded-full text-lg hover:bg-sky-600 transition-transform hover:scale-105" data-lang-en="Explore Services" data-lang-es="Explorar Servicios">Explore Services</a>
-                    <a href="contacto.html" class="bg-white text-sky-600 font-bold py-3 px-8 rounded-full text-lg hover:bg-slate-100 transition-transform hover:scale-105 border border-slate-200" data-lang-en="Get in Touch" data-lang-es="Contáctanos">Get in Touch</a>
+                    <a href="#services" class="bg-sky-500 text-white font-bold py-3 px-8 rounded-full text-lg hover:bg-sky-600 transition-transform hover:scale-105" data-lang-en="Explore Services" data-lang-es="Explorar Servicios">Explore Services</a>
+                    <a href="#contact" class="bg-white text-sky-600 font-bold py-3 px-8 rounded-full text-lg hover:bg-slate-100 transition-transform hover:scale-105 border border-slate-200" data-lang-en="Get in Touch" data-lang-es="Contáctanos">Get in Touch</a>
                 </div>
             </div>
         </section>
 
         <!-- Featured Services -->
-        <section class="py-20 bg-white">
+        <section id="services" class="py-20 bg-white">
             <div class="container mx-auto px-6">
                 <div class="text-center mb-12 fade-in">
                      <h2 class="text-3xl md:text-4xl font-bold text-blue-900" data-lang-en="Our Core Services" data-lang-es="Nuestros Servicios Principales">Our Core Services</h2>
@@ -336,7 +344,7 @@
         </section>
         
         <!-- Portfolio Showcase -->
-        <section class="py-20 bg-slate-50">
+        <section id="portfolio" class="py-20 bg-slate-50">
             <div class="container mx-auto px-6">
                 <div class="text-center mb-12 fade-in">
                     <h2 class="text-3xl md:text-4xl font-bold text-blue-900" data-lang-en="Our Work" data-lang-es="Nuestros Trabajos">Our Work</h2>
@@ -346,7 +354,7 @@
                 <div class="portfolio-grid">
                     <!-- Portfolio Item 1 -->
                     <div class="portfolio-item fade-in">
-                        <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="E-commerce Platform">
+                        <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="E-commerce Platform" onerror="this.onerror=null;this.src='https://placehold.co/500x250/0284c7/ffffff?text=E-commerce';">
                         <div class="portfolio-overlay">
                             <h3 class="text-xl font-bold text-white" data-lang-en="E-commerce Platform" data-lang-es="Plataforma E-commerce">E-commerce Platform</h3>
                             <p class="text-slate-100 mt-2" data-lang-en="Custom online store with advanced features" data-lang-es="Tienda online personalizada con funciones avanzadas">Custom online store with advanced features</p>
@@ -356,7 +364,7 @@
                     
                     <!-- Portfolio Item 2 -->
                     <div class="portfolio-item fade-in" style="transition-delay: 0.1s">
-                        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Business Dashboard">
+                        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Business Dashboard" onerror="this.onerror=null;this.src='https://placehold.co/500x250/0284c7/ffffff?text=Dashboard';">
                         <div class="portfolio-overlay">
                             <h3 class="text-xl font-bold text-white" data-lang-en="Business Dashboard" data-lang-es="Dashboard Empresarial">Business Dashboard</h3>
                             <p class="text-slate-100 mt-2" data-lang-en="Real-time analytics and reporting system" data-lang-es="Sistema de análisis y reportes en tiempo real">Real-time analytics and reporting system</p>
@@ -366,7 +374,7 @@
                     
                     <!-- Portfolio Item 3 -->
                     <div class="portfolio-item fade-in" style="transition-delay: 0.2s">
-                        <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Mobile Application">
+                        <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Mobile Application" onerror="this.onerror=null;this.src='https://placehold.co/500x250/0284c7/ffffff?text=Mobile+App';">
                         <div class="portfolio-overlay">
                             <h3 class="text-xl font-bold text-white" data-lang-en="Mobile Application" data-lang-es="Aplicación Móvil">Mobile Application</h3>
                             <p class="text-slate-100 mt-2" data-lang-en="Cross-platform app for customer engagement" data-lang-es="App multiplataforma para engagement de clientes">Cross-platform app for customer engagement</p>
@@ -376,13 +384,13 @@
                 </div>
                 
                 <div class="text-center mt-12 fade-in" style="transition-delay: 0.3s">
-                    <a href="portafolio.html" class="inline-block bg-sky-500 text-white font-bold py-3 px-8 rounded-full text-lg hover:bg-sky-600 transition-transform hover:scale-105" data-lang-en="View All Projects" data-lang-es="Ver Todos los Proyectos">View All Projects</a>
+                    <a href="#portfolio" class="inline-block bg-sky-500 text-white font-bold py-3 px-8 rounded-full text-lg hover:bg-sky-600 transition-transform hover:scale-105" data-lang-en="View All Projects" data-lang-es="Ver Todos los Proyectos">View All Projects</a>
                 </div>
             </div>
         </section>
         
         <!-- Redesigned Section: Our Process -->
-        <section class="py-20 bg-white">
+        <section id="process" class="py-20 bg-white">
             <div class="container mx-auto px-6">
                  <div class="text-center mb-16 fade-in">
                     <h2 class="text-3xl md:text-4xl font-bold text-blue-900" data-lang-en="Our Process" data-lang-es="Nuestro Proceso">Our Process</h2>
@@ -501,7 +509,7 @@
                         data-lang-placeholder-es="Ej: Soy dueño de una cadena de cafeterías y quiero fidelizar a mis clientes."></textarea>
                         <button id="generate-ideas-btn" class="bg-sky-500 text-white font-bold py-3 px-8 rounded-full text-lg hover:bg-sky-600 transition-all duration-300 hover:scale-105 transform flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-sky-500/20">
                             <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 20a8 8 0 1 0 0-16 8 8 0 0 0 0 16Zm0-6a2 2 0 1 0 0-4 2 2 0 0 0 0 4ZM12 2v2m0 16v2m-7.07-2.93 1.41 1.41M17.66 6.34l1.41 1.41M2 12h2m16 0h2m-2.93-7.07-1.41 1.41M6.34 17.66l-1.41 1.41"/></svg>
-                            <span data-lang-en="Generate Ideas with AI" data-lang-es="Generar Ideas con IA">Generate Ideas with AI</span>
+                            <span data-lang-en="Generate Ideas with AI" data-lang-es="Generar Ideas con IA">Generar Ideas con IA</span>
                         </button>
                     </div>
                 </div>
@@ -509,8 +517,82 @@
             </div>
         </section>
 
+        <!-- New Section: Contact Form -->
+        <section id="contact" class="py-20 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12 fade-in">
+                    <h2 class="text-3xl md:text-4xl font-bold text-blue-900" data-lang-en="Let's Start a Project Together" data-lang-es="Comencemos un Proyecto Juntos">Comencemos un Proyecto Juntos</h2>
+                    <p class="mt-3 text-slate-600 max-w-2xl mx-auto" data-lang-en="Fill out the form below or contact us directly. We usually respond within 24 hours." data-lang-es="Rellena el siguiente formulario o contáctanos directamente. Normalmente respondemos en 24 horas.">Rellena el siguiente formulario o contáctanos directamente. Normalmente respondemos en 24 horas.</p>
+                </div>
+                
+                <div class="max-w-5xl mx-auto contact-form-card grid md:grid-cols-2">
+                    <!-- Contact Information Side -->
+                    <div class="bg-blue-800 p-10 rounded-t-xl md:rounded-l-xl md:rounded-tr-none text-white flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-2xl font-bold mb-4" data-lang-en="Contact Information" data-lang-es="Información de Contacto">Información de Contacto</h3>
+                            <p class="text-blue-200 mb-8" data-lang-en="We are ready to discuss your needs and define the best digital strategy." data-lang-es="Estamos listos para discutir tus necesidades y definir la mejor estrategia digital.">Estamos listos para discutir tus necesidades y definir la mejor estrategia digital.</p>
+                            
+                            <div class="space-y-4">
+                                <div class="flex items-start">
+                                    <svg class="w-6 h-6 mr-3 text-sky-400 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                                    <div>
+                                        <p class="font-semibold" data-lang-en="Email" data-lang-es="Correo Electrónico">Email</p>
+                                        <p class="text-blue-300">contact@nextcoding.com</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start">
+                                    <svg class="w-6 h-6 mr-3 text-sky-400 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+                                    <div>
+                                        <p class="font-semibold" data-lang-en="Phone" data-lang-es="Teléfono">Teléfono</p>
+                                        <p class="text-blue-300">+1 (555) 123-4567</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start">
+                                    <svg class="w-6 h-6 mr-3 text-sky-400 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.828 0l-4.243-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                                    <div>
+                                        <p class="font-semibold" data-lang-en="Office" data-lang-es="Oficina">Oficina</p>
+                                        <p class="text-blue-300">123 Tech Avenue, Silicon Valley, CA</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Form Side -->
+                    <div class="p-10">
+                        <form action="YOUR_FORM_SUBMISSION_ENDPOINT" method="POST" class="space-y-6">
+                            <div class="grid sm:grid-cols-2 gap-6">
+                                <div>
+                                    <label for="name" class="block text-sm font-medium text-slate-700" data-lang-en="Full Name" data-lang-es="Nombre Completo">Full Name</label>
+                                    <input type="text" id="name" name="name" required class="mt-1 w-full border border-slate-300 rounded-lg shadow-sm p-3 focus:ring-sky-500 focus:border-sky-500">
+                                </div>
+                                <div>
+                                    <label for="email" class="block text-sm font-medium text-slate-700" data-lang-en="Email Address" data-lang-es="Correo Electrónico">Email Address</label>
+                                    <input type="email" id="email" name="email" required class="mt-1 w-full border border-slate-300 rounded-lg shadow-sm p-3 focus:ring-sky-500 focus:border-sky-500">
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <label for="subject" class="block text-sm font-medium text-slate-700" data-lang-en="Subject" data-lang-es="Asunto">Subject</label>
+                                <input type="text" id="subject" name="subject" required class="mt-1 w-full border border-slate-300 rounded-lg shadow-sm p-3 focus:ring-sky-500 focus:border-sky-500">
+                            </div>
+
+                            <div>
+                                <label for="message" class="block text-sm font-medium text-slate-700" data-lang-en="Your Message" data-lang-es="Tu Mensaje">Your Message</label>
+                                <textarea id="message" name="message" rows="4" required class="mt-1 w-full border border-slate-300 rounded-lg shadow-sm p-3 focus:ring-sky-500 focus:border-sky-500"></textarea>
+                            </div>
+                            
+                            <button type="submit" class="w-full bg-sky-500 text-white font-bold py-3 px-6 rounded-lg hover:bg-sky-600 transition-transform hover:scale-[1.01] shadow-md shadow-sky-500/30" data-lang-en="Send Message" data-lang-es="Enviar Mensaje">Send Message</button>
+                            <p class="text-xs text-slate-500 text-center" data-lang-en="*Note: Replace 'YOUR_FORM_SUBMISSION_ENDPOINT' with your actual backend URL (e.g., Formspree, Netlify Forms, custom server)." data-lang-es="*Nota: Reemplaza 'YOUR_FORM_SUBMISSION_ENDPOINT' con tu URL de backend real (ej: Formspree, Netlify Forms, servidor custom).">*Note: Replace 'YOUR_FORM_SUBMISSION_ENDPOINT' with your actual backend URL (e.g., Formspree, Netlify Forms, custom server).</p>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
         <!-- Section: Testimonials -->
-        <section class="py-20 bg-white">
+        <section class="py-20 bg-slate-50">
             <div class="container mx-auto px-6">
                 <div class="text-center mb-12 fade-in">
                     <h2 class="text-3xl md:text-4xl font-bold text-blue-900" data-lang-en="What Our Clients Say" data-lang-es="Lo que Dicen Nuestros Clientes">What Our Clients Say</h2>
@@ -543,7 +625,7 @@
              <div class="container mx-auto px-6 text-center">
                  <h2 class="text-3xl md:text-4xl font-bold text-white fade-in" data-lang-en="Ready to Start Your Next Project?" data-lang-es="¿Listo para Empezar tu Próximo Proyecto?">Ready to Start Your Next Project?</h2>
                  <p class="mt-3 text-sky-100 max-w-2xl mx-auto fade-in" data-lang-en="Let's talk about how our technology solutions can help you achieve your business goals." data-lang-es="Hablemos sobre cómo nuestras soluciones tecnológicas pueden ayudarte a alcanzar tus metas de negocio.">Let's talk about how our technology solutions can help you achieve your business goals.</p>
-                 <a href="contacto.html" class="mt-8 inline-block bg-white text-sky-600 font-bold py-3 px-8 rounded-full text-lg hover:bg-slate-100 transition-transform hover:scale-105 fade-in" style="transition-delay: 0.2s" data-lang-en="Contact Us Now" data-lang-es="Contáctanos Ahora">Contact Us Now</a>
+                 <a href="#contact" class="mt-8 inline-block bg-white text-sky-600 font-bold py-3 px-8 rounded-full text-lg hover:bg-slate-100 transition-transform hover:scale-105 fade-in" style="transition-delay: 0.2s" data-lang-en="Contact Us Now" data-lang-es="Contáctanos Ahora">Contact Us Now</a>
              </div>
         </section>
 
@@ -623,26 +705,41 @@
             const ideaResultsContainer = document.getElementById('idea-results');
 
             if (generateIdeasBtn) {
-                 const placeHolderEN = businessDescriptionInput.getAttribute('data-lang-placeholder-en');
-                 const placeHolderES = businessDescriptionInput.getAttribute('data-lang-placeholder-es');
-                 businessDescriptionInput.placeholder = (localStorage.getItem('lang') || 'en') === 'es' ? placeHolderES : placeHolderEN;
+                 // --- IMPORTANT: Ensure apiKey is an empty string for execution in this environment ---
+                 const apiKey = "AIzaSyCVmzehJnxU_Q8zSG5ipDMJD5644D8h8ww"; 
+                 // -----------------------------------------------------------------------------------
+                
+                 const updatePlaceholder = () => {
+                     const placeHolderEN = businessDescriptionInput.getAttribute('data-lang-placeholder-en');
+                     const placeHolderES = businessDescriptionInput.getAttribute('data-lang-placeholder-es');
+                     businessDescriptionInput.placeholder = (localStorage.getItem('lang') || 'en') === 'es' ? placeHolderES : placeHolderEN;
+                 };
+
+                 // Initial placeholder setup (called once lang.js has set the initial language)
+                 setTimeout(updatePlaceholder, 100); 
 
                 generateIdeasBtn.addEventListener('click', async () => {
                     const description = businessDescriptionInput.value.trim();
+                    const currentLang = localStorage.getItem('lang') || 'en';
+
                     if (!description) {
-                        ideaResultsContainer.innerHTML = `<p class="text-red-600 font-medium">${(localStorage.getItem('lang') || 'en') === 'es' ? 'Por favor, describe tu negocio o desafío.' : 'Please, describe your business or challenge.'}</p>`;
+                        ideaResultsContainer.innerHTML = `<p class="text-red-600 font-medium">${currentLang === 'es' ? 'Por favor, describe tu negocio o desafío.' : 'Please, describe your business or challenge.'}</p>`;
                         return;
                     }
-                    ideaResultsContainer.innerHTML = `<div class="flex justify-center items-center flex-col"><svg class="animate-spin h-8 w-8 text-sky-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg><p class="mt-4 text-slate-600">${(localStorage.getItem('lang') || 'en') === 'es' ? 'Nuestra IA está analizando tu caso...' : 'Our AI is analyzing your case...'}</p></div>`;
+                    
+                    const loadingText = currentLang === 'es' ? 'Nuestra IA está analizando tu caso...' : 'Our AI is analyzing your case...';
+                    ideaResultsContainer.innerHTML = `<div class="flex justify-center items-center flex-col"><svg class="animate-spin h-8 w-8 text-sky-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg><p class="mt-4 text-slate-600">${loadingText}</p></div>`;
                     generateIdeasBtn.disabled = true;
 
-                    const apiKey = "AIzaSyCVmzehJnxU_Q8zSG5ipDMJD5644D8h8ww"; // Add your Gemini API key here
-                    const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
-                    const systemPrompt = `You are an expert and creative IT consultant from the company 'Nextcoding'. Your goal is to inspire potential clients by showing them how technology can solve their problems and boost their business. Generate 3 concrete and actionable technology project ideas based on the client's description. The titles must be in English. The descriptions must also be in English.`;
-                    const userQuery = `Client's description: "${description}"`;
+                    const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
+                    
+                    // Set system prompt to generate titles and descriptions in the current language
+                    const systemPrompt = `You are an expert and creative IT consultant from the company 'Nextcoding'. Your goal is to inspire potential clients by showing them how technology can solve their problems and boost their business. Generate 3 concrete and actionable technology project ideas based on the client's description. The response MUST be a single JSON object. The content (titles and descriptions) MUST be written in ${currentLang === 'es' ? 'Spanish' : 'English'}.`;
+                    const userQuery = `Client's business/challenge description: "${description}"`;
 
                     const payload = {
-                        contents: [{ parts: [{ text: `${systemPrompt}\n${userQuery}` }] }],
+                        contents: [{ parts: [{ text: userQuery }] }],
+                        systemInstruction: { parts: [{ text: systemPrompt }] },
                         generationConfig: {
                             responseMimeType: "application/json",
                             responseSchema: {
@@ -652,40 +749,66 @@
                         }
                     };
 
+                    const fetchWithRetry = async (url, options, retries = 3) => {
+                        for (let i = 0; i < retries; i++) {
+                            try {
+                                const response = await fetch(url, options);
+                                if (response.ok) return response;
+                                // Throw an error for non-200 status codes
+                                throw new Error(`HTTP error! Status: ${response.status}`);
+                            } catch (error) {
+                                if (i < retries - 1) {
+                                    // Exponential backoff
+                                    const delay = Math.pow(2, i) * 1000;
+                                    await new Promise(resolve => setTimeout(resolve, delay));
+                                } else {
+                                    throw error;
+                                }
+                            }
+                        }
+                    };
+
                     try {
-                        const response = await fetch(apiUrl, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
-                        if (!response.ok) throw new Error(`API error: ${response.status}`);
+                        const response = await fetchWithRetry(apiUrl, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
                         const result = await response.json();
                         const candidate = result.candidates?.[0];
                         const jsonText = candidate?.content?.parts?.[0]?.text;
                         if (!jsonText) throw new Error("No valid content received from AI.");
-                        const parsedJson = JSON.parse(jsonText);
-                        displayIdeas(parsedJson.ideas);
+                        
+                        // Clean the JSON string (sometimes LLMs wrap it in markdown block)
+                        const cleanJsonText = jsonText.replace(/```json\s*|```/g, '').trim();
+                        const parsedJson = JSON.parse(cleanJsonText);
+
+                        displayIdeas(parsedJson.ideas, currentLang);
                     } catch (error) {
                         console.error("Error calling Gemini API:", error);
-                        ideaResultsContainer.innerHTML = `<p class="text-red-600 font-medium">${(localStorage.getItem('lang') || 'en') === 'es' ? 'Lo sentimos, ocurrió un error al generar las ideas. Por favor, inténtalo de nuevo más tarde.' : 'Sorry, an error occurred while generating ideas. Please try again later.'}</p>`;
+                        ideaResultsContainer.innerHTML = `<p class="text-red-600 font-medium">${currentLang === 'es' ? 'Lo sentimos, ocurrió un error al generar las ideas. Por favor, inténtalo de nuevo más tarde.' : 'Sorry, an error occurred while generating ideas. Please try again later.'}</p>`;
                     } finally {
                         generateIdeasBtn.disabled = false;
                     }
                 });
 
-                function displayIdeas(ideas) {
-                    const lang = localStorage.getItem('lang') || 'en';
+                function displayIdeas(ideas, lang) {
                     if (!ideas || ideas.length === 0) {
                         ideaResultsContainer.innerHTML = `<p class="text-slate-600">${lang === 'es' ? 'No se pudieron generar ideas. Intenta ser más específico.' : 'Could not generate ideas. Try being more specific.'}</p>`;
                         return;
                     }
-                    const titleText = lang === 'es' ? 'Aquí tienes algunas ideas para empezar:' : 'Here are some ideas to get you started:';
+                    const titleText = lang === 'es' ? 'Aquí tienes 3 Ideas Potenciadas por IA para Empezar:' : 'Here are 3 AI-Powered Ideas to Get You Started:';
                     let html = `<h3 class="text-2xl font-bold text-blue-900 mb-8">${titleText}</h3><div class="grid md:grid-cols-3 gap-8 text-left">`;
-                    ideas.forEach(idea => {
-                        html += `<div class="bg-white p-6 rounded-lg shadow-lg border-t-4 border-sky-400 animate-fade-in"><h4 class="text-xl font-bold text-blue-900 mb-2">${idea.title}</h4><p class="text-slate-600">${idea.description}</p></div>`;
+                    ideas.forEach((idea, index) => {
+                        // Apply a staggered animation delay
+                        html += `<div class="bg-white p-6 rounded-xl shadow-lg border-t-4 border-sky-400 fade-in" style="transition-delay: ${0.1 * index}s"><h4 class="text-xl font-bold text-blue-900 mb-2">${idea.title}</h4><p class="text-slate-600">${idea.description}</p></div>`;
                     });
                     html += '</div>';
                     ideaResultsContainer.innerHTML = html;
+
+                    // Ensure newly added ideas run the fade-in animation immediately if they are in view
+                    const newFadeElements = ideaResultsContainer.querySelectorAll('.fade-in');
+                    newFadeElements.forEach(element => {
+                        // A simpler way to trigger animation for newly inserted content
+                        element.classList.add('visible'); 
+                    });
                 }
-                 const styleSheet = document.createElement("style");
-                 styleSheet.innerText = `@keyframes fade-in { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } } .animate-fade-in { animation: fade-in 0.5s ease-out forwards; }`;
-                 document.head.appendChild(styleSheet);
             }
         });
     </script>
