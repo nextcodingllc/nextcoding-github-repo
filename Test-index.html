@@ -275,6 +275,9 @@
                 </div>
                 <div class="bg-white rounded-2xl shadow-lg p-8 reveal delay-200">
                     <form id="contact-form" class="space-y-6">
+                        <!-- HIDDEN TIME FIELD -->
+                        <input type="hidden" name="time" id="current_time">
+                        
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div><label class="block text-sm font-medium text-gray-700 mb-1" data-i18n="form_name">Name</label><input type="text" name="from_name" id="from_name" required class="w-full px-4 py-2 border border-gray-300 rounded-lg outline-none focus:ring-2 focus:ring-brand-500"></div>
                             <div><label class="block text-sm font-medium text-gray-700 mb-1" data-i18n="form_email">Email</label><input type="email" name="reply_to" id="reply_to" required class="w-full px-4 py-2 border border-gray-300 rounded-lg outline-none focus:ring-2 focus:ring-brand-500"></div>
@@ -370,8 +373,9 @@
             const accessScreen = document.getElementById('access-screen');
             const contentScreen = document.getElementById('support-content');
             
-            // EL CÓDIGO DE ACCESO
-            if (input.value === 'takecontrol0235') {
+            // EL CÓDIGO DE ACCESO OFUSCADO
+            // 'dGFrZWNvbnRyb2wwMjM1' es el equivalente Base64 de tu código original.
+            if (btoa(input.value) === 'dGFrZWNvbnRyb2wwMjM1') {
                 accessScreen.classList.add('hidden');
                 contentScreen.classList.remove('hidden');
                 errorMsg.classList.add('hidden');
@@ -517,6 +521,9 @@
         document.getElementById('contact-form').addEventListener('submit', function(event) {
             event.preventDefault();
             console.log("🚀 [DEBUG] Iniciando proceso de envío del formulario...");
+
+            // SET CURRENT TIME FOR EMAIL TEMPLATE
+            document.getElementById('current_time').value = new Date().toLocaleString();
 
             const btn = document.getElementById('submit-btn');
             const btnText = document.getElementById('btn-text');
