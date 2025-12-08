@@ -733,7 +733,7 @@
         (function() {
             // *** IMPORTANTE: REEMPLAZA ESTO CON TU PUBLIC KEY DE EMAILJS ***
             // 1. Log para verificar la inicialización
-            const publicKey = "YOUR_PUBLIC_KEY"; // REEMPLAZA AQUI TU CLAVE PÚBLICA REAL
+            const publicKey = "l5-ahwZ7x9T1LmrMG"; // REEMPLAZA AQUI TU CLAVE PÚBLICA REAL
             console.log("🔑 [DEBUG] Configurando EmailJS con Public Key:", publicKey);
             emailjs.init(publicKey);
         })();
@@ -753,8 +753,8 @@
             btnText.textContent = translations[currentLang]['sending'];
 
             // *** IMPORTANTE: REEMPLAZA ESTO CON TUS IDs DE EMAILJS ***
-            const serviceID = 'YOUR_SERVICE_ID';  // REEMPLAZA AQUI TU SERVICE ID REAL
-            const templateID = 'YOUR_TEMPLATE_ID'; // REEMPLAZA AQUI TU TEMPLATE ID REAL
+            const serviceID = 'service_3j8wg4i';  // REEMPLAZA AQUI TU SERVICE ID REAL
+            const templateID = 'template_dn4b4oe'; // REEMPLAZA AQUI TU TEMPLATE ID REAL
 
             // Logs de verificación de IDs
             console.log("📧 [DEBUG] Service ID configurado:", serviceID);
@@ -765,7 +765,7 @@
             const dataObject = Object.fromEntries(formData.entries());
             console.log("📝 [DEBUG] Datos del formulario capturados:", dataObject);
 
-            if (serviceID === 'YOUR_SERVICE_ID' || templateID === 'YOUR_TEMPLATE_ID') {
+            if (serviceID === 'service_3j8wg4i' || templateID === 'template_dn4b4oe') {
                  console.warn("⚠️ [ALERTA] Parece que todavía no has reemplazado los IDs de ejemplo (YOUR_SERVICE_ID / YOUR_TEMPLATE_ID) con tus IDs reales de EmailJS. El envío probablemente fallará.");
             }
 
