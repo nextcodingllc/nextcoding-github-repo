@@ -732,12 +732,18 @@
         // --- EmailJS Configuration & Handling ---
         (function() {
             // *** IMPORTANTE: REEMPLAZA ESTO CON TU PUBLIC KEY DE EMAILJS ***
-            emailjs.init("l5-ahwZ7x9T1LmrMG");
+            // 1. Log para verificar la inicialización
+            const publicKey = "YOUR_PUBLIC_KEY"; // REEMPLAZA AQUI TU CLAVE PÚBLICA REAL
+            console.log("🔑 [DEBUG] Configurando EmailJS con Public Key:", publicKey);
+            emailjs.init(publicKey);
         })();
 
         document.getElementById('contact-form').addEventListener('submit', function(event) {
             event.preventDefault();
             
+            // Log al iniciar el envío
+            console.log("🚀 [DEBUG] Iniciando proceso de envío del formulario...");
+
             const btn = document.getElementById('submit-btn');
             const btnText = document.getElementById('btn-text');
             const originalText = translations[currentLang]['form_submit'];
@@ -747,11 +753,25 @@
             btnText.textContent = translations[currentLang]['sending'];
 
             // *** IMPORTANTE: REEMPLAZA ESTO CON TUS IDs DE EMAILJS ***
-            const serviceID = 'template_dn4b4oe';
-            const templateID = 'template_dn4b4oe';
+            const serviceID = 'YOUR_SERVICE_ID';  // REEMPLAZA AQUI TU SERVICE ID REAL
+            const templateID = 'YOUR_TEMPLATE_ID'; // REEMPLAZA AQUI TU TEMPLATE ID REAL
+
+            // Logs de verificación de IDs
+            console.log("📧 [DEBUG] Service ID configurado:", serviceID);
+            console.log("📄 [DEBUG] Template ID configurado:", templateID);
+
+            // Log de los datos del formulario que se van a enviar
+            const formData = new FormData(this);
+            const dataObject = Object.fromEntries(formData.entries());
+            console.log("📝 [DEBUG] Datos del formulario capturados:", dataObject);
+
+            if (serviceID === 'YOUR_SERVICE_ID' || templateID === 'YOUR_TEMPLATE_ID') {
+                 console.warn("⚠️ [ALERTA] Parece que todavía no has reemplazado los IDs de ejemplo (YOUR_SERVICE_ID / YOUR_TEMPLATE_ID) con tus IDs reales de EmailJS. El envío probablemente fallará.");
+            }
 
             emailjs.sendForm(serviceID, templateID, this)
                 .then(() => {
+                    console.log("✅ [DEBUG] ¡Envío exitoso! Respuesta de EmailJS recibida correctamente.");
                     // Success (SweetAlert2)
                     Swal.fire({
                         title: translations[currentLang]['alert_success_title'],
@@ -761,6 +781,9 @@
                     });
                     this.reset(); // Clear form
                 }, (err) => {
+                    console.error("❌ [DEBUG] Error al enviar el correo:", err);
+                    console.error("❌ [DEBUG] Detalles del error (status/text):", err.status, err.text);
+                    
                     // Error (SweetAlert2)
                     Swal.fire({
                         title: translations[currentLang]['alert_error_title'],
@@ -768,9 +791,9 @@
                         icon: 'error',
                         confirmButtonColor: '#ef4444'
                     });
-                    console.log(JSON.stringify(err));
                 })
                 .finally(() => {
+                    console.log("🏁 [DEBUG] Proceso de envío finalizado (bloque finally ejecutado).");
                     // Reset Button
                     btn.disabled = false;
                     btnText.textContent = originalText;
