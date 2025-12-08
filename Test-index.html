@@ -730,18 +730,18 @@
         }
 
         // --- EmailJS Configuration & Handling ---
+        
+        // MOVED PUBLIC KEY TO GLOBAL SCOPE FOR BETTER ACCESS
+        const emailJSPublicKey = "l5-ahwZ7x9T1LmrMG"; 
+
         (function() {
-            // *** IMPORTANTE: REEMPLAZA ESTO CON TU PUBLIC KEY DE EMAILJS ***
-            // 1. Log para verificar la inicialización
-            const publicKey = "l5-ahwZ7x9T1LmrMG"; // REEMPLAZA AQUI TU CLAVE PÚBLICA REAL
-            console.log("🔑 [DEBUG] Configurando EmailJS con Public Key:", publicKey);
-            emailjs.init(publicKey);
+            console.log("🔑 [DEBUG] Configurando EmailJS con Public Key:", emailJSPublicKey);
+            emailjs.init(emailJSPublicKey);
         })();
 
         document.getElementById('contact-form').addEventListener('submit', function(event) {
             event.preventDefault();
             
-            // Log al iniciar el envío
             console.log("🚀 [DEBUG] Iniciando proceso de envío del formulario...");
 
             const btn = document.getElementById('submit-btn');
@@ -752,39 +752,26 @@
             btn.disabled = true;
             btnText.textContent = translations[currentLang]['sending'];
 
-            // *** IMPORTANTE: REEMPLAZA ESTO CON TUS IDs DE EMAILJS ***
-            const serviceID = 'service_3j8wg4i';  // REEMPLAZA AQUI TU SERVICE ID REAL
-            const templateID = 'template_dn4b4oe'; // REEMPLAZA AQUI TU TEMPLATE ID REAL
+            // TUS IDs
+            const serviceID = 'service_3j8wg4i';
+            const templateID = 'template_dn4b4oe';
 
-            // Logs de verificación de IDs
-            console.log("📧 [DEBUG] Service ID configurado:", serviceID);
-            console.log("📄 [DEBUG] Template ID configurado:", templateID);
+            console.log("📧 [DEBUG] Service ID:", serviceID);
+            console.log("📄 [DEBUG] Template ID:", templateID);
 
-            // Log de los datos del formulario que se van a enviar
-            const formData = new FormData(this);
-            const dataObject = Object.fromEntries(formData.entries());
-            console.log("📝 [DEBUG] Datos del formulario capturados:", dataObject);
-
-            if (serviceID === 'service_3j8wg4i' || templateID === 'template_dn4b4oe') {
-                 console.warn("⚠️ [ALERTA] Parece que todavía no has reemplazado los IDs de ejemplo (YOUR_SERVICE_ID / YOUR_TEMPLATE_ID) con tus IDs reales de EmailJS. El envío probablemente fallará.");
-            }
-
-            emailjs.sendForm(serviceID, templateID, this)
+            // Using sendForm with explicit Public Key (4th argument) for robustness
+            emailjs.sendForm(serviceID, templateID, this, emailJSPublicKey)
                 .then(() => {
-                    console.log("✅ [DEBUG] ¡Envío exitoso! Respuesta de EmailJS recibida correctamente.");
-                    // Success (SweetAlert2)
+                    console.log("✅ [DEBUG] ¡Envío exitoso!");
                     Swal.fire({
                         title: translations[currentLang]['alert_success_title'],
                         text: translations[currentLang]['alert_success_text'],
                         icon: 'success',
                         confirmButtonColor: '#2563eb'
                     });
-                    this.reset(); // Clear form
+                    this.reset();
                 }, (err) => {
-                    console.error("❌ [DEBUG] Error al enviar el correo:", err);
-                    console.error("❌ [DEBUG] Detalles del error (status/text):", err.status, err.text);
-                    
-                    // Error (SweetAlert2)
+                    console.error("❌ [DEBUG] Error al enviar:", err);
                     Swal.fire({
                         title: translations[currentLang]['alert_error_title'],
                         text: translations[currentLang]['alert_error_text'],
@@ -793,8 +780,7 @@
                     });
                 })
                 .finally(() => {
-                    console.log("🏁 [DEBUG] Proceso de envío finalizado (bloque finally ejecutado).");
-                    // Reset Button
+                    console.log("🏁 [DEBUG] Finalizado.");
                     btn.disabled = false;
                     btnText.textContent = originalText;
                 });
