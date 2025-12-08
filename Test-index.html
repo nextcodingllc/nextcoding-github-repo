@@ -3,814 +3,717 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nextcoding - IT Solutions & Software Development</title>
+    <meta name="description" content="NextCoding provides expert IT support, custom software development, and web solutions for businesses. Enterprise-grade technology services.">
+    <title>NextCoding | IT Support & Software Development</title>
+    
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            500: '#3b82f6', 
+                            600: '#2563eb',
+                            800: '#1e40af',
+                            900: '#1e3a8a',
+                        },
+                        accent: {
+                            500: '#0ea5e9', 
+                            400: '#38bdf8',
+                            300: '#7dd3fc',
+                        },
+                        anydesk: {
+                            red: '#ef4444',
+                        }
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'float-delayed': 'float 6s ease-in-out 3s infinite',
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
     <style>
-        body { 
-            font-family: 'Inter', sans-serif; 
-            overflow-x: hidden; 
-            background-color: #f8fafc;
-        }
-        
-        .header-scrolled { 
-            background-color: rgba(255, 255, 255, 0.95); 
-            backdrop-filter: blur(10px); 
-            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
-        }
-        
-        .hero-section { 
-            background: linear-gradient(to bottom, #f0f9ff, #e0f2fe);
-            position: relative; 
-            overflow: hidden; 
-        }
-        
-        .lang-switcher { 
-            border: 1px solid #cbd5e1; 
-            padding: 4px; 
-            border-radius: 9999px; 
-            display: flex; 
-            font-size: 0.8rem; 
-            font-weight: 500; 
-        }
-        
-        .lang-switcher .active { 
-            background-color: #0284c7; 
-            color: white; 
-        }
-        
-        .lang-switcher button { 
-            padding: 4px 10px; 
-            border-radius: 9999px; 
-            transition: all 0.2s ease-in-out; 
-        }
-        
-        .gradient-text { 
-            background: linear-gradient(to right, #38bdf8, #a78bfa); 
-            -webkit-background-clip: text; 
-            -webkit-text-fill-color: transparent; 
-        }
-        
-        .ai-section-bg { 
-            background-color: #f0f9ff; 
-            background-image: 
-                linear-gradient(to right, rgba(2, 132, 199, 0.05) 1px, transparent 1px), 
-                linear-gradient(to bottom, rgba(2, 132, 199, 0.05) 1px, transparent 1px); 
-            background-size: 30px 30px; 
-        }
-
-        /* Cloud animation styles - optimized version */
-        .cloud {
-            position: absolute;
-            background: white;
-            border-radius: 50%;
-            opacity: 0.9;
-            filter: blur(4px);
-            box-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
-            z-index: 1;
-        }
-        
-        .cloud:before, .cloud:after {
-            content: '';
-            position: absolute;
-            background: white;
-            border-radius: 50%;
-        }
-        
-        .cloud1 {
-            width: 180px;
-            height: 55px;
-            top: 15%;
-            animation: moveClouds 40s linear infinite;
-        }
-        
-        .cloud1:before {
-            width: 90px;
-            height: 90px;
-            top: -45px;
-            left: 15px;
-        }
-        
-        .cloud1:after {
-            width: 120px;
-            height: 110px;
-            top: -55px;
-            right: 10px;
-        }
-        
-        .cloud2 {
-            width: 250px;
-            height: 75px;
-            top: 30%;
-            animation: moveClouds 50s linear infinite;
-            animation-delay: -10s;
-        }
-        
-        .cloud2:before {
-            width: 130px;
-            height: 130px;
-            top: -65px;
-            left: 25px;
-        }
-        
-        .cloud2:after {
-            width: 170px;
-            height: 150px;
-            top: -75px;
-            right: 15px;
-        }
-        
-        .cloud3 {
-            width: 200px;
-            height: 60px;
-            top: 65%;
-            animation: moveClouds 45s linear infinite;
-            animation-delay: -20s;
-        }
-        
-        .cloud3:before {
-            width: 100px;
-            height: 100px;
-            top: -50px;
-            left: 20px;
-        }
-        
-        .cloud3:after {
-            width: 80px;
-            height: 75px;
-            top: -40px;
-            right: 8px;
-        }
-        
-        @keyframes moveClouds {
-            0% { transform: translateX(-150%); }
-            100% { transform: translateX(150vw); }
-        }
-
-        /* Service icons */
-        .service-icon {
-            transition: all 0.3s ease;
-        }
-        
-        .service-card:hover .service-icon {
-            transform: translateY(-5px) scale(1.05);
-        }
-
-        /* Portfolio grid */
-        .portfolio-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
-            justify-items: center;
-        }
-        
-        .portfolio-item {
-            position: relative;
-            border-radius: 0.5rem;
-            overflow: hidden;
-            height: 250px;
-            width: 100%;
-            max-width: 350px;
-            transition: transform 0.3s ease;
-        }
-        
-        .portfolio-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-        
-        .portfolio-item:hover img {
-            transform: scale(1.05);
-        }
-        
-        .portfolio-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(2, 132, 199, 0.85);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
+        /* --- Animaciones de Entrada (Scroll Reveal) --- */
+        .reveal {
             opacity: 0;
-            transition: opacity 0.3s ease;
-            padding: 1rem;
-            text-align: center;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
         }
         
-        .portfolio-item:hover .portfolio-overlay {
-            opacity: 1;
-        }
-
-        /* Testimonial Slider */
-        .testimonial-slider { 
-            display: flex; 
-            transition: transform 0.5s ease-in-out; 
-        }
-        
-        .testimonial-item { 
-            min-width: 100%; 
-        }
-        
-        /* Animation for elements on scroll */
-        .fade-in {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.8s ease, transform 0.8s ease;
-        }
-        
-        .fade-in.visible {
+        .reveal.active {
             opacity: 1;
             transform: translateY(0);
         }
 
-        /* Contact Section Specific Styles */
-        .contact-form-card {
-            background-color: #ffffff;
-            border-radius: 1rem;
-            box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
+        .delay-100 { transition-delay: 0.1s; }
+        .delay-200 { transition-delay: 0.2s; }
+        .delay-300 { transition-delay: 0.3s; }
+
+        /* --- Animaciones SVG de Fondo --- */
+        .bg-animated-grid {
+            background-size: 50px 50px;
+            background-image: 
+                linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+            animation: moveGrid 20s linear infinite;
+        }
+
+        @keyframes moveGrid {
+            0% { background-position: 0 0; }
+            100% { background-position: 50px 50px; }
+        }
+        
+        .blob {
+            position: absolute;
+            filter: blur(40px);
+            z-index: 0;
+            opacity: 0.4;
+            animation: blob-bounce 10s infinite ease-in-out alternate;
+        }
+        
+        @keyframes blob-bounce {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(20px, -20px) scale(1.1); }
+        }
+
+        /* Modal Transitions */
+        .modal {
+            transition: opacity 0.3s ease-in-out;
+            opacity: 0;
+            pointer-events: none;
+        }
+        .modal.open {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .modal-content {
+            transform: scale(0.95);
+            transition: transform 0.3s ease-in-out;
+        }
+        .modal.open .modal-content {
+            transform: scale(1);
+        }
+
+        /* Cookie Banner Transition */
+        #cookie-banner {
+            transform: translateY(100%);
+            transition: transform 0.5s ease-in-out;
+        }
+        #cookie-banner.show {
+            transform: translateY(0);
         }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-800">
+<body class="font-sans text-gray-600 antialiased bg-gray-50 overflow-x-hidden">
 
-    <!-- Header -->
-    <header id="header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
-        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="#hero-section" class="text-2xl font-bold text-blue-800">Next<span class="text-sky-500">coding</span></a>
-            <nav class="hidden md:flex items-center space-x-8">
-                <a href="#services" class="text-slate-600 hover:text-sky-500 transition-colors" data-lang-en="Services" data-lang-es="Servicios">Services</a>
-                <a href="#process" class="text-slate-600 hover:text-sky-500 transition-colors" data-lang-en="Process" data-lang-es="Proceso">Process</a>
-                <a href="#portfolio" class="text-slate-600 hover:text-sky-500 transition-colors" data-lang-en="Portfolio" data-lang-es="Portafolio">Portfolio</a>
-                <a href="#contact" class="text-slate-600 hover:text-sky-500 transition-colors" data-lang-en="Contact" data-lang-es="Contacto">Contact</a>
-                <div class="lang-switcher">
-                    <button id="lang-en" data-lang="en">EN</button>
-                    <button id="lang-es" data-lang="es">ES</button>
+    <!-- Navbar -->
+    <nav class="fixed w-full z-50 bg-white/90 backdrop-blur-md border-b border-gray-100 transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center gap-3">
+                    <img src="https://www.nextcoding.com/images/logo.png" 
+                         alt="NextCoding Logo" 
+                         class="h-10 w-auto object-contain"
+                         onerror="this.onerror=null; this.src='https://via.placeholder.com/150x50?text=NextCoding';">
                 </div>
-            </nav>
-            <a href="#contact" class="hidden md:block bg-blue-700 text-white font-medium py-2 px-4 rounded-lg hover:bg-blue-800 transition-transform hover:scale-105" data-lang-en="Request a Consultation" data-lang-es="Solicitar Consultoría">Request a Consultation</a>
-            <button id="mobile-menu-button" class="md:hidden text-blue-800"><svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" /></svg></button>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-6 items-center">
+                    <a href="#inicio" class="text-gray-700 hover:text-brand-600 font-medium transition" data-i18n="nav_home">Home</a>
+                    <a href="#software" class="text-gray-700 hover:text-brand-600 font-medium transition" data-i18n="nav_software">Software Dev</a>
+                    <a href="#soporte" class="text-gray-700 hover:text-brand-600 font-medium transition" data-i18n="nav_support">IT Support</a>
+                    
+                    <!-- Language Toggle -->
+                    <button onclick="toggleLanguage()" class="flex items-center gap-1 px-3 py-1 rounded-full border border-gray-200 text-sm font-semibold hover:bg-gray-100 transition">
+                        <i data-lucide="globe" class="w-4 h-4"></i>
+                        <span id="lang-display">EN</span>
+                    </button>
+
+                    <!-- Support Button (AnyDesk) -->
+                    <button onclick="openSupportModal()" class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg font-medium transition shadow-lg shadow-red-500/30 flex items-center gap-2 animate-pulse">
+                        <i data-lucide="monitor-check" class="w-4 h-4"></i>
+                        <span data-i18n="nav_quick_support">Quick Support</span>
+                    </button>
+                    
+                    <a href="#contacto" class="bg-brand-600 text-white px-5 py-2 rounded-lg font-medium hover:bg-brand-700 transition shadow-lg shadow-brand-500/30 transform hover:-translate-y-0.5" data-i18n="nav_contact">
+                        Contact Us
+                    </a>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="md:hidden flex items-center gap-4">
+                    <button onclick="toggleLanguage()" class="flex items-center gap-1 px-2 py-1 rounded-full border border-gray-200 text-xs font-bold">
+                        <span id="lang-display-mobile">EN</span>
+                    </button>
+                    <button id="mobile-menu-btn" class="text-gray-700 hover:text-brand-600 focus:outline-none">
+                        <i data-lucide="menu" class="h-6 w-6"></i>
+                    </button>
+                </div>
+            </div>
         </div>
-        <div id="mobile-menu" class="hidden md:hidden bg-white">
-            <a href="#services" class="block py-2 px-6 text-slate-600 hover:bg-sky-50" data-lang-en="Services" data-lang-es="Servicios">Services</a>
-            <a href="#process" class="block py-2 px-6 text-slate-600 hover:bg-sky-50" data-lang-en="Process" data-lang-es="Proceso">Process</a>
-            <a href="#portfolio" class="block py-2 px-6 text-slate-600 hover:bg-sky-50" data-lang-en="Portfolio" data-lang-es="Portafolio">Portfolio</a>
-            <a href="#contact" class="block py-2 px-6 text-slate-600 hover:bg-sky-50" data-lang-en="Contact" data-lang-es="Contacto">Contact</a>
-            <div class="flex justify-between items-center py-2 px-6">
-                <div class="lang-switcher">
-                    <button id="lang-en-mobile" data-lang="en">EN</button>
-                    <button id="lang-es-mobile" data-lang="es">ES</button>
-                </div>
+
+        <!-- Mobile Menu Panel -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100 absolute w-full shadow-xl">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#inicio" class="block px-3 py-2 text-gray-700 hover:bg-brand-50 hover:text-brand-600 rounded-md font-medium" data-i18n="nav_home">Home</a>
+                <a href="#software" class="block px-3 py-2 text-gray-700 hover:bg-brand-50 hover:text-brand-600 rounded-md font-medium" data-i18n="nav_software">Software Dev</a>
+                <a href="#soporte" class="block px-3 py-2 text-gray-700 hover:bg-brand-50 hover:text-brand-600 rounded-md font-medium" data-i18n="nav_support">IT Support</a>
+                <button onclick="openSupportModal()" class="w-full text-left px-3 py-2 text-red-600 font-bold hover:bg-red-50 rounded-md flex items-center gap-2">
+                    <i data-lucide="monitor-check" class="w-4 h-4"></i>
+                    <span data-i18n="nav_quick_support">Quick Support</span>
+                </button>
+                <a href="#contacto" class="block px-3 py-2 text-brand-600 font-bold" data-i18n="nav_contact">Contact Us</a>
             </div>
         </div>
-    </header>
+    </nav>
 
-    <main>
-        <!-- Hero Section -->
-        <section id="hero-section" class="hero-section pt-40 pb-24">
-            <div class="absolute top-0 left-0 w-full h-full z-0">
-                <div class="cloud cloud1"></div>
-                <div class="cloud cloud2"></div>
-                <div class="cloud cloud3"></div>
-            </div>
-            <div class="container mx-auto px-6 text-center relative z-10">
-                <h1 class="text-4xl md:text-6xl font-extrabold text-blue-900 leading-tight fade-in" data-lang-en="Building the Future of Your Business, Code by Code." data-lang-es="Construyendo el Futuro de tu Negocio, Código a Código.">Building the Future of Your Business, Code by Code.</h1>
-                <p class="mt-4 text-lg md:text-xl max-w-3xl mx-auto text-slate-700 fade-in" data-lang-en="We provide custom software, cloud infrastructure, and process automation to drive your growth." data-lang-es="Proveemos software a medida, infraestructura en la nube y automatización de procesos para impulsar tu crecimiento.">We provide custom software, cloud infrastructure, and process automation to drive your growth.</p>
-                <div class="mt-8 flex justify-center gap-4 fade-in" style="transition-delay: 0.2s">
-                    <a href="#services" class="bg-sky-500 text-white font-bold py-3 px-8 rounded-full text-lg hover:bg-sky-600 transition-transform hover:scale-105" data-lang-en="Explore Services" data-lang-es="Explorar Servicios">Explore Services</a>
-                    <a href="#contact" class="bg-white text-sky-600 font-bold py-3 px-8 rounded-full text-lg hover:bg-slate-100 transition-transform hover:scale-105 border border-slate-200" data-lang-en="Get in Touch" data-lang-es="Contáctanos">Get in Touch</a>
-                </div>
-            </div>
-        </section>
-
-        <!-- Featured Services -->
-        <section id="services" class="py-20 bg-white">
-            <div class="container mx-auto px-6">
-                <div class="text-center mb-12 fade-in">
-                     <h2 class="text-3xl md:text-4xl font-bold text-blue-900" data-lang-en="Our Core Services" data-lang-es="Nuestros Servicios Principales">Our Core Services</h2>
-                     <p class="mt-3 text-slate-600 max-w-2xl mx-auto" data-lang-en="Technology solutions designed to solve complex challenges and deliver tangible results." data-lang-es="Soluciones tecnológicas diseñadas para resolver desafíos complejos y entregar resultados tangibles.">Technology solutions designed to solve complex challenges and deliver tangible results.</p>
-                </div>
-                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-                    <!-- Feature 1 -->
-                    <div class="service-card text-center p-6 bg-slate-50 rounded-lg transition-transform hover:scale-105 hover:shadow-lg fade-in">
-                        <div class="flex justify-center items-center mb-4 bg-sky-100 rounded-full w-16 h-16 mx-auto service-icon">
-                            <svg class="text-sky-600 w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m18 16 4-4-4-4m-12 8-4-4 4-4m5.5-4-5 16"/>
-                            </svg>
-                        </div>
-                        <h3 class="text-xl font-bold text-blue-900 mb-2" data-lang-en="Software Development" data-lang-es="Desarrollo de Software">Software Development</h3>
-                        <p class="text-slate-600" data-lang-en="Custom applications tailored to your specific business needs." data-lang-es="Aplicaciones a medida adaptadas a las necesidades de tu negocio.">Custom applications tailored to your specific business needs.</p>
-                    </div>
-                    <!-- Feature 2 -->
-                    <div class="service-card text-center p-6 bg-slate-50 rounded-lg transition-transform hover:scale-105 hover:shadow-lg fade-in" style="transition-delay: 0.1s">
-                        <div class="flex justify-center items-center mb-4 bg-sky-100 rounded-full w-16 h-16 mx-auto service-icon">
-                            <svg class="text-sky-600 w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 16.5V9.5m0 11.5a9 9 0 1 0 0-18 9 9 0 0 0 0 18ZM7 11.5h2m6 0h2"/>
-                            </svg>
-                        </div>
-                        <h3 class="text-xl font-bold text-blue-900 mb-2" data-lang-en="IT Consulting" data-lang-es="Consultoría IT">IT Consulting</h3>
-                        <p class="text-slate-600" data-lang-en="Strategic guidance to align your technology with your business goals." data-lang-es="Guía estratégica para alinear tu tecnología con tus metas de negocio.">Strategic guidance to align your technology with your business goals.</p>
-                    </div>
-                    <!-- Feature 3 -->
-                    <div class="service-card text-center p-6 bg-slate-50 rounded-lg transition-transform hover:scale-105 hover:shadow-lg fade-in" style="transition-delay: 0.2s">
-                        <div class="flex justify-center items-center mb-4 bg-sky-100 rounded-full w-16 h-16 mx-auto service-icon">
-                            <svg class="text-sky-600 w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2 2h20v8H2zm0 12h20v8H2zm4-8h.01M6 18h.01"/>
-                            </svg>
-                        </div>
-                        <h3 class="text-xl font-bold text-blue-900 mb-2" data-lang-en="Server Management" data-lang-es="Gestión de Servidores">Server Management</h3>
-                        <p class="text-slate-600" data-lang-en="Reliable management of your physical and cloud infrastructure." data-lang-es="Administración fiable de tu infraestructura física y en la nube.">Reliable management of your physical and cloud infrastructure.</p>
-                    </div>
-                    <!-- Feature 4 -->
-                    <div class="service-card text-center p-6 bg-slate-50 rounded-lg transition-transform hover:scale-105 hover:shadow-lg fade-in" style="transition-delay: 0.3s">
-                        <div class="flex justify-center items-center mb-4 bg-sky-100 rounded-full w-16 h-16 mx-auto service-icon">
-                            <svg class="text-sky-600 w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 20a8 8 0 1 0 0-16 8 8 0 0 0 0 16Zm0-6a2 2 0 1 0 0-4 2 2 0 0 0 0 4ZM12 2v2m0 16v2m-7.07-2.93 1.41 1.41M17.66 6.34l1.41 1.41M2 12h2m16 0h2m-2.93-7.07-1.41 1.41M6.34 17.66l-1.41 1.41"/>
-                            </svg>
-                        </div>
-                        <h3 class="text-xl font-bold text-blue-900 mb-2" data-lang-en="Process Automation" data-lang-es="Automatización">Process Automation</h3>
-                        <p class="text-slate-600" data-lang-en="We streamline your workflows to increase efficiency and reduce costs." data-lang-es="Optimizamos tus flujos de trabajo para aumentar la eficiencia.">We streamline your workflows to increase efficiency and reduce costs.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
+    <!-- Hero Section -->
+    <section id="inicio" class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden bg-[#0f172a] text-white">
+        <!-- Animated Background SVG/CSS -->
+        <div class="absolute inset-0 bg-animated-grid opacity-20 pointer-events-none"></div>
+        <div class="blob bg-brand-500 w-96 h-96 rounded-full top-0 left-0 blur-3xl opacity-20"></div>
+        <div class="blob bg-accent-500 w-96 h-96 rounded-full bottom-0 right-0 blur-3xl opacity-20 animation-delay-2000"></div>
         
-        <!-- Portfolio Showcase -->
-        <section id="portfolio" class="py-20 bg-slate-50">
-            <div class="container mx-auto px-6">
-                <div class="text-center mb-12 fade-in">
-                    <h2 class="text-3xl md:text-4xl font-bold text-blue-900" data-lang-en="Our Work" data-lang-es="Nuestros Trabajos">Our Work</h2>
-                    <p class="mt-3 text-slate-600 max-w-2xl mx-auto" data-lang-en="Explore some of our recent projects and success stories." data-lang-es="Explora algunos de nuestros proyectos recientes y casos de éxito.">Explore some of our recent projects and success stories.</p>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center max-w-4xl mx-auto">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-900/50 border border-brand-500/30 text-brand-200 text-sm font-medium mb-6 reveal">
+                    <span class="relative flex h-2 w-2">
+                      <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-400 opacity-75"></span>
+                      <span class="relative inline-flex rounded-full h-2 w-2 bg-brand-500"></span>
+                    </span>
+                    <span data-i18n="hero_badge">Technological Innovation for Business</span>
                 </div>
                 
-                <div class="portfolio-grid">
-                    <!-- Portfolio Item 1 -->
-                    <div class="portfolio-item fade-in">
-                        <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="E-commerce Platform" onerror="this.onerror=null;this.src='https://placehold.co/500x250/0284c7/ffffff?text=E-commerce';">
-                        <div class="portfolio-overlay">
-                            <h3 class="text-xl font-bold text-white" data-lang-en="E-commerce Platform" data-lang-es="Plataforma E-commerce">E-commerce Platform</h3>
-                            <p class="text-slate-100 mt-2" data-lang-en="Custom online store with advanced features" data-lang-es="Tienda online personalizada con funciones avanzadas">Custom online store with advanced features</p>
-                            <a href="#" class="mt-4 inline-block bg-white text-sky-600 font-medium py-2 px-4 rounded-lg hover:bg-slate-100 transition-colors" data-lang-en="View Project" data-lang-es="Ver Proyecto">View Project</a>
-                        </div>
+                <!-- FIXED TITLE VISIBILITY: Lighter gradient -->
+                <h1 class="text-4xl md:text-6xl lg:text-7xl font-extrabold tracking-tight mb-6 leading-tight reveal delay-100">
+                    <span data-i18n="hero_title_prefix">Your Strategic Partner in</span> <br>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-white via-brand-200 to-accent-400 drop-shadow-sm" data-i18n="hero_title_highlight">IT & Development</span>
+                </h1>
+                
+                <p class="text-lg md:text-xl text-gray-300 mb-10 max-w-2xl mx-auto reveal delay-200 leading-relaxed" data-i18n="hero_desc">
+                    We boost your business with high-performance custom software and comprehensive technical support. Technology that works, scales, and secures your operation.
+                </p>
+                
+                <div class="flex flex-col sm:flex-row gap-4 justify-center reveal delay-300">
+                    <button onclick="openSupportModal()" class="group inline-flex justify-center items-center px-8 py-4 border border-transparent text-base font-medium rounded-lg text-white bg-red-600 hover:bg-red-700 transition shadow-lg shadow-red-500/25 relative overflow-hidden">
+                        <i data-lucide="life-buoy" class="w-5 h-5 mr-2 group-hover:rotate-12 transition-transform"></i>
+                        <span class="relative" data-i18n="hero_cta_support">Get Remote Support</span>
+                    </button>
+                    <a href="#contacto" class="inline-flex justify-center items-center px-8 py-4 border border-gray-600 text-base font-medium rounded-lg text-gray-200 hover:bg-white/10 hover:border-white transition backdrop-blur-sm">
+                        <span data-i18n="hero_cta_talk">Talk to an Expert</span>
+                        <i data-lucide="arrow-right" class="w-5 h-5 ml-2"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Hero SVG Illustration floating at bottom -->
+            <div class="mt-16 flex justify-center reveal delay-300">
+                <svg width="100%" height="200" viewBox="0 0 800 200" fill="none" xmlns="http://www.w3.org/2000/svg" class="opacity-50 max-w-4xl">
+                    <path d="M0 100 Q 200 50 400 100 T 800 100" stroke="url(#paint0_linear)" stroke-width="2" fill="none" class="animate-pulse">
+                         <animate attributeName="d" values="M0 100 Q 200 50 400 100 T 800 100;M0 100 Q 200 150 400 100 T 800 100;M0 100 Q 200 50 400 100 T 800 100" dur="10s" repeatCount="indefinite" />
+                    </path>
+                    <defs>
+                        <linearGradient id="paint0_linear" x1="0" y1="100" x2="800" y2="100" gradientUnits="userSpaceOnUse">
+                            <stop stop-color="#3B82F6" stop-opacity="0"/>
+                            <stop offset="0.5" stop-color="#3B82F6"/>
+                            <stop offset="1" stop-color="#3B82F6" stop-opacity="0"/>
+                        </linearGradient>
+                    </defs>
+                </svg>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Service: Software Development -->
+    <section id="software" class="py-24 bg-white relative overflow-hidden">
+        <div class="absolute top-0 right-0 -mr-24 -mt-24 w-96 h-96 bg-brand-50 rounded-full blur-3xl opacity-50"></div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <div class="order-2 lg:order-1 reveal">
+                    <div class="inline-block p-3 rounded-lg bg-brand-100 text-brand-600 mb-6">
+                        <i data-lucide="code-2" class="w-8 h-8"></i>
                     </div>
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6" data-i18n="soft_title">Custom Software Development</h2>
+                    <p class="text-lg text-gray-600 mb-6" data-i18n="soft_desc">
+                        Not all companies are the same, and your software shouldn't be either. We design robust and scalable architectures tailored exactly to your workflows.
+                    </p>
                     
-                    <!-- Portfolio Item 2 -->
-                    <div class="portfolio-item fade-in" style="transition-delay: 0.1s">
-                        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Business Dashboard" onerror="this.onerror=null;this.src='https://placehold.co/500x250/0284c7/ffffff?text=Dashboard';">
-                        <div class="portfolio-overlay">
-                            <h3 class="text-xl font-bold text-white" data-lang-en="Business Dashboard" data-lang-es="Dashboard Empresarial">Business Dashboard</h3>
-                            <p class="text-slate-100 mt-2" data-lang-en="Real-time analytics and reporting system" data-lang-es="Sistema de análisis y reportes en tiempo real">Real-time analytics and reporting system</p>
-                            <a href="#" class="mt-4 inline-block bg-white text-sky-600 font-medium py-2 px-4 rounded-lg hover:bg-slate-100 transition-colors" data-lang-en="View Project" data-lang-es="Ver Proyecto">View Project</a>
-                        </div>
-                    </div>
-                    
-                    <!-- Portfolio Item 3 -->
-                    <div class="portfolio-item fade-in" style="transition-delay: 0.2s">
-                        <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Mobile Application" onerror="this.onerror=null;this.src='https://placehold.co/500x250/0284c7/ffffff?text=Mobile+App';">
-                        <div class="portfolio-overlay">
-                            <h3 class="text-xl font-bold text-white" data-lang-en="Mobile Application" data-lang-es="Aplicación Móvil">Mobile Application</h3>
-                            <p class="text-slate-100 mt-2" data-lang-en="Cross-platform app for customer engagement" data-lang-es="App multiplataforma para engagement de clientes">Cross-platform app for customer engagement</p>
-                            <a href="#" class="mt-4 inline-block bg-white text-sky-600 font-medium py-2 px-4 rounded-lg hover:bg-slate-100 transition-colors" data-lang-en="View Project" data-lang-es="Ver Proyecto">View Project</a>
-                        </div>
-                    </div>
+                    <ul class="space-y-4">
+                        <li class="flex items-start group">
+                            <div class="flex-shrink-0 h-6 w-6 rounded-full bg-green-100 flex items-center justify-center mt-1 group-hover:scale-110 transition-transform">
+                                <i data-lucide="check" class="w-4 h-4 text-green-600"></i>
+                            </div>
+                            <div class="ml-4">
+                                <h4 class="text-lg font-medium text-gray-900" data-i18n="soft_item1_title">Enterprise Apps (ERP/CRM)</h4>
+                                <p class="text-gray-500" data-i18n="soft_item1_desc">Internal systems to optimize resource management and clients.</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start group">
+                            <div class="flex-shrink-0 h-6 w-6 rounded-full bg-green-100 flex items-center justify-center mt-1 group-hover:scale-110 transition-transform">
+                                <i data-lucide="check" class="w-4 h-4 text-green-600"></i>
+                            </div>
+                            <div class="ml-4">
+                                <h4 class="text-lg font-medium text-gray-900" data-i18n="soft_item2_title">API Integration & Automation</h4>
+                                <p class="text-gray-500" data-i18n="soft_item2_desc">Connecting your current tools to eliminate manual tasks.</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start group">
+                            <div class="flex-shrink-0 h-6 w-6 rounded-full bg-green-100 flex items-center justify-center mt-1 group-hover:scale-110 transition-transform">
+                                <i data-lucide="check" class="w-4 h-4 text-green-600"></i>
+                            </div>
+                            <div class="ml-4">
+                                <h4 class="text-lg font-medium text-gray-900" data-i18n="soft_item3_title">Mobile & Cloud Dev</h4>
+                                <p class="text-gray-500" data-i18n="soft_item3_desc">Native or hybrid solutions and cloud migration (AWS/Azure).</p>
+                            </div>
+                        </li>
+                    </ul>
                 </div>
                 
-                <div class="text-center mt-12 fade-in" style="transition-delay: 0.3s">
-                    <a href="#portfolio" class="inline-block bg-sky-500 text-white font-bold py-3 px-8 rounded-full text-lg hover:bg-sky-600 transition-transform hover:scale-105" data-lang-en="View All Projects" data-lang-es="Ver Todos los Proyectos">View All Projects</a>
-                </div>
-            </div>
-        </section>
-        
-        <!-- Redesigned Section: Our Process -->
-        <section id="process" class="py-20 bg-white">
-            <div class="container mx-auto px-6">
-                 <div class="text-center mb-16 fade-in">
-                    <h2 class="text-3xl md:text-4xl font-bold text-blue-900" data-lang-en="Our Process" data-lang-es="Nuestro Proceso">Our Process</h2>
-                    <p class="mt-3 text-slate-600 max-w-2xl mx-auto" data-lang-en="A proven path to successful project delivery, ensuring clarity and quality every step of the way." data-lang-es="Un camino probado para la entrega exitosa de proyectos, garantizando claridad y calidad en cada paso.">A proven path to successful project delivery, ensuring clarity and quality every step of the way.</p>
-                </div>
-                <div class="space-y-16">
-                    <!-- Step 1 -->
-                    <div class="grid md:grid-cols-2 gap-12 items-center fade-in">
-                        <div class="flex justify-center">
-                            <lottie-player 
-                                src="https://lottie.host/804c1c27-c1d0-47b6-8e54-47201b1b3696/Q2n2a03k2d.json" 
-                                background="transparent" 
-                                speed="1" 
-                                style="width: 100%; max-width: 400px; height: auto;" 
-                                loop 
-                                autoplay
-                            ></lottie-player>
-                        </div>
-                        <div>
-                            <span class="text-sky-500 font-bold" data-lang-en="Step 1" data-lang-es="Paso 1">Step 1</span>
-                            <h3 class="text-2xl font-bold text-blue-900 my-2" data-lang-en="Discovery & Strategy" data-lang-es="Descubrimiento y Estrategia">Discovery & Strategy</h3>
-                            <p class="text-slate-600" data-lang-en="We start with a deep dive into your business. We listen to your goals, understand your challenges, and analyze your requirements to build a comprehensive project roadmap." data-lang-es="Empezamos con una inmersión profunda en tu negocio. Escuchamos tus metas, entendemos tus desafíos y analizamos tus requisitos para construir una hoja de ruta completa para el proyecto.">We start with a deep dive into your business. We listen to your goals, understand your challenges, and analyze your requirements to build a comprehensive project roadmap.</p>
-                        </div>
-                    </div>
-                    <!-- Step 2 -->
-                    <div class="grid md:grid-cols-2 gap-12 items-center fade-in" style="transition-delay: 0.2s">
-                        <div class="md:order-last flex justify-center">
-                           <lottie-player 
-                                src="https://lottie.host/29e1f578-838d-446a-a55e-389f46401053/k2C7Rbr5Jc.json" 
-                                background="transparent" 
-                                speed="1" 
-                                style="width: 100%; max-width: 400px; height: auto;" 
-                                loop 
-                                autoplay
-                            ></lottie-player>
-                        </div>
-                        <div>
-                            <span class="text-sky-500 font-bold" data-lang-en="Step 2" data-lang-es="Paso 2">Step 2</span>
-                            <h3 class="text-2xl font-bold text-blue-900 my-2" data-lang-en="Development & Iteration" data-lang-es="Desarrollo e Iteración">Development & Iteration</h3>
-                            <p class="text-slate-600" data-lang-en="Our expert team brings the strategy to life, building your solution with agile methodologies. We maintain transparent communication with regular updates and feedback loops." data-lang-es="Nuestro equipo de expertos da vida a la estrategia, construyendo tu solución con metodologías ágiles. Mantenemos una comunicación transparente con actualizaciones regulares y ciclos de feedback.">Our expert team brings the strategy to life, building your solution with agile methodologies. We maintain transparent communication with regular updates and feedback loops.</p>
-                        </div>
-                    </div>
-                     <!-- Step 3 -->
-                    <div class="grid md:grid-cols-2 gap-12 items-center fade-in" style="transition-delay: 0.4s">
-                        <div class="flex justify-center">
-                           <lottie-player 
-                                src="https://lottie.host/99723a96-413e-42c2-b13c-4428c0e66d48/o5r5aL3eJm.json" 
-                                background="transparent" 
-                                speed="1" 
-                                style="width: 100%; max-width: 400px; height: auto;" 
-                                loop 
-                                autoplay
-                            ></lottie-player>
-                        </div>
-                        <div>
-                            <span class="text-sky-500 font-bold" data-lang-en="Step 3" data-lang-es="Paso 3">Step 3</span>
-                            <h3 class="text-2xl font-bold text-blue-900 my-2" data-lang-en="Deployment & Launch" data-lang-es="Despliegue y Lanzamiento">Deployment & Launch</h3>
-                            <p class="text-slate-600" data-lang-en="We meticulously handle the launch process, from server configuration to final testing, ensuring a seamless and successful transition to the live environment." data-lang-es="Gestionamos meticulosamente el proceso de lanzamiento, desde la configuración del servidor hasta las pruebas finales, asegurando una transición fluida y exitosa al entorno de producción.">We meticulously handle the launch process, from server configuration to final testing, ensuring a seamless and successful transition to the live environment.</p>
-                        </div>
-                    </div>
-                     <!-- Step 4 -->
-                    <div class="grid md:grid-cols-2 gap-12 items-center fade-in" style="transition-delay: 0.6s">
-                        <div class="md:order-last flex justify-center">
-                           <lottie-player 
-                                src="https://lottie.host/a6836458-37d4-4235-9856-42775a999712/oB76uKcF6H.json" 
-                                background="transparent" 
-                                speed="1" 
-                                style="width: 100%; max-width: 400px; height: auto;" 
-                                loop 
-                                autoplay
-                            ></lottie-player>
-                        </div>
-                        <div>
-                            <span class="text-sky-500 font-bold" data-lang-en="Step 4" data-lang-es="Paso 4">Step 4</span>
-                            <h3 class="text-2xl font-bold text-blue-900 my-2" data-lang-en="Support & Growth" data-lang-es="Soporte y Crecimiento">Support & Growth</h3>
-                            <p class="text-slate-600" data-lang-en="Our partnership doesn't end at launch. We provide ongoing support, monitoring, and maintenance to ensure your solution runs smoothly and evolves with your business." data-lang-es="Nuestra alianza no termina con el lanzamiento. Ofrecemos soporte, monitorización y mantenimiento continuo para asegurar que tu solución funcione sin problemas y evolucione con tu negocio.">Our partnership doesn't end at launch. We provide ongoing support, monitoring, and maintenance to ensure your solution runs smoothly and evolves with your business.</p>
-                        </div>
+                <div class="order-1 lg:order-2 relative reveal delay-200">
+                    <!-- SVG Animado de Interfaz/Código -->
+                    <div class="relative w-full h-auto animate-float">
+                         <svg viewBox="0 0 500 400" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full drop-shadow-2xl">
+                            <!-- Background Window -->
+                            <rect x="50" y="50" width="400" height="300" rx="15" fill="#1E293B" />
+                            <rect x="50" y="50" width="400" height="40" rx="15" fill="#334155" />
+                            <rect x="50" y="80" width="400" height="10" fill="#1E293B" />
+                            
+                            <!-- Window Dots -->
+                            <circle cx="80" cy="70" r="6" fill="#EF4444" />
+                            <circle cx="105" cy="70" r="6" fill="#F59E0B" />
+                            <circle cx="130" cy="70" r="6" fill="#10B981" />
+                            
+                            <!-- Code Lines -->
+                            <rect x="90" y="120" width="200" height="10" rx="5" fill="#475569" class="animate-pulse" />
+                            <rect x="90" y="150" width="150" height="10" rx="5" fill="#475569" />
+                            <rect x="90" y="180" width="250" height="10" rx="5" fill="#3B82F6" />
+                            <rect x="110" y="210" width="180" height="10" rx="5" fill="#475569" />
+                            <rect x="110" y="240" width="120" height="10" rx="5" fill="#475569" />
+                            
+                            <!-- Floating Badge -->
+                            <g class="animate-float-delayed">
+                                <rect x="300" y="250" width="180" height="80" rx="10" fill="white" stroke="#E2E8F0" stroke-width="2"/>
+                                <circle cx="330" cy="290" r="15" fill="#10B981" fill-opacity="0.2"/>
+                                <circle cx="330" cy="290" r="8" fill="#10B981"/>
+                                <rect x="360" y="275" width="80" height="10" rx="5" fill="#CBD5E1"/>
+                                <rect x="360" y="295" width="50" height="10" rx="5" fill="#E2E8F0"/>
+                            </g>
+                        </svg>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- Section: Why Choose Us -->
-        <section class="py-20 bg-slate-50">
-            <div class="container mx-auto px-6">
-                <div class="text-center mb-12 fade-in">
-                    <h2 class="text-3xl md:text-4xl font-bold text-blue-900" data-lang-en="Why Partner with Nextcoding?" data-lang-es="¿Por Qué Elegir Nextcoding?">Why Partner with Nextcoding?</h2>
-                    <p class="mt-3 text-slate-600 max-w-2xl mx-auto" data-lang-en="We are more than just developers; we are architects of digital solutions that deliver real value." data-lang-es="Somos más que desarrolladores; somos arquitectos de soluciones digitales que entregan valor real.">We are more than just developers; we are architects of digital solutions that deliver real value.</p>
+    <!-- Main Service: IT Support -->
+    <section id="soporte" class="py-24 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16 reveal">
+                <span class="text-brand-600 font-semibold tracking-wide uppercase text-sm" data-i18n="it_badge">Infrastructure & Security</span>
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mt-2 mb-4" data-i18n="it_title">Corporate IT Support</h2>
+                <p class="text-lg text-gray-600" data-i18n="it_desc">
+                    Your outsourced IT department. We guarantee your company's operational continuity with fast response times and definitive solutions.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Card 1 -->
+                <div class="bg-white rounded-xl p-8 shadow-sm hover:shadow-xl transition-all border border-gray-100 group reveal delay-100 hover:-translate-y-2">
+                    <div class="w-14 h-14 bg-blue-50 rounded-lg flex items-center justify-center text-blue-600 mb-6 group-hover:bg-blue-600 group-hover:text-white transition duration-300">
+                        <i data-lucide="shield-check" class="w-7 h-7 group-hover:rotate-12 transition-transform"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3" data-i18n="it_card1_title">Cybersecurity & Networks</h3>
+                    <p class="text-gray-500 mb-4" data-i18n="it_card1_desc">Data protection, firewall configuration, secure VPNs, and 24/7 threat monitoring.</p>
                 </div>
-                <div class="grid md:grid-cols-3 gap-8">
-                    <div class="bg-white p-8 rounded-lg shadow-sm hover:shadow-xl transition-all fade-in">
-                        <h3 class="text-xl font-bold text-blue-900 mb-3" data-lang-en="Expert Team" data-lang-es="Equipo Experto">Expert Team</h3>
-                        <p class="text-slate-600" data-lang-en="Our team consists of certified professionals with years of experience in diverse technology stacks." data-lang-es="Nuestro equipo está formado por profesionales certificados con años de experiencia en diversas tecnologías.">Our team consists of certified professionals with years of experience in diverse technology stacks.</p>
+
+                <!-- Card 2 -->
+                <div class="bg-white rounded-xl p-8 shadow-sm hover:shadow-xl transition-all border border-gray-100 group reveal delay-200 hover:-translate-y-2">
+                    <div class="w-14 h-14 bg-indigo-50 rounded-lg flex items-center justify-center text-indigo-600 mb-6 group-hover:bg-indigo-600 group-hover:text-white transition duration-300">
+                        <i data-lucide="server" class="w-7 h-7 group-hover:scale-110 transition-transform"></i>
                     </div>
-                    <div class="bg-white p-8 rounded-lg shadow-sm hover:shadow-xl transition-all fade-in" style="transition-delay: 0.2s">
-                        <h3 class="text-xl font-bold text-blue-900 mb-3" data-lang-en="Custom Solutions" data-lang-es="Soluciones a Medida">Custom Solutions</h3>
-                        <p class="text-slate-600" data-lang-en="We don't believe in one-size-fits-all. Every project is tailored to meet your unique goals." data-lang-es="No creemos en soluciones genéricas. Cada proyecto se adapta para cumplir tus objetivos únicos.">We don't believe in one-size-fits-all. Every project is tailored to meet your unique goals.</p>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3" data-i18n="it_card2_title">Server Administration</h3>
+                    <p class="text-gray-500 mb-4" data-i18n="it_card2_desc">Windows/Linux server installation, maintenance, and virtualization. Automated backups.</p>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="bg-white rounded-xl p-8 shadow-sm hover:shadow-xl transition-all border border-gray-100 group reveal delay-300 hover:-translate-y-2">
+                    <div class="w-14 h-14 bg-teal-50 rounded-lg flex items-center justify-center text-teal-600 mb-6 group-hover:bg-teal-600 group-hover:text-white transition duration-300">
+                        <i data-lucide="headset" class="w-7 h-7 group-hover:rotate-12 transition-transform"></i>
                     </div>
-                    <div class="bg-white p-8 rounded-lg shadow-sm hover:shadow-xl transition-all fade-in" style="transition-delay: 0.4s">
-                        <h3 class="text-xl font-bold text-blue-900 mb-3" data-lang-en="Client-Focused" data-lang-es="Enfoque en el Cliente">Client-Focused</h3>
-                        <p class="text-slate-600" data-lang-en="Your success is our priority. We maintain transparent communication throughout the entire process." data-lang-es="Tu éxito es nuestra prioridad. Mantenemos una comunicación transparente durante todo el proceso.">Your success is our priority. We maintain transparent communication throughout the entire process.</p>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3" data-i18n="it_card3_title">Helpdesk & Technical Support</h3>
+                    <p class="text-gray-500 mb-4" data-i18n="it_card3_desc">End-user support, remote or on-site hardware and software incident resolution.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Web Development -->
+    <section id="web" class="py-20 bg-white border-t border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-12">
+                <div class="md:w-1/2 reveal">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-4" data-i18n="web_title">Professional Digital Presence</h2>
+                    <p class="text-lg text-gray-600 mb-6" data-i18n="web_desc">
+                        We build websites that not only look good but convert. From corporate landing pages to complex e-commerce systems.
+                    </p>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="flex items-center gap-3 p-3 bg-gray-50 rounded-lg">
+                            <i data-lucide="layout" class="text-brand-500"></i>
+                            <span class="font-medium text-gray-800">UI/UX Design</span>
+                        </div>
+                        <div class="flex items-center gap-3 p-3 bg-gray-50 rounded-lg">
+                            <i data-lucide="shopping-cart" class="text-brand-500"></i>
+                            <span class="font-medium text-gray-800">E-commerce</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="md:w-1/2 flex justify-center reveal delay-200">
+                    <div class="relative w-full max-w-md group">
+                        <div class="absolute inset-0 bg-gradient-to-r from-brand-400 to-accent-500 rounded-2xl transform rotate-3 opacity-20 group-hover:rotate-6 transition-transform duration-500"></div>
+                        <div class="relative bg-white p-2 rounded-2xl shadow-xl border border-gray-100 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2015&auto=format&fit=crop" alt="Web Development" class="rounded-xl w-full h-auto object-cover transform group-hover:scale-105 transition-transform duration-700">
+                        </div>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- Gemini AI Idea Generator Section -->
-        <section id="ai-powered-strategy" class="py-20 ai-section-bg">
-            <div class="container mx-auto px-6 text-center">
-                <h2 class="text-3xl md:text-4xl font-bold text-blue-900 fade-in" data-lang-en="Discover Your Next" data-lang-es="Descubre tu Próximo">Discover Your Next <span class="gradient-text" data-lang-en="Innovative Project" data-lang-es="Proyecto Innovador">Innovative Project</span></h2>
-                <p class="mt-4 text-slate-600 max-w-3xl mx-auto fade-in" data-lang-en="Don't know where to start? Describe your business or a challenge, and our AI will give you personalized ideas, powered by Gemini." data-lang-es="¿No sabes por dónde empezar? Describe tu negocio o un desafío, y nuestra IA te dará ideas personalizadas, potenciada por Gemini.">Don't know where to start? Describe your business or a challenge, and our AI will give you personalized ideas, powered by Gemini.</p>
-                <div class="max-w-2xl mx-auto mt-8 bg-white/70 backdrop-blur-sm p-8 rounded-2xl shadow-lg border border-slate-200 fade-in" style="transition-delay: 0.2s">
-                    <div class="flex flex-col gap-4">
-                        <textarea id="business-description" rows="3" class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-500 transition" 
-                        data-lang-placeholder-en="Ex: I own a chain of coffee shops and want to increase customer loyalty."
-                        data-lang-placeholder-es="Ej: Soy dueño de una cadena de cafeterías y quiero fidelizar a mis clientes."></textarea>
-                        <button id="generate-ideas-btn" class="bg-sky-500 text-white font-bold py-3 px-8 rounded-full text-lg hover:bg-sky-600 transition-all duration-300 hover:scale-105 transform flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-sky-500/20">
-                            <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 20a8 8 0 1 0 0-16 8 8 0 0 0 0 16Zm0-6a2 2 0 1 0 0-4 2 2 0 0 0 0 4ZM12 2v2m0 16v2m-7.07-2.93 1.41 1.41M17.66 6.34l1.41 1.41M2 12h2m16 0h2m-2.93-7.07-1.41 1.41M6.34 17.66l-1.41 1.41"/></svg>
-                            <span data-lang-en="Generate Ideas with AI" data-lang-es="Generar Ideas con IA">Generar Ideas con IA</span>
+    <!-- Contact Section -->
+    <section id="contacto" class="py-24 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
+                <div class="reveal">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-6" data-i18n="contact_title">Let's talk about your project</h2>
+                    <p class="text-lg text-gray-600 mb-8" data-i18n="contact_desc">
+                        Whether you need urgent technical support, develop a new platform, or modernize your infrastructure, we are ready to help.
+                    </p>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-start group">
+                            <div class="flex-shrink-0">
+                                <i data-lucide="mail" class="w-6 h-6 text-brand-600"></i>
+                            </div>
+                            <div class="ml-4">
+                                <h3 class="text-lg font-medium text-gray-900">Email</h3>
+                                <p class="text-gray-500">contacto@nextcoding.com</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-2xl shadow-lg p-8 reveal delay-200">
+                    <form onsubmit="event.preventDefault(); alert('Message sent!');" class="space-y-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1" data-i18n="form_name">Name</label>
+                                <input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-lg outline-none focus:ring-2 focus:ring-brand-500">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1" data-i18n="form_email">Email</label>
+                                <input type="email" class="w-full px-4 py-2 border border-gray-300 rounded-lg outline-none focus:ring-2 focus:ring-brand-500">
+                            </div>
+                        </div>
+                        <button type="submit" class="w-full bg-brand-600 text-white font-bold py-3 px-4 rounded-lg hover:bg-brand-700 transition flex justify-center items-center">
+                            <span data-i18n="form_submit">Send Message</span> <i data-lucide="send" class="ml-2 w-4 h-4"></i>
                         </button>
-                    </div>
-                </div>
-                <div id="idea-results" class="mt-12"></div>
-            </div>
-        </section>
-
-        <!-- New Section: Contact Form -->
-        <section id="contact" class="py-20 bg-white">
-            <div class="container mx-auto px-6">
-                <div class="text-center mb-12 fade-in">
-                    <h2 class="text-3xl md:text-4xl font-bold text-blue-900" data-lang-en="Let's Start a Project Together" data-lang-es="Comencemos un Proyecto Juntos">Comencemos un Proyecto Juntos</h2>
-                    <p class="mt-3 text-slate-600 max-w-2xl mx-auto" data-lang-en="Fill out the form below or contact us directly. We usually respond within 24 hours." data-lang-es="Rellena el siguiente formulario o contáctanos directamente. Normalmente respondemos en 24 horas.">Rellena el siguiente formulario o contáctanos directamente. Normalmente respondemos en 24 horas.</p>
-                </div>
-                
-                <div class="max-w-5xl mx-auto contact-form-card grid md:grid-cols-2">
-                    <!-- Contact Information Side -->
-                    <div class="bg-blue-800 p-10 rounded-t-xl md:rounded-l-xl md:rounded-tr-none text-white flex flex-col justify-between">
-                        <div>
-                            <h3 class="text-2xl font-bold mb-4" data-lang-en="Contact Information" data-lang-es="Información de Contacto">Información de Contacto</h3>
-                            <p class="text-blue-200 mb-8" data-lang-en="We are ready to discuss your needs and define the best digital strategy." data-lang-es="Estamos listos para discutir tus necesidades y definir la mejor estrategia digital.">Estamos listos para discutir tus necesidades y definir la mejor estrategia digital.</p>
-                            
-                            <div class="space-y-4">
-                                <div class="flex items-start">
-                                    <svg class="w-6 h-6 mr-3 text-sky-400 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
-                                    <div>
-                                        <p class="font-semibold" data-lang-en="Email" data-lang-es="Correo Electrónico">Email</p>
-                                        <p class="text-blue-300">contact@nextcoding.com</p>
-                                    </div>
-                                </div>
-                                <div class="flex items-start">
-                                    <svg class="w-6 h-6 mr-3 text-sky-400 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
-                                    <div>
-                                        <p class="font-semibold" data-lang-en="Phone" data-lang-es="Teléfono">Teléfono</p>
-                                        <p class="text-blue-300">+1 (555) 123-4567</p>
-                                    </div>
-                                </div>
-                                <div class="flex items-start">
-                                    <svg class="w-6 h-6 mr-3 text-sky-400 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.828 0l-4.243-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-                                    <div>
-                                        <p class="font-semibold" data-lang-en="Office" data-lang-es="Oficina">Oficina</p>
-                                        <p class="text-blue-300">123 Tech Avenue, Silicon Valley, CA</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Form Side -->
-                    <div class="p-10">
-                        <form action="YOUR_FORM_SUBMISSION_ENDPOINT" method="POST" class="space-y-6">
-                            <div class="grid sm:grid-cols-2 gap-6">
-                                <div>
-                                    <label for="name" class="block text-sm font-medium text-slate-700" data-lang-en="Full Name" data-lang-es="Nombre Completo">Full Name</label>
-                                    <input type="text" id="name" name="name" required class="mt-1 w-full border border-slate-300 rounded-lg shadow-sm p-3 focus:ring-sky-500 focus:border-sky-500">
-                                </div>
-                                <div>
-                                    <label for="email" class="block text-sm font-medium text-slate-700" data-lang-en="Email Address" data-lang-es="Correo Electrónico">Email Address</label>
-                                    <input type="email" id="email" name="email" required class="mt-1 w-full border border-slate-300 rounded-lg shadow-sm p-3 focus:ring-sky-500 focus:border-sky-500">
-                                </div>
-                            </div>
-                            
-                            <div>
-                                <label for="subject" class="block text-sm font-medium text-slate-700" data-lang-en="Subject" data-lang-es="Asunto">Subject</label>
-                                <input type="text" id="subject" name="subject" required class="mt-1 w-full border border-slate-300 rounded-lg shadow-sm p-3 focus:ring-sky-500 focus:border-sky-500">
-                            </div>
-
-                            <div>
-                                <label for="message" class="block text-sm font-medium text-slate-700" data-lang-en="Your Message" data-lang-es="Tu Mensaje">Your Message</label>
-                                <textarea id="message" name="message" rows="4" required class="mt-1 w-full border border-slate-300 rounded-lg shadow-sm p-3 focus:ring-sky-500 focus:border-sky-500"></textarea>
-                            </div>
-                            
-                            <button type="submit" class="w-full bg-sky-500 text-white font-bold py-3 px-6 rounded-lg hover:bg-sky-600 transition-transform hover:scale-[1.01] shadow-md shadow-sky-500/30" data-lang-en="Send Message" data-lang-es="Enviar Mensaje">Send Message</button>
-                            <p class="text-xs text-slate-500 text-center" data-lang-en="*Note: Replace 'YOUR_FORM_SUBMISSION_ENDPOINT' with your actual backend URL (e.g., Formspree, Netlify Forms, custom server)." data-lang-es="*Nota: Reemplaza 'YOUR_FORM_SUBMISSION_ENDPOINT' con tu URL de backend real (ej: Formspree, Netlify Forms, servidor custom).">*Note: Replace 'YOUR_FORM_SUBMISSION_ENDPOINT' with your actual backend URL (e.g., Formspree, Netlify Forms, custom server).</p>
-                        </form>
-                    </div>
+                    </form>
                 </div>
             </div>
-        </section>
-
-
-        <!-- Section: Testimonials -->
-        <section class="py-20 bg-slate-50">
-            <div class="container mx-auto px-6">
-                <div class="text-center mb-12 fade-in">
-                    <h2 class="text-3xl md:text-4xl font-bold text-blue-900" data-lang-en="What Our Clients Say" data-lang-es="Lo que Dicen Nuestros Clientes">What Our Clients Say</h2>
-                </div>
-                <div class="max-w-3xl mx-auto relative fade-in" style="transition-delay: 0.2s">
-                    <div class="overflow-hidden">
-                        <div id="testimonial-slider" class="testimonial-slider">
-                            <!-- Testimonial 1 -->
-                            <div class="testimonial-item text-center px-8">
-                                <p class="text-xl text-slate-700 italic" data-lang-en='"Nextcoding transformed our workflow. Their automation solution saved us countless hours and significantly reduced errors."' data-lang-es='"Nextcoding transformó nuestro flujo de trabajo. Su solución de automatización nos ahorró incontables horas y redujo los errores significativamente."'>"Nextcoding transformed our workflow. Their automation solution saved us countless hours and significantly reduced errors."</p>
-                                <p class="mt-4 font-bold text-blue-800">John Doe</p>
-                                <p class="text-sm text-slate-500" data-lang-en="CEO of Innovate Corp" data-lang-es="CEO de Innovate Corp">CEO of Innovate Corp</p>
-                            </div>
-                            <!-- Testimonial 2 -->
-                            <div class="testimonial-item text-center px-8">
-                                <p class="text-xl text-slate-700 italic" data-lang-en='"The custom software they developed is the backbone of our operations. Incredibly reliable and perfectly tailored to our needs."' data-lang-es='"El software a medida que desarrollaron es la columna vertebral de nuestras operaciones. Increíblemente fiable y perfectamente adaptado a nuestras necesidades."'>"The custom software they developed is the backbone of our operations. Incredibly reliable and perfectly tailored to our needs."</p>
-                                <p class="mt-4 font-bold text-blue-800">Jane Smith</p>
-                                <p class="text-sm text-slate-500" data-lang-en="Operations Manager at TechSolutions" data-lang-es="Gerente de Operaciones en TechSolutions">Operations Manager at TechSolutions</p>
-                            </div>
-                        </div>
-                    </div>
-                    <button id="prev-testimonial" class="absolute top-1/2 -translate-y-1/2 left-0 bg-white/50 hover:bg-white rounded-full p-2 shadow-md"><svg class="w-6 h-6 text-blue-800" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg></button>
-                    <button id="next-testimonial" class="absolute top-1/2 -translate-y-1/2 right-0 bg-white/50 hover:bg-white rounded-full p-2 shadow-md"><svg class="w-6 h-6 text-blue-800" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></button>
-                </div>
-            </div>
-        </section>
-
-        <!-- Final CTA -->
-        <section class="py-20 bg-sky-500">
-             <div class="container mx-auto px-6 text-center">
-                 <h2 class="text-3xl md:text-4xl font-bold text-white fade-in" data-lang-en="Ready to Start Your Next Project?" data-lang-es="¿Listo para Empezar tu Próximo Proyecto?">Ready to Start Your Next Project?</h2>
-                 <p class="mt-3 text-sky-100 max-w-2xl mx-auto fade-in" data-lang-en="Let's talk about how our technology solutions can help you achieve your business goals." data-lang-es="Hablemos sobre cómo nuestras soluciones tecnológicas pueden ayudarte a alcanzar tus metas de negocio.">Let's talk about how our technology solutions can help you achieve your business goals.</p>
-                 <a href="#contact" class="mt-8 inline-block bg-white text-sky-600 font-bold py-3 px-8 rounded-full text-lg hover:bg-slate-100 transition-transform hover:scale-105 fade-in" style="transition-delay: 0.2s" data-lang-en="Contact Us Now" data-lang-es="Contáctanos Ahora">Contact Us Now</a>
-             </div>
-        </section>
-
-    </main>
-
-    <!-- Footer -->
-    <footer class="bg-blue-900 text-white py-8">
-        <div class="container mx-auto px-6 text-center">
-            <p>&copy; <span id="year"></span> Nextcoding. <span data-lang-en="All rights reserved." data-lang-es="Todos los derechos reservados.">All rights reserved.</span></p>
-            <p class="text-sm text-blue-300 mt-2" data-lang-en="Technology Solutions for the Future" data-lang-es="Soluciones Tecnológicas para el Futuro">Technology Solutions for the Future</p>
         </div>
-    </footer>
+    </section>
 
-    <script src="lang.js"></script>
+    <!-- Support Modal (AnyDesk) -->
+    <div id="support-modal" class="modal fixed inset-0 z-[60] flex items-center justify-center p-4">
+        <!-- Backdrop -->
+        <div class="absolute inset-0 bg-gray-900/80 backdrop-blur-sm" onclick="closeSupportModal()"></div>
+        
+        <!-- Modal Content -->
+        <div class="modal-content bg-white rounded-2xl shadow-2xl w-full max-w-md relative z-10 overflow-hidden">
+            <div class="bg-red-600 p-6 text-white text-center relative">
+                <button onclick="closeSupportModal()" class="absolute top-4 right-4 text-white/80 hover:text-white">
+                    <i data-lucide="x" class="w-6 h-6"></i>
+                </button>
+                <div class="w-16 h-16 bg-white rounded-full mx-auto flex items-center justify-center mb-4 text-red-600 shadow-lg">
+                    <i data-lucide="monitor-check" class="w-8 h-8"></i>
+                </div>
+                <h3 class="text-2xl font-bold" data-i18n="modal_title">Quick Remote Support</h3>
+                <p class="text-red-100 mt-2" data-i18n="modal_subtitle">Connect with a technician now</p>
+            </div>
+            
+            <div class="p-8">
+                <div class="space-y-6">
+                    <!-- Step 1 -->
+                    <div class="flex gap-4">
+                        <div class="flex-shrink-0 w-8 h-8 rounded-full bg-red-100 text-red-600 flex items-center justify-center font-bold">1</div>
+                        <div>
+                            <h4 class="font-bold text-gray-900" data-i18n="step1_title">Download Client</h4>
+                            <p class="text-sm text-gray-500 mb-2" data-i18n="step1_desc">You need the support software so we can view your screen.</p>
+                            <a href="https://anydesk.com/en/downloads" target="_blank" class="inline-flex items-center text-sm text-brand-600 hover:text-brand-800 font-semibold hover:underline">
+                                <i data-lucide="download" class="w-4 h-4 mr-1"></i>
+                                <span data-i18n="download_anydesk">Download AnyDesk (Official)</span>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Step 2 -->
+                    <div class="flex gap-4">
+                        <div class="flex-shrink-0 w-8 h-8 rounded-full bg-red-100 text-red-600 flex items-center justify-center font-bold">2</div>
+                        <div>
+                            <h4 class="font-bold text-gray-900" data-i18n="step2_title">Run and Share ID</h4>
+                            <p class="text-sm text-gray-500" data-i18n="step2_desc">Open the program and find the 9-digit number.</p>
+                        </div>
+                    </div>
+
+                    <!-- Step 3 -->
+                    <div class="flex gap-4">
+                        <div class="flex-shrink-0 w-8 h-8 rounded-full bg-red-100 text-red-600 flex items-center justify-center font-bold">3</div>
+                        <div>
+                            <h4 class="font-bold text-gray-900" data-i18n="step3_title">Contact Technician</h4>
+                            <p class="text-sm text-gray-500 mb-3" data-i18n="step3_desc">Send us the ID to connect.</p>
+                            <a href="https://wa.me/15551234567" target="_blank" class="w-full bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-lg flex items-center justify-center gap-2 transition shadow-md shadow-green-500/20">
+                                <i data-lucide="message-circle" class="w-5 h-5"></i>
+                                <span data-i18n="whatsapp_btn">Send ID via WhatsApp</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-gray-50 p-4 text-center text-xs text-gray-400 border-t border-gray-100">
+                Powered by NextCoding Remote Support
+            </div>
+        </div>
+    </div>
+
+    <!-- Cookie Banner -->
+    <div id="cookie-banner" class="fixed bottom-0 w-full bg-gray-900 border-t border-gray-800 p-4 z-[100] hidden">
+        <div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <i data-lucide="cookie" class="w-8 h-8 text-brand-400 flex-shrink-0"></i>
+                <p class="text-sm text-gray-300">
+                    <span data-i18n="cookie_text">We use cookies to improve your experience and analyze our traffic. By clicking "Accept", you agree to our use of cookies.</span>
+                </p>
+            </div>
+            <div class="flex gap-3">
+                <button onclick="acceptCookies()" class="px-6 py-2 bg-brand-600 text-white text-sm font-bold rounded-lg hover:bg-brand-500 transition shadow-lg shadow-brand-500/20 whitespace-nowrap" data-i18n="cookie_accept">
+                    Accept
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // Set current year in footer
-            document.getElementById('year').textContent = new Date().getFullYear();
-            
-            // Header scroll effect
-            const header = document.getElementById('header');
-            window.addEventListener('scroll', () => {
-                if (window.scrollY > 50) {
-                    header.classList.add('header-scrolled');
-                } else {
-                    header.classList.remove('header-scrolled');
-                }
-            });
+        // Initialize Icons
+        lucide.createIcons();
 
-            // Mobile Menu
-            const mobileMenuButton = document.getElementById('mobile-menu-button');
-            const mobileMenu = document.getElementById('mobile-menu');
-            mobileMenuButton.addEventListener('click', () => { 
-                mobileMenu.classList.toggle('hidden'); 
-            });
-
-            // Testimonial Slider Logic
-            const slider = document.getElementById('testimonial-slider');
-            if (slider) {
-                const prevBtn = document.getElementById('prev-testimonial');
-                const nextBtn = document.getElementById('next-testimonial');
-                const items = slider.querySelectorAll('.testimonial-item');
-                let currentIndex = 0;
-                
-                function updateSlider() { 
-                    slider.style.transform = `translateX(-${currentIndex * 100}%)`; 
-                }
-                
-                prevBtn.addEventListener('click', () => { 
-                    currentIndex = (currentIndex > 0) ? currentIndex - 1 : items.length - 1; 
-                    updateSlider(); 
-                });
-                
-                nextBtn.addEventListener('click', () => { 
-                    currentIndex = (currentIndex < items.length - 1) ? currentIndex + 1 : 0; 
-                    updateSlider(); 
-                });
+        // --- Multi-language Logic ---
+        const translations = {
+            es: {
+                nav_home: "Inicio",
+                nav_software: "Desarrollo Software",
+                nav_support: "Soporte IT",
+                nav_quick_support: "Soporte YA",
+                nav_contact: "Contactar",
+                hero_badge: "Innovación Tecnológica para Empresas",
+                hero_title_prefix: "Tu Socio Estratégico en",
+                hero_title_highlight: "TI y Desarrollo",
+                hero_desc: "Impulsamos tu negocio con software a medida de alto rendimiento y soporte técnico integral. Tecnología que funciona, escala y asegura tu operación.",
+                hero_cta_support: "Solicitar Soporte Remoto",
+                hero_cta_talk: "Hablar con Experto",
+                soft_title: "Desarrollo de Software a Medida",
+                soft_desc: "No todas las empresas son iguales, y tu software tampoco debería serlo. Diseñamos arquitecturas robustas y escalables.",
+                soft_item1_title: "Aplicaciones Empresariales (ERP/CRM)",
+                soft_item1_desc: "Sistemas internos para optimizar la gestión de recursos.",
+                soft_item2_title: "Integración de APIs",
+                soft_item2_desc: "Conectamos herramientas para eliminar tareas manuales.",
+                soft_item3_title: "Desarrollo Móvil y Cloud",
+                soft_item3_desc: "Soluciones nativas o híbridas y migración a la nube.",
+                it_badge: "Infraestructura & Seguridad",
+                it_title: "Soporte IT Corporativo",
+                it_desc: "Tu departamento de sistemas, externalizado. Garantizamos la continuidad operativa con tiempos de respuesta rápidos.",
+                it_card1_title: "Ciberseguridad y Redes",
+                it_card1_desc: "Protección de datos, firewalls y VPNs seguras.",
+                it_card2_title: "Administración de Servidores",
+                it_card2_desc: "Mantenimiento Windows/Linux y backups automatizados.",
+                it_card3_title: "Helpdesk y Soporte",
+                it_card3_desc: "Atención a usuarios y resolución de incidencias.",
+                web_title: "Presencia Digital Profesional",
+                web_desc: "Desarrollamos sitios web que convierten. Desde landing pages hasta e-commerce.",
+                contact_title: "Hablemos de tu proyecto",
+                contact_desc: "Soporte técnico, desarrollo o infraestructura. Estamos listos.",
+                form_name: "Nombre",
+                form_email: "Email Corporativo",
+                form_submit: "Enviar Mensaje",
+                modal_title: "Soporte Remoto Rápido",
+                modal_subtitle: "Conéctate con un técnico ahora",
+                step1_title: "Descarga el Cliente",
+                step1_desc: "Necesitas el programa de soporte para que podamos ver tu pantalla.",
+                download_anydesk: "Descargar AnyDesk (Oficial)",
+                step2_title: "Ejecuta y comparte tu ID",
+                step2_desc: "Abre el programa y busca el número de 9 dígitos.",
+                step3_title: "Contacta al Técnico",
+                step3_desc: "Envíanos el ID para conectar.",
+                whatsapp_btn: "Enviar ID por WhatsApp",
+                cookie_text: "Usamos cookies para mejorar tu experiencia. Al aceptar, confirmas su uso.",
+                cookie_accept: "Aceptar"
+            },
+            en: {
+                nav_home: "Home",
+                nav_software: "Software Dev",
+                nav_support: "IT Support",
+                nav_quick_support: "Quick Support",
+                nav_contact: "Contact Us",
+                hero_badge: "Technological Innovation for Business",
+                hero_title_prefix: "Your Strategic Partner in",
+                hero_title_highlight: "IT & Development",
+                hero_desc: "We boost your business with high-performance custom software and comprehensive technical support. Technology that works, scales, and secures your operation.",
+                hero_cta_support: "Get Remote Support",
+                hero_cta_talk: "Talk to an Expert",
+                soft_title: "Custom Software Development",
+                soft_desc: "Not all companies are the same, and your software shouldn't be either. We design robust and scalable architectures.",
+                soft_item1_title: "Enterprise Apps (ERP/CRM)",
+                soft_item1_desc: "Internal systems to optimize resource management.",
+                soft_item2_title: "API Integration",
+                soft_item2_desc: "Connecting tools to eliminate manual tasks.",
+                soft_item3_title: "Mobile & Cloud Dev",
+                soft_item3_desc: "Native/Hybrid solutions and cloud migration.",
+                it_badge: "Infrastructure & Security",
+                it_title: "Corporate IT Support",
+                it_desc: "Your outsourced IT department. We guarantee operational continuity with fast response times.",
+                it_card1_title: "Cybersecurity & Networks",
+                it_card1_desc: "Data protection, firewalls, and secure VPNs.",
+                it_card2_title: "Server Administration",
+                it_card2_desc: "Windows/Linux maintenance and automated backups.",
+                it_card3_title: "Helpdesk & Support",
+                it_card3_desc: "User support and incident resolution.",
+                web_title: "Professional Digital Presence",
+                web_desc: "We build websites that convert. From landing pages to e-commerce.",
+                contact_title: "Let's talk about your project",
+                contact_desc: "Tech support, development, or infrastructure. We are ready.",
+                form_name: "Name",
+                form_email: "Corporate Email",
+                form_submit: "Send Message",
+                modal_title: "Quick Remote Support",
+                modal_subtitle: "Connect with a technician now",
+                step1_title: "Download Client",
+                step1_desc: "You need the support software so we can view your screen.",
+                download_anydesk: "Download AnyDesk (Official)",
+                step2_title: "Run and Share ID",
+                step2_desc: "Open the program and find the 9-digit number.",
+                step3_title: "Contact Technician",
+                step3_desc: "Send us the ID to connect.",
+                whatsapp_btn: "Send ID via WhatsApp",
+                cookie_text: "We use cookies to improve your experience and analyze our traffic. By clicking \"Accept\", you agree to our use of cookies.",
+                cookie_accept: "Accept"
             }
-            
-            // Scroll animations
-            const fadeElements = document.querySelectorAll('.fade-in');
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                    }
-                });
-            }, { threshold: 0.1 });
-            
-            fadeElements.forEach(element => {
-                observer.observe(element);
-            });
-            
-            // Gemini AI logic
-            const generateIdeasBtn = document.getElementById('generate-ideas-btn');
-            const businessDescriptionInput = document.getElementById('business-description');
-            const ideaResultsContainer = document.getElementById('idea-results');
+        };
 
-            if (generateIdeasBtn) {
-                 // --- IMPORTANT: Ensure apiKey is an empty string for execution in this environment ---
-                 const apiKey = "AIzaSyCVmzehJnxU_Q8zSG5ipDMJD5644D8h8ww"; 
-                 // -----------------------------------------------------------------------------------
-                
-                 const updatePlaceholder = () => {
-                     const placeHolderEN = businessDescriptionInput.getAttribute('data-lang-placeholder-en');
-                     const placeHolderES = businessDescriptionInput.getAttribute('data-lang-placeholder-es');
-                     businessDescriptionInput.placeholder = (localStorage.getItem('lang') || 'en') === 'es' ? placeHolderES : placeHolderEN;
-                 };
+        let currentLang = 'en'; // DEFAULT ENGLISH
 
-                 // Initial placeholder setup (called once lang.js has set the initial language)
-                 setTimeout(updatePlaceholder, 100); 
+        function toggleLanguage() {
+            currentLang = currentLang === 'es' ? 'en' : 'es';
+            document.getElementById('lang-display').textContent = currentLang.toUpperCase();
+            document.getElementById('lang-display-mobile').textContent = currentLang.toUpperCase();
+            updateContent();
+        }
 
-                generateIdeasBtn.addEventListener('click', async () => {
-                    const description = businessDescriptionInput.value.trim();
-                    const currentLang = localStorage.getItem('lang') || 'en';
-
-                    if (!description) {
-                        ideaResultsContainer.innerHTML = `<p class="text-red-600 font-medium">${currentLang === 'es' ? 'Por favor, describe tu negocio o desafío.' : 'Please, describe your business or challenge.'}</p>`;
-                        return;
-                    }
-                    
-                    const loadingText = currentLang === 'es' ? 'Nuestra IA está analizando tu caso...' : 'Our AI is analyzing your case...';
-                    ideaResultsContainer.innerHTML = `<div class="flex justify-center items-center flex-col"><svg class="animate-spin h-8 w-8 text-sky-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg><p class="mt-4 text-slate-600">${loadingText}</p></div>`;
-                    generateIdeasBtn.disabled = true;
-
-                    const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
-                    
-                    // Set system prompt to generate titles and descriptions in the current language
-                    const systemPrompt = `You are an expert and creative IT consultant from the company 'Nextcoding'. Your goal is to inspire potential clients by showing them how technology can solve their problems and boost their business. Generate 3 concrete and actionable technology project ideas based on the client's description. The response MUST be a single JSON object. The content (titles and descriptions) MUST be written in ${currentLang === 'es' ? 'Spanish' : 'English'}.`;
-                    const userQuery = `Client's business/challenge description: "${description}"`;
-
-                    const payload = {
-                        contents: [{ parts: [{ text: userQuery }] }],
-                        systemInstruction: { parts: [{ text: systemPrompt }] },
-                        generationConfig: {
-                            responseMimeType: "application/json",
-                            responseSchema: {
-                                type: "OBJECT",
-                                properties: { "ideas": { type: "ARRAY", items: { type: "OBJECT", properties: { "title": { "type": "STRING" }, "description": { "type": "STRING" } }, required: ["title", "description"] } } }, required: ["ideas"]
-                            }
-                        }
-                    };
-
-                    const fetchWithRetry = async (url, options, retries = 3) => {
-                        for (let i = 0; i < retries; i++) {
-                            try {
-                                const response = await fetch(url, options);
-                                if (response.ok) return response;
-                                // Throw an error for non-200 status codes
-                                throw new Error(`HTTP error! Status: ${response.status}`);
-                            } catch (error) {
-                                if (i < retries - 1) {
-                                    // Exponential backoff
-                                    const delay = Math.pow(2, i) * 1000;
-                                    await new Promise(resolve => setTimeout(resolve, delay));
-                                } else {
-                                    throw error;
-                                }
-                            }
-                        }
-                    };
-
-                    try {
-                        const response = await fetchWithRetry(apiUrl, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
-                        const result = await response.json();
-                        const candidate = result.candidates?.[0];
-                        const jsonText = candidate?.content?.parts?.[0]?.text;
-                        if (!jsonText) throw new Error("No valid content received from AI.");
-                        
-                        // Clean the JSON string (sometimes LLMs wrap it in markdown block)
-                        const cleanJsonText = jsonText.replace(/```json\s*|```/g, '').trim();
-                        const parsedJson = JSON.parse(cleanJsonText);
-
-                        displayIdeas(parsedJson.ideas, currentLang);
-                    } catch (error) {
-                        console.error("Error calling Gemini API:", error);
-                        ideaResultsContainer.innerHTML = `<p class="text-red-600 font-medium">${currentLang === 'es' ? 'Lo sentimos, ocurrió un error al generar las ideas. Por favor, inténtalo de nuevo más tarde.' : 'Sorry, an error occurred while generating ideas. Please try again later.'}</p>`;
-                    } finally {
-                        generateIdeasBtn.disabled = false;
-                    }
-                });
-
-                function displayIdeas(ideas, lang) {
-                    if (!ideas || ideas.length === 0) {
-                        ideaResultsContainer.innerHTML = `<p class="text-slate-600">${lang === 'es' ? 'No se pudieron generar ideas. Intenta ser más específico.' : 'Could not generate ideas. Try being more specific.'}</p>`;
-                        return;
-                    }
-                    const titleText = lang === 'es' ? 'Aquí tienes 3 Ideas Potenciadas por IA para Empezar:' : 'Here are 3 AI-Powered Ideas to Get You Started:';
-                    let html = `<h3 class="text-2xl font-bold text-blue-900 mb-8">${titleText}</h3><div class="grid md:grid-cols-3 gap-8 text-left">`;
-                    ideas.forEach((idea, index) => {
-                        // Apply a staggered animation delay
-                        html += `<div class="bg-white p-6 rounded-xl shadow-lg border-t-4 border-sky-400 fade-in" style="transition-delay: ${0.1 * index}s"><h4 class="text-xl font-bold text-blue-900 mb-2">${idea.title}</h4><p class="text-slate-600">${idea.description}</p></div>`;
-                    });
-                    html += '</div>';
-                    ideaResultsContainer.innerHTML = html;
-
-                    // Ensure newly added ideas run the fade-in animation immediately if they are in view
-                    const newFadeElements = ideaResultsContainer.querySelectorAll('.fade-in');
-                    newFadeElements.forEach(element => {
-                        // A simpler way to trigger animation for newly inserted content
-                        element.classList.add('visible'); 
-                    });
+        function updateContent() {
+            document.querySelectorAll('[data-i18n]').forEach(element => {
+                const key = element.getAttribute('data-i18n');
+                if (translations[currentLang][key]) {
+                    element.textContent = translations[currentLang][key];
                 }
+            });
+        }
+
+        // --- Modal Logic ---
+        function openSupportModal() {
+            const modal = document.getElementById('support-modal');
+            modal.classList.remove('hidden'); 
+            setTimeout(() => modal.classList.add('open'), 10);
+        }
+
+        function closeSupportModal() {
+            const modal = document.getElementById('support-modal');
+            modal.classList.remove('open');
+            setTimeout(() => modal.classList.add('hidden'), 300); // Wait for transition
+        }
+
+        // --- Cookie Banner Logic ---
+        function checkCookieConsent() {
+            if (!localStorage.getItem('cookie_consent')) {
+                const banner = document.getElementById('cookie-banner');
+                banner.classList.remove('hidden');
+                setTimeout(() => banner.classList.add('show'), 100);
+            }
+        }
+
+        function acceptCookies() {
+            localStorage.setItem('cookie_consent', 'true');
+            const banner = document.getElementById('cookie-banner');
+            banner.classList.remove('show');
+            setTimeout(() => banner.classList.add('hidden'), 500);
+        }
+
+        window.addEventListener('load', checkCookieConsent);
+
+        // --- Scroll Effect ---
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 20) {
+                navbar.classList.add('shadow-md', 'bg-white/95');
+                navbar.classList.remove('bg-white/90');
+            } else {
+                navbar.classList.remove('shadow-md', 'bg-white/95');
+                navbar.classList.add('bg-white/90');
             }
         });
+
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+        });
+
+        // --- Animation Observer ---
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
     </script>
 </body>
 </html>
