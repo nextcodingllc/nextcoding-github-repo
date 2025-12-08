@@ -53,6 +53,7 @@
                         'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
                         'shake': 'shake 0.5s cubic-bezier(.36,.07,.19,.97) both',
                         'bounce-slow': 'bounce 3s infinite',
+                        'slide-up': 'slideUp 0.3s ease-out forwards',
                     },
                     keyframes: {
                         float: {
@@ -64,6 +65,10 @@
                             '20%, 80%': { transform: 'translate3d(2px, 0, 0)' },
                             '30%, 50%, 70%': { transform: 'translate3d(-4px, 0, 0)' },
                             '40%, 60%': { transform: 'translate3d(4px, 0, 0)' }
+                        },
+                        slideUp: {
+                            '0%': { transform: 'translateY(20px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' }
                         }
                     }
                 }
@@ -335,7 +340,7 @@
                     </button>
                 </div>
 
-                <!-- 3. DOWNLOAD CONTENT (Hidden by default) -->
+                <!-- 3. DOWNLOAD & CONTACT CONTENT (Hidden by default) -->
                 <div id="support-content" class="space-y-6 hidden">
                     <div class="flex gap-4 items-start">
                         <div class="flex-shrink-0 w-8 h-8 rounded-full bg-red-100 text-red-600 flex items-center justify-center font-bold">1</div>
@@ -354,16 +359,18 @@
                     </div>
                     <div class="flex gap-4">
                         <div class="flex-shrink-0 w-8 h-8 rounded-full bg-red-100 text-red-600 flex items-center justify-center font-bold">2</div>
-                        <div><h4 class="font-bold text-gray-900" data-i18n="step2_title">Run and Share ID</h4><p class="text-sm text-gray-500" data-i18n="step2_desc">Open the program and find the 9-digit number.</p></div>
-                    </div>
-                    <div class="flex gap-4">
-                        <div class="flex-shrink-0 w-8 h-8 rounded-full bg-red-100 text-red-600 flex items-center justify-center font-bold">3</div>
-                        <div>
+                        <div class="w-full">
                             <h4 class="font-bold text-gray-900" data-i18n="step3_title">Contact Technician</h4>
-                            <p class="text-sm text-gray-500 mb-3" data-i18n="step3_desc">Send us the ID to connect.</p>
-                            <a href="https://wa.me/16892465889" target="_blank" class="w-full bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-lg flex items-center justify-center gap-2 transition shadow-md shadow-green-500/20">
-                                <i data-lucide="message-circle" class="w-5 h-5"></i><span data-i18n="whatsapp_btn">Send ID via WhatsApp</span>
-                            </a>
+                            <p class="text-sm text-gray-500 mb-2" data-i18n="step3_desc">Send us the ID to connect.</p>
+                            
+                            <!-- Enhanced AnyDesk Input Form -->
+                            <div class="space-y-3">
+                                <input type="text" id="anydesk-id-input" placeholder="9-Digit AnyDesk Code" class="w-full px-3 py-2 border border-gray-300 rounded text-center font-mono text-lg tracking-widest outline-none focus:ring-1 focus:ring-green-500" maxlength="11">
+                                <textarea id="anydesk-msg-input" placeholder="Optional message..." class="w-full px-3 py-2 border border-gray-300 rounded text-sm outline-none focus:ring-1 focus:ring-green-500" rows="2"></textarea>
+                                <button onclick="sendAnydeskWhatsApp()" class="w-full bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-lg flex items-center justify-center gap-2 transition shadow-md shadow-green-500/20">
+                                    <i data-lucide="message-circle" class="w-5 h-5"></i><span data-i18n="whatsapp_btn">Send via WhatsApp</span>
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -372,13 +379,51 @@
         </div>
     </div>
 
-    <!-- Floating WhatsApp Widget -->
-    <a href="https://wa.me/16892465889" target="_blank" class="fixed bottom-6 right-6 z-50 bg-green-500 text-white p-4 rounded-full shadow-lg hover:bg-green-600 transition-all hover:scale-110 flex items-center justify-center group animate-bounce-slow">
-        <i data-lucide="message-circle" class="w-8 h-8"></i>
-        <span class="absolute right-full mr-3 bg-white text-gray-800 px-3 py-1 rounded-lg text-sm font-bold shadow-md opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
-            ¡Chatea con nosotros!
-        </span>
-    </a>
+    <!-- Floating Elegant WhatsApp Widget -->
+    <div class="fixed bottom-6 right-6 z-50 flex flex-col items-end">
+        <!-- Chat Form (Hidden by default) -->
+        <div id="whatsapp-chat-form" class="hidden bg-white p-4 rounded-2xl shadow-2xl mb-4 w-80 border border-gray-100 animate-slide-up origin-bottom-right">
+           <!-- Header -->
+           <div class="flex justify-between items-center mb-4 border-b border-gray-100 pb-2">
+               <div class="flex items-center gap-2">
+                   <div class="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center text-green-600">
+                       <i data-lucide="message-circle" class="w-5 h-5"></i>
+                   </div>
+                   <div>
+                       <h3 class="font-bold text-gray-800 text-sm" data-i18n="wa_chat_title">Chat with Support</h3>
+                       <p class="text-xs text-green-600 font-medium">Online</p>
+                   </div>
+               </div>
+               <button onclick="toggleChat()" class="text-gray-400 hover:text-gray-600 transition"><i data-lucide="x" class="w-5 h-5"></i></button>
+           </div>
+           
+           <!-- Inputs -->
+           <div class="space-y-3">
+               <div>
+                   <label class="block text-xs font-semibold text-gray-500 mb-1" data-i18n="wa_name_label">Name</label>
+                   <input id="wa-name" class="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:border-green-500 focus:ring-1 focus:ring-green-500 transition" placeholder="Your Name">
+               </div>
+               <div>
+                   <label class="block text-xs font-semibold text-gray-500 mb-1" data-i18n="wa_msg_label">Message</label>
+                   <textarea id="wa-msg" class="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:border-green-500 focus:ring-1 focus:ring-green-500 transition" rows="3" placeholder="How can we help?"></textarea>
+               </div>
+               
+               <!-- Button -->
+               <button onclick="openGeneralWhatsApp()" class="w-full bg-green-500 hover:bg-green-600 text-white py-2.5 rounded-lg font-bold flex items-center justify-center gap-2 transition shadow-lg shadow-green-500/20 text-sm">
+                   <i data-lucide="send" class="w-4 h-4"></i> <span data-i18n="wa_send_btn">Start Chat</span>
+               </button>
+           </div>
+           <div class="text-center mt-3 text-[10px] text-gray-400">Usually replies in minutes</div>
+        </div>
+    
+        <!-- Toggle Button -->
+        <button onclick="toggleChat()" class="bg-green-500 text-white p-4 rounded-full shadow-lg hover:bg-green-600 transition-all hover:scale-110 flex items-center justify-center group">
+            <i data-lucide="message-circle" class="w-7 h-7"></i>
+            <span class="absolute right-full mr-3 bg-gray-900 text-white px-3 py-1.5 rounded-lg text-xs font-bold shadow-xl opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
+                Chat with us
+            </span>
+        </button>
+    </div>
 
     <!-- Cookie Banner -->
     <div id="cookie-banner" class="fixed bottom-0 w-full bg-gray-900 border-t border-gray-800 p-4 z-[100] hidden">
@@ -396,7 +441,8 @@
         // LINKS DE DESCARGA
         // ------------------------------------------------------------
         const winLink = "https://anydesk.com/en/downloads/thank-you?dv=win_exe";
-        const macLink = "https://anydesk.com/en/downloads/thank-you?dv=mac_dmg";
+        const macLink = "https://anydesk.com/en/downloads/mac-os";
+        const phoneNumber = "15551234567"; // Replace with your actual number (no + sign)
 
         // --- Gatekeeper Logic ---
         function verifySupportCode() {
@@ -405,23 +451,16 @@
             const accessScreen = document.getElementById('access-screen');
             const nameScreen = document.getElementById('name-screen');
             
-            // EL CÓDIGO DE ACCESO (123 or takecontrol0235)
-            // 123 in Base64 is 'MTIz'
-            // takecontrol0235 in Base64 is 'dGFrZWNvbnRyb2wwMjM1'
             const val = btoa(input.value);
-            
+            // 123 (Base64: MTIz) OR takecontrol0235 (Base64: dGFrZWNvbnRyb2wwMjM1)
             if (val === 'dGFrZWNvbnRyb2wwMjM1' || val === 'MTIz') {
                 accessScreen.classList.add('hidden');
                 nameScreen.classList.remove('hidden'); 
                 errorMsg.classList.add('hidden');
             } else {
                 errorMsg.classList.remove('hidden');
-                input.classList.add('animate-shake');
-                input.classList.add('border-red-500');
-                setTimeout(() => {
-                    input.classList.remove('animate-shake');
-                    input.classList.remove('border-red-500');
-                }, 500);
+                input.classList.add('animate-shake', 'border-red-500');
+                setTimeout(() => input.classList.remove('animate-shake', 'border-red-500'), 500);
             }
         }
 
@@ -437,7 +476,7 @@
                 return;
             }
 
-            // 1. Send silent notification to you
+            // 1. Send silent notification
             const templateParams = {
                 from_name: nameInput.value,
                 reply_to: "No-Reply-System",
@@ -445,7 +484,6 @@
                 message: "Client " + nameInput.value + " has accessed the remote support area.",
                 time: new Date().toLocaleString()
             };
-            
             emailjs.send('service_ozqopai', 'template_dn4b4oe', templateParams, emailJSPublicKey);
 
             // 2. Show Download Content
@@ -454,14 +492,54 @@
 
             // 3. Try to Auto-Detect OS and Download
             const userAgent = window.navigator.userAgent;
-            let downloadLink = winLink; // Default to Windows
+            let downloadLink = winLink; 
+            if (userAgent.indexOf("Mac") != -1) { downloadLink = macLink; }
+            window.open(downloadLink, '_blank');
+        }
 
-            if (userAgent.indexOf("Mac") != -1) {
-                downloadLink = macLink;
+        // --- WHATSAPP LOGIC ---
+        function sendAnydeskWhatsApp() {
+            const name = document.getElementById('client-name').value || "Client";
+            const code = document.getElementById('anydesk-id-input').value;
+            const msg = document.getElementById('anydesk-msg-input').value;
+            
+            if(!code) {
+                alert("Please enter your AnyDesk ID");
+                return;
             }
 
-            // Open in new tab so current page stays open for WhatsApp
-            window.open(downloadLink, '_blank');
+            let text = "";
+            if (currentLang === 'es') {
+                text = `Hola, mi nombre es: ${name} y mi código de asistencia es: ${code}. ${msg ? 'Mensaje: ' + msg : ''}`;
+            } else {
+                text = `Hi, My name is: ${name} and my code for assistance is: ${code}. ${msg ? 'Message: ' + msg : ''}`;
+            }
+            
+            window.open(`https://wa.me/${phoneNumber}?text=${encodeURIComponent(text)}`, '_blank');
+        }
+
+        function toggleChat() {
+            const chatForm = document.getElementById('whatsapp-chat-form');
+            chatForm.classList.toggle('hidden');
+        }
+
+        function openGeneralWhatsApp() {
+            const name = document.getElementById('wa-name').value;
+            const msg = document.getElementById('wa-msg').value;
+            
+            if(!msg) {
+                alert("Please write a message");
+                return;
+            }
+
+            let text = "";
+            if (currentLang === 'es') {
+                text = `Hola, soy ${name ? name : 'un visitante'}. ${msg}`;
+            } else {
+                text = `Hi, I am ${name ? name : 'a visitor'}. ${msg}`;
+            }
+            
+            window.open(`https://wa.me/${phoneNumber}?text=${encodeURIComponent(text)}`, '_blank');
         }
 
         // --- Multi-language Logic ---
@@ -485,8 +563,9 @@
                 modal_title: "Soporte Remoto Rápido", modal_subtitle: "Conéctate con un técnico ahora",
                 step1_title: "Descarga el Cliente", step1_desc: "Elige tu sistema operativo:", download_anydesk: "Descargar AnyDesk (Oficial)",
                 step2_title: "Ejecuta y comparte tu ID", step2_desc: "Abre el programa y busca el número de 9 dígitos.",
-                step3_title: "Contacta al Técnico", step3_desc: "Envíanos el ID para conectar.", whatsapp_btn: "Enviar ID por WhatsApp",
+                step3_title: "Contacta al Técnico", step3_desc: "Envíanos tu ID para conectar.", whatsapp_btn: "Enviar por WhatsApp",
                 cookie_text: "Usamos cookies para mejorar tu experiencia. Al aceptar, confirmas su uso.", cookie_accept: "Aceptar",
+                wa_chat_title: "Chatea con Soporte", wa_name_label: "Nombre", wa_msg_label: "Mensaje", wa_send_btn: "Iniciar Chat",
                 alert_success_title: "¡Mensaje Enviado!", alert_success_text: "Nos pondremos en contacto contigo lo antes posible.",
                 alert_error_title: "Error", alert_error_text: "Hubo un problema al enviar el mensaje. Por favor intenta de nuevo.", sending: "Enviando..."
             },
@@ -509,8 +588,9 @@
                 modal_title: "Quick Remote Support", modal_subtitle: "Connect with a technician now",
                 step1_title: "Download Client", step1_desc: "Choose your operating system:", download_anydesk: "Download AnyDesk (Official)",
                 step2_title: "Run and Share ID", step2_desc: "Open the program and find the 9-digit number.",
-                step3_title: "Contact Technician", step3_desc: "Send us the ID to connect.", whatsapp_btn: "Send ID via WhatsApp",
+                step3_title: "Contact Technician", step3_desc: "Send us the ID to connect.", whatsapp_btn: "Send via WhatsApp",
                 cookie_text: "We use cookies to improve your experience and analyze our traffic. By clicking \"Accept\", you agree to our use of cookies.", cookie_accept: "Accept",
+                wa_chat_title: "Chat with Support", wa_name_label: "Name", wa_msg_label: "Message", wa_send_btn: "Start Chat",
                 alert_success_title: "Message Sent!", alert_success_text: "We will get back to you as soon as possible.",
                 alert_error_title: "Error", alert_error_text: "There was a problem sending the message. Please try again.", sending: "Sending..."
             }
@@ -553,30 +633,23 @@
             modal.classList.remove('open');
             setTimeout(() => {
                 modal.classList.add('hidden');
-                // Reset Access Screens
                 document.getElementById('access-screen').classList.remove('hidden');
                 document.getElementById('name-screen').classList.add('hidden');
                 document.getElementById('support-content').classList.add('hidden');
                 document.getElementById('support-code').value = '';
                 document.getElementById('client-name').value = '';
+                document.getElementById('anydesk-id-input').value = '';
+                document.getElementById('anydesk-msg-input').value = '';
                 document.getElementById('code-error').classList.add('hidden');
             }, 300);
         }
 
-        // Support Code "Enter" key trigger
+        // Event Listeners for Enter key
         document.getElementById('support-code').addEventListener("keypress", function(event) {
-            if (event.key === "Enter") {
-                event.preventDefault();
-                verifySupportCode();
-            }
+            if (event.key === "Enter") { event.preventDefault(); verifySupportCode(); }
         });
-
-        // Name Input "Enter" key trigger
         document.getElementById('client-name').addEventListener("keypress", function(event) {
-            if (event.key === "Enter") {
-                event.preventDefault();
-                submitNameAndDownload();
-            }
+            if (event.key === "Enter") { event.preventDefault(); submitNameAndDownload(); }
         });
 
         function checkCookieConsent() {
@@ -606,7 +679,6 @@
             event.preventDefault();
             console.log("🚀 [DEBUG] Iniciando proceso de envío del formulario...");
 
-            // SET CURRENT TIME FOR EMAIL TEMPLATE
             document.getElementById('current_time').value = new Date().toLocaleString();
 
             const btn = document.getElementById('submit-btn');
