@@ -732,7 +732,7 @@
         // --- EmailJS Configuration & Handling ---
         (function() {
             // *** IMPORTANTE: REEMPLAZA ESTO CON TU PUBLIC KEY DE EMAILJS ***
-            emailjs.init("YOUR_PUBLIC_KEY");
+            emailjs.init("l5-ahwZ7x9T1LmrMG");
         })();
 
         document.getElementById('contact-form').addEventListener('submit', function(event) {
@@ -747,8 +747,8 @@
             btnText.textContent = translations[currentLang]['sending'];
 
             // *** IMPORTANTE: REEMPLAZA ESTO CON TUS IDs DE EMAILJS ***
-            const serviceID = 'YOUR_SERVICE_ID';
-            const templateID = 'YOUR_TEMPLATE_ID';
+            const serviceID = 'template_dn4b4oe';
+            const templateID = 'template_dn4b4oe';
 
             emailjs.sendForm(serviceID, templateID, this)
                 .then(() => {
