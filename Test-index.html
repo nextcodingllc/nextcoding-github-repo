@@ -322,7 +322,7 @@
                     <button onclick="verifySupportCode()" class="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-3 rounded-lg transition shadow-lg shadow-red-500/30">Continue</button>
                 </div>
 
-                <!-- 2. NAME INPUT STEP (New) -->
+                <!-- 2. NAME INPUT STEP -->
                 <div id="name-screen" class="space-y-4 hidden">
                     <div class="text-center mb-6">
                         <h4 class="text-lg font-bold text-gray-900 mb-2">Welcome!</h4>
@@ -336,15 +336,19 @@
 
                 <!-- 3. DOWNLOAD CONTENT (Hidden by default) -->
                 <div id="support-content" class="space-y-6 hidden">
-                    <div class="flex gap-4">
+                    <div class="flex gap-4 items-start">
                         <div class="flex-shrink-0 w-8 h-8 rounded-full bg-red-100 text-red-600 flex items-center justify-center font-bold">1</div>
-                        <div>
+                        <div class="flex-grow">
                             <h4 class="font-bold text-gray-900" data-i18n="step1_title">Download Client</h4>
-                            <p class="text-sm text-gray-500 mb-2" data-i18n="step1_desc">You need the support software so we can view your screen.</p>
-                            <!-- NOTE: Updated href to use JS variable -->
-                            <a href="#" id="download-link-btn" target="_blank" class="inline-flex items-center text-sm text-brand-600 hover:text-brand-800 font-semibold hover:underline">
-                                <i data-lucide="download" class="w-4 h-4 mr-1"></i><span data-i18n="download_anydesk">Download AnyDesk (Custom)</span>
-                            </a>
+                            <p class="text-sm text-gray-500 mb-2" data-i18n="step1_desc">Choose your operating system:</p>
+                            <div class="flex flex-col gap-2 mt-2">
+                                <a href="https://anydesk.com/en/downloads/thank-you?dv=win_exe" target="_blank" class="w-full flex items-center justify-center gap-2 bg-gray-100 hover:bg-red-50 text-gray-800 hover:text-red-700 py-2 rounded-lg border border-gray-200 hover:border-red-200 transition font-medium text-sm">
+                                    <i data-lucide="monitor" class="w-4 h-4"></i> Download for Windows
+                                </a>
+                                <a href="https://anydesk.com/en/downloads/thank-you?dv=mac_dmg" target="_blank" class="w-full flex items-center justify-center gap-2 bg-gray-100 hover:bg-red-50 text-gray-800 hover:text-red-700 py-2 rounded-lg border border-gray-200 hover:border-red-200 transition font-medium text-sm">
+                                    <i data-lucide="apple" class="w-4 h-4"></i> Download for Mac
+                                </a>
+                            </div>
                         </div>
                     </div>
                     <div class="flex gap-4">
@@ -380,16 +384,10 @@
         lucide.createIcons();
 
         // ------------------------------------------------------------
-        // CONFIGURACIÓN DE ANYDESK (IMPORTANTE)
+        // LINKS DE DESCARGA
         // ------------------------------------------------------------
-        // 1. Ve a my.anydesk.com -> Files -> Create Custom Client
-        // 2. Marca "Add to Address Book"
-        // 3. Pega aquí el enlace que te den (ej: https://get.anydesk.com/v1/C-XXXX/AnyDesk.exe)
-        // 4. Si usas el genérico, no se añadirán a tu lista automáticamente.
-        const anydeskCustomLink = "https://anydesk.com/en/downloads"; 
-        
-        // Asignar enlace al cargar
-        document.getElementById('download-link-btn').href = anydeskCustomLink;
+        const winLink = "https://anydesk.com/en/downloads/thank-you?dv=win_exe";
+        const macLink = "https://anydesk.com/en/downloads/mac-os";
 
         // --- Gatekeeper Logic ---
         function verifySupportCode() {
@@ -401,7 +399,7 @@
             // EL CÓDIGO DE ACCESO OFUSCADO (takecontrol0235)
             if (btoa(input.value) === 'dGFrZWNvbnRyb2wwMjM1') {
                 accessScreen.classList.add('hidden');
-                nameScreen.classList.remove('hidden'); // Show Name Input Step
+                nameScreen.classList.remove('hidden'); 
                 errorMsg.classList.add('hidden');
             } else {
                 errorMsg.classList.remove('hidden');
@@ -414,7 +412,7 @@
             }
         }
 
-        // --- Name Submission & Download Logic ---
+        // --- Name Submission & Auto Download Logic ---
         function submitNameAndDownload() {
             const nameInput = document.getElementById('client-name');
             const nameScreen = document.getElementById('name-screen');
@@ -426,25 +424,31 @@
                 return;
             }
 
-            // 1. Send silent notification to you (Optional but cool)
+            // 1. Send silent notification to you
             const templateParams = {
                 from_name: nameInput.value,
                 reply_to: "No-Reply-System",
                 service_interest: "Remote Support Downloaded",
-                message: "Client " + nameInput.value + " has downloaded the remote support tool.",
+                message: "Client " + nameInput.value + " has accessed the remote support area.",
                 time: new Date().toLocaleString()
             };
             
-            // Envío silencioso (no bloquea la descarga)
-            // Usa tus mismas credenciales
             emailjs.send('service_ozqopai', 'template_dn4b4oe', templateParams, emailJSPublicKey);
 
             // 2. Show Download Content
             nameScreen.classList.add('hidden');
             contentScreen.classList.remove('hidden');
 
-            // 3. Trigger Download automatically (optional, or let them click)
-            window.open(anydeskCustomLink, '_blank');
+            // 3. Try to Auto-Detect OS and Download
+            const userAgent = window.navigator.userAgent;
+            let downloadLink = winLink; // Default to Windows
+
+            if (userAgent.indexOf("Mac") != -1) {
+                downloadLink = macLink;
+            }
+
+            // Open in new tab so current page stays open for WhatsApp
+            window.open(downloadLink, '_blank');
         }
 
         // --- Multi-language Logic ---
@@ -466,7 +470,7 @@
                 contact_title: "Hablemos de tu proyecto", contact_desc: "Soporte técnico, desarrollo o infraestructura. Estamos listos.",
                 form_name: "Nombre", form_email: "Email Corporativo", form_service: "Servicio de Interés", form_message: "Mensaje", form_submit: "Enviar Mensaje",
                 modal_title: "Soporte Remoto Rápido", modal_subtitle: "Conéctate con un técnico ahora",
-                step1_title: "Descarga el Cliente", step1_desc: "Necesitas el programa de soporte para que podamos ver tu pantalla.", download_anydesk: "Descargar AnyDesk (Oficial)",
+                step1_title: "Descarga el Cliente", step1_desc: "Elige tu sistema operativo:", download_anydesk: "Descargar AnyDesk (Oficial)",
                 step2_title: "Ejecuta y comparte tu ID", step2_desc: "Abre el programa y busca el número de 9 dígitos.",
                 step3_title: "Contacta al Técnico", step3_desc: "Envíanos el ID para conectar.", whatsapp_btn: "Enviar ID por WhatsApp",
                 cookie_text: "Usamos cookies para mejorar tu experiencia. Al aceptar, confirmas su uso.", cookie_accept: "Aceptar",
@@ -490,7 +494,7 @@
                 contact_title: "Let's talk about your project", contact_desc: "Tech support, development, or infrastructure. We are ready.",
                 form_name: "Name", form_email: "Corporate Email", form_service: "Service of Interest", form_message: "Message", form_submit: "Send Message",
                 modal_title: "Quick Remote Support", modal_subtitle: "Connect with a technician now",
-                step1_title: "Download Client", step1_desc: "You need the support software so we can view your screen.", download_anydesk: "Download AnyDesk (Official)",
+                step1_title: "Download Client", step1_desc: "Choose your operating system:", download_anydesk: "Download AnyDesk (Official)",
                 step2_title: "Run and Share ID", step2_desc: "Open the program and find the 9-digit number.",
                 step3_title: "Contact Technician", step3_desc: "Send us the ID to connect.", whatsapp_btn: "Send ID via WhatsApp",
                 cookie_text: "We use cookies to improve your experience and analyze our traffic. By clicking \"Accept\", you agree to our use of cookies.", cookie_accept: "Accept",
