@@ -58,7 +58,7 @@
                         'shake': 'shake 0.5s cubic-bezier(.36,.07,.19,.97) both',
                         'bounce-slow': 'bounce 3s infinite',
                         'slide-up': 'slideUp 0.3s ease-out forwards',
-                        'logo-enter': 'logoEnter 1.0s ease-out forwards',
+                        'logo-enter': 'logoEnter 0.5s ease-out forwards', /* Faster logo enter (0.5s) */
                     },
                     keyframes: {
                         float: {
@@ -119,7 +119,7 @@
 
         /* --- SPLASH SCREEN OPTIMIZED --- */
         #splash-screen {
-            transition: opacity 0.5s ease-out, visibility 0.5s; 
+            transition: opacity 0.3s ease-out, visibility 0.3s; /* Faster fade out */
         }
         
         .wave-container {
@@ -132,11 +132,11 @@
             will-change: width, height; 
         }
 
-        /* Desktop Wave (Vertical) */
+        /* Desktop Wave (Vertical) - Super Fast Timing */
         @media (min-width: 768px) {
             .wave-container {
                 bottom: 0; left: 0; width: 100%; height: 0%; 
-                transition: height 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+                transition: height 0.8s cubic-bezier(0.4, 0, 0.2, 1); /* Faster 0.8s */
             }
             .wave-container.start-wave { height: 100%; }
             .wave-container::before {
@@ -146,11 +146,11 @@
             }
         }
         
-        /* Mobile Wave (Horizontal) */
+        /* Mobile Wave (Horizontal) - Super Fast Timing */
         @media (max-width: 767px) {
             .wave-container {
                 top: 0; right: 0; width: 0%; height: 100%;
-                transition: width 0.8s cubic-bezier(0.65, 0, 0.35, 1); 
+                transition: width 0.6s cubic-bezier(0.65, 0, 0.35, 1); /* Faster 0.6s */
             }
             .wave-container.start-wave { width: 100%; }
             .wave-container::before {
@@ -215,7 +215,7 @@
     <!-- SPLASH SCREEN -->
     <div id="splash-screen" class="fixed inset-0 z-[100] bg-white flex items-center justify-center">
         <div class="splash-logo-container z-10">
-            <!-- Added fetchpriority for LCP -->
+            <!-- Added fetchpriority for LCP, Changed to SVG -->
             <img src="https://www.nextcoding.com/images/logo.svg" 
                  class="h-12 md:h-24 w-auto object-contain animate-logo-enter" 
                  alt="NextCoding"
@@ -224,6 +224,7 @@
         </div>
         <div id="splash-wave" class="wave-container z-20">
             <div class="splash-logo-container">
+                <!-- Changed to SVG -->
                 <img src="https://www.nextcoding.com/images/logo.svg" 
                      class="h-12 md:h-24 w-auto object-contain animate-logo-enter brightness-0 invert" 
                      alt="NextCoding"
@@ -240,7 +241,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-20">
                 <div class="flex-shrink-0 flex items-center gap-3">
-                    <!-- Added dimensions to reduce CLS -->
+                    <!-- Added dimensions to reduce CLS, Changed to SVG -->
                     <img id="nav-logo" src="https://www.nextcoding.com/images/logo.svg" alt="NextCoding Logo" class="h-8 md:h-10 w-auto object-contain brightness-0 invert" onerror="this.onerror=null; this.src='https://via.placeholder.com/150x50?text=NextCoding';" width="150" height="40">
                 </div>
                 <div class="hidden md:flex space-x-6 items-center">
@@ -496,7 +497,7 @@
                                 <a href="https://anydesk.com/en/downloads/thank-you?dv=win_exe" target="_blank" class="w-full flex items-center justify-center gap-2 bg-gray-100 hover:bg-red-50 text-gray-800 hover:text-red-700 py-2 rounded-lg border border-gray-200 hover:border-red-200 transition font-medium text-sm">
                                     <i data-lucide="monitor" class="w-4 h-4"></i> Download for Windows
                                 </a>
-                                <a href="https://anydesk.com/en/downloads/mac-os" target="_blank" class="w-full flex items-center justify-center gap-2 bg-gray-100 hover:bg-red-50 text-gray-800 hover:text-red-700 py-2 rounded-lg border border-gray-200 hover:border-red-200 transition font-medium text-sm">
+                                <a href="https://anydesk.com/en/downloads/thank-you?dv=mac_dmg" target="_blank" class="w-full flex items-center justify-center gap-2 bg-gray-100 hover:bg-red-50 text-gray-800 hover:text-red-700 py-2 rounded-lg border border-gray-200 hover:border-red-200 transition font-medium text-sm">
                                     <i data-lucide="apple" class="w-4 h-4"></i> Download for Mac
                                 </a>
                             </div>
@@ -524,7 +525,7 @@
         </div>
     </div>
 
-    <!-- Floating Elegant WhatsApp Widget (Z-Index increased to 60 to stay above focus mode) -->
+    <!-- Floating Elegant WhatsApp Widget -->
     <div class="fixed bottom-6 right-6 z-[60] flex flex-col items-end whatsapp-widget-container">
         <!-- Chat Form (Hidden by default) -->
         <div id="whatsapp-chat-form" class="hidden bg-white p-4 rounded-2xl shadow-2xl mb-4 w-80 border border-gray-100 animate-slide-up origin-bottom-right">
@@ -624,7 +625,7 @@
                         splash.style.opacity = '0';
                         setTimeout(() => splash.style.display = 'none', 500);
                     }, 1500); 
-                }, 500); 
+                }, 200); // Wait 200ms before starting wave
                 
                 // Mark as shown for future refreshes
                 sessionStorage.setItem('splashShown', 'true');
