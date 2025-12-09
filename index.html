@@ -54,7 +54,7 @@
                         'shake': 'shake 0.5s cubic-bezier(.36,.07,.19,.97) both',
                         'bounce-slow': 'bounce 3s infinite',
                         'slide-up': 'slideUp 0.3s ease-out forwards',
-                        'logo-enter': 'logoEnter 1.0s ease-out forwards', /* Faster logo enter */
+                        'logo-enter': 'logoEnter 1.0s ease-out forwards',
                     },
                     keyframes: {
                         float: {
@@ -128,11 +128,11 @@
             will-change: width, height; 
         }
 
-        /* Desktop Wave (Vertical) - Faster Timing */
+        /* Desktop Wave (Vertical) */
         @media (min-width: 768px) {
             .wave-container {
                 bottom: 0; left: 0; width: 100%; height: 0%; 
-                transition: height 1.2s cubic-bezier(0.4, 0, 0.2, 1); /* Faster 1.2s */
+                transition: height 1.2s cubic-bezier(0.4, 0, 0.2, 1);
             }
             .wave-container.start-wave { height: 100%; }
             .wave-container::before {
@@ -142,11 +142,11 @@
             }
         }
         
-        /* Mobile Wave (Horizontal) - Faster Timing */
+        /* Mobile Wave (Horizontal) */
         @media (max-width: 767px) {
             .wave-container {
                 top: 0; right: 0; width: 0%; height: 100%;
-                transition: width 0.8s cubic-bezier(0.65, 0, 0.35, 1); /* Faster 0.8s */
+                transition: width 0.8s cubic-bezier(0.65, 0, 0.35, 1); 
             }
             .wave-container.start-wave { width: 100%; }
             .wave-container::before {
@@ -172,7 +172,6 @@
             z-index: 10;
         }
         
-        /* Apply Focus Mode only on screens wider than 768px (Desktop/Tablet) */
         @media (min-width: 768px) {
             #contact-card.focus-mode {
                 position: fixed;
@@ -209,8 +208,9 @@
 </head>
 <body class="font-sans text-gray-600 antialiased bg-gray-50 overflow-x-hidden">
 
-    <!-- SPLASH SCREEN (Default Hidden, JS Shows if needed) -->
-    <div id="splash-screen" class="fixed inset-0 z-[100] bg-white hidden">
+    <!-- SPLASH SCREEN -->
+    <!-- Removed 'hidden' class to ensure it's visible on load -->
+    <div id="splash-screen" class="fixed inset-0 z-[100] bg-white flex items-center justify-center">
         <div class="splash-logo-container z-10">
             <img src="https://www.nextcoding.com/images/logo.png" 
                  class="h-12 md:h-24 w-auto object-contain animate-logo-enter" 
@@ -225,7 +225,7 @@
         </div>
     </div>
 
-    <!-- FOCUS MODE OVERLAY (Backdrop) -->
+    <!-- FOCUS MODE OVERLAY -->
     <div id="focus-overlay" onclick="disableFocusMode()"></div>
 
     <!-- Navbar -->
@@ -487,7 +487,7 @@
                                 <a href="https://anydesk.com/en/downloads/thank-you?dv=win_exe" target="_blank" class="w-full flex items-center justify-center gap-2 bg-gray-100 hover:bg-red-50 text-gray-800 hover:text-red-700 py-2 rounded-lg border border-gray-200 hover:border-red-200 transition font-medium text-sm">
                                     <i data-lucide="monitor" class="w-4 h-4"></i> Download for Windows
                                 </a>
-                                <a href="https://anydesk.com/en/downloads/mac-os" target="_blank" class="w-full flex items-center justify-center gap-2 bg-gray-100 hover:bg-red-50 text-gray-800 hover:text-red-700 py-2 rounded-lg border border-gray-200 hover:border-red-200 transition font-medium text-sm">
+                                <a href="https://anydesk.com/en/downloads/thank-you?dv=mac_dmg" target="_blank" class="w-full flex items-center justify-center gap-2 bg-gray-100 hover:bg-red-50 text-gray-800 hover:text-red-700 py-2 rounded-lg border border-gray-200 hover:border-red-200 transition font-medium text-sm">
                                     <i data-lucide="apple" class="w-4 h-4"></i> Download for Mac
                                 </a>
                             </div>
@@ -591,27 +591,28 @@
         // LINKS DE DESCARGA
         // ------------------------------------------------------------
         const winLink = "https://anydesk.com/en/downloads/thank-you?dv=win_exe";
-        const macLink = "https://anydesk.com/en/downloads/mac-os";
+        const macLink = "https://anydesk.com/en/downloads/thank-you?dv=mac_dmg";
         const phoneNumber = "15551234567"; // Replace with your actual number (no + sign)
 
         // --- Splash Screen Logic (Wave Effect & Session Storage) ---
         window.addEventListener('load', () => {
             // Check if splash has been shown in this session
             if (sessionStorage.getItem('splashShown')) {
+                // If shown, ensure it's hidden immediately by modifying the DOM
                 const splash = document.getElementById('splash-screen');
-                splash.style.display = 'none'; // Hide immediately
+                splash.style.display = 'none';
             } else {
-                // Run animation
+                // Run animation only if NOT shown before
                 setTimeout(() => {
                     document.getElementById('splash-wave').classList.add('start-wave');
                     setTimeout(() => {
                         const splash = document.getElementById('splash-screen');
                         splash.style.opacity = '0';
                         setTimeout(() => splash.style.display = 'none', 500);
-                    }, 1500); // Reduced from 2000
-                }, 500); // Reduced start delay from 1000
+                    }, 1500); 
+                }, 500); 
                 
-                // Mark as shown
+                // Mark as shown for future refreshes
                 sessionStorage.setItem('splashShown', 'true');
             }
         });
@@ -801,8 +802,6 @@
                 step2_title: "Run and Share ID", step2_desc: "Open the program and find the 9-digit number.",
                 step3_title: "Contact Technician", step3_desc: "Send us the ID to connect.", whatsapp_btn: "Send via WhatsApp",
                 cookie_text: "We use cookies to improve your experience and analyze our traffic. By clicking \"Accept\", you agree to our use of cookies.", cookie_accept: "Accept",
-                wa_chat_title: "Chat with Support", wa_name_label: "Name", wa_msg_label: "Message", wa_send_btn: "Start Chat",
-                wa_has_anydesk: "I have AnyDesk", wa_anydesk_code: "AnyDesk Code",
                 alert_success_title: "Message Sent!", alert_success_text: "We will get back to you as soon as possible.",
                 alert_error_title: "Error", alert_error_text: "There was a problem sending the message. Please try again.", sending: "Sending..."
             }
