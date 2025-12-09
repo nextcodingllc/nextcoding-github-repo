@@ -18,7 +18,7 @@
     <!-- EmailJS SDK -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 
-    <!-- SweetAlert2 (Para alertas bonitas) -->
+    <!-- SweetAlert2 -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script>
@@ -36,7 +36,7 @@
                             500: '#3b82f6', 
                             600: '#2563eb',
                             800: '#1e40af',
-                            900: '#0f172a', // Darker slate for navbar match
+                            900: '#0f172a',
                         },
                         accent: {
                             500: '#0ea5e9', 
@@ -55,7 +55,7 @@
                         'bounce-slow': 'bounce 3s infinite',
                         'slide-up': 'slideUp 0.3s ease-out forwards',
                         'logo-enter': 'logoEnter 1.5s ease-out forwards',
-                        'wipe-out': 'wipeOut 1.5s cubic-bezier(0.77, 0, 0.175, 1) forwards',
+                        'wave-rise': 'waveRise 2.5s ease-in-out forwards',
                     },
                     keyframes: {
                         float: {
@@ -76,9 +76,9 @@
                             '0%': { transform: 'scale(0.8)', opacity: '0' },
                             '100%': { transform: 'scale(1)', opacity: '1' }
                         },
-                        wipeOut: {
-                            '0%': { clipPath: 'inset(0 0 0 0)' },
-                            '100%': { clipPath: 'inset(0 0 0 100%)' }
+                        waveRise: {
+                            '0%': { top: '100%' },
+                            '100%': { top: '0%' }
                         }
                     }
                 }
@@ -93,7 +93,7 @@
         .delay-200 { transition-delay: 0.2s; }
         .delay-300 { transition-delay: 0.3s; }
 
-        /* NUEVO FONDO DE CIRCUITOS MINIMALISTAS */
+        /* CIRCUIT BACKGROUND */
         .bg-circuit-pattern {
             background-color: #0f172a;
             background-image: 
@@ -119,46 +119,99 @@
         #cookie-banner { transform: translateY(100%); transition: transform 0.5s ease-in-out; }
         #cookie-banner.show { transform: translateY(0); }
 
-        /* Splash Screen Animation Class - Applied by JS */
-        .splash-exit {
-            animation: wipe-out 1.2s cubic-bezier(0.7, 0, 0.3, 1) forwards;
+        /* --- SPLASH SCREEN WAVE EFFECT --- */
+        #splash-screen {
+            transition: opacity 0.5s ease-out 0.5s, visibility 0.5s 0.5s; 
         }
         
-        /* Navbar Transitions */
-        #navbar, #nav-logo, .nav-text {
-            transition: all 0.4s ease-in-out;
+        /* The rising dark liquid */
+        .wave-container {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 0%; /* Starts empty */
+            background-color: #0f172a; /* Match Hero/Navbar color */
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: height 2s cubic-bezier(0.4, 0, 0.2, 1); /* Smooth rise */
+        }
+
+        /* The wave shape at the top of the rising liquid */
+        .wave-container::before {
+            content: "";
+            position: absolute;
+            top: -50px; /* Adjust based on wave height */
+            left: -50%;
+            width: 200%;
+            height: 100px;
+            background: #0f172a;
+            border-radius: 50%;
+            opacity: 0.8;
+            animation: waveWobble 4s infinite linear;
+        }
+
+        @keyframes waveWobble {
+            0% { transform: translateX(0) rotate(0deg); }
+            50% { transform: translateX(-25%) rotate(5deg); }
+            100% { transform: translateX(-50%) rotate(0deg); }
+        }
+
+        /* Fixed Centering for Splash Logos */
+        .splash-logo-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            pointer-events: none;
         }
     </style>
 </head>
 <body class="font-sans text-gray-600 antialiased bg-gray-50 overflow-x-hidden">
 
     <!-- SPLASH SCREEN -->
-    <div id="splash-screen" class="fixed inset-0 z-[100] bg-white flex items-center justify-center">
-        <div class="text-center">
+    <div id="splash-screen" class="fixed inset-0 z-[100] bg-white">
+        
+        <!-- 1. Background Layer: White with Color Logo -->
+        <div class="splash-logo-container z-10">
             <img src="https://www.nextcoding.com/images/logo.png" 
-                 alt="NextCoding" 
-                 class="h-24 w-auto object-contain animate-logo-enter mb-4 mx-auto"
-                 onerror="this.onerror=null; this.src='https://via.placeholder.com/150x50?text=NextCoding';">
-            
-            <div class="w-48 h-1 bg-gray-200 rounded-full mx-auto mt-6 overflow-hidden">
-                <div class="h-full bg-brand-500 w-full animate-[float_2s_ease-in-out_infinite] origin-left"></div>
+                 class="h-24 w-auto object-contain animate-logo-enter" 
+                 alt="NextCoding">
+        </div>
+
+        <!-- 2. Overlay Layer: Dark Wave with White Logo -->
+        <div id="splash-wave" class="wave-container z-20">
+            <!-- This container mirrors the full screen but is clipped by height -->
+            <div class="splash-logo-container">
+                <!-- White Logo (inverted) positioned exactly same as above -->
+                <img src="https://www.nextcoding.com/images/logo.png" 
+                     class="h-24 w-auto object-contain animate-logo-enter brightness-0 invert" 
+                     alt="NextCoding">
             </div>
         </div>
+
     </div>
 
-    <!-- Navbar -->
-    <nav class="fixed w-full z-50 bg-gray-900/95 backdrop-blur-md border-b border-transparent transition-all duration-300" id="navbar">
+    <!-- Navbar (FIXED DARK THEME) -->
+    <!-- Removed transition classes that change bg color -->
+    <nav class="fixed w-full z-50 bg-gray-900 shadow-md border-b border-gray-800 transition-all duration-300" id="navbar">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-20">
                 <div class="flex-shrink-0 flex items-center gap-3">
-                    <!-- Logo: Starts inverted (white) for dark background -->
-                    <img id="nav-logo" src="https://www.nextcoding.com/images/logo.png" alt="NextCoding Logo" class="h-10 w-auto object-contain brightness-0 invert transition-all duration-300" onerror="this.onerror=null; this.src='https://via.placeholder.com/150x50?text=NextCoding';">
+                    <!-- Logo Always White -->
+                    <img id="nav-logo" src="https://www.nextcoding.com/images/logo.png" alt="NextCoding Logo" class="h-10 w-auto object-contain brightness-0 invert" onerror="this.onerror=null; this.src='https://via.placeholder.com/150x50?text=NextCoding';">
                 </div>
                 <div class="hidden md:flex space-x-6 items-center">
-                    <a href="#inicio" class="nav-text text-gray-300 hover:text-white font-medium transition" data-i18n="nav_home">Home</a>
-                    <a href="#software" class="nav-text text-gray-300 hover:text-white font-medium transition" data-i18n="nav_software">Software Dev</a>
-                    <a href="#soporte" class="nav-text text-gray-300 hover:text-white font-medium transition" data-i18n="nav_support">IT Support</a>
-                    <button onclick="toggleLanguage()" class="flex items-center gap-1 px-3 py-1 rounded-full border border-gray-500 text-sm font-semibold hover:opacity-80 transition nav-text text-gray-300">
+                    <a href="#inicio" class="text-gray-300 hover:text-white font-medium transition">Home</a>
+                    <a href="#software" class="text-gray-300 hover:text-white font-medium transition">Software Dev</a>
+                    <a href="#soporte" class="text-gray-300 hover:text-white font-medium transition">IT Support</a>
+                    <button onclick="toggleLanguage()" class="flex items-center gap-1 px-3 py-1 rounded-full border border-gray-700 text-gray-300 hover:text-white text-sm font-semibold hover:bg-gray-800 transition">
                         <i data-lucide="globe" class="w-4 h-4"></i><span id="lang-display">EN</span>
                     </button>
                     <button onclick="openSupportModal()" class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg font-medium transition shadow-lg shadow-red-600/30 flex items-center gap-2 animate-pulse">
@@ -167,12 +220,12 @@
                     <a href="#contacto" class="bg-brand-600 text-white px-5 py-2 rounded-lg font-medium hover:bg-brand-700 transition shadow-lg shadow-brand-500/30 transform hover:-translate-y-0.5" data-i18n="nav_contact">Contact Us</a>
                 </div>
                 <div class="md:hidden flex items-center gap-4">
-                    <button onclick="toggleLanguage()" class="flex items-center gap-1 px-2 py-1 rounded-full border border-gray-500 text-xs font-bold nav-text text-gray-300"><span id="lang-display-mobile">EN</span></button>
-                    <button id="mobile-menu-btn" class="nav-text text-gray-300 hover:text-white focus:outline-none"><i data-lucide="menu" class="h-6 w-6"></i></button>
+                    <button onclick="toggleLanguage()" class="flex items-center gap-1 px-2 py-1 rounded-full border border-gray-700 text-gray-300 text-xs font-bold"><span id="lang-display-mobile">EN</span></button>
+                    <button id="mobile-menu-btn" class="text-gray-300 hover:text-white focus:outline-none"><i data-lucide="menu" class="h-6 w-6"></i></button>
                 </div>
             </div>
         </div>
-        <!-- Mobile Menu -->
+        <!-- Mobile Menu (Dark) -->
         <div id="mobile-menu" class="hidden md:hidden bg-gray-900 border-t border-gray-800 absolute w-full shadow-xl">
             <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
                 <a href="#inicio" class="block px-3 py-2 text-gray-300 hover:bg-gray-800 hover:text-white rounded-md font-medium" data-i18n="nav_home">Home</a>
@@ -186,8 +239,8 @@
         </div>
     </nav>
 
-    <!-- Hero Section (Dark Theme Trigger) -->
-    <section id="inicio" class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden bg-circuit-pattern text-white" data-theme="dark">
+    <!-- Hero Section -->
+    <section id="inicio" class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden bg-circuit-pattern text-white">
         <div class="blob bg-brand-500 w-96 h-96 rounded-full top-0 left-0 blur-3xl opacity-20"></div>
         <div class="blob bg-accent-500 w-96 h-96 rounded-full bottom-0 right-0 blur-3xl opacity-20 animation-delay-2000"></div>
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -233,8 +286,8 @@
         </div>
     </section>
 
-    <!-- Main Service: Software Development (Light Theme Trigger) -->
-    <section id="software" class="py-24 bg-white relative overflow-hidden" data-theme="light">
+    <!-- Main Service: Software Development -->
+    <section id="software" class="py-24 bg-white relative overflow-hidden">
         <div class="absolute top-0 right-0 -mr-24 -mt-24 w-96 h-96 bg-brand-50 rounded-full blur-3xl opacity-50"></div>
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
@@ -262,8 +315,7 @@
         </div>
     </section>
 
-    <!-- Main Service: IT Support (Light Theme Trigger) -->
-    <section id="soporte" class="py-24 bg-gray-50" data-theme="light">
+    <section id="soporte" class="py-24 bg-gray-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center max-w-3xl mx-auto mb-16 reveal">
                 <span class="text-brand-600 font-semibold tracking-wide uppercase text-sm" data-i18n="it_badge">Infrastructure & Security</span>
@@ -287,8 +339,7 @@
         </div>
     </section>
 
-    <!-- Web Development (Light Theme Trigger) -->
-    <section id="web" class="py-20 bg-white border-t border-gray-100" data-theme="light">
+    <section id="web" class="py-20 bg-white border-t border-gray-100">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex flex-col md:flex-row items-center justify-between gap-12">
                 <div class="md:w-1/2 reveal">
@@ -311,8 +362,8 @@
         </div>
     </section>
 
-    <!-- Contact Section (Light Theme Trigger) -->
-    <section id="contacto" class="py-24 bg-gray-50" data-theme="light">
+    <!-- Contact Section -->
+    <section id="contacto" class="py-24 bg-gray-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
                 <div class="reveal">
@@ -503,11 +554,18 @@
 
         // --- Splash Screen Logic (Wave Effect) ---
         window.addEventListener('load', () => {
+            // Give time for logo to enter
             setTimeout(() => {
-                const splash = document.getElementById('splash-screen');
-                splash.classList.add('splash-exit');
-                setTimeout(() => splash.style.display = 'none', 1500); // Remove from DOM after anim
-            }, 2500); 
+                // Trigger the wave rise
+                document.getElementById('splash-wave').style.height = '100%';
+                
+                // After wave covers screen (2s duration), fade out splash
+                setTimeout(() => {
+                    const splash = document.getElementById('splash-screen');
+                    splash.style.opacity = '0';
+                    setTimeout(() => splash.style.display = 'none', 500);
+                }, 2000); 
+            }, 1000); 
         });
 
         // --- Gatekeeper Logic ---
@@ -518,6 +576,7 @@
             const nameScreen = document.getElementById('name-screen');
             
             const val = btoa(input.value);
+            // 123 (Base64: MTIz) OR takecontrol0235 (Base64: dGFrZWNvbnRyb2wwMjM1)
             if (val === 'dGFrZWNvbnRyb2wwMjM1' || val === 'MTIz') {
                 accessScreen.classList.add('hidden');
                 nameScreen.classList.remove('hidden'); 
@@ -749,6 +808,8 @@
         }
 
         // --- EmailJS Configuration & Handling ---
+        
+        // MOVED PUBLIC KEY TO GLOBAL SCOPE FOR BETTER ACCESS
         const emailJSPublicKey = "l5-ahwZ7x9T1LmrMG"; 
 
         (function() {
@@ -758,6 +819,7 @@
 
         document.getElementById('contact-form').addEventListener('submit', function(event) {
             event.preventDefault();
+            
             console.log("🚀 [DEBUG] Iniciando proceso de envío del formulario...");
 
             document.getElementById('current_time').value = new Date().toLocaleString();
@@ -766,15 +828,18 @@
             const btnText = document.getElementById('btn-text');
             const originalText = translations[currentLang]['form_submit'];
             
+            // UI Loading State
             btn.disabled = true;
             btnText.textContent = translations[currentLang]['sending'];
 
-            const serviceID = 'service_ozqopai'; 
+            // TUS IDs
+            const serviceID = 'service_ozqopai';
             const templateID = 'template_dn4b4oe';
 
             console.log("📧 [DEBUG] Service ID:", serviceID);
             console.log("📄 [DEBUG] Template ID:", templateID);
 
+            // Using sendForm with explicit Public Key (4th argument) for robustness
             emailjs.sendForm(serviceID, templateID, this, emailJSPublicKey)
                 .then(() => {
                     console.log("✅ [DEBUG] ¡Envío exitoso!");
@@ -803,64 +868,18 @@
 
         window.addEventListener('load', checkCookieConsent);
 
-        // --- DYNAMIC NAVBAR & SCROLL EFFECT ---
-        // Observes sections with "data-theme" to toggle navbar style
-        const navObserverOptions = {
-            root: null,
-            rootMargin: "-90px 0px 0px 0px", // Trigger when section hits the navbar area
-            threshold: 0.1
-        };
-
-        const navObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const theme = entry.target.getAttribute('data-theme');
-                    const navbar = document.getElementById('navbar');
-                    const logo = document.getElementById('nav-logo');
-                    const navTexts = document.querySelectorAll('.nav-text');
-                    const navButtons = document.querySelectorAll('#navbar button:not(.bg-red-600)'); // Excluding CTA
-
-                    if (theme === 'light') {
-                        // Switch to Light Mode Navbar
-                        navbar.classList.remove('bg-gray-900/95', 'border-transparent');
-                        navbar.classList.add('bg-white/95', 'border-gray-200', 'shadow-md');
-                        
-                        logo.classList.remove('brightness-0', 'invert'); // Original Color
-                        
-                        navTexts.forEach(el => {
-                            el.classList.remove('text-gray-300', 'hover:text-white');
-                            el.classList.add('text-gray-700', 'hover:text-brand-600');
-                        });
-
-                        navButtons.forEach(btn => {
-                            btn.classList.remove('border-gray-700', 'text-gray-300', 'hover:text-white', 'hover:bg-gray-800');
-                            btn.classList.add('border-gray-200', 'text-gray-700', 'hover:text-brand-600', 'hover:bg-gray-50');
-                        });
-
-                    } else {
-                        // Revert to Dark Mode Navbar
-                        navbar.classList.add('bg-gray-900/95', 'border-transparent');
-                        navbar.classList.remove('bg-white/95', 'border-gray-200', 'shadow-md');
-                        
-                        logo.classList.add('brightness-0', 'invert'); // White Logo
-                        
-                        navTexts.forEach(el => {
-                            el.classList.add('text-gray-300', 'hover:text-white');
-                            el.classList.remove('text-gray-700', 'hover:text-brand-600');
-                        });
-
-                        navButtons.forEach(btn => {
-                            btn.classList.add('border-gray-700', 'text-gray-300', 'hover:text-white', 'hover:bg-gray-800');
-                            btn.classList.remove('border-gray-200', 'text-gray-700', 'hover:text-brand-600', 'hover:bg-gray-50');
-                        });
-                    }
-                }
-            });
-        }, navObserverOptions);
-
-        // Observe all sections that define a theme
-        document.querySelectorAll('section[data-theme]').forEach(section => {
-            navObserver.observe(section);
+        // --- Scroll Effect ---
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 20) {
+                // Simplified scroll effect to just add a shadow and slight border change
+                // keeping the dark background
+                navbar.classList.add('shadow-md', 'border-gray-700');
+                navbar.classList.remove('border-gray-800');
+            } else {
+                navbar.classList.remove('shadow-md', 'border-gray-700');
+                navbar.classList.add('border-gray-800');
+            }
         });
 
         const btn = document.getElementById('mobile-menu-btn');
