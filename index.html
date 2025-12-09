@@ -122,15 +122,16 @@
 <body class="font-sans text-gray-600 antialiased bg-gray-50 overflow-x-hidden">
 
     <!-- SPLASH SCREEN -->
-    <div id="splash-screen" class="fixed inset-0 z-[100] bg-[#0f172a] flex items-center justify-center">
+    <!-- Changed bg-[#0f172a] (dark blue) to bg-white -->
+    <div id="splash-screen" class="fixed inset-0 z-[100] bg-white flex items-center justify-center">
         <div class="text-center">
             <img src="https://www.nextcoding.com/images/logo.png" 
                  alt="NextCoding" 
                  class="h-24 w-auto object-contain animate-logo-enter mb-4 mx-auto"
                  onerror="this.onerror=null; this.src='https://via.placeholder.com/150x50?text=NextCoding';">
             
-            <!-- Optional Loading Bar -->
-            <div class="w-48 h-1 bg-gray-800 rounded-full mx-auto mt-6 overflow-hidden">
+            <!-- Optional Loading Bar (kept gray-200 for subtle background on white) -->
+            <div class="w-48 h-1 bg-gray-200 rounded-full mx-auto mt-6 overflow-hidden">
                 <div class="h-full bg-brand-500 w-full animate-[float_2s_ease-in-out_infinite] origin-left"></div>
             </div>
         </div>
