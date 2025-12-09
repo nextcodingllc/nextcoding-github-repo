@@ -55,7 +55,6 @@
                         'bounce-slow': 'bounce 3s infinite',
                         'slide-up': 'slideUp 0.3s ease-out forwards',
                         'logo-enter': 'logoEnter 1.5s ease-out forwards',
-                        'wave-rise': 'waveRise 2.5s ease-in-out forwards',
                     },
                     keyframes: {
                         float: {
@@ -75,10 +74,6 @@
                         logoEnter: {
                             '0%': { transform: 'scale(0.8)', opacity: '0' },
                             '100%': { transform: 'scale(1)', opacity: '1' }
-                        },
-                        waveRise: {
-                            '0%': { top: '100%' },
-                            '100%': { top: '0%' }
                         }
                     }
                 }
@@ -93,7 +88,6 @@
         .delay-200 { transition-delay: 0.2s; }
         .delay-300 { transition-delay: 0.3s; }
 
-        /* CIRCUIT BACKGROUND */
         .bg-circuit-pattern {
             background-color: #0f172a;
             background-image: 
@@ -119,38 +113,55 @@
         #cookie-banner { transform: translateY(100%); transition: transform 0.5s ease-in-out; }
         #cookie-banner.show { transform: translateY(0); }
 
-        /* --- SPLASH SCREEN WAVE EFFECT --- */
+        /* --- SPLASH SCREEN OPTIMIZED --- */
         #splash-screen {
             transition: opacity 0.5s ease-out 0.5s, visibility 0.5s 0.5s; 
         }
         
-        /* The rising dark liquid */
         .wave-container {
             position: absolute;
             bottom: 0;
             left: 0;
             width: 100%;
-            height: 0%; /* Starts empty */
-            background-color: #0f172a; /* Match Hero/Navbar color */
+            height: 0%;
+            background-color: #0f172a;
             overflow: hidden;
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: height 2s cubic-bezier(0.4, 0, 0.2, 1); /* Smooth rise */
+            transition: height 2s cubic-bezier(0.4, 0, 0.2, 1);
+            will-change: height; /* GPU Optimization */
         }
 
-        /* The wave shape at the top of the rising liquid */
-        .wave-container::before {
-            content: "";
-            position: absolute;
-            top: -50px; /* Adjust based on wave height */
-            left: -50%;
-            width: 200%;
-            height: 100px;
-            background: #0f172a;
-            border-radius: 50%;
-            opacity: 0.8;
-            animation: waveWobble 4s infinite linear;
+        /* The wave wobble is ONLY for desktop to save mobile battery */
+        @media (min-width: 768px) {
+            .wave-container::before {
+                content: "";
+                position: absolute;
+                top: -50px;
+                left: -50%;
+                width: 200%;
+                height: 100px;
+                background: #0f172a;
+                border-radius: 50%;
+                opacity: 0.8;
+                animation: waveWobble 4s infinite linear;
+                will-change: transform;
+            }
+        }
+        
+        /* Mobile: Just a simple curved rise, no heavy wobble animation */
+        @media (max-width: 767px) {
+             .wave-container::before {
+                content: "";
+                position: absolute;
+                top: -30px;
+                left: -10%;
+                width: 120%;
+                height: 60px;
+                background: #0f172a;
+                border-radius: 100% 100% 0 0;
+             }
         }
 
         @keyframes waveWobble {
@@ -159,7 +170,6 @@
             100% { transform: translateX(-50%) rotate(0deg); }
         }
 
-        /* Fixed Centering for Splash Logos */
         .splash-logo-container {
             position: absolute;
             top: 0;
@@ -180,18 +190,18 @@
         
         <!-- 1. Background Layer: White with Color Logo -->
         <div class="splash-logo-container z-10">
+            <!-- Mobile: h-12 (smaller) / Desktop: h-24 (larger) -->
             <img src="https://www.nextcoding.com/images/logo.png" 
-                 class="h-24 w-auto object-contain animate-logo-enter" 
+                 class="h-12 md:h-24 w-auto object-contain animate-logo-enter" 
                  alt="NextCoding">
         </div>
 
         <!-- 2. Overlay Layer: Dark Wave with White Logo -->
         <div id="splash-wave" class="wave-container z-20">
-            <!-- This container mirrors the full screen but is clipped by height -->
             <div class="splash-logo-container">
-                <!-- White Logo (inverted) positioned exactly same as above -->
+                <!-- Mobile: h-12 / Desktop: h-24 -->
                 <img src="https://www.nextcoding.com/images/logo.png" 
-                     class="h-24 w-auto object-contain animate-logo-enter brightness-0 invert" 
+                     class="h-12 md:h-24 w-auto object-contain animate-logo-enter brightness-0 invert" 
                      alt="NextCoding">
             </div>
         </div>
@@ -199,13 +209,11 @@
     </div>
 
     <!-- Navbar (FIXED DARK THEME) -->
-    <!-- Removed transition classes that change bg color -->
     <nav class="fixed w-full z-50 bg-gray-900 shadow-md border-b border-gray-800 transition-all duration-300" id="navbar">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-20">
                 <div class="flex-shrink-0 flex items-center gap-3">
-                    <!-- Logo Always White -->
-                    <img id="nav-logo" src="https://www.nextcoding.com/images/logo.png" alt="NextCoding Logo" class="h-10 w-auto object-contain brightness-0 invert" onerror="this.onerror=null; this.src='https://via.placeholder.com/150x50?text=NextCoding';">
+                    <img id="nav-logo" src="https://www.nextcoding.com/images/logo.png" alt="NextCoding Logo" class="h-8 md:h-10 w-auto object-contain brightness-0 invert" onerror="this.onerror=null; this.src='https://via.placeholder.com/150x50?text=NextCoding';">
                 </div>
                 <div class="hidden md:flex space-x-6 items-center">
                     <a href="#inicio" class="text-gray-300 hover:text-white font-medium transition">Home</a>
@@ -773,6 +781,7 @@
             modal.classList.remove('open');
             setTimeout(() => {
                 modal.classList.add('hidden');
+                // Reset Access Screens
                 document.getElementById('access-screen').classList.remove('hidden');
                 document.getElementById('name-screen').classList.add('hidden');
                 document.getElementById('support-content').classList.add('hidden');
