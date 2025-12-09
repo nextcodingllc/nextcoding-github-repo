@@ -113,7 +113,7 @@
         #cookie-banner { transform: translateY(100%); transition: transform 0.5s ease-in-out; }
         #cookie-banner.show { transform: translateY(0); }
 
-        /* --- SPLASH SCREEN --- */
+        /* --- SPLASH SCREEN OPTIMIZED (MOBILE & DESKTOP) --- */
         #splash-screen {
             transition: opacity 0.5s ease-out 0.5s, visibility 0.5s 0.5s; 
         }
@@ -125,33 +125,59 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            will-change: width, height; 
+            will-change: width, height; /* GPU Optimization */
         }
 
-        /* Desktop Wave */
+        /* --- DESKTOP ANIMATION (Vertical Rise) --- */
         @media (min-width: 768px) {
             .wave-container {
-                bottom: 0; left: 0; width: 100%; height: 0%; 
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                height: 0%; /* Start Height 0 */
                 transition: height 2s cubic-bezier(0.4, 0, 0.2, 1);
             }
-            .wave-container.start-wave { height: 100%; }
+            .wave-container.start-wave {
+                height: 100%; /* End Height 100% */
+            }
             .wave-container::before {
-                content: ""; position: absolute; top: -50px; left: -50%; width: 200%; height: 100px;
-                background: #0f172a; border-radius: 50%; opacity: 0.8;
+                content: "";
+                position: absolute;
+                top: -50px;
+                left: -50%;
+                width: 200%;
+                height: 100px;
+                background: #0f172a;
+                border-radius: 50%;
+                opacity: 0.8;
                 animation: waveWobble 4s infinite linear;
             }
         }
         
-        /* Mobile Wave */
+        /* --- MOBILE ANIMATION (Horizontal Right-to-Left Wipe) --- */
         @media (max-width: 767px) {
             .wave-container {
-                top: 0; right: 0; width: 0%; height: 100%;
+                top: 0;
+                right: 0; /* Anchor Right */
+                width: 0%; /* Start Width 0 */
+                height: 100%;
+                /* Faster transition for mobile as requested */
                 transition: width 1.5s cubic-bezier(0.65, 0, 0.35, 1); 
             }
-            .wave-container.start-wave { width: 100%; }
+            .wave-container.start-wave {
+                width: 100%; /* End Width 100% (Moves left because anchored right) */
+            }
+            /* Curved leading edge on the LEFT side */
             .wave-container::before {
-                content: ""; position: absolute; top: -10%; left: -40px; width: 80px; height: 120%;
-                background: #0f172a; border-radius: 50%; opacity: 0.9;
+                content: "";
+                position: absolute;
+                top: -10%;
+                left: -40px; /* Stick out to the left */
+                width: 80px;
+                height: 120%;
+                background: #0f172a;
+                border-radius: 50%; /* Simple curve */
+                opacity: 0.9;
             }
         }
 
@@ -162,8 +188,15 @@
         }
 
         .splash-logo-container {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            display: flex; align-items: center; justify-content: center; pointer-events: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            pointer-events: none;
         }
 
         /* --- FOCUS MODE STYLES (New) --- */
@@ -211,20 +244,31 @@
 
     <!-- SPLASH SCREEN -->
     <div id="splash-screen" class="fixed inset-0 z-[100] bg-white">
+        
+        <!-- 1. Background Layer: White with Color Logo -->
         <div class="splash-logo-container z-10">
-            <img src="https://www.nextcoding.com/images/logo.png" class="h-12 md:h-24 w-auto object-contain animate-logo-enter" alt="NextCoding">
+            <!-- Mobile: h-12 (smaller) / Desktop: h-24 (larger) -->
+            <img src="https://www.nextcoding.com/images/logo.png" 
+                 class="h-12 md:h-24 w-auto object-contain animate-logo-enter" 
+                 alt="NextCoding">
         </div>
+
+        <!-- 2. Overlay Layer: Dark Wave with White Logo -->
         <div id="splash-wave" class="wave-container z-20">
             <div class="splash-logo-container">
-                <img src="https://www.nextcoding.com/images/logo.png" class="h-12 md:h-24 w-auto object-contain animate-logo-enter brightness-0 invert" alt="NextCoding">
+                <!-- Mobile: h-12 / Desktop: h-24 -->
+                <img src="https://www.nextcoding.com/images/logo.png" 
+                     class="h-12 md:h-24 w-auto object-contain animate-logo-enter brightness-0 invert" 
+                     alt="NextCoding">
             </div>
         </div>
+
     </div>
 
     <!-- FOCUS MODE OVERLAY (Backdrop) -->
     <div id="focus-overlay" onclick="disableFocusMode()"></div>
 
-    <!-- Navbar -->
+    <!-- Navbar (FIXED DARK THEME) -->
     <nav class="fixed w-full z-50 bg-gray-900 shadow-md border-b border-gray-800 transition-all duration-300" id="navbar">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-20">
@@ -249,6 +293,7 @@
                 </div>
             </div>
         </div>
+        <!-- Mobile Menu (Dark) -->
         <div id="mobile-menu" class="hidden md:hidden bg-gray-900 border-t border-gray-800 absolute w-full shadow-xl">
             <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
                 <a href="#inicio" class="block px-3 py-2 text-gray-300 hover:bg-gray-800 hover:text-white rounded-md font-medium" data-i18n="nav_home">Home</a>
@@ -483,7 +528,7 @@
                                 <a href="https://anydesk.com/en/downloads/thank-you?dv=win_exe" target="_blank" class="w-full flex items-center justify-center gap-2 bg-gray-100 hover:bg-red-50 text-gray-800 hover:text-red-700 py-2 rounded-lg border border-gray-200 hover:border-red-200 transition font-medium text-sm">
                                     <i data-lucide="monitor" class="w-4 h-4"></i> Download for Windows
                                 </a>
-                                <a href="https://anydesk.com/en/downloads/mac-os" target="_blank" class="w-full flex items-center justify-center gap-2 bg-gray-100 hover:bg-red-50 text-gray-800 hover:text-red-700 py-2 rounded-lg border border-gray-200 hover:border-red-200 transition font-medium text-sm">
+                                <a href="https://anydesk.com/en/downloads/thank-you?dv=mac_dmg" target="_blank" class="w-full flex items-center justify-center gap-2 bg-gray-100 hover:bg-red-50 text-gray-800 hover:text-red-700 py-2 rounded-lg border border-gray-200 hover:border-red-200 transition font-medium text-sm">
                                     <i data-lucide="apple" class="w-4 h-4"></i> Download for Mac
                                 </a>
                             </div>
@@ -587,7 +632,7 @@
         // LINKS DE DESCARGA
         // ------------------------------------------------------------
         const winLink = "https://anydesk.com/en/downloads/thank-you?dv=win_exe";
-        const macLink = "https://anydesk.com/en/downloads/mac-os";
+        const macLink = "https://anydesk.com/en/downloads/thank-you?dv=mac_dmg";
         const phoneNumber = "15551234567"; // Replace with your actual number (no + sign)
 
         // --- Splash Screen Logic (Wave Effect) ---
@@ -952,6 +997,21 @@
                 }
             });
         }, { threshold: 0.1 });
+
+        // --- FORM FOCUS INTERSECTION OBSERVER ---
+        const contactObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                const card = document.getElementById('contact-card');
+                if (entry.isIntersecting) {
+                    card.classList.add('focused');
+                } else {
+                    card.classList.remove('focused');
+                }
+            });
+        }, { threshold: 0.5 }); // Trigger when 50% of the form is visible
+
+        // Observe the form CARD directly, not the section
+        contactObserver.observe(document.getElementById('contact-card'));
 
         document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
     </script>
