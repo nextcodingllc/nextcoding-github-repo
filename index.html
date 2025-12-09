@@ -113,28 +113,33 @@
         #cookie-banner { transform: translateY(100%); transition: transform 0.5s ease-in-out; }
         #cookie-banner.show { transform: translateY(0); }
 
-        /* --- SPLASH SCREEN OPTIMIZED --- */
+        /* --- SPLASH SCREEN OPTIMIZED (MOBILE & DESKTOP) --- */
         #splash-screen {
             transition: opacity 0.5s ease-out 0.5s, visibility 0.5s 0.5s; 
         }
         
         .wave-container {
             position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 0%;
             background-color: #0f172a;
             overflow: hidden;
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: height 2s cubic-bezier(0.4, 0, 0.2, 1);
-            will-change: height; /* GPU Optimization */
+            will-change: width, height; /* GPU Optimization */
         }
 
-        /* The wave wobble is ONLY for desktop to save mobile battery */
+        /* --- DESKTOP ANIMATION (Vertical Rise) --- */
         @media (min-width: 768px) {
+            .wave-container {
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                height: 0%; /* Start Height 0 */
+                transition: height 2s cubic-bezier(0.4, 0, 0.2, 1);
+            }
+            .wave-container.start-wave {
+                height: 100%; /* End Height 100% */
+            }
             .wave-container::before {
                 content: "";
                 position: absolute;
@@ -146,22 +151,34 @@
                 border-radius: 50%;
                 opacity: 0.8;
                 animation: waveWobble 4s infinite linear;
-                will-change: transform;
             }
         }
         
-        /* Mobile: Just a simple curved rise, no heavy wobble animation */
+        /* --- MOBILE ANIMATION (Horizontal Right-to-Left Wipe) --- */
         @media (max-width: 767px) {
-             .wave-container::before {
+            .wave-container {
+                top: 0;
+                right: 0; /* Anchor Right */
+                width: 0%; /* Start Width 0 */
+                height: 100%;
+                /* Faster transition for mobile as requested */
+                transition: width 1.5s cubic-bezier(0.65, 0, 0.35, 1); 
+            }
+            .wave-container.start-wave {
+                width: 100%; /* End Width 100% (Moves left because anchored right) */
+            }
+            /* Curved leading edge on the LEFT side */
+            .wave-container::before {
                 content: "";
                 position: absolute;
-                top: -30px;
-                left: -10%;
-                width: 120%;
-                height: 60px;
+                top: -10%;
+                left: -40px; /* Stick out to the left */
+                width: 80px;
+                height: 120%;
                 background: #0f172a;
-                border-radius: 100% 100% 0 0;
-             }
+                border-radius: 50%; /* Simple curve */
+                opacity: 0.9;
+            }
         }
 
         @keyframes waveWobble {
@@ -564,8 +581,8 @@
         window.addEventListener('load', () => {
             // Give time for logo to enter
             setTimeout(() => {
-                // Trigger the wave rise
-                document.getElementById('splash-wave').style.height = '100%';
+                // Trigger the wave rise logic via CSS class
+                document.getElementById('splash-wave').classList.add('start-wave');
                 
                 // After wave covers screen (2s duration), fade out splash
                 setTimeout(() => {
@@ -781,7 +798,6 @@
             modal.classList.remove('open');
             setTimeout(() => {
                 modal.classList.add('hidden');
-                // Reset Access Screens
                 document.getElementById('access-screen').classList.remove('hidden');
                 document.getElementById('name-screen').classList.add('hidden');
                 document.getElementById('support-content').classList.add('hidden');
@@ -817,8 +833,6 @@
         }
 
         // --- EmailJS Configuration & Handling ---
-        
-        // MOVED PUBLIC KEY TO GLOBAL SCOPE FOR BETTER ACCESS
         const emailJSPublicKey = "l5-ahwZ7x9T1LmrMG"; 
 
         (function() {
@@ -828,7 +842,6 @@
 
         document.getElementById('contact-form').addEventListener('submit', function(event) {
             event.preventDefault();
-            
             console.log("🚀 [DEBUG] Iniciando proceso de envío del formulario...");
 
             document.getElementById('current_time').value = new Date().toLocaleString();
@@ -837,18 +850,15 @@
             const btnText = document.getElementById('btn-text');
             const originalText = translations[currentLang]['form_submit'];
             
-            // UI Loading State
             btn.disabled = true;
             btnText.textContent = translations[currentLang]['sending'];
 
-            // TUS IDs
-            const serviceID = 'service_ozqopai';
+            const serviceID = 'service_ozqopai'; 
             const templateID = 'template_dn4b4oe';
 
             console.log("📧 [DEBUG] Service ID:", serviceID);
             console.log("📄 [DEBUG] Template ID:", templateID);
 
-            // Using sendForm with explicit Public Key (4th argument) for robustness
             emailjs.sendForm(serviceID, templateID, this, emailJSPublicKey)
                 .then(() => {
                     console.log("✅ [DEBUG] ¡Envío exitoso!");
@@ -881,8 +891,6 @@
         window.addEventListener('scroll', function() {
             const navbar = document.getElementById('navbar');
             if (window.scrollY > 20) {
-                // Simplified scroll effect to just add a shadow and slight border change
-                // keeping the dark background
                 navbar.classList.add('shadow-md', 'border-gray-700');
                 navbar.classList.remove('border-gray-800');
             } else {
