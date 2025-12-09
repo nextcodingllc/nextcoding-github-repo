@@ -54,7 +54,7 @@
                         'shake': 'shake 0.5s cubic-bezier(.36,.07,.19,.97) both',
                         'bounce-slow': 'bounce 3s infinite',
                         'slide-up': 'slideUp 0.3s ease-out forwards',
-                        'logo-enter': 'logoEnter 1.5s ease-out forwards',
+                        'logo-enter': 'logoEnter 1.0s ease-out forwards', /* Faster logo enter */
                     },
                     keyframes: {
                         float: {
@@ -113,9 +113,9 @@
         #cookie-banner { transform: translateY(100%); transition: transform 0.5s ease-in-out; }
         #cookie-banner.show { transform: translateY(0); }
 
-        /* --- SPLASH SCREEN OPTIMIZED (MOBILE & DESKTOP) --- */
+        /* --- SPLASH SCREEN OPTIMIZED --- */
         #splash-screen {
-            transition: opacity 0.5s ease-out 0.5s, visibility 0.5s 0.5s; 
+            transition: opacity 0.5s ease-out, visibility 0.5s; 
         }
         
         .wave-container {
@@ -125,59 +125,33 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            will-change: width, height; /* GPU Optimization */
+            will-change: width, height; 
         }
 
-        /* --- DESKTOP ANIMATION (Vertical Rise) --- */
+        /* Desktop Wave (Vertical) - Faster Timing */
         @media (min-width: 768px) {
             .wave-container {
-                bottom: 0;
-                left: 0;
-                width: 100%;
-                height: 0%; /* Start Height 0 */
-                transition: height 2s cubic-bezier(0.4, 0, 0.2, 1);
+                bottom: 0; left: 0; width: 100%; height: 0%; 
+                transition: height 1.2s cubic-bezier(0.4, 0, 0.2, 1); /* Faster 1.2s */
             }
-            .wave-container.start-wave {
-                height: 100%; /* End Height 100% */
-            }
+            .wave-container.start-wave { height: 100%; }
             .wave-container::before {
-                content: "";
-                position: absolute;
-                top: -50px;
-                left: -50%;
-                width: 200%;
-                height: 100px;
-                background: #0f172a;
-                border-radius: 50%;
-                opacity: 0.8;
+                content: ""; position: absolute; top: -50px; left: -50%; width: 200%; height: 100px;
+                background: #0f172a; border-radius: 50%; opacity: 0.8;
                 animation: waveWobble 4s infinite linear;
             }
         }
         
-        /* --- MOBILE ANIMATION (Horizontal Right-to-Left Wipe) --- */
+        /* Mobile Wave (Horizontal) - Faster Timing */
         @media (max-width: 767px) {
             .wave-container {
-                top: 0;
-                right: 0; /* Anchor Right */
-                width: 0%; /* Start Width 0 */
-                height: 100%;
-                /* Faster transition for mobile as requested */
-                transition: width 1.5s cubic-bezier(0.65, 0, 0.35, 1); 
+                top: 0; right: 0; width: 0%; height: 100%;
+                transition: width 0.8s cubic-bezier(0.65, 0, 0.35, 1); /* Faster 0.8s */
             }
-            .wave-container.start-wave {
-                width: 100%; /* End Width 100% (Moves left because anchored right) */
-            }
-            /* Curved leading edge on the LEFT side */
+            .wave-container.start-wave { width: 100%; }
             .wave-container::before {
-                content: "";
-                position: absolute;
-                top: -10%;
-                left: -40px; /* Stick out to the left */
-                width: 80px;
-                height: 120%;
-                background: #0f172a;
-                border-radius: 50%; /* Simple curve */
-                opacity: 0.9;
+                content: ""; position: absolute; top: -10%; left: -40px; width: 80px; height: 120%;
+                background: #0f172a; border-radius: 50%; opacity: 0.9;
             }
         }
 
@@ -188,53 +162,46 @@
         }
 
         .splash-logo-container {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            pointer-events: none;
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            display: flex; align-items: center; justify-content: center; pointer-events: none;
         }
 
-        /* --- FOCUS MODE STYLES (New) --- */
+        /* --- FOCUS MODE STYLES (DESKTOP ONLY) --- */
         #contact-card {
-            transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1); /* Bouncy spring transition */
+            transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
             z-index: 10;
         }
         
-        /* The Focus State */
-        #contact-card.focus-mode {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) scale(1);
-            width: 90%;
-            max-width: 700px;
-            z-index: 50; /* Above overlay */
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-            border: 1px solid rgba(59, 130, 246, 0.5);
+        /* Apply Focus Mode only on screens wider than 768px (Desktop/Tablet) */
+        @media (min-width: 768px) {
+            #contact-card.focus-mode {
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%) scale(1);
+                width: 90%;
+                max-width: 700px;
+                z-index: 50; 
+                box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+                border: 1px solid rgba(59, 130, 246, 0.5);
+            }
+            #focus-overlay.active {
+                opacity: 1;
+                pointer-events: auto;
+            }
         }
 
-        /* The blurred backdrop overlay */
         #focus-overlay {
             position: fixed;
             inset: 0;
-            background-color: rgba(15, 23, 42, 0.6); /* Dark navy tint */
+            background-color: rgba(15, 23, 42, 0.6); 
             backdrop-filter: blur(8px);
-            z-index: 40; /* Below form, above page */
+            z-index: 40; 
             opacity: 0;
             pointer-events: none;
             transition: opacity 0.4s ease;
         }
-        #focus-overlay.active {
-            opacity: 1;
-            pointer-events: auto;
-        }
 
-        /* Ensure WhatsApp is always on top */
         .whatsapp-widget-container {
             z-index: 60 !important;
         }
@@ -242,33 +209,26 @@
 </head>
 <body class="font-sans text-gray-600 antialiased bg-gray-50 overflow-x-hidden">
 
-    <!-- SPLASH SCREEN -->
-    <div id="splash-screen" class="fixed inset-0 z-[100] bg-white">
-        
-        <!-- 1. Background Layer: White with Color Logo -->
+    <!-- SPLASH SCREEN (Default Hidden, JS Shows if needed) -->
+    <div id="splash-screen" class="fixed inset-0 z-[100] bg-white hidden">
         <div class="splash-logo-container z-10">
-            <!-- Mobile: h-12 (smaller) / Desktop: h-24 (larger) -->
             <img src="https://www.nextcoding.com/images/logo.png" 
                  class="h-12 md:h-24 w-auto object-contain animate-logo-enter" 
                  alt="NextCoding">
         </div>
-
-        <!-- 2. Overlay Layer: Dark Wave with White Logo -->
         <div id="splash-wave" class="wave-container z-20">
             <div class="splash-logo-container">
-                <!-- Mobile: h-12 / Desktop: h-24 -->
                 <img src="https://www.nextcoding.com/images/logo.png" 
                      class="h-12 md:h-24 w-auto object-contain animate-logo-enter brightness-0 invert" 
                      alt="NextCoding">
             </div>
         </div>
-
     </div>
 
     <!-- FOCUS MODE OVERLAY (Backdrop) -->
     <div id="focus-overlay" onclick="disableFocusMode()"></div>
 
-    <!-- Navbar (FIXED DARK THEME) -->
+    <!-- Navbar -->
     <nav class="fixed w-full z-50 bg-gray-900 shadow-md border-b border-gray-800 transition-all duration-300" id="navbar">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-20">
@@ -293,7 +253,6 @@
                 </div>
             </div>
         </div>
-        <!-- Mobile Menu (Dark) -->
         <div id="mobile-menu" class="hidden md:hidden bg-gray-900 border-t border-gray-800 absolute w-full shadow-xl">
             <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
                 <a href="#inicio" class="block px-3 py-2 text-gray-300 hover:bg-gray-800 hover:text-white rounded-md font-medium" data-i18n="nav_home">Home</a>
@@ -528,7 +487,7 @@
                                 <a href="https://anydesk.com/en/downloads/thank-you?dv=win_exe" target="_blank" class="w-full flex items-center justify-center gap-2 bg-gray-100 hover:bg-red-50 text-gray-800 hover:text-red-700 py-2 rounded-lg border border-gray-200 hover:border-red-200 transition font-medium text-sm">
                                     <i data-lucide="monitor" class="w-4 h-4"></i> Download for Windows
                                 </a>
-                                <a href="https://anydesk.com/en/downloads/thank-you?dv=mac_dmg" target="_blank" class="w-full flex items-center justify-center gap-2 bg-gray-100 hover:bg-red-50 text-gray-800 hover:text-red-700 py-2 rounded-lg border border-gray-200 hover:border-red-200 transition font-medium text-sm">
+                                <a href="https://anydesk.com/en/downloads/mac-os" target="_blank" class="w-full flex items-center justify-center gap-2 bg-gray-100 hover:bg-red-50 text-gray-800 hover:text-red-700 py-2 rounded-lg border border-gray-200 hover:border-red-200 transition font-medium text-sm">
                                     <i data-lucide="apple" class="w-4 h-4"></i> Download for Mac
                                 </a>
                             </div>
@@ -556,7 +515,7 @@
         </div>
     </div>
 
-    <!-- Floating Elegant WhatsApp Widget (Z-Index increased to 60 to stay above focus mode) -->
+    <!-- Floating Elegant WhatsApp Widget -->
     <div class="fixed bottom-6 right-6 z-[60] flex flex-col items-end whatsapp-widget-container">
         <!-- Chat Form (Hidden by default) -->
         <div id="whatsapp-chat-form" class="hidden bg-white p-4 rounded-2xl shadow-2xl mb-4 w-80 border border-gray-100 animate-slide-up origin-bottom-right">
@@ -632,22 +591,32 @@
         // LINKS DE DESCARGA
         // ------------------------------------------------------------
         const winLink = "https://anydesk.com/en/downloads/thank-you?dv=win_exe";
-        const macLink = "https://anydesk.com/en/downloads/thank-you?dv=mac_dmg";
+        const macLink = "https://anydesk.com/en/downloads/mac-os";
         const phoneNumber = "15551234567"; // Replace with your actual number (no + sign)
 
-        // --- Splash Screen Logic (Wave Effect) ---
+        // --- Splash Screen Logic (Wave Effect & Session Storage) ---
         window.addEventListener('load', () => {
-            setTimeout(() => {
-                document.getElementById('splash-wave').classList.add('start-wave');
+            // Check if splash has been shown in this session
+            if (sessionStorage.getItem('splashShown')) {
+                const splash = document.getElementById('splash-screen');
+                splash.style.display = 'none'; // Hide immediately
+            } else {
+                // Run animation
                 setTimeout(() => {
-                    const splash = document.getElementById('splash-screen');
-                    splash.style.opacity = '0';
-                    setTimeout(() => splash.style.display = 'none', 500);
-                }, 2000); 
-            }, 1000); 
+                    document.getElementById('splash-wave').classList.add('start-wave');
+                    setTimeout(() => {
+                        const splash = document.getElementById('splash-screen');
+                        splash.style.opacity = '0';
+                        setTimeout(() => splash.style.display = 'none', 500);
+                    }, 1500); // Reduced from 2000
+                }, 500); // Reduced start delay from 1000
+                
+                // Mark as shown
+                sessionStorage.setItem('splashShown', 'true');
+            }
         });
 
-        // --- FOCUS MODE LOGIC ---
+        // --- FOCUS MODE LOGIC (Desktop Only) ---
         const focusTriggers = document.querySelectorAll('.focus-trigger');
         const contactCard = document.getElementById('contact-card');
         const focusOverlay = document.getElementById('focus-overlay');
@@ -656,9 +625,12 @@
         // Activate Focus Mode
         focusTriggers.forEach(trigger => {
             trigger.addEventListener('focus', () => {
-                contactCard.classList.add('focus-mode');
-                focusOverlay.classList.add('active');
-                closeFocusBtn.classList.remove('hidden');
+                // Check if window width is >= 768px (standard tablet/desktop breakpoint)
+                if (window.innerWidth >= 768) {
+                    contactCard.classList.add('focus-mode');
+                    focusOverlay.classList.add('active');
+                    closeFocusBtn.classList.remove('hidden');
+                }
             });
         });
 
