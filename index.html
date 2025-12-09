@@ -1,406 +1,783 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nextcoding | Coming Soon</title>
-    <style>
-        :root {
-            --blue-light: #2196F3;
-            --blue-dark: #1976D2;
-            --text-color: white;
-        }
-        
-        body {
-            font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, var(--blue-dark), var(--blue-light));
-            color: var(--text-color);
-            min-height: 100vh;
-            margin: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 20px;
-            box-sizing: border-box;
-        }
-        
-        /* Logo container */
-        .logo-container {
-            margin-bottom: 2rem;
-            padding: 15px;
-            background: rgba(255,255,255,0.1);
-            border-radius: 16px;
-            backdrop-filter: blur(5px);
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-        }
-        
-        .logo {
-            width: auto;
-            height: 60px;
-            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
-        }
-        
-        /* Language selector */
-        .language-selector {
-            position: fixed;
-            top: 15px;
-            right: 15px;
-            z-index: 10;
-        }
-        
-        .language-btn {
-            background: rgba(255,255,255,0.2);
-            color: white;
-            border: 1px solid rgba(255,255,255,0.3);
-            border-radius: 8px;
-            padding: 8px 12px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            font-size: 0.9rem;
-        }
-        
-        .language-btn:hover {
-            background: rgba(255,255,255,0.3);
-        }
-        
-        .language-options {
-            display: none;
-            position: absolute;
-            right: 0;
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-            overflow: hidden;
-            min-width: 120px;
-        }
-        
-        .language-options.show {
-            display: block;
-        }
-        
-        .language-option {
-            padding: 10px 15px;
-            color: var(--blue-dark);
-            text-decoration: none;
-            display: block;
-            transition: background 0.2s ease;
-            font-size: 0.9rem;
-        }
-        
-        .language-option:hover {
-            background: #f0f0f0;
-        }
-        
-        /* Content styles */
-        h1 {
-            font-size: clamp(1.8rem, 5vw, 2.5rem);
-            margin-bottom: 1rem;
-            line-height: 1.2;
-        }
-        
-        p {
-            font-size: clamp(1rem, 3vw, 1.1rem);
-            margin-bottom: 2rem;
-            max-width: 500px;
-            line-height: 1.5;
-        }
-        
-        /* Countdown - Mobile first approach */
-        .countdown {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 0.8rem;
-            margin: 2rem 0;
-            width: 100%;
-            max-width: 500px;
-        }
-        
-        .countdown-item {
-            background: rgba(255,255,255,0.15);
-            backdrop-filter: blur(5px);
-            border-radius: 12px;
-            padding: 1rem 0.5rem;
-            text-align: center;
-            min-width: 0;
-        }
-        
-        .countdown-number {
-            font-size: clamp(1.5rem, 6vw, 1.8rem);
-            font-weight: bold;
-            margin-bottom: 0.3rem;
-        }
-        
-        .countdown-label {
-            font-size: clamp(0.6rem, 2.5vw, 0.8rem);
-            opacity: 0.9;
-            text-transform: uppercase;
-        }
-        
-        /* Form styles */
-        .notify-form {
-            display: flex;
-            flex-direction: column;
-            width: 100%;
-            max-width: 400px;
-            margin: 1rem 0;
-        }
-        
-        .notify-input {
-            padding: 15px;
-            border: none;
-            border-radius: 8px;
-            margin-bottom: 1rem;
-            font-size: 1rem;
-        }
-        
-        .notify-button {
-            background: white;
-            color: var(--blue-dark);
-            border: none;
-            padding: 15px;
-            border-radius: 8px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .notify-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-        }
-        
-        /* Social links */
-        .social-links {
-            margin-top: 2rem;
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-        
-        .social-link {
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
-            background: rgba(255,255,255,0.15);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s ease;
-            color: var(--text-color);
-        }
-        
-        .social-link:hover {
-            background: rgba(255,255,255,0.25);
-            transform: translateY(-3px);
-        }
-        
-        /* Media queries for larger screens */
-        @media (min-width: 480px) {
-            .countdown {
-                grid-template-columns: repeat(4, 1fr);
-                gap: 0.8rem;
-            }
-            
-            .language-selector {
-                top: 20px;
-                right: 20px;
-            }
-        }
-        
-        @media (min-width: 768px) {
-            .countdown {
-                gap: 1.5rem;
-                max-width: 600px;
-            }
-            
-            .countdown-item {
-                padding: 1rem;
-                min-width: 100px;
-            }
-            
-            .notify-form {
-                flex-direction: row;
-            }
-            
-            .notify-input {
-                margin-bottom: 0;
-                margin-right: 1rem;
-                flex: 1;
-                border-radius: 50px 0 0 50px;
-            }
-            
-            .notify-button {
-                border-radius: 0 50px 50px 0;
-                padding: 0 30px;
-                width: auto;
-            }
-        }
-    </style>
-    <!-- Font Awesome for the chevron icon -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts: Inter -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-</head>
-<body>
-    <!-- Language Selector -->
-    <div class="language-selector">
-        <button class="language-btn" id="languageBtn">
-            <span id="currentLang">EN</span>
-            <i class="fas fa-chevron-down ml-2"></i>
-        </button>
-        <div class="language-options" id="languageOptions">
-            <a href="#" class="language-option" data-lang="en">English</a>
-            <a href="#" class="language-option" data-lang="es">Español</a>
-        </div>
-    </div>
+    <meta name="description" content="NextCoding provides expert IT support, custom software development, and web solutions for businesses. Enterprise-grade technology services.">
+    <title>NextCoding | IT Support & Software Development</title>
     
-    <!-- Main Content -->
-    <div class="logo-container">
-        <img src="images/logo.png" alt="Nextcoding LLC Logo" class="logo">
-    </div>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
     
-    <h1 id="mainHeading">We are building something amazing</h1>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     
-    <p id="subHeading">Our new website is under development. We are working hard to bring you the best experience. Please subscribe for updates.</p>
-    
-    <div class="countdown">
-        <div class="countdown-item">
-            <div class="countdown-number" id="days">00</div>
-            <div class="countdown-label" id="daysLabel">Days</div>
-        </div>
-        <div class="countdown-item">
-            <div class="countdown-number" id="hours">00</div>
-            <div class="countdown-label" id="hoursLabel">Hours</div>
-        </div>
-        <div class="countdown-item">
-            <div class="countdown-number" id="minutes">00</div>
-            <div class="countdown-label" id="minutesLabel">Minutes</div>
-        </div>
-        <div class="countdown-item">
-            <div class="countdown-number" id="seconds">00</div>
-            <div class="countdown-label" id="secondsLabel">Seconds</div>
-        </div>
-    </div>
-    
-    <form class="notify-form" id="notifyForm">
-        <input type="email" class="notify-input" id="emailInput" placeholder="Your email address" required>
-        <button type="submit" class="notify-button" id="notifyBtn">Notify Me</button>
-    </form>
-    
-    <div class="social-links">
-        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
-        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
-        <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
-        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
-    </div>
-    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- EmailJS SDK -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+
+    <!-- SweetAlert2 (Para alertas bonitas) -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <script>
-        // Translations
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            500: '#3b82f6', 
+                            600: '#2563eb',
+                            800: '#1e40af',
+                            900: '#1e3a8a',
+                        },
+                        accent: {
+                            500: '#0ea5e9', 
+                            400: '#38bdf8',
+                            300: '#7dd3fc',
+                        },
+                        anydesk: {
+                            red: '#ef4444',
+                        }
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'float-delayed': 'float 6s ease-in-out 3s infinite',
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'shake': 'shake 0.5s cubic-bezier(.36,.07,.19,.97) both',
+                        'bounce-slow': 'bounce 3s infinite',
+                        'slide-up': 'slideUp 0.3s ease-out forwards',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        },
+                        shake: {
+                            '10%, 90%': { transform: 'translate3d(-1px, 0, 0)' },
+                            '20%, 80%': { transform: 'translate3d(2px, 0, 0)' },
+                            '30%, 50%, 70%': { transform: 'translate3d(-4px, 0, 0)' },
+                            '40%, 60%': { transform: 'translate3d(4px, 0, 0)' }
+                        },
+                        slideUp: {
+                            '0%': { transform: 'translateY(20px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s cubic-bezier(0.5, 0, 0, 1); }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+        .delay-100 { transition-delay: 0.1s; }
+        .delay-200 { transition-delay: 0.2s; }
+        .delay-300 { transition-delay: 0.3s; }
+
+        .bg-animated-grid {
+            background-size: 50px 50px;
+            background-image: 
+                linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+            animation: moveGrid 20s linear infinite;
+        }
+        @keyframes moveGrid { 0% { background-position: 0 0; } 100% { background-position: 50px 50px; } }
+        
+        .blob { position: absolute; filter: blur(40px); z-index: 0; opacity: 0.4; animation: blob-bounce 10s infinite ease-in-out alternate; }
+        @keyframes blob-bounce { 0% { transform: translate(0, 0) scale(1); } 100% { transform: translate(20px, -20px) scale(1.1); } }
+
+        .modal { transition: opacity 0.3s ease-in-out; opacity: 0; pointer-events: none; }
+        .modal.open { opacity: 1; pointer-events: auto; }
+        .modal-content { transform: scale(0.95); transition: transform 0.3s ease-in-out; }
+        .modal.open .modal-content { transform: scale(1); }
+
+        #cookie-banner { transform: translateY(100%); transition: transform 0.5s ease-in-out; }
+        #cookie-banner.show { transform: translateY(0); }
+    </style>
+</head>
+<body class="font-sans text-gray-600 antialiased bg-gray-50 overflow-x-hidden">
+
+    <!-- Navbar -->
+    <nav class="fixed w-full z-50 bg-white/90 backdrop-blur-md border-b border-gray-100 transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex-shrink-0 flex items-center gap-3">
+                    <img src="https://www.nextcoding.com/images/logo.png" alt="NextCoding Logo" class="h-10 w-auto object-contain" onerror="this.onerror=null; this.src='https://via.placeholder.com/150x50?text=NextCoding';">
+                </div>
+                <div class="hidden md:flex space-x-6 items-center">
+                    <a href="#inicio" class="text-gray-700 hover:text-brand-600 font-medium transition" data-i18n="nav_home">Home</a>
+                    <a href="#software" class="text-gray-700 hover:text-brand-600 font-medium transition" data-i18n="nav_software">Software Dev</a>
+                    <a href="#soporte" class="text-gray-700 hover:text-brand-600 font-medium transition" data-i18n="nav_support">IT Support</a>
+                    <button onclick="toggleLanguage()" class="flex items-center gap-1 px-3 py-1 rounded-full border border-gray-200 text-sm font-semibold hover:bg-gray-100 transition">
+                        <i data-lucide="globe" class="w-4 h-4"></i><span id="lang-display">EN</span>
+                    </button>
+                    <button onclick="openSupportModal()" class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg font-medium transition shadow-lg shadow-red-500/30 flex items-center gap-2 animate-pulse">
+                        <i data-lucide="monitor-check" class="w-4 h-4"></i><span data-i18n="nav_quick_support">Quick Support</span>
+                    </button>
+                    <a href="#contacto" class="bg-brand-600 text-white px-5 py-2 rounded-lg font-medium hover:bg-brand-700 transition shadow-lg shadow-brand-500/30 transform hover:-translate-y-0.5" data-i18n="nav_contact">Contact Us</a>
+                </div>
+                <div class="md:hidden flex items-center gap-4">
+                    <button onclick="toggleLanguage()" class="flex items-center gap-1 px-2 py-1 rounded-full border border-gray-200 text-xs font-bold"><span id="lang-display-mobile">EN</span></button>
+                    <button id="mobile-menu-btn" class="text-gray-700 hover:text-brand-600 focus:outline-none"><i data-lucide="menu" class="h-6 w-6"></i></button>
+                </div>
+            </div>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100 absolute w-full shadow-xl">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#inicio" class="block px-3 py-2 text-gray-700 hover:bg-brand-50 hover:text-brand-600 rounded-md font-medium" data-i18n="nav_home">Home</a>
+                <a href="#software" class="block px-3 py-2 text-gray-700 hover:bg-brand-50 hover:text-brand-600 rounded-md font-medium" data-i18n="nav_software">Software Dev</a>
+                <a href="#soporte" class="block px-3 py-2 text-gray-700 hover:bg-brand-50 hover:text-brand-600 rounded-md font-medium" data-i18n="nav_support">IT Support</a>
+                <button onclick="openSupportModal()" class="w-full text-left px-3 py-2 text-red-600 font-bold hover:bg-red-50 rounded-md flex items-center gap-2">
+                    <i data-lucide="monitor-check" class="w-4 h-4"></i><span data-i18n="nav_quick_support">Quick Support</span>
+                </button>
+                <a href="#contacto" class="block px-3 py-2 text-brand-600 font-bold" data-i18n="nav_contact">Contact Us</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="inicio" class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden bg-[#0f172a] text-white">
+        <div class="absolute inset-0 bg-animated-grid opacity-20 pointer-events-none"></div>
+        <div class="blob bg-brand-500 w-96 h-96 rounded-full top-0 left-0 blur-3xl opacity-20"></div>
+        <div class="blob bg-accent-500 w-96 h-96 rounded-full bottom-0 right-0 blur-3xl opacity-20 animation-delay-2000"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center max-w-4xl mx-auto">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-900/50 border border-brand-500/30 text-brand-200 text-sm font-medium mb-6 reveal">
+                    <span class="relative flex h-2 w-2">
+                      <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-400 opacity-75"></span>
+                      <span class="relative inline-flex rounded-full h-2 w-2 bg-brand-500"></span>
+                    </span>
+                    <span data-i18n="hero_badge">Technological Innovation for Business</span>
+                </div>
+                <h1 class="text-4xl md:text-6xl lg:text-7xl font-extrabold tracking-tight mb-6 leading-tight reveal delay-100">
+                    <span data-i18n="hero_title_prefix">Your Strategic Partner in</span> <br>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-white via-brand-200 to-accent-400 drop-shadow-sm" data-i18n="hero_title_highlight">IT & Development</span>
+                </h1>
+                <p class="text-lg md:text-xl text-gray-300 mb-10 max-w-2xl mx-auto reveal delay-200 leading-relaxed" data-i18n="hero_desc">
+                    We boost your business with high-performance custom software and comprehensive technical support. Technology that works, scales, and secures your operation.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center reveal delay-300">
+                    <button onclick="openSupportModal()" class="group inline-flex justify-center items-center px-8 py-4 border border-transparent text-base font-medium rounded-lg text-white bg-red-600 hover:bg-red-700 transition shadow-lg shadow-red-500/25 relative overflow-hidden">
+                        <i data-lucide="life-buoy" class="w-5 h-5 mr-2 group-hover:rotate-12 transition-transform"></i>
+                        <span class="relative" data-i18n="hero_cta_support">Get Remote Support</span>
+                    </button>
+                    <a href="#contacto" class="inline-flex justify-center items-center px-8 py-4 border border-gray-600 text-base font-medium rounded-lg text-gray-200 hover:bg-white/10 hover:border-white transition backdrop-blur-sm">
+                        <span data-i18n="hero_cta_talk">Talk to an Expert</span><i data-lucide="arrow-right" class="w-5 h-5 ml-2"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="mt-16 flex justify-center reveal delay-300">
+                <svg width="100%" height="200" viewBox="0 0 800 200" fill="none" xmlns="http://www.w3.org/2000/svg" class="opacity-50 max-w-4xl">
+                    <path d="M0 100 Q 200 50 400 100 T 800 100" stroke="url(#paint0_linear)" stroke-width="2" fill="none" class="animate-pulse">
+                         <animate attributeName="d" values="M0 100 Q 200 50 400 100 T 800 100;M0 100 Q 200 150 400 100 T 800 100;M0 100 Q 200 50 400 100 T 800 100" dur="10s" repeatCount="indefinite" />
+                    </path>
+                    <defs>
+                        <linearGradient id="paint0_linear" x1="0" y1="100" x2="800" y2="100" gradientUnits="userSpaceOnUse">
+                            <stop stop-color="#3B82F6" stop-opacity="0"/>
+                            <stop offset="0.5" stop-color="#3B82F6"/>
+                            <stop offset="1" stop-color="#3B82F6" stop-opacity="0"/>
+                        </linearGradient>
+                    </defs>
+                </svg>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sections (Software, IT, Web) -->
+    <section id="software" class="py-24 bg-white relative overflow-hidden">
+        <div class="absolute top-0 right-0 -mr-24 -mt-24 w-96 h-96 bg-brand-50 rounded-full blur-3xl opacity-50"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <div class="order-2 lg:order-1 reveal">
+                    <div class="inline-block p-3 rounded-lg bg-brand-100 text-brand-600 mb-6"><i data-lucide="code-2" class="w-8 h-8"></i></div>
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6" data-i18n="soft_title">Custom Software Development</h2>
+                    <p class="text-lg text-gray-600 mb-6" data-i18n="soft_desc">Not all companies are the same, and your software shouldn't be either. We design robust and scalable architectures tailored exactly to your workflows.</p>
+                    <ul class="space-y-4">
+                        <li class="flex items-start group"><div class="flex-shrink-0 h-6 w-6 rounded-full bg-green-100 flex items-center justify-center mt-1 group-hover:scale-110 transition-transform"><i data-lucide="check" class="w-4 h-4 text-green-600"></i></div><div class="ml-4"><h4 class="text-lg font-medium text-gray-900" data-i18n="soft_item1_title">Enterprise Apps (ERP/CRM)</h4><p class="text-gray-500" data-i18n="soft_item1_desc">Internal systems to optimize resource management and clients.</p></div></li>
+                        <li class="flex items-start group"><div class="flex-shrink-0 h-6 w-6 rounded-full bg-green-100 flex items-center justify-center mt-1 group-hover:scale-110 transition-transform"><i data-lucide="check" class="w-4 h-4 text-green-600"></i></div><div class="ml-4"><h4 class="text-lg font-medium text-gray-900" data-i18n="soft_item2_title">API Integration & Automation</h4><p class="text-gray-500" data-i18n="soft_item2_desc">Connecting your current tools to eliminate manual tasks.</p></div></li>
+                        <li class="flex items-start group"><div class="flex-shrink-0 h-6 w-6 rounded-full bg-green-100 flex items-center justify-center mt-1 group-hover:scale-110 transition-transform"><i data-lucide="check" class="w-4 h-4 text-green-600"></i></div><div class="ml-4"><h4 class="text-lg font-medium text-gray-900" data-i18n="soft_item3_title">Mobile & Cloud Dev</h4><p class="text-gray-500" data-i18n="soft_item3_desc">Native or hybrid solutions and cloud migration (AWS/Azure).</p></div></li>
+                    </ul>
+                </div>
+                <div class="order-1 lg:order-2 relative reveal delay-200">
+                    <div class="relative w-full h-auto animate-float">
+                         <svg viewBox="0 0 500 400" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full drop-shadow-2xl">
+                            <rect x="50" y="50" width="400" height="300" rx="15" fill="#1E293B" /><rect x="50" y="50" width="400" height="40" rx="15" fill="#334155" /><rect x="50" y="80" width="400" height="10" fill="#1E293B" />
+                            <circle cx="80" cy="70" r="6" fill="#EF4444" /><circle cx="105" cy="70" r="6" fill="#F59E0B" /><circle cx="130" cy="70" r="6" fill="#10B981" />
+                            <rect x="90" y="120" width="200" height="10" rx="5" fill="#475569" class="animate-pulse" /><rect x="90" y="150" width="150" height="10" rx="5" fill="#475569" /><rect x="90" y="180" width="250" height="10" rx="5" fill="#3B82F6" /><rect x="110" y="210" width="180" height="10" rx="5" fill="#475569" /><rect x="110" y="240" width="120" height="10" rx="5" fill="#475569" />
+                            <g class="animate-float-delayed"><rect x="300" y="250" width="180" height="80" rx="10" fill="white" stroke="#E2E8F0" stroke-width="2"/><circle cx="330" cy="290" r="15" fill="#10B981" fill-opacity="0.2"/><circle cx="330" cy="290" r="8" fill="#10B981"/><rect x="360" y="275" width="80" height="10" rx="5" fill="#CBD5E1"/><rect x="360" y="295" width="50" height="10" rx="5" fill="#E2E8F0"/></g>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="soporte" class="py-24 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16 reveal">
+                <span class="text-brand-600 font-semibold tracking-wide uppercase text-sm" data-i18n="it_badge">Infrastructure & Security</span>
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mt-2 mb-4" data-i18n="it_title">Corporate IT Support</h2>
+                <p class="text-lg text-gray-600" data-i18n="it_desc">Your outsourced IT department. We guarantee your company's operational continuity with fast response times and definitive solutions.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white rounded-xl p-8 shadow-sm hover:shadow-xl transition-all border border-gray-100 group reveal delay-100 hover:-translate-y-2">
+                    <div class="w-14 h-14 bg-blue-50 rounded-lg flex items-center justify-center text-blue-600 mb-6 group-hover:bg-blue-600 group-hover:text-white transition duration-300"><i data-lucide="shield-check" class="w-7 h-7 group-hover:rotate-12 transition-transform"></i></div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3" data-i18n="it_card1_title">Cybersecurity & Networks</h3><p class="text-gray-500 mb-4" data-i18n="it_card1_desc">Data protection, firewall configuration, secure VPNs, and 24/7 threat monitoring.</p>
+                </div>
+                <div class="bg-white rounded-xl p-8 shadow-sm hover:shadow-xl transition-all border border-gray-100 group reveal delay-200 hover:-translate-y-2">
+                    <div class="w-14 h-14 bg-indigo-50 rounded-lg flex items-center justify-center text-indigo-600 mb-6 group-hover:bg-indigo-600 group-hover:text-white transition duration-300"><i data-lucide="server" class="w-7 h-7 group-hover:scale-110 transition-transform"></i></div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3" data-i18n="it_card2_title">Server Administration</h3><p class="text-gray-500 mb-4" data-i18n="it_card2_desc">Windows/Linux server installation, maintenance, and virtualization. Automated backups.</p>
+                </div>
+                <div class="bg-white rounded-xl p-8 shadow-sm hover:shadow-xl transition-all border border-gray-100 group reveal delay-300 hover:-translate-y-2">
+                    <div class="w-14 h-14 bg-teal-50 rounded-lg flex items-center justify-center text-teal-600 mb-6 group-hover:bg-teal-600 group-hover:text-white transition duration-300"><i data-lucide="headset" class="w-7 h-7 group-hover:rotate-12 transition-transform"></i></div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3" data-i18n="it_card3_title">Helpdesk & Technical Support</h3><p class="text-gray-500 mb-4" data-i18n="it_card3_desc">End-user support, remote or on-site hardware and software incident resolution.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="web" class="py-20 bg-white border-t border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-12">
+                <div class="md:w-1/2 reveal">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-4" data-i18n="web_title">Professional Digital Presence</h2>
+                    <p class="text-lg text-gray-600 mb-6" data-i18n="web_desc">We build websites that not only look good but convert. From corporate landing pages to complex e-commerce systems.</p>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="flex items-center gap-3 p-3 bg-gray-50 rounded-lg"><i data-lucide="layout" class="text-brand-500"></i><span class="font-medium text-gray-800">UI/UX Design</span></div>
+                        <div class="flex items-center gap-3 p-3 bg-gray-50 rounded-lg"><i data-lucide="shopping-cart" class="text-brand-500"></i><span class="font-medium text-gray-800">E-commerce</span></div>
+                    </div>
+                </div>
+                <div class="md:w-1/2 flex justify-center reveal delay-200">
+                    <div class="relative w-full max-w-md group">
+                        <div class="absolute inset-0 bg-gradient-to-r from-brand-400 to-accent-500 rounded-2xl transform rotate-3 opacity-20 group-hover:rotate-6 transition-transform duration-500"></div>
+                        <div class="relative bg-white p-2 rounded-2xl shadow-xl border border-gray-100 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2015&auto=format&fit=crop" alt="Web Development" class="rounded-xl w-full h-auto object-cover transform group-hover:scale-105 transition-transform duration-700">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contacto" class="py-24 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
+                <div class="reveal">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-6" data-i18n="contact_title">Let's talk about your project</h2>
+                    <p class="text-lg text-gray-600 mb-8" data-i18n="contact_desc">Whether you need urgent technical support, develop a new platform, or modernize your infrastructure, we are ready to help.</p>
+                    <div class="space-y-6">
+                        <div class="flex items-start group"><div class="flex-shrink-0"><i data-lucide="mail" class="w-6 h-6 text-brand-600"></i></div><div class="ml-4"><h3 class="text-lg font-medium text-gray-900">Email</h3><p class="text-gray-500">contacto@nextcoding.com</p></div></div>
+                    </div>
+                </div>
+                <div class="bg-white rounded-2xl shadow-lg p-8 reveal delay-200">
+                    <form id="contact-form" class="space-y-6">
+                        <!-- HIDDEN TIME FIELD -->
+                        <input type="hidden" name="time" id="current_time">
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div><label class="block text-sm font-medium text-gray-700 mb-1" data-i18n="form_name">Name</label><input type="text" name="from_name" id="from_name" required class="w-full px-4 py-2 border border-gray-300 rounded-lg outline-none focus:ring-2 focus:ring-brand-500"></div>
+                            <div><label class="block text-sm font-medium text-gray-700 mb-1" data-i18n="form_email">Email</label><input type="email" name="reply_to" id="reply_to" required class="w-full px-4 py-2 border border-gray-300 rounded-lg outline-none focus:ring-2 focus:ring-brand-500"></div>
+                        </div>
+                        <div>
+                             <label class="block text-sm font-medium text-gray-700 mb-1" data-i18n="form_service">Service of Interest</label>
+                             <select name="service_interest" id="service_interest" class="w-full px-4 py-2 border border-gray-300 rounded-lg outline-none focus:ring-2 focus:ring-brand-500 bg-white">
+                                 <option value="General Inquiry">General Inquiry</option>
+                                 <option value="Software Development">Software Development</option>
+                                 <option value="IT Support">IT Support</option>
+                                 <option value="Web Development">Web Development</option>
+                             </select>
+                        </div>
+                        <div><label class="block text-sm font-medium text-gray-700 mb-1" data-i18n="form_message">Message</label><textarea name="message" id="message" rows="4" required class="w-full px-4 py-2 border border-gray-300 rounded-lg outline-none focus:ring-2 focus:ring-brand-500"></textarea></div>
+                        <button type="submit" id="submit-btn" class="w-full bg-brand-600 text-white font-bold py-3 px-4 rounded-lg hover:bg-brand-700 transition flex justify-center items-center disabled:opacity-50 disabled:cursor-not-allowed"><span id="btn-text" data-i18n="form_submit">Send Message</span> <i id="btn-icon" data-lucide="send" class="ml-2 w-4 h-4"></i></button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Support Modal (AnyDesk + Gatekeeper) -->
+    <div id="support-modal" class="modal fixed inset-0 z-[60] flex items-center justify-center p-4">
+        <div class="absolute inset-0 bg-gray-900/80 backdrop-blur-sm" onclick="closeSupportModal()"></div>
+        <div class="modal-content bg-white rounded-2xl shadow-2xl w-full max-w-md relative z-10 overflow-hidden">
+            <div class="bg-red-600 p-6 text-white text-center relative">
+                <button onclick="closeSupportModal()" class="absolute top-4 right-4 text-white/80 hover:text-white"><i data-lucide="x" class="w-6 h-6"></i></button>
+                <div class="w-16 h-16 bg-white rounded-full mx-auto flex items-center justify-center mb-4 text-red-600 shadow-lg"><i data-lucide="monitor-check" class="w-8 h-8"></i></div>
+                <h3 class="text-2xl font-bold" data-i18n="modal_title">Quick Remote Support</h3>
+                <p class="text-red-100 mt-2" data-i18n="modal_subtitle">Connect with a technician now</p>
+            </div>
+            
+            <div class="p-8">
+                <!-- 1. ACCESS GATEKEEPER -->
+                <div id="access-screen" class="space-y-4">
+                    <div class="text-center mb-6">
+                        <h4 class="text-lg font-bold text-gray-900 mb-2">Restricted Access</h4>
+                        <p class="text-sm text-gray-500">Please enter the security code provided by your technician to access the download area.</p>
+                    </div>
+                    <input type="password" id="support-code" class="w-full px-4 py-3 border border-gray-300 rounded-lg text-center text-lg tracking-widest focus:ring-2 focus:ring-red-500 outline-none transition" placeholder="ENTER CODE">
+                    <p id="code-error" class="text-red-500 text-sm text-center font-bold hidden animate-pulse">Incorrect Code. Try again.</p>
+                    <button onclick="verifySupportCode()" class="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-3 rounded-lg transition shadow-lg shadow-red-500/30">Continue</button>
+                </div>
+
+                <!-- 2. NAME INPUT STEP -->
+                <div id="name-screen" class="space-y-4 hidden">
+                    <div class="text-center mb-6">
+                        <h4 class="text-lg font-bold text-gray-900 mb-2">Welcome!</h4>
+                        <p class="text-sm text-gray-500">Please enter your name so we know who is connecting.</p>
+                    </div>
+                    <input type="text" id="client-name" class="w-full px-4 py-3 border border-gray-300 rounded-lg text-center text-lg focus:ring-2 focus:ring-red-500 outline-none transition" placeholder="Your Name">
+                    <button onclick="submitNameAndDownload()" class="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-3 rounded-lg transition shadow-lg shadow-red-500/30">
+                        Start Download
+                    </button>
+                </div>
+
+                <!-- 3. DOWNLOAD & CONTACT CONTENT (Hidden by default) -->
+                <div id="support-content" class="space-y-6 hidden">
+                    <div class="flex gap-4 items-start">
+                        <div class="flex-shrink-0 w-8 h-8 rounded-full bg-red-100 text-red-600 flex items-center justify-center font-bold">1</div>
+                        <div class="flex-grow">
+                            <h4 class="font-bold text-gray-900" data-i18n="step1_title">Download Client</h4>
+                            <p class="text-sm text-gray-500 mb-2" data-i18n="step1_desc">Choose your operating system:</p>
+                            <div class="flex flex-col gap-2 mt-2">
+                                <a href="https://anydesk.com/en/downloads/thank-you?dv=win_exe" target="_blank" class="w-full flex items-center justify-center gap-2 bg-gray-100 hover:bg-red-50 text-gray-800 hover:text-red-700 py-2 rounded-lg border border-gray-200 hover:border-red-200 transition font-medium text-sm">
+                                    <i data-lucide="monitor" class="w-4 h-4"></i> Download for Windows
+                                </a>
+                                <a href="https://anydesk.com/en/downloads/mac-os" target="_blank" class="w-full flex items-center justify-center gap-2 bg-gray-100 hover:bg-red-50 text-gray-800 hover:text-red-700 py-2 rounded-lg border border-gray-200 hover:border-red-200 transition font-medium text-sm">
+                                    <i data-lucide="apple" class="w-4 h-4"></i> Download for Mac
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex gap-4">
+                        <div class="flex-shrink-0 w-8 h-8 rounded-full bg-red-100 text-red-600 flex items-center justify-center font-bold">2</div>
+                        <div class="w-full">
+                            <h4 class="font-bold text-gray-900" data-i18n="step3_title">Contact Technician</h4>
+                            <p class="text-sm text-gray-500 mb-2" data-i18n="step3_desc">Send us the ID to connect.</p>
+                            
+                            <!-- Enhanced AnyDesk Input Form -->
+                            <div class="space-y-3">
+                                <input type="text" id="anydesk-id-input" placeholder="9-Digit AnyDesk Code" class="w-full px-3 py-2 border border-gray-300 rounded text-center font-mono text-lg tracking-widest outline-none focus:ring-1 focus:ring-green-500" maxlength="11">
+                                <textarea id="anydesk-msg-input" placeholder="Optional message..." class="w-full px-3 py-2 border border-gray-300 rounded text-sm outline-none focus:ring-1 focus:ring-green-500" rows="2"></textarea>
+                                <button onclick="sendAnydeskWhatsApp()" class="w-full bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-lg flex items-center justify-center gap-2 transition shadow-md shadow-green-500/20">
+                                    <i data-lucide="message-circle" class="w-5 h-5"></i><span data-i18n="whatsapp_btn">Send via WhatsApp</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-gray-50 p-4 text-center text-xs text-gray-400 border-t border-gray-100">Powered by NextCoding Remote Support</div>
+        </div>
+    </div>
+
+    <!-- Floating Elegant WhatsApp Widget -->
+    <div class="fixed bottom-6 right-6 z-50 flex flex-col items-end">
+        <!-- Chat Form (Hidden by default) -->
+        <div id="whatsapp-chat-form" class="hidden bg-white p-4 rounded-2xl shadow-2xl mb-4 w-80 border border-gray-100 animate-slide-up origin-bottom-right">
+           <!-- Header -->
+           <div class="flex justify-between items-center mb-4 border-b border-gray-100 pb-2">
+               <div class="flex items-center gap-2">
+                   <div class="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center text-green-600">
+                       <i data-lucide="message-circle" class="w-5 h-5"></i>
+                   </div>
+                   <div>
+                       <h3 class="font-bold text-gray-800 text-sm" data-i18n="wa_chat_title">Chat with Support</h3>
+                       <p class="text-xs text-green-600 font-medium">Online</p>
+                   </div>
+               </div>
+               <button onclick="toggleChat()" class="text-gray-400 hover:text-gray-600 transition"><i data-lucide="x" class="w-5 h-5"></i></button>
+           </div>
+           
+           <!-- Inputs -->
+           <div class="space-y-3">
+               <div>
+                   <label class="block text-xs font-semibold text-gray-500 mb-1" data-i18n="wa_name_label">Name</label>
+                   <input id="wa-name" class="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:border-green-500 focus:ring-1 focus:ring-green-500 transition" placeholder="Your Name">
+               </div>
+               <div>
+                   <label class="block text-xs font-semibold text-gray-500 mb-1" data-i18n="wa_msg_label">Message</label>
+                   <textarea id="wa-msg" class="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:border-green-500 focus:ring-1 focus:ring-green-500 transition" rows="3" placeholder="How can we help?"></textarea>
+               </div>
+               
+               <!-- AnyDesk Option -->
+               <div>
+                   <label class="flex items-center gap-2 cursor-pointer">
+                       <input type="checkbox" id="wa-has-anydesk" class="w-4 h-4 text-green-600 rounded focus:ring-green-500" onchange="toggleAnyDeskInput()">
+                       <span class="text-xs font-semibold text-gray-500" data-i18n="wa_has_anydesk">I have AnyDesk</span>
+                   </label>
+               </div>
+               
+               <!-- Hidden AnyDesk Code Input -->
+               <div id="wa-anydesk-container" class="hidden">
+                   <label class="block text-xs font-semibold text-gray-500 mb-1" data-i18n="wa_anydesk_code">AnyDesk Code</label>
+                   <input id="wa-anydesk-code" class="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:border-green-500 focus:ring-1 focus:ring-green-500 transition" placeholder="000 000 000" maxlength="11">
+               </div>
+               
+               <!-- Button -->
+               <button onclick="openGeneralWhatsApp()" class="w-full bg-green-500 hover:bg-green-600 text-white py-2.5 rounded-lg font-bold flex items-center justify-center gap-2 transition shadow-lg shadow-green-500/20 text-sm">
+                   <i data-lucide="send" class="w-4 h-4"></i> <span data-i18n="wa_send_btn">Start Chat</span>
+               </button>
+           </div>
+           <div class="text-center mt-3 text-[10px] text-gray-400">Usually replies in minutes</div>
+        </div>
+    
+        <!-- Toggle Button -->
+        <button onclick="toggleChat()" class="bg-green-500 text-white p-4 rounded-full shadow-lg hover:bg-green-600 transition-all hover:scale-110 flex items-center justify-center group">
+            <i data-lucide="message-circle" class="w-7 h-7"></i>
+            <span class="absolute right-full mr-3 bg-gray-900 text-white px-3 py-1.5 rounded-lg text-xs font-bold shadow-xl opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
+                Chat with us
+            </span>
+        </button>
+    </div>
+
+    <!-- Cookie Banner -->
+    <div id="cookie-banner" class="fixed bottom-0 w-full bg-gray-900 border-t border-gray-800 p-4 z-[100] hidden">
+        <div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3"><i data-lucide="cookie" class="w-8 h-8 text-brand-400 flex-shrink-0"></i><p class="text-sm text-gray-300"><span data-i18n="cookie_text">We use cookies to improve your experience and analyze our traffic. By clicking "Accept", you agree to our use of cookies.</span></p></div>
+            <div class="flex gap-3"><button onclick="acceptCookies()" class="px-6 py-2 bg-brand-600 text-white text-sm font-bold rounded-lg hover:bg-brand-500 transition shadow-lg shadow-brand-500/20 whitespace-nowrap" data-i18n="cookie_accept">Accept</button></div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        lucide.createIcons();
+
+        // ------------------------------------------------------------
+        // LINKS DE DESCARGA
+        // ------------------------------------------------------------
+        const winLink = "https://anydesk.com/en/downloads/thank-you?dv=win_exe";
+        const macLink = "https://anydesk.com/en/downloads/mac-os";
+        const phoneNumber = "15551234567"; // Replace with your actual number (no + sign)
+
+        // --- Gatekeeper Logic ---
+        function verifySupportCode() {
+            const input = document.getElementById('support-code');
+            const errorMsg = document.getElementById('code-error');
+            const accessScreen = document.getElementById('access-screen');
+            const nameScreen = document.getElementById('name-screen');
+            
+            const val = btoa(input.value);
+            // 123 (Base64: MTIz) OR takecontrol0235 (Base64: dGFrZWNvbnRyb2wwMjM1)
+            if (val === 'dGFrZWNvbnRyb2wwMjM1' || val === 'MTIz') {
+                accessScreen.classList.add('hidden');
+                nameScreen.classList.remove('hidden'); 
+                errorMsg.classList.add('hidden');
+            } else {
+                errorMsg.classList.remove('hidden');
+                input.classList.add('animate-shake', 'border-red-500');
+                setTimeout(() => input.classList.remove('animate-shake', 'border-red-500'), 500);
+            }
+        }
+
+        // --- Name Submission & Auto Download Logic ---
+        function submitNameAndDownload() {
+            const nameInput = document.getElementById('client-name');
+            const nameScreen = document.getElementById('name-screen');
+            const contentScreen = document.getElementById('support-content');
+            
+            if(nameInput.value.trim() === "") {
+                nameInput.classList.add('border-red-500', 'animate-shake');
+                setTimeout(() => nameInput.classList.remove('border-red-500', 'animate-shake'), 500);
+                return;
+            }
+
+            // 1. Send silent notification
+            const templateParams = {
+                from_name: nameInput.value,
+                reply_to: "No-Reply-System",
+                service_interest: "Remote Support Downloaded",
+                message: "Client " + nameInput.value + " has accessed the remote support area.",
+                time: new Date().toLocaleString()
+            };
+            emailjs.send('service_ozqopai', 'template_dn4b4oe', templateParams, emailJSPublicKey);
+
+            // 2. Show Download Content
+            nameScreen.classList.add('hidden');
+            contentScreen.classList.remove('hidden');
+
+            // 3. Try to Auto-Detect OS and Download
+            const userAgent = window.navigator.userAgent;
+            let downloadLink = winLink; 
+            if (userAgent.indexOf("Mac") != -1) { downloadLink = macLink; }
+            window.open(downloadLink, '_blank');
+        }
+
+        // --- WHATSAPP LOGIC ---
+        function sendAnydeskWhatsApp() {
+            const name = document.getElementById('client-name').value || "Client";
+            const code = document.getElementById('anydesk-id-input').value;
+            const msg = document.getElementById('anydesk-msg-input').value;
+            
+            if(!code) {
+                alert("Please enter your AnyDesk ID");
+                return;
+            }
+
+            let text = "";
+            if (currentLang === 'es') {
+                text = `Hola, mi nombre es: ${name} y mi código de asistencia es: ${code}. ${msg ? 'Mensaje: ' + msg : ''}`;
+            } else {
+                text = `Hi, My name is: ${name} and my code for assistance is: ${code}. ${msg ? 'Message: ' + msg : ''}`;
+            }
+            
+            window.open(`https://wa.me/${phoneNumber}?text=${encodeURIComponent(text)}`, '_blank');
+        }
+
+        function toggleChat() {
+            const chatForm = document.getElementById('whatsapp-chat-form');
+            chatForm.classList.toggle('hidden');
+        }
+
+        function toggleAnyDeskInput() {
+            const container = document.getElementById('wa-anydesk-container');
+            container.classList.toggle('hidden');
+        }
+
+        function openGeneralWhatsApp() {
+            const name = document.getElementById('wa-name').value;
+            const msg = document.getElementById('wa-msg').value;
+            const hasAnyDesk = document.getElementById('wa-has-anydesk').checked;
+            const anyDeskCode = document.getElementById('wa-anydesk-code').value;
+            
+            if(!msg) {
+                alert("Please write a message");
+                return;
+            }
+
+            let text = "";
+            if (currentLang === 'es') {
+                text = `Hola, soy ${name ? name : 'un visitante'}. ${msg}`;
+                if (hasAnyDesk && anyDeskCode) {
+                    text += ` Mi código de AnyDesk es: ${anyDeskCode}`;
+                }
+            } else {
+                text = `Hi, I am ${name ? name : 'a visitor'}. ${msg}`;
+                if (hasAnyDesk && anyDeskCode) {
+                    text += ` My AnyDesk code is: ${anyDeskCode}`;
+                }
+            }
+            
+            window.open(`https://wa.me/${phoneNumber}?text=${encodeURIComponent(text)}`, '_blank');
+        }
+
+        // --- Multi-language Logic ---
         const translations = {
-            en: {
-                title: "Nextcoding | Coming Soon",
-                heading: "We are building something amazing",
-                subheading: "Our new website is under development. We are working hard to bring you the best experience. Subscribe for updates.",
-                days: "Days",
-                hours: "Hours",
-                minutes: "Minutes",
-                seconds: "Seconds",
-                emailPlaceholder: "Your email address",
-                notifyBtn: "Notify Me",
-                currentLang: "EN"
-            },
             es: {
-                title: "Nextcoding | Próximamente",
-                heading: "Estamos construyendo algo increíble",
-                subheading: "Nuestro nuevo sitio web está en desarrollo. Estamos trabajando duro para ofrecerte la mejor experiencia. Suscríbete para recibir actualizaciones.",
-                days: "Días",
-                hours: "Horas",
-                minutes: "Minutos",
-                seconds: "Segundos",
-                emailPlaceholder: "Tu correo electrónico",
-                notifyBtn: "Notificarme",
-                currentLang: "ES"
+                nav_home: "Inicio", nav_software: "Desarrollo Software", nav_support: "Soporte IT", nav_quick_support: "Soporte YA", nav_contact: "Contactar",
+                hero_badge: "Innovación Tecnológica para Empresas", hero_title_prefix: "Tu Socio Estratégico en", hero_title_highlight: "TI y Desarrollo",
+                hero_desc: "Impulsamos tu negocio con software a medida de alto rendimiento y soporte técnico integral. Tecnología que funciona, escala y asegura tu operación.",
+                hero_cta_support: "Solicitar Soporte Remoto", hero_cta_talk: "Hablar con Experto",
+                soft_title: "Desarrollo de Software a Medida", soft_desc: "No todas las empresas son iguales, y tu software tampoco debería serlo. Diseñamos arquitecturas robustas y escalables.",
+                soft_item1_title: "Aplicaciones Empresariales (ERP/CRM)", soft_item1_desc: "Sistemas internos para optimizar la gestión de recursos.",
+                soft_item2_title: "Integración de APIs", soft_item2_desc: "Conectamos herramientas para eliminar tareas manuales.",
+                soft_item3_title: "Desarrollo Móvil y Cloud", soft_item3_desc: "Soluciones nativas o híbridas y migración a la nube.",
+                it_badge: "Infraestructura & Seguridad", it_title: "Soporte IT Corporativo", it_desc: "Tu departamento de sistemas, externalizado. Garantizamos la continuidad operativa con tiempos de respuesta rápidos.",
+                it_card1_title: "Ciberseguridad y Redes", it_card1_desc: "Protección de datos, firewalls y VPNs seguras.",
+                it_card2_title: "Administración de Servidores", it_card2_desc: "Mantenimiento Windows/Linux y backups automatizados.",
+                it_card3_title: "Helpdesk y Soporte", it_card3_desc: "Atención a usuarios y resolución de incidencias.",
+                web_title: "Presencia Digital Profesional", web_desc: "Desarrollamos sitios web que convierten. Desde landing pages hasta e-commerce.",
+                contact_title: "Hablemos de tu proyecto", contact_desc: "Soporte técnico, desarrollo o infraestructura. Estamos listos.",
+                form_name: "Nombre", form_email: "Email Corporativo", form_service: "Servicio de Interés", form_message: "Mensaje", form_submit: "Enviar Mensaje",
+                modal_title: "Soporte Remoto Rápido", modal_subtitle: "Conéctate con un técnico ahora",
+                step1_title: "Descarga el Cliente", step1_desc: "Elige tu sistema operativo:", download_anydesk: "Descargar AnyDesk (Oficial)",
+                step2_title: "Ejecuta y comparte tu ID", step2_desc: "Abre el programa y busca el número de 9 dígitos.",
+                step3_title: "Contacta al Técnico", step3_desc: "Envíanos tu ID para conectar.", whatsapp_btn: "Enviar por WhatsApp",
+                cookie_text: "Usamos cookies para mejorar tu experiencia. Al aceptar, confirmas su uso.", cookie_accept: "Aceptar",
+                wa_chat_title: "Chatea con Soporte", wa_name_label: "Nombre", wa_msg_label: "Mensaje", wa_send_btn: "Iniciar Chat",
+                wa_has_anydesk: "Tengo AnyDesk", wa_anydesk_code: "Código AnyDesk",
+                alert_success_title: "¡Mensaje Enviado!", alert_success_text: "Nos pondremos en contacto contigo lo antes posible.",
+                alert_error_title: "Error", alert_error_text: "Hubo un problema al enviar el mensaje. Por favor intenta de nuevo.", sending: "Enviando..."
+            },
+            en: {
+                nav_home: "Home", nav_software: "Software Dev", nav_support: "IT Support", nav_quick_support: "Quick Support", nav_contact: "Contact Us",
+                hero_badge: "Technological Innovation for Business", hero_title_prefix: "Your Strategic Partner in", hero_title_highlight: "IT & Development",
+                hero_desc: "We boost your business with high-performance custom software and comprehensive technical support. Technology that works, scales, and secures your operation.",
+                hero_cta_support: "Get Remote Support", hero_cta_talk: "Talk to an Expert",
+                soft_title: "Custom Software Development", soft_desc: "Not all companies are the same, and your software shouldn't be either. We design robust and scalable architectures.",
+                soft_item1_title: "Enterprise Apps (ERP/CRM)", soft_item1_desc: "Internal systems to optimize resource management.",
+                soft_item2_title: "API Integration", soft_item2_desc: "Connecting tools to eliminate manual tasks.",
+                soft_item3_title: "Mobile & Cloud Dev", soft_item3_desc: "Native/Hybrid solutions and cloud migration.",
+                it_badge: "Infrastructure & Security", it_title: "Corporate IT Support", it_desc: "Your outsourced IT department. We guarantee operational continuity with fast response times.",
+                it_card1_title: "Cybersecurity & Networks", it_card1_desc: "Data protection, firewalls, and secure VPNs.",
+                it_card2_title: "Server Administration", it_card2_desc: "Windows/Linux maintenance and automated backups.",
+                it_card3_title: "Helpdesk & Support", it_card3_desc: "User support and incident resolution.",
+                web_title: "Professional Digital Presence", web_desc: "We build websites that convert. From landing pages to e-commerce.",
+                contact_title: "Let's talk about your project", contact_desc: "Tech support, development, or infrastructure. We are ready.",
+                form_name: "Name", form_email: "Corporate Email", form_service: "Service of Interest", form_message: "Message", form_submit: "Send Message",
+                modal_title: "Quick Remote Support", modal_subtitle: "Connect with a technician now",
+                step1_title: "Download Client", step1_desc: "Choose your operating system:", download_anydesk: "Download AnyDesk (Official)",
+                step2_title: "Run and Share ID", step2_desc: "Open the program and find the 9-digit number.",
+                step3_title: "Contact Technician", step3_desc: "Send us the ID to connect.", whatsapp_btn: "Send via WhatsApp",
+                cookie_text: "We use cookies to improve your experience and analyze our traffic. By clicking \"Accept\", you agree to our use of cookies.", cookie_accept: "Accept",
+                wa_chat_title: "Chat with Support", wa_name_label: "Name", wa_msg_label: "Message", wa_send_btn: "Start Chat",
+                wa_has_anydesk: "I have AnyDesk", wa_anydesk_code: "AnyDesk Code",
+                alert_success_title: "Message Sent!", alert_success_text: "We will get back to you as soon as possible.",
+                alert_error_title: "Error", alert_error_text: "There was a problem sending the message. Please try again.", sending: "Sending..."
             }
         };
-        
-        // Language selector functionality
-        const languageBtn = document.getElementById('languageBtn');
-        const languageOptions = document.getElementById('languageOptions');
-        const currentLang = document.getElementById('currentLang');
-        
-        // Toggle language dropdown
-        languageBtn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            languageOptions.classList.toggle('show');
-        });
-        
-        // Close dropdown when clicking outside
-        document.addEventListener('click', () => {
-            languageOptions.classList.remove('show');
-        });
-        
-        // Change language
-        document.querySelectorAll('.language-option').forEach(option => {
-            option.addEventListener('click', (e) => {
-                e.preventDefault();
-                const lang = option.dataset.lang;
-                setLanguage(lang);
-                languageOptions.classList.remove('show');
-            });
-        });
-        
-        // Set language function
-        function setLanguage(lang) {
-            // Update all text elements
-            document.title = translations[lang].title;
-            document.getElementById('mainHeading').textContent = translations[lang].heading;
-            document.getElementById('subHeading').textContent = translations[lang].subheading;
-            document.getElementById('daysLabel').textContent = translations[lang].days;
-            document.getElementById('hoursLabel').textContent = translations[lang].hours;
-            document.getElementById('minutesLabel').textContent = translations[lang].minutes;
-            document.getElementById('secondsLabel').textContent = translations[lang].seconds;
-            document.getElementById('emailInput').placeholder = translations[lang].emailPlaceholder;
-            document.getElementById('notifyBtn').textContent = translations[lang].notifyBtn;
-            currentLang.textContent = translations[lang].currentLang;
-            
-            // Store selected language
-            localStorage.setItem('selectedLanguage', lang);
+
+        let currentLang = 'en';
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'es' ? 'en' : 'es';
+            document.getElementById('lang-display').textContent = currentLang.toUpperCase();
+            document.getElementById('lang-display-mobile').textContent = currentLang.toUpperCase();
+            updateContent();
         }
-        
-        // Initialize with saved language or default to English
-        const savedLanguage = localStorage.getItem('selectedLanguage') || 'en';
-        setLanguage(savedLanguage);
-        
-        // Countdown Timer
-        function updateCountdown() {
-            const launchDate = new Date('2025-11-28T17:00:00').getTime();
-            const now = new Date().getTime();
-            const distance = launchDate - now;
-            
-            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-            
-            document.getElementById('days').textContent = days.toString().padStart(2, '0');
-            document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
-            document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
-            document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
-            
-            if (distance < 0) {
-                clearInterval(countdownTimer);
-                document.querySelector('.countdown').innerHTML = '<div class="launch-message">We\'re live!</div>';
+
+        function updateContent() {
+            document.querySelectorAll('[data-i18n]').forEach(element => {
+                const key = element.getAttribute('data-i18n');
+                if (translations[currentLang][key]) {
+                    if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
+                         element.placeholder = translations[currentLang][key];
+                    } else {
+                         element.textContent = translations[currentLang][key];
+                    }
+                }
+            });
+            const btnText = document.getElementById('btn-text');
+            if(btnText && !document.getElementById('submit-btn').disabled) {
+                 btnText.textContent = translations[currentLang]['form_submit'];
             }
         }
-        
-        // Update immediately and then every second
-        updateCountdown();
-        const countdownTimer = setInterval(updateCountdown, 1000);
+
+        function openSupportModal() {
+            const modal = document.getElementById('support-modal');
+            modal.classList.remove('hidden'); 
+            setTimeout(() => modal.classList.add('open'), 10);
+        }
+
+        function closeSupportModal() {
+            const modal = document.getElementById('support-modal');
+            modal.classList.remove('open');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                document.getElementById('access-screen').classList.remove('hidden');
+                document.getElementById('name-screen').classList.add('hidden');
+                document.getElementById('support-content').classList.add('hidden');
+                document.getElementById('support-code').value = '';
+                document.getElementById('client-name').value = '';
+                document.getElementById('anydesk-id-input').value = '';
+                document.getElementById('anydesk-msg-input').value = '';
+                document.getElementById('code-error').classList.add('hidden');
+            }, 300);
+        }
+
+        // Event Listeners for Enter key
+        document.getElementById('support-code').addEventListener("keypress", function(event) {
+            if (event.key === "Enter") { event.preventDefault(); verifySupportCode(); }
+        });
+        document.getElementById('client-name').addEventListener("keypress", function(event) {
+            if (event.key === "Enter") { event.preventDefault(); submitNameAndDownload(); }
+        });
+
+        function checkCookieConsent() {
+            if (!localStorage.getItem('cookie_consent')) {
+                const banner = document.getElementById('cookie-banner');
+                banner.classList.remove('hidden');
+                setTimeout(() => banner.classList.add('show'), 100);
+            }
+        }
+
+        function acceptCookies() {
+            localStorage.setItem('cookie_consent', 'true');
+            const banner = document.getElementById('cookie-banner');
+            banner.classList.remove('show');
+            setTimeout(() => banner.classList.add('hidden'), 500);
+        }
+
+        // --- EmailJS Configuration & Handling ---
+        const emailJSPublicKey = "l5-ahwZ7x9T1LmrMG"; 
+
+        (function() {
+            console.log("🔑 [DEBUG] Configurando EmailJS con Public Key:", emailJSPublicKey);
+            emailjs.init(emailJSPublicKey);
+        })();
+
+        document.getElementById('contact-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            console.log("🚀 [DEBUG] Iniciando proceso de envío del formulario...");
+
+            document.getElementById('current_time').value = new Date().toLocaleString();
+
+            const btn = document.getElementById('submit-btn');
+            const btnText = document.getElementById('btn-text');
+            const originalText = translations[currentLang]['form_submit'];
+            
+            btn.disabled = true;
+            btnText.textContent = translations[currentLang]['sending'];
+
+            const serviceID = 'service_ozqopai'; 
+            const templateID = 'template_dn4b4oe';
+
+            console.log("📧 [DEBUG] Service ID:", serviceID);
+            console.log("📄 [DEBUG] Template ID:", templateID);
+
+            emailjs.sendForm(serviceID, templateID, this, emailJSPublicKey)
+                .then(() => {
+                    console.log("✅ [DEBUG] ¡Envío exitoso!");
+                    Swal.fire({
+                        title: translations[currentLang]['alert_success_title'],
+                        text: translations[currentLang]['alert_success_text'],
+                        icon: 'success',
+                        confirmButtonColor: '#2563eb'
+                    });
+                    this.reset();
+                }, (err) => {
+                    console.error("❌ [DEBUG] Error al enviar:", err);
+                    Swal.fire({
+                        title: translations[currentLang]['alert_error_title'],
+                        text: translations[currentLang]['alert_error_text'],
+                        icon: 'error',
+                        confirmButtonColor: '#ef4444'
+                    });
+                })
+                .finally(() => {
+                    console.log("🏁 [DEBUG] Finalizado.");
+                    btn.disabled = false;
+                    btnText.textContent = originalText;
+                });
+        });
+
+        window.addEventListener('load', checkCookieConsent);
+
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 20) {
+                navbar.classList.add('shadow-md', 'bg-white/95');
+                navbar.classList.remove('bg-white/90');
+            } else {
+                navbar.classList.remove('shadow-md', 'bg-white/95');
+                navbar.classList.add('bg-white/90');
+            }
+        });
+
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+        });
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
     </script>
 </body>
 </html>
