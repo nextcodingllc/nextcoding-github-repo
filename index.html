@@ -695,6 +695,7 @@
             }
         }
 
+        // --- Modal Logic ---
         function openSupportModal() {
             const modal = document.getElementById('support-modal');
             modal.classList.remove('hidden'); 
@@ -741,6 +742,8 @@
         }
 
         // --- EmailJS Configuration & Handling ---
+        
+        // MOVED PUBLIC KEY TO GLOBAL SCOPE FOR BETTER ACCESS
         const emailJSPublicKey = "l5-ahwZ7x9T1LmrMG"; 
 
         (function() {
@@ -750,6 +753,7 @@
 
         document.getElementById('contact-form').addEventListener('submit', function(event) {
             event.preventDefault();
+            
             console.log("🚀 [DEBUG] Iniciando proceso de envío del formulario...");
 
             document.getElementById('current_time').value = new Date().toLocaleString();
@@ -758,15 +762,18 @@
             const btnText = document.getElementById('btn-text');
             const originalText = translations[currentLang]['form_submit'];
             
+            // UI Loading State
             btn.disabled = true;
             btnText.textContent = translations[currentLang]['sending'];
 
-            const serviceID = 'service_ozqopai'; 
+            // TUS IDs
+            const serviceID = 'service_ozqopai';
             const templateID = 'template_dn4b4oe';
 
             console.log("📧 [DEBUG] Service ID:", serviceID);
             console.log("📄 [DEBUG] Template ID:", templateID);
 
+            // Using sendForm with explicit Public Key (4th argument) for robustness
             emailjs.sendForm(serviceID, templateID, this, emailJSPublicKey)
                 .then(() => {
                     console.log("✅ [DEBUG] ¡Envío exitoso!");
@@ -795,14 +802,17 @@
 
         window.addEventListener('load', checkCookieConsent);
 
+        // --- Scroll Effect ---
         window.addEventListener('scroll', function() {
             const navbar = document.getElementById('navbar');
             if (window.scrollY > 20) {
-                navbar.classList.add('shadow-md', 'bg-white/95');
-                navbar.classList.remove('bg-white/90');
+                // Simplified scroll effect to just add a shadow and slight border change
+                // keeping the dark background
+                navbar.classList.add('shadow-md', 'border-gray-700');
+                navbar.classList.remove('border-gray-800');
             } else {
-                navbar.classList.remove('shadow-md', 'bg-white/95');
-                navbar.classList.add('bg-white/90');
+                navbar.classList.remove('shadow-md', 'border-gray-700');
+                navbar.classList.add('border-gray-800');
             }
         });
 
@@ -812,6 +822,7 @@
             menu.classList.toggle('hidden');
         });
 
+        // --- Animation Observer ---
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
