@@ -113,7 +113,7 @@
         #cookie-banner { transform: translateY(100%); transition: transform 0.5s ease-in-out; }
         #cookie-banner.show { transform: translateY(0); }
 
-        /* --- SPLASH SCREEN OPTIMIZED (MOBILE & DESKTOP) --- */
+        /* --- SPLASH SCREEN --- */
         #splash-screen {
             transition: opacity 0.5s ease-out 0.5s, visibility 0.5s 0.5s; 
         }
@@ -125,59 +125,33 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            will-change: width, height; /* GPU Optimization */
+            will-change: width, height; 
         }
 
-        /* --- DESKTOP ANIMATION (Vertical Rise) --- */
+        /* Desktop Wave */
         @media (min-width: 768px) {
             .wave-container {
-                bottom: 0;
-                left: 0;
-                width: 100%;
-                height: 0%; /* Start Height 0 */
+                bottom: 0; left: 0; width: 100%; height: 0%; 
                 transition: height 2s cubic-bezier(0.4, 0, 0.2, 1);
             }
-            .wave-container.start-wave {
-                height: 100%; /* End Height 100% */
-            }
+            .wave-container.start-wave { height: 100%; }
             .wave-container::before {
-                content: "";
-                position: absolute;
-                top: -50px;
-                left: -50%;
-                width: 200%;
-                height: 100px;
-                background: #0f172a;
-                border-radius: 50%;
-                opacity: 0.8;
+                content: ""; position: absolute; top: -50px; left: -50%; width: 200%; height: 100px;
+                background: #0f172a; border-radius: 50%; opacity: 0.8;
                 animation: waveWobble 4s infinite linear;
             }
         }
         
-        /* --- MOBILE ANIMATION (Horizontal Right-to-Left Wipe) --- */
+        /* Mobile Wave */
         @media (max-width: 767px) {
             .wave-container {
-                top: 0;
-                right: 0; /* Anchor Right */
-                width: 0%; /* Start Width 0 */
-                height: 100%;
-                /* Faster transition for mobile as requested */
+                top: 0; right: 0; width: 0%; height: 100%;
                 transition: width 1.5s cubic-bezier(0.65, 0, 0.35, 1); 
             }
-            .wave-container.start-wave {
-                width: 100%; /* End Width 100% (Moves left because anchored right) */
-            }
-            /* Curved leading edge on the LEFT side */
+            .wave-container.start-wave { width: 100%; }
             .wave-container::before {
-                content: "";
-                position: absolute;
-                top: -10%;
-                left: -40px; /* Stick out to the left */
-                width: 80px;
-                height: 120%;
-                background: #0f172a;
-                border-radius: 50%; /* Simple curve */
-                opacity: 0.9;
+                content: ""; position: absolute; top: -10%; left: -40px; width: 80px; height: 120%;
+                background: #0f172a; border-radius: 50%; opacity: 0.9;
             }
         }
 
@@ -188,27 +162,48 @@
         }
 
         .splash-logo-container {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            pointer-events: none;
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            display: flex; align-items: center; justify-content: center; pointer-events: none;
         }
 
-        /* --- CONTACT FORM FOCUS EFFECT --- */
+        /* --- FOCUS MODE STYLES (New) --- */
         #contact-card {
-            transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+            transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1); /* Bouncy spring transition */
+            z-index: 10;
         }
-        /* Class applied when scrolling to contact section */
-        #contact-card.focused {
-            transform: scale(1.05);
-            box-shadow: 0 25px 50px -12px rgba(59, 130, 246, 0.15); /* Brand colored shadow */
-            border: 1px solid rgba(59, 130, 246, 0.2);
-            z-index: 40; /* Keeps it below WhatsApp (z-50) */
+        
+        /* The Focus State */
+        #contact-card.focus-mode {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(1);
+            width: 90%;
+            max-width: 700px;
+            z-index: 50; /* Above overlay */
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(59, 130, 246, 0.5);
+        }
+
+        /* The blurred backdrop overlay */
+        #focus-overlay {
+            position: fixed;
+            inset: 0;
+            background-color: rgba(15, 23, 42, 0.6); /* Dark navy tint */
+            backdrop-filter: blur(8px);
+            z-index: 40; /* Below form, above page */
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s ease;
+        }
+        #focus-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        /* Ensure WhatsApp is always on top */
+        .whatsapp-widget-container {
+            z-index: 60 !important;
         }
     </style>
 </head>
@@ -216,28 +211,20 @@
 
     <!-- SPLASH SCREEN -->
     <div id="splash-screen" class="fixed inset-0 z-[100] bg-white">
-        
-        <!-- 1. Background Layer: White with Color Logo -->
         <div class="splash-logo-container z-10">
-            <!-- Mobile: h-12 (smaller) / Desktop: h-24 (larger) -->
-            <img src="https://www.nextcoding.com/images/logo.png" 
-                 class="h-12 md:h-24 w-auto object-contain animate-logo-enter" 
-                 alt="NextCoding">
+            <img src="https://www.nextcoding.com/images/logo.png" class="h-12 md:h-24 w-auto object-contain animate-logo-enter" alt="NextCoding">
         </div>
-
-        <!-- 2. Overlay Layer: Dark Wave with White Logo -->
         <div id="splash-wave" class="wave-container z-20">
             <div class="splash-logo-container">
-                <!-- Mobile: h-12 / Desktop: h-24 -->
-                <img src="https://www.nextcoding.com/images/logo.png" 
-                     class="h-12 md:h-24 w-auto object-contain animate-logo-enter brightness-0 invert" 
-                     alt="NextCoding">
+                <img src="https://www.nextcoding.com/images/logo.png" class="h-12 md:h-24 w-auto object-contain animate-logo-enter brightness-0 invert" alt="NextCoding">
             </div>
         </div>
-
     </div>
 
-    <!-- Navbar (FIXED DARK THEME) -->
+    <!-- FOCUS MODE OVERLAY (Backdrop) -->
+    <div id="focus-overlay" onclick="disableFocusMode()"></div>
+
+    <!-- Navbar -->
     <nav class="fixed w-full z-50 bg-gray-900 shadow-md border-b border-gray-800 transition-all duration-300" id="navbar">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-20">
@@ -262,7 +249,6 @@
                 </div>
             </div>
         </div>
-        <!-- Mobile Menu (Dark) -->
         <div id="mobile-menu" class="hidden md:hidden bg-gray-900 border-t border-gray-800 absolute w-full shadow-xl">
             <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
                 <a href="#inicio" class="block px-3 py-2 text-gray-300 hover:bg-gray-800 hover:text-white rounded-md font-medium" data-i18n="nav_home">Home</a>
@@ -410,27 +396,41 @@
                         <div class="flex items-start group"><div class="flex-shrink-0"><i data-lucide="mail" class="w-6 h-6 text-brand-600"></i></div><div class="ml-4"><h3 class="text-lg font-medium text-gray-900">Email</h3><p class="text-gray-500">info@nextcoding.com</p></div></div>
                     </div>
                 </div>
-                <!-- Added ID "contact-card" for focus animation -->
-                <div id="contact-card" class="bg-white rounded-2xl shadow-lg p-8 reveal delay-200">
+                <!-- Contact Form Card with ID for JS logic -->
+                <div id="contact-card" class="bg-white rounded-2xl shadow-lg p-8 reveal delay-200 transition-all duration-500">
                     <form id="contact-form" class="space-y-6">
                         <!-- HIDDEN TIME FIELD -->
                         <input type="hidden" name="time" id="current_time">
                         
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div><label class="block text-sm font-medium text-gray-700 mb-1" data-i18n="form_name">Name</label><input type="text" name="from_name" id="from_name" required class="w-full px-4 py-2 border border-gray-300 rounded-lg outline-none focus:ring-2 focus:ring-brand-500"></div>
-                            <div><label class="block text-sm font-medium text-gray-700 mb-1" data-i18n="form_email">Email</label><input type="email" name="reply_to" id="reply_to" required class="w-full px-4 py-2 border border-gray-300 rounded-lg outline-none focus:ring-2 focus:ring-brand-500"></div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1" data-i18n="form_name">Name</label>
+                                <!-- Added focus trigger -->
+                                <input type="text" name="from_name" id="from_name" required class="w-full px-4 py-2 border border-gray-300 rounded-lg outline-none focus:ring-2 focus:ring-brand-500 focus-trigger">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1" data-i18n="form_email">Email</label>
+                                <input type="email" name="reply_to" id="reply_to" required class="w-full px-4 py-2 border border-gray-300 rounded-lg outline-none focus:ring-2 focus:ring-brand-500 focus-trigger">
+                            </div>
                         </div>
                         <div>
                              <label class="block text-sm font-medium text-gray-700 mb-1" data-i18n="form_service">Service of Interest</label>
-                             <select name="service_interest" id="service_interest" class="w-full px-4 py-2 border border-gray-300 rounded-lg outline-none focus:ring-2 focus:ring-brand-500 bg-white">
+                             <select name="service_interest" id="service_interest" class="w-full px-4 py-2 border border-gray-300 rounded-lg outline-none focus:ring-2 focus:ring-brand-500 bg-white focus-trigger">
                                  <option value="General Inquiry">General Inquiry</option>
                                  <option value="Software Development">Software Development</option>
                                  <option value="IT Support">IT Support</option>
                                  <option value="Web Development">Web Development</option>
                              </select>
                         </div>
-                        <div><label class="block text-sm font-medium text-gray-700 mb-1" data-i18n="form_message">Message</label><textarea name="message" id="message" rows="4" required class="w-full px-4 py-2 border border-gray-300 rounded-lg outline-none focus:ring-2 focus:ring-brand-500"></textarea></div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1" data-i18n="form_message">Message</label>
+                            <textarea name="message" id="message" rows="4" required class="w-full px-4 py-2 border border-gray-300 rounded-lg outline-none focus:ring-2 focus:ring-brand-500 focus-trigger"></textarea>
+                        </div>
+                        
                         <button type="submit" id="submit-btn" class="w-full bg-brand-600 text-white font-bold py-3 px-4 rounded-lg hover:bg-brand-700 transition flex justify-center items-center disabled:opacity-50 disabled:cursor-not-allowed"><span id="btn-text" data-i18n="form_submit">Send Message</span> <i id="btn-icon" data-lucide="send" class="ml-2 w-4 h-4"></i></button>
+                        
+                        <!-- Close button visible only in Focus Mode -->
+                        <button type="button" onclick="disableFocusMode()" id="close-focus-btn" class="hidden w-full mt-2 text-gray-400 hover:text-gray-600 text-sm font-medium">Cancel / Close</button>
                     </form>
                 </div>
             </div>
@@ -511,8 +511,8 @@
         </div>
     </div>
 
-    <!-- Floating Elegant WhatsApp Widget -->
-    <div class="fixed bottom-6 right-6 z-50 flex flex-col items-end">
+    <!-- Floating Elegant WhatsApp Widget (Z-Index increased to 60 to stay above focus mode) -->
+    <div class="fixed bottom-6 right-6 z-[60] flex flex-col items-end whatsapp-widget-container">
         <!-- Chat Form (Hidden by default) -->
         <div id="whatsapp-chat-form" class="hidden bg-white p-4 rounded-2xl shadow-2xl mb-4 w-80 border border-gray-100 animate-slide-up origin-bottom-right">
            <!-- Header -->
@@ -592,12 +592,8 @@
 
         // --- Splash Screen Logic (Wave Effect) ---
         window.addEventListener('load', () => {
-            // Give time for logo to enter
             setTimeout(() => {
-                // Trigger the wave rise logic via CSS class
                 document.getElementById('splash-wave').classList.add('start-wave');
-                
-                // After wave covers screen (2s duration), fade out splash
                 setTimeout(() => {
                     const splash = document.getElementById('splash-screen');
                     splash.style.opacity = '0';
@@ -605,6 +601,28 @@
                 }, 2000); 
             }, 1000); 
         });
+
+        // --- FOCUS MODE LOGIC ---
+        const focusTriggers = document.querySelectorAll('.focus-trigger');
+        const contactCard = document.getElementById('contact-card');
+        const focusOverlay = document.getElementById('focus-overlay');
+        const closeFocusBtn = document.getElementById('close-focus-btn');
+
+        // Activate Focus Mode
+        focusTriggers.forEach(trigger => {
+            trigger.addEventListener('focus', () => {
+                contactCard.classList.add('focus-mode');
+                focusOverlay.classList.add('active');
+                closeFocusBtn.classList.remove('hidden');
+            });
+        });
+
+        // Deactivate Focus Mode
+        function disableFocusMode() {
+            contactCard.classList.remove('focus-mode');
+            focusOverlay.classList.remove('active');
+            closeFocusBtn.classList.add('hidden');
+        }
 
         // --- Gatekeeper Logic ---
         function verifySupportCode() {
@@ -934,21 +952,6 @@
                 }
             });
         }, { threshold: 0.1 });
-
-        // --- FORM FOCUS INTERSECTION OBSERVER ---
-        const contactObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                const card = document.getElementById('contact-card');
-                if (entry.isIntersecting) {
-                    card.classList.add('focused');
-                } else {
-                    card.classList.remove('focused');
-                }
-            });
-        }, { threshold: 0.5 }); // Trigger when 50% of the form is visible
-
-        // Observe the form CARD directly, not the section
-        contactObserver.observe(document.getElementById('contact-card'));
 
         document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
     </script>
